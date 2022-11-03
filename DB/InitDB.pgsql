@@ -1,3 +1,5 @@
+CREATE EXTENSION pgcrypto;
+
 DROP TABLE IF EXISTS
 	Client,
 	_Order,
@@ -12,9 +14,9 @@ DROP TABLE IF EXISTS
 	Store_Type, 
 	Store_Products, 
 	Manager,
-	Manager_Phones
+	Manager_Phones,
+	Administrator
 CASCADE;
-
 
 
 create table Client
@@ -24,11 +26,12 @@ create table Client
 	LastName1 varchar(15) not null,
 	LastName2 varchar(15),
 	Province char(15),
-	County varchar(15),
+	City varchar(15),
 	District varchar(15),
     PhoneNumber varchar(10),
     Username varchar(15) not null,
     BirthDate date,
+    Password text not null,
 	PRIMARY KEY(ID)
 );
 
@@ -51,9 +54,9 @@ create table Deliveryman
     LastName2 varchar(15),
 	Email varchar(40),
     Province char(15),
-    County varchar(15),
+    City varchar(15),
     District varchar(15),
-    Password varchar(15) not null,
+    Password text not null,
     PRIMARY KEY(Id)
 );
 
@@ -96,7 +99,7 @@ create table Store(
     Name varchar(15) not null,
     Email varchar(40) not null,
     Province char(15),
-    County varchar(15),
+    City varchar(15),
     District varchar(15),
     StoreTypeId int not null,
 	ManagerId int not null, 
@@ -128,9 +131,9 @@ create table Manager(
     LastName2 varchar(15),
     Email varchar(40) not null,
     Province char(15),
-    County varchar(15),
+    City varchar(15),
     District varchar(15),
-    Password varchar(15) not null,
+    Password text not null,
     Primary Key(Id)
 );
 
@@ -138,6 +141,20 @@ create table Manager_Phones(
 	ManagerId int not null,
 	PhoneNumber varchar(10) not null,
 	Primary key(ManagerId, PhoneNumber)
+);
+
+create table Administrator(
+	Id int not null,
+	Name varchar(15) not null,
+	LastName1 varchar(15) not null,
+	LastName2 varchar(15),
+	Email varchar(40),
+	Province char(15),
+	City varchar(15),
+	District varchar(15),
+    Username varchar(15) not null,
+   	Password text not null,
+	Primary Key(Id)
 );
 
 -- Foreign Keys Order
