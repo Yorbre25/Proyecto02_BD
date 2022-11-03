@@ -1,4 +1,7 @@
+-- Initialization of DB
 
+
+-- Delete all tables
 DROP TABLE IF EXISTS
 	Client,
 	_Order,
@@ -29,7 +32,7 @@ create table Client
 	District varchar(15),
     PhoneNumber varchar(10),
     Username varchar(15) not null,
-    BirthDate date,
+    BirthDate Date,
     Password text not null,
 	PRIMARY KEY(ID)
 );
