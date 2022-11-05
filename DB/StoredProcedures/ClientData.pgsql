@@ -8,7 +8,10 @@ AS $$
 $$;
 
 
---get an client by id
+-- get an client by id
+-- Si no le pone "" al nombre de la función, el nombre de
+-- los parámetros queda en minuscúla
+-- create or replace function "Get_Client"(In_Id int) -- Para que queden en mayúscula
 create or replace function Get_Client(In_Id int)
 returns setof client
 LANGUAGE sql
