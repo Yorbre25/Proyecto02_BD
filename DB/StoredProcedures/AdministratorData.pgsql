@@ -10,7 +10,6 @@ AS $$
   from administrator;
 $$;
 
-
 --get an administrator by id
 create or replace function Get_Administrator(In_Id int)
 returns setof administrator
@@ -24,7 +23,7 @@ $$;
 
 -- Insert a new administrator
 create or replace procedure Insert_Administrator(
-    In_Id int,
+  In_Id int,
 	In_Name varchar(15),
 	In_LastName1 varchar(15),
 	In_LastName2 varchar(15),
@@ -32,8 +31,8 @@ create or replace procedure Insert_Administrator(
 	In_Province char(15),
 	In_City varchar(15),
 	In_District varchar(15),
-    In_Username varchar(15),
-   	In_Password text
+  In_Username varchar(15),
+  In_Password text
 )
 language plpgsql
 as $$
@@ -61,4 +60,43 @@ begin
         In_District,
         In_Username,
         crypt(In_Password, gen_salt('bf')));
+end; $$;
+
+-- Update an administrator
+create or replace procedure Update_Administrator(
+  In_Id int,
+	In_Name varchar(15),
+	In_LastName1 varchar(15),
+	In_LastName2 varchar(15),
+	In_Email varchar(40),
+	In_Province char(15),
+	In_City varchar(15),
+	In_District varchar(15),
+  In_Username varchar(15),
+  In_Password text
+)
+language plpgsql
+as $$
+begin
+    Update Administrator
+    set 
+        Name = In_Name,
+        LastName1 = In_LastName1,
+        LastName2 = In_LastName2,
+        Email = In_Email,
+        Province = In_Province,
+        City = In_City,
+        District = In_District,
+        Username = In_Username,
+        Password = crypt(In_Password, gen_salt('bf'))
+    where Id = In_Id;
+end; $$;
+
+-- Delete an administrator
+create or replace procedure Delete_Administrator(In_Id int)
+language plpgsql
+as $$
+begin
+    DELETE from Administrator
+    where Id = In_Id;
 end; $$
