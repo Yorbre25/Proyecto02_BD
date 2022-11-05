@@ -5,6 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'Frontend';
+class AppComponent {
+  title = 'UbyTEC';
 }
+
+const apiURL = 'https://localhost:7156'
+
+export default AppComponent
+export { AppComponent, apiURL }
