@@ -18,3 +18,18 @@ drop TYPE if EXISTS Full_Deliveryman;
 drop function if exists get_all_products;
 drop function if exists get_product;
 drop type if EXISTS Full_Product;
+
+--Drop Store
+drop function if exists get_all_stores;
+drop function if exists Get_Store;
+drop type if EXISTS Full_Store;
+
+--Drop Order
+drop function if exists get_all_orders;
+drop function if exists get_order;
+drop type if EXISTS Full_Order;
+
+--Drop Manager
+drop function if exists get_all_managers;
+drop function if exists get_manager;
+drop type if EXISTS Full_Manager;
