@@ -7,6 +7,7 @@ drop function if exists Get_Administrator;
 drop procedure if exists Insert_Administrator;
 drop procedure if exists Update_Administrator;
 drop procedure if exists Delete_Administrator;
+
 --Drop Client
 drop function if exists get_all_clients;
 drop function if exists get_client;
@@ -23,10 +24,19 @@ drop TYPE if EXISTS Full_Deliveryman;
 --Drop Product
 drop function if exists get_all_products;
 drop function if exists get_product;
+drop procedure if exists Insert_Product;
+drop procedure if exists Insert_Product_Photo;
+drop procedure if exists Delete_Product;
+drop procedure if exists Update_Product;
 drop type if EXISTS Full_Product;
 
+
+--Drop Product_Category
 drop function if exists Get_All_Product_Categories;
 drop function if exists Get_Product_Category;
+drop procedure if exists Insert_Product_Category;
+drop procedure if exists Update_Product_Category;
+drop procedure if exists Delete_Product_Category;
 
 --Drop Store
 drop function if exists get_all_stores;
@@ -36,6 +46,9 @@ drop type if EXISTS Full_Store;
 --Drop Store_Type
 drop function if exists Get_All_Store_Types;
 drop function if exists Get_Store_Type;
+drop procedure if exists Insert_Store_Type;
+drop procedure if exists Update_Store_Type;
+drop procedure if exists Delete_Store_Type;
 
 --Drop Order
 drop function if exists get_all_orders;

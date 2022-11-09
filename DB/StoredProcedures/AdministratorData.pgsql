@@ -21,7 +21,7 @@ AS $$
 $$;
 
 
--- Insert a new administrator
+-- Insert new administrator
 create or replace procedure Insert_Administrator(
   In_Id int,
 	In_Name varchar(15),

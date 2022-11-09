@@ -28,13 +28,18 @@ call insert_deliveryman(1111,'prueba','prueba','prueba','prueba','prueba@gmail.c
 
 --PROCEDURES PRODUCT
 Select * from Get_All_Products();
-
 Select * from Get_Product(123);
+call Insert_Product(1234, '1500', 'Palomitas', 1, 9759832);
+call Insert_Product_Photo(1234, 'C:\Users\Usuario\Desktop\palomitas.jpg');
+call Update_Product(1234, '1500', 'Victoria', 1, 9759832);
+call Delete_Product(1234);
 
 --PROCEDURES PRODUCT_CATEGORY
 Select * from Get_All_Product_Categories();
-
 Select * from Get_Product_Category(1);
+call Insert_Product_Category('Juguete');
+call Update_Product_Category(1, 'Triunfo');
+call Delete_Product_Category(7);
 
 --Procedure STORE
 
@@ -45,8 +50,10 @@ select * from Get_Store(163235);
 --Procedure STORE_TYPE
 
 select * from Get_All_Store_Types();
-
 select * from Get_Store_Type(1);
+call Insert_Store_Type('Tienda');
+call Update_Store_Type(1, 'Almacen');
+call Delete_Store_Type(5);
 
 --Procedure ORDER
 

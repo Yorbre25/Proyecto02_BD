@@ -79,7 +79,7 @@ create table Product(
 create table Product_Category(
     Id serial,
     Name varchar(15) not null,
-    PRIMARY KEY(Id)
+    PRIMARY KEY(Id, name)
 );
 
 create table Product_Photos(
@@ -116,7 +116,7 @@ create table Store_Phones(
 create table Store_Type(
     Id serial,
     Name varchar(15) not null,
-    PRIMARY KEY(Id)
+    PRIMARY KEY(Id, name)
 );
 
 create table Store_Products(
