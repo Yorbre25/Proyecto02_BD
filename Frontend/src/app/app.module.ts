@@ -23,7 +23,9 @@ import { ClientLoginComponent } from './Components/Client/client-login/client-lo
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
 import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
-import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component'
+import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
+import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add-manager-form.component';
+import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-
     ManagerMainComponent,
     ManagerMenuComponent,
     ManagerListComponent,
-    ManagerInfoComponent
+    ManagerInfoComponent,
+    AddManagerFormComponent,
+    EditManagerFormComponent
   ],
   imports: [
     BrowserModule,

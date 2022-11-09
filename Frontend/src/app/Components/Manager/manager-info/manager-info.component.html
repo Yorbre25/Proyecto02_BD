@@ -14,11 +14,10 @@
       <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Editar empleado'"
         [modalHeader]="'Edición de empleado'">
 
-        <!-- <app-edit-manager-form [managerInfo]="manager"></app-edit-manager-form> -->
+        <app-edit-manager-form [managerInfo]="managerCopy"></app-edit-manager-form>
       </app-modal>
 
       <button class="btn btn-outline-danger" (click)="deleteManager()">Eliminar empleado</button>
     </div>
-
   </div>
 </div>

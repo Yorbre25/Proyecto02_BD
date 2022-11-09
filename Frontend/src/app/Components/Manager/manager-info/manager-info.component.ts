@@ -16,6 +16,7 @@ import { MessageService } from 'src/app/Services/message.service'
 export class ManagerInfoComponent implements OnInit {
   managerInfoTitles: KeyReplacement<Manager>[]
   manager: Manager
+  managerCopy: Manager
 
   constructor(
     private route: ActivatedRoute,
@@ -29,10 +30,11 @@ export class ManagerInfoComponent implements OnInit {
       { key: "name", replacement: "Nombre completo" },
       { key: "email", replacement: "Correo electrónico" },
       { key: "province", replacement: "Dirección" },
-      { key: "phoneNumber", replacement: "Teléfonos" },
+      { key: "phoneNumbers", replacement: "Teléfonos" },
     ]
 
     this.manager = {} as Manager
+    this.managerCopy = {} as Manager
   }
 
   ngOnInit(): void {
@@ -44,6 +46,8 @@ export class ManagerInfoComponent implements OnInit {
         }
         else if (response.manager) {
           this.manager = response.manager
+          this.managerCopy = { ...this.manager }
+
           this.manager.name =
             `${this.manager.name} ${this.manager.lastName1} ${this.manager.lastName2}`
 

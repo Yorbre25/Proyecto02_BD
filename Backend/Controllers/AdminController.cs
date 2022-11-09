@@ -54,75 +54,73 @@ namespace Backend.Controllers
       }
     }
 
-    //         [HttpPost]
-    //         [Route("add")]
-    //         public Object Post([FromBody] Admin cliente)
-    //         {
-    //             bool ok = AdminData.Registrar(cliente);
-    //             if (ok)
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "ok",
-    //                     message = "Admine registrado correctamente"
-    //                 };
-    //             }
-    //             else
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "error",
-    //                     message = "No se pudo registrar el cliente"
-    //                 };
-    //             }
-    //         }
+    [HttpPost]
+    [Route("add")]
+    public Object Post([FromBody] Admin admin)
+    {
+      bool ok = AdminData.Add(admin);
+      if (ok)
+      {
+        return new
+        {
+          status = "ok",
+          message = "Administrador registrado correctamente"
+        };
+      }
+      else
+      {
+        return new
+        {
+          status = "error",
+          message = "No se pudo registrar el administrador"
+        };
+      }
+    }
 
-    //         [HttpPatch]
-    //         [Route("update/{id}")]
-    //         public Object Put([FromBody] Admin cliente)
-    //         {
-    //             bool ok = AdminData.Modificar(cliente);
-    //             if (ok)
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "ok",
-    //                     message = "Admine modificado correctamente"
-    //                 };
-    //             }
-    //             else
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "error",
-    //                     message = "No se pudo modificar el cliente"
-    //                 };
-    //             }
-    //         }
+    [HttpPatch]
+    [Route("update/{id}")]
+    public Object Put([FromBody] Admin admin, int id)
+    {
+      bool ok = AdminData.Edit(admin, id);
+      if (ok)
+      {
+        return new
+        {
+          status = "ok",
+          message = "Admin modificado correctamente"
+        };
+      }
+      else
+      {
+        return new
+        {
+          status = "error",
+          message = "No se pudo modificar el admin"
+        };
+      }
+    }
 
-    //         [HttpDelete]
-    //         [Route("delete/{cedula}")]
-    //         public Object Delete(int id)
-    //         {
-    //             bool ok = AdminData.Eliminar(id);
-    //             if (ok)
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "ok",
-    //                     message = "Admine eliminado correctamente"
-    //                 };
-    //             }
-    //             else
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "error",
-    //                     message = "No se pudo eliminar el cliente"
-    //                 };
-    //             }
-    //         }
-
-    //     }
+    [HttpDelete]
+    [Route("delete/{id}")]
+    public Object Delete(int id)
+    {
+      bool ok = AdminData.Delete(id);
+      if (ok)
+      {
+        return new
+        {
+          status = "ok",
+          message = "Administrador eliminado correctamente"
+        };
+      }
+      else
+      {
+        return new
+        {
+          status = "error",
+          message = "No se pudo eliminar el admininistrador"
+        };
+      }
+    }
   }
 }

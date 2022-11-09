@@ -12,8 +12,7 @@
     public string city { get; set; }
     public string district { get; set; }
     public string? password { get; set; }
-    public string? passwordConfirm { get; set; }
     public string? oldPassword { get; set; }
-    public List<string> phoneNumber { get; set; }
+    public List<string> phoneNumbers { get; set; }
   }
 }

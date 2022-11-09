@@ -31,8 +31,6 @@ const routes: Routes = [
       { path: '', redirectTo: '/manager/menu', pathMatch: 'full' },
       { path: 'employees', component: ManagerListComponent },
       { path: 'employees/:id', component: ManagerInfoComponent },
-      // { path: 'members', component: MemberLoginComponent },
-      // { path: 'clients', component: ClientLoginComponent }
     ]
   }
 ]

@@ -8,7 +8,7 @@ interface Manager {
   province: string
   city: string
   district: string
-  phoneNumber: number[]
+  phoneNumbers: number[]
 }
 
 export { Manager }

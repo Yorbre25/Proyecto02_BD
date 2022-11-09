@@ -7,67 +7,6 @@ namespace Backend.Data
 {
   public class AdminData
   {
-    // public static bool Registrar(Admin Admin)
-    // {
-    //   using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
-    //   {
-    //     SqlCommand cmd = new SqlCommand("Admin_registrar", oConexion);
-    //     cmd.CommandType = CommandType.StoredProcedure;
-    //     cmd.Parameters.AddWithValue("@Id", Admin.id);
-    //     cmd.Parameters.AddWithValue("@Name", Admin.name);
-    //     cmd.Parameters.AddWithValue("@LastName1", Admin.lastName1);
-    //     cmd.Parameters.AddWithValue("@LastName2", Admin.lastName1);
-    //     cmd.Parameters.AddWithValue("@Province", Admin.province);
-    //     cmd.Parameters.AddWithValue("@City", Admin.city);
-    //     cmd.Parameters.AddWithValue("@District", Admin.district);
-    //     cmd.Parameters.AddWithValue("@PhoneNumber", Admin.phoneNumber);
-    //     cmd.Parameters.AddWithValue("@Username", Admin.userName);
-    //     cmd.Parameters.AddWithValue("@Password", Admin.password);
-    //     cmd.Parameters.AddWithValue("@Birthdate", Admin.birthday.Date);
-    //     try
-    //     {
-    //       oConexion.Open();
-    //       cmd.ExecuteNonQuery();
-    //       return true;
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //       return false;
-    //     }
-    //   }
-    // }
-
-    // public static bool Modificar(Admin Admin)
-    // {
-    //   using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
-    //   {
-    //     SqlCommand cmd = new SqlCommand("Admin_modificar", oConexion);
-    //     cmd.CommandType = CommandType.StoredProcedure;
-    //     cmd.Parameters.AddWithValue("@Id", Admin.id);
-    //     cmd.Parameters.AddWithValue("@Name", Admin.name);
-    //     cmd.Parameters.AddWithValue("@LastName1", Admin.lastName1);
-    //     cmd.Parameters.AddWithValue("@LastName2", Admin.lastName1);
-    //     cmd.Parameters.AddWithValue("@Province", Admin.province);
-    //     cmd.Parameters.AddWithValue("@City", Admin.city);
-    //     cmd.Parameters.AddWithValue("@District", Admin.district);
-    //     cmd.Parameters.AddWithValue("@PhoneNumber", Admin.phoneNumber);
-    //     cmd.Parameters.AddWithValue("@Username", Admin.userName);
-    //     cmd.Parameters.AddWithValue("@Password", Admin.password);
-    //     cmd.Parameters.AddWithValue("@Birthdate", Admin.birthday.Date);
-
-    //     try
-    //     {
-    //       oConexion.Open();
-    //       cmd.ExecuteNonQuery();
-    //       return true;
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //       return false;
-    //     }
-    //   }
-    // }
-
     public static List<Admin> GetAll()
     {
       List<Admin> adminList = new List<Admin>();
@@ -95,7 +34,7 @@ namespace Backend.Data
             province = dr["Province"].ToString()!,
             city = dr["City"].ToString()!,
             district = dr["District"].ToString()!,
-            // phoneNumber = (List<String>)dr["PhoneNumber"] Descomentar cuando el query este listo
+            // phoneNumbers = (List<String>)dr["PhoneNumbers"] Descomentar cuando el query este listo
           });
         }
 
@@ -138,7 +77,7 @@ namespace Backend.Data
             province = dr["Province"].ToString()!,
             city = dr["City"].ToString()!,
             district = dr["District"].ToString()!,
-            // phoneNumber = (List<String>)dr["PhoneNumber"] Descomentar cuando el query este listo
+            // phoneNumbers = (List<String>)dr["PhoneNumbers"] Descomentar cuando el query este listo
           };
         }
 
@@ -153,25 +92,92 @@ namespace Backend.Data
       }
     }
 
-    // public static bool Eliminar(int id)
-    // {
-    //   using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
-    //   {
-    //     SqlCommand cmd = new SqlCommand("usp_eliminar", oConexion);
-    //     cmd.CommandType = CommandType.StoredProcedure;
-    //     cmd.Parameters.AddWithValue("@idusuario", id);
+    public static bool Add(Admin admin)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Insert_Administrator(
+          {admin.id},
+          '{admin.name}',
+          '{admin.lastName1}',
+          '{admin.lastName2}',
+          '{admin.email}',
+          '{admin.province}',
+          '{admin.city}',
+          '{admin.district}',
+          '{admin.username}',
+          '{admin.password}'
+        );", connection
+      );
+      // Faltan teléfonooooos
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
 
-    //     try
-    //     {
-    //       oConexion.Open();
-    //       cmd.ExecuteNonQuery();
-    //       return true;
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //       return false;
-    //     }
-    //   }
-    // }
+    public static bool Edit(Admin admin, int adminID)
+    {
+      /* Hay que verificar que admin.oldPassword coincida
+      con la password guardada en la base */
+
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Update_Administrator(
+          {adminID},
+          {admin.id},
+          '{admin.name}',
+          '{admin.lastName1}',
+          '{admin.lastName2}',
+          '{admin.email}',
+          '{admin.province}',
+          '{admin.city}',
+          '{admin.district}',
+          '{admin.username}',
+          '{admin.password}'
+        );", connection
+      );
+      // Faltan teléfonooooos
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
+
+    public static bool Delete(int id)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Delete_Administrator({id});", connection);
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
   }
 }

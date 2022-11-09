@@ -31,47 +31,35 @@ export class ManagerService {
 
   /**
    * Solicita al servidor que devuelva la información de un empleado
-   * @param employeeID ID del empleado
+   * @param managerID ID del empleado
   */
   getManager = (id: number): Observable<ManagerResponse> =>
     this.httpClient.get<ManagerResponse>(`${this.url}/get/${id}`)
 
-  // /**
-  //  * Solicita al servidor que cree un nuevo empleado
-  //  * @param employee Objeto con la información del empleado
-  //  * @returns Objeto con respuesta del servidor
-  // */
-  // createManager = (employee: any): Observable<ServerResponse> => {
-  //   employee.id = employee.id.toString()
-  //   employee.fechaNacimiento = this.auxFunctionsService
-  //     .dateToString(employee.fechaNacimiento)
-  //   employee.fechaInicio = this.auxFunctionsService
-  //     .dateToString(employee.fechaInicio)
+  /**
+   * Solicita al servidor que cree un nuevo empleado
+   * @param manager Objeto con la información del empleado
+   * @returns Objeto con respuesta del servidor
+  */
+  createManager = (manager: any): Observable<ServerResponse> => {
+    manager.phoneNumbers
+      .forEach((phoneNumber: number) => phoneNumber.toString())
 
-  //   employee.password = employee.password.toString();
+    return this.httpClient.post<ServerResponse>(`${this.url}/add`, manager)
+  }
 
-  //   return this.httpClient.post<ServerResponse>(`${this.url}/add`, employee)
-  // }
+  /**
+   * Solicita al servidor que actualice la información de un empleado
+   * @param managerID ID del empleado
+   * @param manager Objeto con la información del empleado
+   * @returns Objeto con respuesta del servidor
+  */
+  updateManager = (managerID: number, manager: any): Observable<ServerResponse> => {
+    manager.phoneNumbers
+      .forEach((phoneNumber: number) => phoneNumber.toString())
 
-  // /**
-  //  * Solicita al servidor que actualice la información de un empleado
-  //  * @param employeeID ID del empleado
-  //  * @param employee Objeto con la información del empleado
-  //  * @returns Objeto con respuesta del servidor
-  // */
-  // updateManager = (employeeID: number, employee: any): Observable<ServerResponse> => {
-  //   employee.id = employee.id.toString()
-
-  //   employee.fechaNacimiento = this.auxFunctionsService
-  //     .dateToString(employee.fechaNacimiento)
-
-  //   employee.fechaInicio = this.auxFunctionsService
-  //     .dateToString(employee.fechaInicio)
-
-  //   employee.password = employee.password.toString();
-
-  //   return this.httpClient.patch<ServerResponse>(`${this.url}/update/${employeeID}`, employee)
-  // }
+    return this.httpClient.patch<ServerResponse>(`${this.url}/update/${managerID}`, manager)
+  }
 
   /**
    * Solicita al servidor que elimine un empleado
