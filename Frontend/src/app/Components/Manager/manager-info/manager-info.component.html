@@ -1,0 +1,23 @@
+<div class="container-sm">
+  <h1 class="text-center mb-3">Información de empleado</h1>
+
+  <app-message [messageInfo]="messageService.messageInfo"></app-message>
+
+  <app-info-card [infoTitles]="managerInfoTitles" [info]="manager"></app-info-card>
+
+  <div class="d-flex justify-content-between mt-3">
+    <div>
+      <button class="btn btn-outline-secondary" (click)="auxFunctionsService.goBack()">Regresar</button>
+    </div>
+
+    <div class="d-flex gap-2">
+      <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Editar empleado'"
+        [modalHeader]="'Edición de empleado'">
+
+        <app-edit-manager-form [managerInfo]="managerCopy"></app-edit-manager-form>
+      </app-modal>
+
+      <button class="btn btn-outline-danger" (click)="deleteManager()">Eliminar empleado</button>
+    </div>
+  </div>
+</div>

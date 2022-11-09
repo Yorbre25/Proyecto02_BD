@@ -17,9 +17,15 @@ import { LoginRouterComponent } from './Components/Generic/login-router/login-ro
 import { LoginComponent } from './Components/Generic/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoginFormComponent } from './Components/Forms/login-form/login-form.component'
-import { ManagerLoginComponent } from './Components/Manager/login/login.component'
-import { MemberLoginComponent } from './Components/Member/login/login.component'
-import { ClientLoginComponent } from './Components/Client/login/login.component'
+import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component'
+import { MemberLoginComponent } from './Components/Member/member-login/member-login.component'
+import { ClientLoginComponent } from './Components/Client/client-login/client-login.component';
+import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
+import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
+import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
+import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
+import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add-manager-form.component';
+import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +42,13 @@ import { ClientLoginComponent } from './Components/Client/login/login.component'
     ManagerLoginComponent,
     MemberLoginComponent,
     ClientLoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    ManagerMainComponent,
+    ManagerMenuComponent,
+    ManagerListComponent,
+    ManagerInfoComponent,
+    AddManagerFormComponent,
+    EditManagerFormComponent
   ],
   imports: [
     BrowserModule,

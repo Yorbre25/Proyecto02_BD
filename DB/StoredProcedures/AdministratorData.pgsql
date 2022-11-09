@@ -8,6 +8,24 @@ LANGUAGE sql
 AS $$
   select *
   from administrator;
+  /* Así queda de puta madre
+  select 
+    a.id,
+    a.username,
+    a.name,
+    a.lastName1,
+    a.lastName2,
+    a.email,
+    a.province,
+    a.city,
+    a.district,
+	  ARRAY(
+      select ap.phonenumber
+      from administrator_phones as ap
+      where a.id = ap.administratorid
+    ) as phoneNumbers
+    from administrator as a;
+  */
 $$;
 
 --get an administrator by id
@@ -21,7 +39,7 @@ AS $$
 $$;
 
 
--- Insert a new administrator
+-- Insert new administrator
 create or replace procedure Insert_Administrator(
   In_Id int,
 	In_Name varchar(15),
@@ -64,6 +82,7 @@ end; $$;
 
 -- Update an administrator
 create or replace procedure Update_Administrator(
+  In_Old_Id int,
   In_Id int,
 	In_Name varchar(15),
 	In_LastName1 varchar(15),
@@ -80,6 +99,7 @@ as $$
 begin
     Update Administrator
     set 
+        Id = In_Id,
         Name = In_Name,
         LastName1 = In_LastName1,
         LastName2 = In_LastName2,
@@ -89,7 +109,7 @@ begin
         District = In_District,
         Username = In_Username,
         Password = crypt(In_Password, gen_salt('bf'))
-    where Id = In_Id;
+    where Id = In_Old_Id;
 end; $$;
 
 -- Delete an administrator
