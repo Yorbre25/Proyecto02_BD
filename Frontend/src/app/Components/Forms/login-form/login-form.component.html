@@ -1,0 +1,13 @@
+<form [formGroup]="this.formsService.form" (ngSubmit)="this.onSubmit()">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="usernameInput" placeholder="Username" formControlName="username">
+    <label for=" usernameInput"><i class="bi bi-person-circle"></i> Nombre de usuario</label>
+  </div>
+
+  <div class="form-floating mb-3">
+    <input type="password" class="form-control" id="passwordInput" placeholder="Password" formControlName="password">
+    <label for="passwordInput"><i class="bi bi-unlock-fill"></i> Contraseña</label>
+  </div>
+
+  <input class="w-100 btn btn-outline-primary" type="submit" value="Iniciar Sesión">
+</form>

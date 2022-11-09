@@ -1,28 +1,25 @@
-﻿namespace UbyTec.Data;
+var builder = WebApplication.CreateBuilder(args);
 
-using Npgsql;
-// Clase que se encarga de la conexión a la base de datos
-public class Program {
+// Add services to the container.
 
-    static void Main(string[] args){
-        new Program().Test();
-        Console.ReadKey();
-    }
-    
-    public void Test(){
-        using(var cn = GetConnection()){
-            cn.Open();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Clients", cn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            var reader = cmd.ExecuteReader();
-            while(reader.Read()){
-                Console.WriteLine(reader["Name"].ToString());
-            }
-        }
-    }
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-    private NpgsqlConnection GetConnection(){
-        return new NpgsqlConnection("Server=localhost;Port=5432;Database=UbyTec; User Id=postgres;Password=1234;");
-    }
-    
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
