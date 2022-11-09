@@ -8,6 +8,24 @@ LANGUAGE sql
 AS $$
   select *
   from administrator;
+  /* Así queda de puta madre
+  select 
+    a.id,
+    a.username,
+    a.name,
+    a.lastName1,
+    a.lastName2,
+    a.email,
+    a.province,
+    a.city,
+    a.district,
+	  ARRAY(
+      select ap.phonenumber
+      from administrator_phones as ap
+      where a.id = ap.administratorid
+    ) as phoneNumber
+    from administrator as a;
+  */
 $$;
 
 --get an administrator by id

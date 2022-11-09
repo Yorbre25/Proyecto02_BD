@@ -22,7 +22,8 @@ import { MemberLoginComponent } from './Components/Member/member-login/member-lo
 import { ClientLoginComponent } from './Components/Client/client-login/client-login.component';
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
-import { EmployeeListComponent } from './Components/Manager/employee-list/employee-list.component'
+import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
+import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { EmployeeListComponent } from './Components/Manager/employee-list/employ
     LoginFormComponent,
     ManagerMainComponent,
     ManagerMenuComponent,
-    EmployeeListComponent
+    ManagerListComponent,
+    ManagerInfoComponent
   ],
   imports: [
     BrowserModule,
