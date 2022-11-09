@@ -25,10 +25,17 @@ drop function if exists get_all_products;
 drop function if exists get_product;
 drop type if EXISTS Full_Product;
 
+drop function if exists Get_All_Product_Categories;
+drop function if exists Get_Product_Category;
+
 --Drop Store
 drop function if exists get_all_stores;
 drop function if exists Get_Store;
 drop type if EXISTS Full_Store;
+
+--Drop Store_Type
+drop function if exists Get_All_Store_Types;
+drop function if exists Get_Store_Type;
 
 --Drop Order
 drop function if exists get_all_orders;

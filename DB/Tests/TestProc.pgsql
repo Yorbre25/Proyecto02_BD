@@ -31,11 +31,22 @@ Select * from Get_All_Products();
 
 Select * from Get_Product(123);
 
+--PROCEDURES PRODUCT_CATEGORY
+Select * from Get_All_Product_Categories();
+
+Select * from Get_Product_Category(1);
+
 --Procedure STORE
 
 select * from Get_All_Stores();
 
 select * from Get_Store(163235);
+
+--Procedure STORE_TYPE
+
+select * from Get_All_Store_Types();
+
+select * from Get_Store_Type(1);
 
 --Procedure ORDER
 
