@@ -8,7 +8,8 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 import { MemberLoginComponent } from './Components/Member/member-login/member-login.component';
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
-import { EmployeeListComponent } from './Components/Manager/employee-list/employee-list.component';
+import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
+import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,9 +29,8 @@ const routes: Routes = [
     component: ManagerMainComponent,
     children: [
       { path: '', redirectTo: '/manager/menu', pathMatch: 'full' },
-      { path: 'employees', component: EmployeeListComponent },
-      // { path: 'members', component: MemberLoginComponent },
-      // { path: 'clients', component: ClientLoginComponent }
+      { path: 'employees', component: ManagerListComponent },
+      { path: 'employees/:id', component: ManagerInfoComponent },
     ]
   }
 ]

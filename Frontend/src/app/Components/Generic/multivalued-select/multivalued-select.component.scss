@@ -4,6 +4,14 @@ ul {
     padding: 0;
 }
 
+i.bi-plus-circle {
+    color: green;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 i.bi-x-circle {
     color: red;
 
