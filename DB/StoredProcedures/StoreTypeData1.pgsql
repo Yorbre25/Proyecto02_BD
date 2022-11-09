@@ -17,7 +17,7 @@ AS $$
   from Store_Type
   where id = In_Id;
 $$;
-
+ a
 --Insert store_type
 create or replace procedure Insert_Store_Type(In_Name varchar(15))
 language plpgsql

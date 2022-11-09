@@ -17,7 +17,7 @@ AS $$
   from product_category
   where id = In_Id;
 $$;
-
+ a
 --Insert product_category
 create or replace procedure Insert_Product_Category(In_Name varchar(15))
 language plpgsql
