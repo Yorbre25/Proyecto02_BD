@@ -20,6 +20,9 @@ drop procedure if EXISTS Delete_client;
 drop function if exists get_all_deliverymen;
 drop function if exists get_deliveryman;
 drop TYPE if EXISTS Full_Deliveryman;
+drop procedure if exists insert_deliveryman;
+drop procedure if exists update_deliveryman;
+drop procedure if exists delete_deliveryman;
 
 --Drop Product
 drop function if exists get_all_products;

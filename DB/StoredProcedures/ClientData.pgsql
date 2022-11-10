@@ -9,9 +9,6 @@ $$;
 
 
 -- get an client by id
--- Si no le pone "" al nombre de la función, el nombre de
--- los parámetros queda en minuscúla
--- create or replace function "Get_Client"(In_Id int) -- Para que queden en mayúscula
 create or replace function Get_Client(In_Id int)
 returns setof client
 LANGUAGE sql
@@ -20,6 +17,8 @@ AS $$
   from client
   where id = In_Id;
 $$;
+
+
 
 -- Insert a new client
 create or replace procedure Insert_Client(
@@ -62,11 +61,13 @@ begin
         In_PhoneNumber,
         In_Username,
         In_BirthDate,
-        crypt(In_Password, gen_salt('bf')));
+        In_Password
+    );
 end; $$;
 
--- Update an administrator
+-- Update client
 create or replace procedure Update_Client(
+  In_Old_Id int,
   In_Id int,
 	In_Name varchar(15),
 	In_LastName1 varchar(15),
@@ -94,8 +95,8 @@ begin
         PhoneNumber = In_PhoneNumber,
         Username = In_Username,
         BirthDate = In_BirthDate, 
-        Password = crypt(In_Password, gen_salt('bf'))
-    where Id = In_Id;
+        Password = In_Password
+    where Id = In_Old_Id;
 end; $$;
 
 -- Delete a client

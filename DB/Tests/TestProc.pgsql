@@ -2,7 +2,7 @@
 SELECT * From Get_All_Clients();
 SELECT * from Get_Client(303520771);
 call Insert_Client(11111, 'Prueba', 'Prueba', 'Prueba', 'Prueba', 'Prueba', 'Prueba', '6341235', 'prueba', '12/12/12', 'ABC123');
-call Update_Client(11111, 'Triunfo', 'Prueba', 'Prueba', 'Prueba', 'Prueba', 'Prueba', '6341235', 'prueba', '12/12/12', 'ABC123');
+call Update_Client(11111, 5432, 'Triunfo', 'Prueba', 'Prueba', 'Prueba', 'Prueba', 'Prueba', '6341235', 'prueba', '12/12/12', 'ABC123');
 call delete_client(11111);
 
 
@@ -17,13 +17,9 @@ call Delete_Administrator(547835);
 --PROCEDURES DELIVERYMAN
 SELECT * from get_all_deliverymen();
 SELECT * from get_deliveryman(756345);
-
-DECLARE @deliveryman_phones deliveryman_phones
-
-INSERT INTO @deliveryman_phones VALUES (1111, '12341234')
-INSERT INTO @deliveryman_phones VALUES (1111, '234521')
-
-call insert_deliveryman(1111,'prueba','prueba','prueba','prueba','prueba@gmail.com','prueba','prueba','prueba','ABC123', @deliveryman_phones);
+call insert_deliveryman(1111,'prueba','prueba','prueba','prueba','prueba@gmail.com','prueba','prueba','prueba','ABC123',  array['48345125','75213421']);
+call update_deliveryman(1111, 1111, 'Si así','prueba','prueba','prueba','prueba@gmail.com','prueba','prueba','prueba','ABC123',  array['48345125','ueeee']);
+call delete_deliveryman(1111);
 
 
 --PROCEDURES PRODUCT
@@ -66,3 +62,13 @@ select * from Get_Order(1);
 select * from Get_All_Managers();
 
 select * from Get_Manager(237654);
+
+-- Procedure Passwords
+
+select * from Get_Admin_Password(237654);
+select * from Get_Client_Password(237654);
+select * from Get_Manager_Password(237654);
+
+-- Procedure Phones
+call insert_deliveryman_phones(756345, array['12341234', '234521']);
+call Update_Deliveryman_Phones(1111, array['12341234', '234521']);

@@ -8,24 +8,7 @@ LANGUAGE sql
 AS $$
   select *
   from administrator;
-  /* Así queda de puta madre
-  select 
-    a.id,
-    a.username,
-    a.name,
-    a.lastName1,
-    a.lastName2,
-    a.email,
-    a.province,
-    a.city,
-    a.district,
-	  ARRAY(
-      select ap.phonenumber
-      from administrator_phones as ap
-      where a.id = ap.administratorid
-    ) as phoneNumbers
-    from administrator as a;
-  */
+
 $$;
 
 --get an administrator by id
@@ -108,7 +91,7 @@ begin
         City = In_City,
         District = In_District,
         Username = In_Username,
-        Password = crypt(In_Password, gen_salt('bf'))
+        Password = In_Password
     where Id = In_Old_Id;
 end; $$;
 
