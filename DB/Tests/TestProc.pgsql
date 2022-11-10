@@ -18,7 +18,7 @@ call Delete_Administrator(547835);
 SELECT * from get_all_deliverymen();
 SELECT * from get_deliveryman(756345);
 call insert_deliveryman(1111,'prueba','prueba','prueba','prueba','prueba@gmail.com','prueba','prueba','prueba','ABC123',  array['48345125','75213421']);
-call update_deliveryman(1111, 1111, 'Si así','prueba','prueba','prueba','prueba@gmail.com','prueba','prueba','prueba','ABC123',  array['48345125','ueeee']);
+call update_deliveryman(1111, 1361, 'Si así','prueba','prueba','prueba','prueba@gmail.com','prueba','prueba','prueba','ABC123',  array['48345125','cambio']);
 call delete_deliveryman(1111);
 
 
@@ -60,8 +60,10 @@ select * from Get_Order(1);
 --Procedure Manager
 
 select * from Get_All_Managers();
-
 select * from Get_Manager(237654);
+call Insert_Manager(1111, 'Prueba', 'Prueba', 'Prueba', 'Prueba', 'prueba@gmail.com', 'Cartago', 'TresRios','TresRios', 'ABC123', array['12341234', '234521']);
+call Update_Manager(1111, 1234, 'Triunfo', 'Prueba', 'Prueba', 'Prueba', 'prueba@gmail.com', 'Cartago', 'TresRios','TresRios', 'ABC123', array['victoria', '234521']);
+call Delete_Manager(1111);
 
 -- Procedure Passwords
 
@@ -72,3 +74,6 @@ select * from Get_Manager_Password(237654);
 -- Procedure Phones
 call insert_deliveryman_phones(756345, array['12341234', '234521']);
 call Update_Deliveryman_Phones(1111, array['12341234', '234521']);
+call insert_manager_phones(123456, array['12341234', '234521']);
+call update_manager_phones(1111, array['laksg', '234521']);
+call delete_manager_phones(1111);

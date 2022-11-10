@@ -87,8 +87,7 @@ begin
       City,
       District,
       Password
-  ) 
-  VALUES(
+  )VALUES(
       In_Id,
       In_Username,
       In_Name,

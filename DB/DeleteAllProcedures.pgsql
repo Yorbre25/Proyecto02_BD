@@ -62,6 +62,9 @@ drop type if EXISTS Full_Order;
 drop function if exists get_all_managers;
 drop function if exists get_manager;
 drop type if EXISTS Full_Manager;
+drop procedure if exists insert_manager;
+drop procedure if exists update_manager;
+drop procedure if exists delete_manager;
 
 --Drop GenericPhoneNumber
 drop type if EXISTS GenericPhoneNumber;
