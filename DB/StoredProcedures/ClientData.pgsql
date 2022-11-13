@@ -20,7 +20,7 @@ $$;
 
 
 
--- Insert a new client
+-- Insert new client
 create or replace procedure Insert_Client(
   In_Id int,
 	In_Name varchar(15),

@@ -59,7 +59,7 @@ AS $$
   WHERE D.id = In_Id
 $$;
 
--- Insert a new deliveyman
+-- Insert deliveyman
 create or replace procedure Insert_Deliveryman(
   In_Id int,
   In_Username varchar(15),
@@ -103,7 +103,7 @@ begin
 end; $$;
 
 
--- Update a derliveryman
+-- Update derliveryman
 create or replace procedure Update_Deliveryman(
   In_Old_Id int,
   In_Id int,

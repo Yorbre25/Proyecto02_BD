@@ -40,9 +40,10 @@ call Delete_Product_Category(7);
 --Procedure STORE
 
 select * from Get_All_Stores();
-
 select * from Get_Store(163235);
-
+call Insert_Store(5935, 'Prueba', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','cambio']);
+call Update_Store(5935, 11, 'Triunfo', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','Chigugua']);
+call Delete_Store(5935);
 --Procedure STORE_TYPE
 
 select * from Get_All_Store_Types();
@@ -54,8 +55,11 @@ call Delete_Store_Type(5);
 --Procedure ORDER
 
 select * from Get_All_Orders();
-
 select * from Get_Order(1);
+-- call insert_order('Por la parada de Transtusa', 1234567, 2763495, array[1234]);
+-- insert into order_products(orderID, productbarcode, quantity) values (5, 934, 2);
+call delete_Order(8);
+
 
 --Procedure Manager
 
@@ -77,3 +81,6 @@ call Update_Deliveryman_Phones(1111, array['12341234', '234521']);
 call insert_manager_phones(123456, array['12341234', '234521']);
 call update_manager_phones(1111, array['laksg', '234521']);
 call delete_manager_phones(1111);
+
+SELECT MAX(Id) FROM _Order;   
+SELECT nextval('the_primary_key_sequence');

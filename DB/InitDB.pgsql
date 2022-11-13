@@ -41,7 +41,9 @@ create table _Order
 (
     Id serial,
     Total decimal(10,2) not null,
-    ShippingAddress varchar(50) not null,
+    Province char(15),
+    City varchar(15),
+    District varchar(15),
     ClientId int not null,
     DelManId int not null,
     PRIMARY KEY(Id)
@@ -100,7 +102,7 @@ create table Store(
     Id int not null,
     Name varchar(15) not null,
     Email varchar(40) not null,
-    Province char(15),
+    Province varchar(15),
     City varchar(15),
     District varchar(15),
     StoreTypeId int not null,

@@ -103,9 +103,9 @@ insert into _Order(
 	ClientId,
 	DelManId)
 VALUES
-	('3500', '300m este del banco nacional', 1234567, 756345),
-	('3155', 'Avenida 14A, Cartago Centro', 303520771, 756345),
-	('2100', 'Aquiiiii', 1234567, 2763495);
+	('3500', 'Cartago', 'Cartago', 'Cartago', 1234567, 756345),
+	('3155', 'San José', 'San José', 'San José', 303520771, 756345),
+	('2100', 'Limon', 'Limon', 'Limon', 1234567, 2763495);
 
 
 Insert into Order_Products( -- Pasa algo raro aquí
