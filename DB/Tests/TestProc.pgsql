@@ -82,5 +82,6 @@ call insert_manager_phones(123456, array['12341234', '234521']);
 call update_manager_phones(1111, array['laksg', '234521']);
 call delete_manager_phones(1111);
 
-SELECT MAX(Id) FROM _Order;   
-SELECT nextval('the_primary_key_sequence');
+-- Procedure Reports
+select * from get_Sales_Per_Client();
+select * from get_Sales_Per_Store();
