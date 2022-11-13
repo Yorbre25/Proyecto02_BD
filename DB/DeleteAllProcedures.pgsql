@@ -71,3 +71,7 @@ drop type if EXISTS Full_Manager;
 drop procedure if exists insert_manager;
 drop procedure if exists update_manager;
 drop procedure if exists delete_manager;
+
+--drop reports
+drop function if exists get_Sales_Per_Client;
+drop function if exists get_Sales_Per_Store;
