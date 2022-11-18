@@ -31,7 +31,7 @@ create table Client
 	City varchar(15),
 	District varchar(15),
     PhoneNumber varchar(10),
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
     BirthDate Date,
     Password text not null,
 	PRIMARY KEY(ID)
@@ -40,8 +40,8 @@ create table Client
 create table _Order
 (
     Id serial,
-    Total decimal(10,2) not null,
-    Province char(15),
+    Total decimal(10,2),
+    Province varchar(15),
     City varchar(15),
     District varchar(15),
     ClientId int not null,
@@ -52,7 +52,7 @@ create table _Order
 create table Deliveryman
 (
     Id int not null,
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
     Name varchar(15) not null,
     LastName1 varchar(15) not null,
     LastName2 varchar(15),
@@ -92,9 +92,9 @@ create table Product_Photos(
 
 create table Order_Products(
     OrderId int not null,
-    ProductBarCode int unique not null,
+    ProductBarCode int not null,
     Quantity int not null,
-	Primary Key(OrderId, ProductBarCode)
+	Primary Key(ProductBarCode, OrderId)
 );
 
 
@@ -129,7 +129,7 @@ create table Store_Products(
 
 create table Manager(
     Id int not null,
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
     Name varchar(15) not null,
     LastName1 varchar(15) not null,
     LastName2 varchar(15),
@@ -156,7 +156,7 @@ create table Administrator(
 	Province varchar(15),
 	City varchar(15),
 	District varchar(15),
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
    	Password text not null,
 	Primary Key(Id)
 );
