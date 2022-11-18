@@ -1,54 +1,53 @@
---- get all clients
-CREATE OR REPLACE FUNCTION Get_All_Clients()
-returns setof client
+-- PROCEDURES FOR administrator MANIPULATION
+
+
+--- get all administrators
+CREATE OR REPLACE FUNCTION Get_All_Administrators()
+returns setof administrator
 LANGUAGE sql
 AS $$
   select *
-  from client;
+  from administrator;
+
 $$;
 
-
--- get an client by id
--- Si no le pone "" al nombre de la función, el nombre de
--- los parámetros queda en minuscúla
--- create or replace function "Get_Client"(In_Id int) -- Para que queden en mayúscula
-create or replace function Get_Client(In_Id int)
-returns setof client
+--get an administrator by id
+create or replace function Get_Administrator(In_Id int)
+returns setof administrator
 LANGUAGE sql
 AS $$
   select *
-  from client
+  from administrator
   where id = In_Id;
 $$;
 
--- Insert a new client
-create or replace procedure Insert_Client(
+
+-- Insert new administrator
+create or replace procedure Insert_Administrator(
   In_Id int,
 	In_Name varchar(15),
 	In_LastName1 varchar(15),
 	In_LastName2 varchar(15),
+	In_Email varchar(40),
 	In_Province char(15),
 	In_City varchar(15),
 	In_District varchar(15),
-  In_PhoneNumber varchar(10),
   In_Username varchar(15),
-  In_BirthDate date,
-  In_Password varchar(15)
+  In_Password text
 )
 language plpgsql
 as $$
 begin
-    INSERT INTO Client(	
+    INSERT INTO Administrator(	
         Id,
         Name,
         LastName1,
         LastName2,
+        Email,
         Province,
         City,
         District,
-        PhoneNumber,
-        Username,
-        BirthDate, 
+        Username, 
         Password
     ) 
     VALUES(
@@ -56,53 +55,51 @@ begin
         In_Name,
         In_LastName1,
         In_LastName2,
+        In_Email,
         In_Province,
         In_City,
         In_District,
-        In_PhoneNumber,
         In_Username,
-        In_BirthDate,
         crypt(In_Password, gen_salt('bf')));
 end; $$;
 
 -- Update an administrator
-create or replace procedure Update_Client(
+create or replace procedure Update_Administrator(
+  In_Old_Id int,
   In_Id int,
 	In_Name varchar(15),
 	In_LastName1 varchar(15),
 	In_LastName2 varchar(15),
+	In_Email varchar(40),
 	In_Province char(15),
 	In_City varchar(15),
 	In_District varchar(15),
-  In_PhoneNumber varchar(10),
   In_Username varchar(15),
-  In_BirthDate date,
-  In_Password varchar(15)
+  In_Password text
 )
 language plpgsql
 as $$
 begin
-    Update Client
+    Update Administrator
     set 
         Id = In_Id,
         Name = In_Name,
         LastName1 = In_LastName1,
         LastName2 = In_LastName2,
-        Province = In_Province, 
+        Email = In_Email,
+        Province = In_Province,
         City = In_City,
         District = In_District,
-        PhoneNumber = In_PhoneNumber,
         Username = In_Username,
-        BirthDate = In_BirthDate, 
-        Password = crypt(In_Password, gen_salt('bf'))
-    where Id = In_Id;
+        Password = In_Password
+    where Id = In_Old_Id;
 end; $$;
 
--- Delete a client
-create or replace procedure Delete_Client(In_Id int)
+-- Delete an administrator
+create or replace procedure Delete_Administrator(In_Id int)
 language plpgsql
 as $$
 begin
-    DELETE from Client
+    DELETE from Administrator
     where Id = In_Id;
 end; $$
