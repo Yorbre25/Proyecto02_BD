@@ -12,9 +12,9 @@ INSERT INTO Client(
 	Username, 
 	Password)
 Values
-	(1234567, 'ClientName', 'ClientL1', 'ClientL2', '1990-12-12', 'Cartago', 'Cartago', 'Cartago', '88888888', 'client', crypt('client', gen_salt('bf'))),
-	(303520771, 'Cristian', 'Smith', 'Ulloa', '1980-12-12','Cartago', 'Turrialba', 'La Suiza','77777777', 'crisnorris', crypt('ABC123', gen_salt('bf'))),
-    (63423413, 'Juan', 'Perez', 'Gonzalez', '2000-12-12','San José', 'San José', 'San Pedro','99999999', 'juanPe', crypt('ABC123', gen_salt('bf')));
+	(1234567, 'ClientName', 'ClientL1', 'ClientL2', '1990-12-12', 'Cartago', 'Cartago', 'Cartago', '88888888', 'client', 'ABC123'),
+	(303520771, 'Cristian', 'Smith', 'Ulloa', '1980-12-12','Cartago', 'Turrialba', 'La Suiza','77777777', 'crisnorris', 'ABC123'),
+    (63423413, 'Juan', 'Perez', 'Gonzalez', '2000-12-12','San José', 'San José', 'San Pedro','99999999', 'juanPe', 'ABC123');
 
 
 INSERT INTO Manager(
@@ -29,8 +29,8 @@ INSERT INTO Manager(
 	Username,
 	Password)
 Values
-	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', crypt('ABC123', gen_salt('bf'))),
-	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', crypt('ABC123', gen_salt('bf')));
+	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', 'ABC123'),
+	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', 'ABC123');
 
 
 INSERT INTO manager_phones(
@@ -124,11 +124,10 @@ Insert into Order_Products( -- Pasa algo raro aquí
 VALUES
 	(1, 123, 2),
 	(1, 783, 1),
+	(2, 123, 1),
 	(2, 934, 4),
 	(2, 222, 1),
 	(3, 333, 1),
 	(3, 444, 1),
 	(4, 555, 1);
-	-- (3, 123, 3),
-	-- (3, 545, 1);
 
