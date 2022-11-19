@@ -2,6 +2,22 @@
 @import 'bootstrap/scss/bootstrap';
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+@import "./variables.scss";
+
+@import "./components/button.scss";
+@import "./components/text.scss";
+@import "./components/image.scss";
+@import "./components/form.scss";
+
+
+
+body {
+  background-color: #007F70;
+}
+
+
+
+
 .full-container {
   width: 100vw;
   height: 100vh;

@@ -15,10 +15,11 @@ import { MultivaluedSelectComponent } from './Components/Generic/multivalued-sel
 
 import { LoginRouterComponent } from './Components/Generic/login-router/login-router.component';
 import { LoginComponent } from './Components/Generic/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms'
-import { LoginFormComponent } from './Components/Forms/login-form/login-form.component'
-import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component'
-import { MemberLoginComponent } from './Components/Member/member-login/member-login.component'
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginFormComponent } from './Components/Forms/login-form/login-form.component';
+import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
+import { MemberLoginComponent } from './Components/Member/member-login/member-login.component';
+import { MemberMenuComponent } from './Components/Member/member-menu/member-menu.component';
 import { ClientLoginComponent } from './Components/Client/client-login/client-login.component';
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
@@ -28,6 +29,7 @@ import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add
 import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component';
 import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
 import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
+
 
 @NgModule({
   declarations: [

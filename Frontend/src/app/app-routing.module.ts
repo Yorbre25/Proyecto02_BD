@@ -6,6 +6,8 @@ import { LoginComponent } from './Components/Generic/login/login.component';
 import { ClientLoginComponent } from './Components/Client/client-login/client-login.component';
 import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
 import { MemberLoginComponent } from './Components/Member/member-login/member-login.component';
+import { MemberMenuComponent } from './Components/Member/member-menu/member-menu.component';
+import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
 import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
@@ -26,6 +28,7 @@ const routes: Routes = [
     ]
   },
   { path: 'manager/menu', component: ManagerMenuComponent },
+  { path: 'member/menu', component: MemberMenuComponent },
   {
     path: 'manager',
     component: ManagerMainComponent,
@@ -35,6 +38,15 @@ const routes: Routes = [
       { path: 'employees/:id', component: ManagerInfoComponent },
       { path: 'delivery_men', component: DeliveryManListComponent },
       { path: 'delivery_men/:id', component: DeliveryManInfoComponent }
+    ]
+  },
+  {
+    path: 'member',
+    component: MemberMainComponent,
+    children: [
+      { path: '', redirectTo: '/member/menu', pathMatch: 'full' },
+      { path: 'employees', component: ManagerListComponent },
+      { path: 'employees/:id', component: ManagerInfoComponent },
     ]
   }
 ]
