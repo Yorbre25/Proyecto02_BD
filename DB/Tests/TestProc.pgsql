@@ -71,9 +71,9 @@ call Delete_Manager(1111);
 
 -- Procedure Passwords
 
-select * from Get_Admin_Password(237654);
-select * from Get_Client_Password(237654);
-select * from Get_Manager_Password(237654);
+select * from Get_Admin_Password('adminPrueba');
+select * from Get_Client_Password();
+select * from Get_Manager_Password();
 
 -- Procedure Phones
 call insert_deliveryman_phones(756345, array['12341234', '234521']);
