@@ -9,7 +9,5 @@ export class ManagerMenuComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }
