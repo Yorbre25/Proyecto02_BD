@@ -14,20 +14,23 @@ namespace Backend.Controllers
     {
       try
       {
-        List<Store> storesData = StoreData.GetAll();
+        List<Store> stores = StoreData.GetAll();
 
-        List<object> stores = new List<object>();
-        foreach (Store storeData in storesData)
+        List<object> storesData = new List<object>();
+        foreach (Store storeData in stores)
         {
-          stores.Add(new
+          storesData.Add(new
           {
-            status = "ok",
             store = storeData,
             manager = ManagerData.Get(storeData.managerID)
           });
         }
 
-        return stores;
+        return new
+        {
+          status = "ok",
+          storesData = storesData
+        };
       }
       catch (System.Exception err)
       {
@@ -45,13 +48,17 @@ namespace Backend.Controllers
     {
       try
       {
-        Store storeData = StoreData.Get(id);
+        Store store = StoreData.Get(id);
+        object storeData = new
+        {
+          store = store,
+          manager = ManagerData.Get(store.managerID)
+        };
 
         return new
         {
           status = "ok",
-          store = storeData,
-          manager = ManagerData.Get(storeData.managerID)
+          storeData = storeData
         };
       }
       catch (System.Exception err)

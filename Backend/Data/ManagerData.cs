@@ -47,7 +47,7 @@ namespace Backend.Data
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
-        throw new Exception("Error al obtener el repartidor");
+        throw new Exception("Error al obtener el administrador de comercio");
       }
     }
   }

@@ -13,7 +13,7 @@ export class ManagerMainComponent implements OnInit {
   constructor() {
     this.navbarLinks = [
       { href: 'employees', name: 'Empleados' },
-      { href: 'members', name: 'Afiliados' },
+      { href: 'stores', name: 'Afiliados' },
       { href: 'delivery_men', name: 'Repartidores' },
       { href: 'store_types', name: 'Tipos de comercio' },
       { href: 'reports', name: 'Reportes' },
