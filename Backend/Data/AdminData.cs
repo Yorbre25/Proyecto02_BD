@@ -1,6 +1,7 @@
 using System.Data;
 using Npgsql;
 
+using Backend.Helpers;
 using Backend.Models;
 
 namespace Backend.Data
@@ -94,6 +95,8 @@ namespace Backend.Data
 
     public static bool Add(Admin admin)
     {
+      string phoneNumbers = AuxFunctions.arrayToString(admin.phoneNumbers);
+
       var connection = Connection.Get();
       NpgsqlCommand cmd = new NpgsqlCommand(
         $@"CALL Insert_Administrator(
@@ -107,7 +110,7 @@ namespace Backend.Data
           '{admin.district}',
           '{admin.username}',
           '{admin.password}'
-        );", connection
+        );", connection // array{phoneNumbers} -> Para agregar los teléfonos -> También hay que ponerlo en edit
       );
       // Faltan teléfonooooos
       try

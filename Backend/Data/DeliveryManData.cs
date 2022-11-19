@@ -1,6 +1,7 @@
 using System.Data;
 using Npgsql;
 
+using Backend.Helpers;
 using Backend.Models;
 
 namespace Backend.Data
@@ -94,6 +95,9 @@ namespace Backend.Data
 
     public static bool Add(DeliveryMan deliveryMan)
     {
+      //Hay que generarle una contraseña aleatoria
+      string phoneNumbers = AuxFunctions.arrayToString(deliveryMan.phoneNumbers);
+
       var connection = Connection.Get();
       NpgsqlCommand cmd = new NpgsqlCommand(
         $@"CALL Insert_Deliveryman(
@@ -107,7 +111,7 @@ namespace Backend.Data
           '{deliveryMan.city}',
           '{deliveryMan.district}',
           '{deliveryMan.password}',
-          '{deliveryMan.phoneNumbers}'
+          array{phoneNumbers}
         );", connection
       );
       try
@@ -128,6 +132,7 @@ namespace Backend.Data
     {
       /* Hay que verificar que deliveryMan.oldPassword coincida
       con la password guardada en la base */
+      string phoneNumbers = AuxFunctions.arrayToString(deliveryMan.phoneNumbers);
 
       var connection = Connection.Get();
       NpgsqlCommand cmd = new NpgsqlCommand(
@@ -143,7 +148,7 @@ namespace Backend.Data
           '{deliveryMan.city}',
           '{deliveryMan.district}',
           '{deliveryMan.password}',
-          '{deliveryMan.phoneNumbers}'
+          array{phoneNumbers}
         );", connection
       );
       try
