@@ -8,7 +8,7 @@ CREATE TYPE Full_Manager as(
     Province char(15),
     City varchar(15),
     District varchar(15),
-    ManagesStore varchar(15)
+    PhoneNumbers character varying[]
 );
 
 --- get all managers
@@ -25,9 +25,13 @@ AS $$
     M.Email, 
     M.Province, 
     M.City, 
-    M.District, 
-    S.Name as ManagesStore
-  from Manager as M Join Store as S on M.Id = S.ManagerId;
+    M.District,
+    ARRAY(
+      select MP.Phonenumber
+      from Manager_Phones as MP
+      where M.Id = MP.ManagerId
+    ) as PhoneNumbers
+  from Manager as M;
 $$;
 
 
@@ -46,32 +50,14 @@ AS $$
     M.Province, 
     M.City, 
     M.District, 
-    S.Name as ManagesStore
-  from Manager as M Join Store as S on M.Id = S.ManagerId
-  where managerId = in_id;
+    ARRAY(
+      select MP.Phonenumber
+      from Manager_Phones as MP
+      where M.Id = MP.ManagerId
+    ) as PhoneNumbers
+  from Manager as M
+  where M.Id = in_id;
 $$;
-
-
---Get Manager by Id
-create or replace function Get_Manager(in_id int)
-returns setof Full_Manager
-LANGUAGE sql
-AS $$
-  select 
-    M.Id,
-    M.Username, 
-    M.Name, 
-    M.LastName1,
-    M.LastName2,
-    M.Email, 
-    M.Province, 
-    M.City, 
-    M.District, 
-    S.Name as ManagesStore
-  from Manager as M Join Store as S on M.Id = S.ManagerId
-  where managerId = in_id;
-$$;
-
 
 --Isert Manager
 create or replace procedure Insert_Manager(
