@@ -14,9 +14,8 @@ export class ManagerMainComponent implements OnInit {
     this.navbarLinks = [
       { href: 'employees', name: 'Empleados' },
       { href: 'members', name: 'Afiliados' },
-      { href: 'clients', name: 'Clientes' },
       { href: 'delivery_men', name: 'Repartidores' },
-      { href: 'stores', name: 'Comercios' },
+      { href: 'store_types', name: 'Tipos de comercio' },
       { href: 'reports', name: 'Reportes' },
     ]
   }

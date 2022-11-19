@@ -1,0 +1,23 @@
+<div class="container-sm">
+  <h4 class="text-center mb-3">Información de tipo de comercio</h4>
+
+  <app-message [messageInfo]="messageService.messageInfo"></app-message>
+
+  <app-info-card [infoTitles]="storeTypeInfoTitles" [info]="storeType"></app-info-card>
+
+  <div class="d-flex justify-content-between mt-3">
+    <div>
+      <button class="btn btn-outline-secondary" (click)="auxFunctionsService.goBack()">Regresar</button>
+    </div>
+
+    <div class="d-flex gap-2">
+      <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Editar tipo de comercio'"
+        [modalHeader]="'Edición de tipo de comercio'">
+
+        <app-add-store-type-form [storeTypeInfo]="storeType"></app-add-store-type-form>
+      </app-modal>
+
+      <button class="btn btn-outline-danger" (click)="deleteStoreType()">Eliminar tipo de comercio</button>
+    </div>
+  </div>
+</div>
