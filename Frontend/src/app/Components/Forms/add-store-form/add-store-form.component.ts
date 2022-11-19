@@ -11,5 +11,4 @@ export class AddStoreFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

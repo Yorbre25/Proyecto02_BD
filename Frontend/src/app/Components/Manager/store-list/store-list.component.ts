@@ -23,6 +23,7 @@ export class StoreListComponent implements OnInit {
       { key: "name", replacement: "Nombre del comercio" },
       { key: "email", replacement: "Correo electrónico" },
       { key: "storeTypeName", replacement: "Tipo de comercio" },
+      { key: "managerID", replacement: "Nombre del gerente" }
     ]
 
     this.tableData = []
@@ -38,7 +39,14 @@ export class StoreListComponent implements OnInit {
         }
         else if (response.storesData) {
           const stores: Store[] = response.storesData
-            .map((storeData) => storeData.store)
+            .map((storeData) => {
+              let store: any = storeData.store
+              const manager = storeData.manager
+
+              store.managerID = `
+                ${manager.name} ${manager.lastName1} ${manager.lastName2}`
+              return store
+            })
 
           this.tableData = stores
         }

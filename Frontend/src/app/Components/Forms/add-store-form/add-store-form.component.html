@@ -1,1 +1,15 @@
-<p>add-store-form works!</p>
+<nav ngbNav #nav="ngbNav" class="nav-tabs nav-fill">
+  <ng-container ngbNavItem>
+    <a ngbNavLink>Comercio</a>
+    <ng-template ngbNavContent>
+      ----------------> Contenido 1<---------------- </ng-template>
+  </ng-container>
+
+  <ng-container ngbNavItem>
+    <a ngbNavLink>Administrador</a>
+    <ng-template ngbNavContent>
+      ----------------> Contenido 2<---------------- </ng-template>
+  </ng-container>
+</nav>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

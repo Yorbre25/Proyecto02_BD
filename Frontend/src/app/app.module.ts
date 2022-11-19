@@ -37,6 +37,8 @@ import { AddStoreTypeFormComponent } from './Components/Forms/add-store-type-for
 import { AddStoreFormComponent } from './Components/Forms/add-store-form/add-store-form.component';
 import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component';
 import { StoreListComponent } from './Components/Manager/store-list/store-list.component';
+import { StoreFormComponent } from './Components/Forms/store-form/store-form.component';
+import { StoreManagerFormComponent } from './Components/Forms/store-manager-form/store-manager-form.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { StoreListComponent } from './Components/Manager/store-list/store-list.c
     AddStoreFormComponent,
     StoreInfoComponent,
     StoreListComponent,
+    StoreFormComponent,
+    StoreManagerFormComponent
   ],
   imports: [
     BrowserModule,
