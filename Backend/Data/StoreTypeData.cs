@@ -26,7 +26,7 @@ namespace Backend.Data
         {
           storeTypeList.Add(new StoreType()
           {
-            id = dr["Id"].ToString()!,
+            id = Convert.ToInt32(dr["Id"]),
             name = dr["Name"].ToString()!
           });
         }
@@ -61,7 +61,7 @@ namespace Backend.Data
         {
           storeType = new StoreType()
           {
-            id = dr["Id"].ToString()!,
+            id = Convert.ToInt32(dr["Id"])!,
             name = dr["Name"].ToString()!
           };
         }
@@ -102,7 +102,7 @@ namespace Backend.Data
       var connection = Connection.Get();
       NpgsqlCommand cmd = new NpgsqlCommand(
         $@"CALL Update_Store_Type(
-          '{storeType.id}',
+          {storeType.id},
           '{storeType.name}'
         );", connection
       );

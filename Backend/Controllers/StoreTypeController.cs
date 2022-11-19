@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
   [ApiController]
-  [Route("store_type")]
+  [Route("store_types")]
   public class StoreTypeController : Controller
   {
     [HttpGet]

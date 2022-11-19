@@ -63,8 +63,6 @@ export class AddDeliveryManFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.deliveryManInfo);
-
     if (this.deliveryManInfo && Object.keys(this.deliveryManInfo).length) {
       const { ...deliveryManInfo } = this.deliveryManInfo as any
 
