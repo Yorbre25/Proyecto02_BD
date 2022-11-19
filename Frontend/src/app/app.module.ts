@@ -27,7 +27,8 @@ import { ManagerListComponent } from './Components/Manager/manager-list/manager-
 import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
 import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add-manager-form.component';
 import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component';
-import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
+import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
+import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
 
 
 @NgModule({
@@ -52,8 +53,8 @@ import { MemberMainComponent } from './Components/Member/member-main/member-main
     ManagerInfoComponent,
     AddManagerFormComponent,
     EditManagerFormComponent,
-    MemberMenuComponent,
-    MemberMainComponent,
+    DeliveryManListComponent,
+    DeliveryManInfoComponent
   ],
   imports: [
     BrowserModule,
