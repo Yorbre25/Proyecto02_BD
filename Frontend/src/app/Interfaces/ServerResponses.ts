@@ -1,6 +1,7 @@
 import { Manager } from "./Manager"
 import { DeliveryMan } from "./DeliveryMan"
 import { StoreType } from "./StoreType"
+import { StoreData } from "./Store"
 
 interface ServerResponse {
     status: 'ok' | 'error'
@@ -31,6 +32,14 @@ interface StoreTypeResponse extends ServerResponse {
     storeType?: StoreType
 }
 
+interface StoresDataResponse extends ServerResponse {
+    storesData: StoreData[]
+}
+
+interface StoreDataResponse extends ServerResponse {
+    storeData: StoreData
+}
+
 export {
     ServerResponse,
     ManagersResponse,
@@ -38,5 +47,7 @@ export {
     DeliveryMenResponse,
     DeliveryManResponse,
     StoreTypesResponse,
-    StoreTypeResponse
+    StoreTypeResponse,
+    StoresDataResponse,
+    StoreDataResponse
 }

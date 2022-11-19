@@ -16,6 +16,8 @@ import { DeliveryManListComponent } from './Components/Manager/delivery-man-list
 import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component'
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component'
+import { StoreListComponent } from './Components/Manager/store-list/store-list.component'
+import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -40,6 +42,8 @@ const routes: Routes = [
       { path: 'employees/:id', component: ManagerInfoComponent },
       { path: 'delivery_men', component: DeliveryManListComponent },
       { path: 'delivery_men/:id', component: DeliveryManInfoComponent },
+      { path: 'stores', component: StoreListComponent },
+      { path: 'stores/:id', component: StoreInfoComponent },
       { path: 'store_types', component: StoreTypeListComponent },
       { path: 'store_types/:id', component: StoreTypeInfoComponent },
     ]

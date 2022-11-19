@@ -34,6 +34,11 @@ import { AddDeliveryManFormComponent } from './Components/Forms/add-delivery-man
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component';
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component';
 import { AddStoreTypeFormComponent } from './Components/Forms/add-store-type-form/add-store-type-form.component';
+import { AddStoreFormComponent } from './Components/Forms/add-store-form/add-store-form.component';
+import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component';
+import { StoreListComponent } from './Components/Manager/store-list/store-list.component';
+import { StoreFormComponent } from './Components/Forms/store-form/store-form.component';
+import { StoreManagerFormComponent } from './Components/Forms/store-manager-form/store-manager-form.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +71,11 @@ import { AddStoreTypeFormComponent } from './Components/Forms/add-store-type-for
     StoreTypeListComponent,
     StoreTypeInfoComponent,
     AddStoreTypeFormComponent,
+    AddStoreFormComponent,
+    StoreInfoComponent,
+    StoreListComponent,
+    StoreFormComponent,
+    StoreManagerFormComponent
   ],
   imports: [
     BrowserModule,

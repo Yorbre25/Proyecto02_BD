@@ -1,15 +1,14 @@
 CREATE TYPE Full_Store as(
     Id int,
     Name varchar(15),
-	Email varchar(40),
+    Email varchar(40),
     Province char(15),
     City varchar(15),
     District varchar(15),
-    ManagerName varchar(15),
-    ManagerLastName1 varchar(15),
-    ManagerLastName2 varchar(15),
-    StoreType varchar(15),
-    PhoneNumbers text
+    ManagerId int,
+    StoreTypeId int,
+    StoreTypeName varchar(15),
+    PhoneNumbers character varying[]
 );
 
 --- get all stores
@@ -24,15 +23,18 @@ AS $$
     S.Province, 
     S.City, 
     S.District, 
-    M.Name as ManagerName, 
-    M.LastName1 as ManagerLastName1, 
-    M.LastName2 as ManagerLastName2, 
-    ST.Name as StoreType, 
-    array_to_string(array_agg(SP.PhoneNumber), ',') as PhoneNumbers
+    M.Id as ManagerId,
+    ST.Id as StoreTypeId,
+    ST.Name as StoreTypeName,
+    ARRAY(
+      select SP.Phonenumber
+      from Store_Phones as SP
+      where S.Id = SP.StoreId
+    ) as PhoneNumbers
   from (((Store as S join Store_Type as ST on S.StoreTypeId = ST.Id) 
   join Store_Phones as SP on S.Id = SP.StoreId)
   join Manager as M on S.ManagerId = M.Id)
-  GROUP By S.id, M.Name, M.lastname1, M.lastname2, ST.Name
+  GROUP By S.id, M.Id, ST.Id, ST.Name
 $$;
 
 
@@ -48,16 +50,19 @@ AS $$
     S.Province, 
     S.City, 
     S.District, 
-    M.Name as ManagerName, 
-    M.LastName1 as ManagerLastName1, 
-    M.LastName2 as ManagerLastName2, 
-    ST.Name as StoreType, 
-    array_to_string(array_agg(SP.PhoneNumber), ',') as PhoneNumbers
+    M.Id as ManagerId,
+    ST.Id as StoreTypeId,
+    ST.Name as StoreTypeName,
+    ARRAY(
+      select SP.Phonenumber
+      from Store_Phones as SP
+      where S.Id = SP.StoreId
+    ) as PhoneNumbers
   from (((Store as S join Store_Type as ST on S.StoreTypeId = ST.Id) 
   join Store_Phones as SP on S.Id = SP.StoreId)
   join Manager as M on S.ManagerId = M.Id)
   where S.Id = in_id
-  GROUP By S.id, M.Name, M.lastname1, M.lastname2, ST.Name
+  GROUP By S.id, M.Id, ST.Id, ST.Name
 $$;
 
 

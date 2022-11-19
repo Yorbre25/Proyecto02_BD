@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
   [ApiController]
-  [Route("delivery_man")]
-  public class DeliveryManController : Controller
+  [Route("stores")]
+  public class StoreController : Controller
   {
     [HttpGet]
     [Route("get_all")]
@@ -14,11 +14,22 @@ namespace Backend.Controllers
     {
       try
       {
-        List<DeliveryMan> deliveryMen = DeliveryManData.GetAll();
+        List<Store> stores = StoreData.GetAll();
+
+        List<object> storesData = new List<object>();
+        foreach (Store storeData in stores)
+        {
+          storesData.Add(new
+          {
+            store = storeData,
+            manager = ManagerData.Get(storeData.managerID)
+          });
+        }
+
         return new
         {
           status = "ok",
-          deliveryMen = deliveryMen
+          storesData = storesData
         };
       }
       catch (System.Exception err)
@@ -37,11 +48,17 @@ namespace Backend.Controllers
     {
       try
       {
-        DeliveryMan deliveryMan = DeliveryManData.Get(id);
+        Store store = StoreData.Get(id);
+        object storeData = new
+        {
+          store = store,
+          manager = ManagerData.Get(store.managerID)
+        };
+
         return new
         {
           status = "ok",
-          deliveryMan = deliveryMan
+          storeData = storeData
         };
       }
       catch (System.Exception err)
@@ -56,15 +73,15 @@ namespace Backend.Controllers
 
     [HttpPost]
     [Route("add")]
-    public Object Post([FromBody] DeliveryMan deliveryMan)
+    public Object Post([FromBody] Store store)
     {
-      bool ok = DeliveryManData.Add(deliveryMan);
+      bool ok = StoreData.Add(store);
       if (ok)
       {
         return new
         {
           status = "ok",
-          message = "Repartidor registrado correctamente"
+          message = "Afiliado registrado correctamente"
         };
       }
       else
@@ -72,22 +89,22 @@ namespace Backend.Controllers
         return new
         {
           status = "error",
-          message = "No se pudo registrar el repartidor"
+          message = "No se pudo registrar el afiliado"
         };
       }
     }
 
     [HttpPatch]
     [Route("update/{id}")]
-    public Object Put([FromBody] DeliveryMan deliveryMan, int id)
+    public Object Put([FromBody] Store store, int id)
     {
-      bool ok = DeliveryManData.Edit(deliveryMan, id);
+      bool ok = StoreData.Edit(store, id);
       if (ok)
       {
         return new
         {
           status = "ok",
-          message = "Repartidor modificado correctamente"
+          message = "Afiliado modificado correctamente"
         };
       }
       else
@@ -95,7 +112,7 @@ namespace Backend.Controllers
         return new
         {
           status = "error",
-          message = "No se pudo modificar el repartidor"
+          message = "No se pudo modificar el afiliado"
         };
       }
     }
@@ -104,13 +121,13 @@ namespace Backend.Controllers
     [Route("delete/{id}")]
     public Object Delete(int id)
     {
-      bool ok = DeliveryManData.Delete(id);
+      bool ok = StoreData.Delete(id);
       if (ok)
       {
         return new
         {
           status = "ok",
-          message = "Repartidor eliminado correctamente"
+          message = "Afiliado eliminado correctamente"
         };
       }
       else
@@ -118,7 +135,7 @@ namespace Backend.Controllers
         return new
         {
           status = "error",
-          message = "No se pudo eliminar el repartidor"
+          message = "No se pudo eliminar el afiliado"
         };
       }
     }

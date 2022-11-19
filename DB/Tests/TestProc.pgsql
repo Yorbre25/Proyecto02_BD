@@ -44,8 +44,8 @@ select * from Get_Store(163235);
 call Insert_Store(5935, 'Prueba', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','cambio']);
 call Update_Store(5935, 11, 'Triunfo', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','Chigugua']);
 call Delete_Store(5935);
---Procedure STORE_TYPE
 
+--Procedure STORE_TYPE
 select * from Get_All_Store_Types();
 select * from Get_Store_Type(1);
 call Insert_Store_Type('Tienda');
