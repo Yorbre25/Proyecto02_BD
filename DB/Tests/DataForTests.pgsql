@@ -12,9 +12,9 @@ INSERT INTO Client(
 	Username, 
 	Password)
 Values
-	(1234567, 'ClientName', 'ClientL1', 'ClientL2', '1990-12-12', 'Cartago', 'Cartago', 'Cartago', '88888888', 'client', crypt('client', gen_salt('bf'))),
-	(303520771, 'Cristian', 'Smith', 'Ulloa', '1980-12-12','Cartago', 'Turrialba', 'La Suiza','77777777', 'crisnorris', crypt('ABC123', gen_salt('bf'))),
-    (63423413, 'Juan', 'Perez', 'Gonzalez', '2000-12-12','San José', 'San José', 'San Pedro','99999999', 'juanPe', crypt('ABC123', gen_salt('bf')));
+	(1234567, 'ClientName', 'ClientL1', 'ClientL2', '1990-12-12', 'Cartago', 'Cartago', 'Cartago', '88888888', 'client', 'ABC123'),
+	(303520771, 'Cristian', 'Smith', 'Ulloa', '1980-12-12','Cartago', 'Turrialba', 'La Suiza','77777777', 'crisnorris', 'ABC123'),
+    (63423413, 'Juan', 'Perez', 'Gonzalez', '2000-12-12','San José', 'San José', 'San Pedro','99999999', 'juanPe', 'ABC123');
 
 
 INSERT INTO Manager(
@@ -29,8 +29,8 @@ INSERT INTO Manager(
 	Username,
 	Password)
 Values
-	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', crypt('ABC123', gen_salt('bf'))),
-	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', crypt('ABC123', gen_salt('bf')));
+	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', 'ABC123'),
+	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', 'ABC123');
 
 
 INSERT INTO manager_phones(
@@ -73,7 +73,10 @@ Values
 	(123, 'McNífica', '3500', 1),
 	(783, 'CocaCola 0', '800', 6),
 	(934, 'Viagra', '2000', 2),
-	(545, 'Panadol Noche', '500', 2);
+	(222, 'Panadol Noche', '500', 2),
+	(333, 'CocaCola', '500', 6),
+	(444, 'Casado', '500', 4),
+	(555, 'Smirnoff', '500', 6);
 
 
 INSERT INTO product_photos(
@@ -83,9 +86,8 @@ VALUES
 	(123, 'https://www.mcdonalds.com'),
 	(123, '://www.mcdonalds.com'),
 	(783, 'https://www.cocacola.com'),
-	(934, 'https://www.viagra.com'),
-	(545, 'https://www.panadol.com');
-
+	(934, 'https://www.viagra.com');
+	
 
 Insert into Store_Products(
 	StoreId,
@@ -94,18 +96,25 @@ VALUES
 	(163235, 123),
 	(163235, 783),
 	(9759832, 934),
-	(9759832, 545);
+	(9759832, 222),
+	(9759832, 333),
+	(9759832, 444),
+	(9759832, 555);
 
 
 insert into _Order(
 	Total,
-	shippingaddress,
+	province,
+	city,
+	district,
 	ClientId,
 	DelManId)
 VALUES
-	('3500', '300m este del banco nacional', 1234567, 756345),
-	('3155', 'Avenida 14A, Cartago Centro', 303520771, 756345),
-	('2100', 'Aquiiiii', 1234567, 2763495);
+	('3500', 'Cartago', 'Cartago', 'Cartago', 1234567, 756345),
+	('1200', 'Cartago', 'Cartago', 'Cartago', 303520771, 756345),
+	('2500', 'Cartago', 'Cartago', 'Cartago', 303520771, 2763495),
+	('3155', 'San José', 'San José', 'San José', 303520771, 756345),
+	('2100', 'Limon', 'Limon', 'Limon', 1234567, 2763495);
 
 
 Insert into Order_Products( -- Pasa algo raro aquí
@@ -115,8 +124,10 @@ Insert into Order_Products( -- Pasa algo raro aquí
 VALUES
 	(1, 123, 2),
 	(1, 783, 1),
+	(2, 123, 1),
 	(2, 934, 4),
-	(2, 545, 1);
-	-- (3, 123, 3),
-	-- (3, 545, 1);
+	(2, 222, 1),
+	(3, 333, 1),
+	(3, 444, 1),
+	(4, 555, 1);
 

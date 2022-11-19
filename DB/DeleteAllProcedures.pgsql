@@ -20,6 +20,9 @@ drop procedure if EXISTS Delete_client;
 drop function if exists get_all_deliverymen;
 drop function if exists get_deliveryman;
 drop TYPE if EXISTS Full_Deliveryman;
+drop procedure if exists insert_deliveryman;
+drop procedure if exists update_deliveryman;
+drop procedure if exists delete_deliveryman;
 
 --Drop Product
 drop function if exists get_all_products;
@@ -42,6 +45,9 @@ drop procedure if exists Delete_Product_Category;
 drop function if exists get_all_stores;
 drop function if exists Get_Store;
 drop type if EXISTS Full_Store;
+drop procedure if exists Insert_Store;
+drop procedure if exists Update_Store;
+drop procedure if exists Delete_Store;
 
 --Drop Store_Type
 drop function if exists Get_All_Store_Types;
@@ -54,11 +60,18 @@ drop procedure if exists Delete_Store_Type;
 drop function if exists get_all_orders;
 drop function if exists get_order;
 drop type if EXISTS Full_Order;
+drop procedure if exists insert_order;
+drop procedure if exists update_order;
+drop procedure if exists delete_order;
 
 --Drop Manager
 drop function if exists get_all_managers;
 drop function if exists get_manager;
 drop type if EXISTS Full_Manager;
+drop procedure if exists insert_manager;
+drop procedure if exists update_manager;
+drop procedure if exists delete_manager;
 
---Drop GenericPhoneNumber
-drop type if EXISTS GenericPhoneNumber;
+--drop reports
+drop function if exists get_Sales_Per_Client;
+drop function if exists get_Sales_Per_Store;

@@ -31,7 +31,7 @@ create table Client
 	City varchar(15),
 	District varchar(15),
     PhoneNumber varchar(10),
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
     BirthDate Date,
     Password text not null,
 	PRIMARY KEY(ID)
@@ -40,8 +40,10 @@ create table Client
 create table _Order
 (
     Id serial,
-    Total decimal(10,2) not null,
-    ShippingAddress varchar(50) not null,
+    Total decimal(10,2),
+    Province varchar(15),
+    City varchar(15),
+    District varchar(15),
     ClientId int not null,
     DelManId int not null,
     PRIMARY KEY(Id)
@@ -50,7 +52,7 @@ create table _Order
 create table Deliveryman
 (
     Id int not null,
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
     Name varchar(15) not null,
     LastName1 varchar(15) not null,
     LastName2 varchar(15),
@@ -90,9 +92,9 @@ create table Product_Photos(
 
 create table Order_Products(
     OrderId int not null,
-    ProductBarCode int unique not null,
+    ProductBarCode int not null,
     Quantity int not null,
-	Primary Key(OrderId, ProductBarCode)
+	Primary Key(ProductBarCode, OrderId)
 );
 
 
@@ -100,7 +102,7 @@ create table Store(
     Id int not null,
     Name varchar(15) not null,
     Email varchar(40) not null,
-    Province char(15),
+    Province varchar(15),
     City varchar(15),
     District varchar(15),
     StoreTypeId int not null,
@@ -127,12 +129,12 @@ create table Store_Products(
 
 create table Manager(
     Id int not null,
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
     Name varchar(15) not null,
     LastName1 varchar(15) not null,
     LastName2 varchar(15),
     Email varchar(40) not null,
-    Province char(15),
+    Province varchar(15),
     City varchar(15),
     District varchar(15),
     Password text not null,
@@ -151,10 +153,10 @@ create table Administrator(
 	LastName1 varchar(15) not null,
 	LastName2 varchar(15),
 	Email varchar(40),
-	Province char(15),
+	Province varchar(15),
 	City varchar(15),
 	District varchar(15),
-    Username varchar(15) not null,
+    Username varchar(15) not null unique,
    	Password text not null,
 	Primary Key(Id)
 );
@@ -163,73 +165,86 @@ create table Administrator(
 ALTER TABLE _ORDER
 ADD CONSTRAINT ORDER_CLIENTE
 FOREIGN KEY (ClientId)
-REFERENCES Client (Id);
+REFERENCES Client (Id)
+ON UPDATE CASCADE;
 
 ALTER TABLE _ORDER
 ADD CONSTRAINT ORDER_DELIVERYMAN
 FOREIGN KEY (DelManId)
-REFERENCES Deliveryman(Id);
+REFERENCES Deliveryman(Id)
+ON UPDATE CASCADE;
 
 -- Foreign Keys Deliveryman_Phones
 ALTER TABLE DELIVERYMAN_PHONES
 ADD CONSTRAINT DELIVERYMAN_PHONES_DELIVERYMAN
 FOREIGN KEY (DelManId)
-REFERENCES Deliveryman (Id);
+REFERENCES Deliveryman (Id)
+ON UPDATE CASCADE;
 
 --Foreign Keys Order_Products
 ALTER TABLE ORDER_PRODUCTS
 ADD CONSTRAINT ORDER_PRODUCTS_PRODUCT
 FOREIGN KEY (ProductBarCode)
-REFERENCES Product (barCode);
+REFERENCES Product (barCode)
+ON UPDATE CASCADE;
 
 ALTER TABLE ORDER_PRODUCTS
 ADD CONSTRAINT ORDER_PRODUCTS_ORDER
 FOREIGN KEY (OrderId)
-REFERENCES _Order (Id);
+REFERENCES _Order (Id)
+ON UPDATE CASCADE;
 
 --Foreign Keys Product
 ALTER TABLE PRODUCT
 ADD CONSTRAINT PRODUCT_CATEGORY
 FOREIGN KEY (CategoryId)
-REFERENCES Product_Category (Id);
+REFERENCES Product_Category (Id)
+ON UPDATE CASCADE;
 
 --Foreign Keys Product_Photos
 ALTER TABLE PRODUCT_PHOTOS
 ADD CONSTRAINT PRODUCT_PHOTOS_PRODUCT
 FOREIGN KEY (ProductBarCode)
-REFERENCES Product (BarCode);
+REFERENCES Product (BarCode)
+ON UPDATE CASCADE;
 
 --Foreign Keys Store_Products
 ALTER TABLE STORE_PRODUCTS
 ADD CONSTRAINT STORE_PRODUCTS_PRODUCT
 FOREIGN KEY (ProductBarCode)
-REFERENCES Product (BarCode);
+REFERENCES Product (BarCode)
+ON UPDATE CASCADE;
 
 ALTER TABLE STORE_PRODUCTS
 ADD CONSTRAINT STORE_PRODUCTS_STORE
 FOREIGN KEY (StoreId)
-REFERENCES Store (Id);
+REFERENCES Store (Id)
+ON UPDATE CASCADE;
 
 --Foreign Keys Store
 ALTER TABLE STORE
 ADD CONSTRAINT STORE_STORE_TYPE
 FOREIGN KEY (StoreTypeId)
-REFERENCES Store_Type (Id);
+REFERENCES Store_Type (Id)
+ON UPDATE CASCADE;
 
 ALTER TABLE STORE
 ADD CONSTRAINT STORE_MANAGER
 FOREIGN KEY (ManagerId)
-REFERENCES Manager(Id);
+REFERENCES Manager(Id)
+ON UPDATE CASCADE;
 
 --Foreign Keys Store_Phones
 ALTER TABLE STORE_PHONES
 ADD CONSTRAINT STORE_STORE_PHONES
 FOREIGN KEY (StoreId)
-REFERENCES Store(Id);
+REFERENCES Store(Id)
+ON UPDATE CASCADE;
 
 --Foreign Keys Manager_Phones
 ALTER TABLE MANAGER_PHONES
 ADD CONSTRAINT MANAGER_MANAGER_PHONES
 FOREIGN KEY (ManagerId)
-REFERENCES Manager(Id);
+REFERENCES Manager(Id)
+ON UPDATE CASCADE;
 
