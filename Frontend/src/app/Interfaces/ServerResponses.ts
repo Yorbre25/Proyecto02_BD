@@ -1,4 +1,5 @@
 import { Manager } from "./Manager"
+import { DeliveryMan } from "./DeliveryMan"
 
 interface ServerResponse {
     status: 'ok' | 'error'
@@ -13,8 +14,18 @@ interface ManagerResponse extends ServerResponse {
     manager?: Manager
 }
 
+interface DeliveryMenResponse extends ServerResponse {
+    deliveryMen?: DeliveryMan[]
+}
+
+interface DeliveryManResponse extends ServerResponse {
+    deliveryMan?: DeliveryMan
+}
+
 export {
     ServerResponse,
     ManagersResponse,
-    ManagerResponse
+    ManagerResponse,
+    DeliveryMenResponse,
+    DeliveryManResponse
 }
