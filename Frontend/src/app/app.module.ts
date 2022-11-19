@@ -30,8 +30,9 @@ import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/e
 import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
 import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
 import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
-import { AddDeliveryManFormComponent } from './Components/Forms/add-delivery-man-form/add-delivery-man-form.component'
-
+import { AddDeliveryManFormComponent } from './Components/Forms/add-delivery-man-form/add-delivery-man-form.component';
+import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component';
+import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { AddDeliveryManFormComponent } from './Components/Forms/add-delivery-man
     MemberMenuComponent,
     MemberMainComponent,
     MemberLoginComponent,
-    AddDeliveryManFormComponent
+    AddDeliveryManFormComponent,
+    StoreTypeListComponent,
+    StoreTypeInfoComponent,
   ],
   imports: [
     BrowserModule,
