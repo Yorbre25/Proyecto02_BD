@@ -15,7 +15,7 @@ export class ManagerMainComponent implements OnInit {
       { href: 'employees', name: 'Empleados' },
       { href: 'members', name: 'Afiliados' },
       { href: 'clients', name: 'Clientes' },
-      { href: 'delivery', name: 'Repartidores' },
+      { href: 'delivery_men', name: 'Repartidores' },
       { href: 'stores', name: 'Comercios' },
       { href: 'reports', name: 'Reportes' },
     ]

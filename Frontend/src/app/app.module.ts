@@ -25,7 +25,9 @@ import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-
 import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
 import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
 import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add-manager-form.component';
-import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component'
+import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component';
+import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
+import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/e
     ManagerListComponent,
     ManagerInfoComponent,
     AddManagerFormComponent,
-    EditManagerFormComponent
+    EditManagerFormComponent,
+    DeliveryManListComponent,
+    DeliveryManInfoComponent
   ],
   imports: [
     BrowserModule,

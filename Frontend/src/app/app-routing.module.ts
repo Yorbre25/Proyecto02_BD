@@ -10,6 +10,8 @@ import { ManagerMainComponent } from './Components/Manager/manager-main/manager-
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
 import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
 import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
+import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
+import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,6 +33,8 @@ const routes: Routes = [
       { path: '', redirectTo: '/manager/menu', pathMatch: 'full' },
       { path: 'employees', component: ManagerListComponent },
       { path: 'employees/:id', component: ManagerInfoComponent },
+      { path: 'delivery_men', component: DeliveryManListComponent },
+      { path: 'delivery_men/:id', component: DeliveryManInfoComponent }
     ]
   }
 ]
