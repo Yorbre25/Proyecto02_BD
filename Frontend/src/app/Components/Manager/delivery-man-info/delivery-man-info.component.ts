@@ -46,7 +46,7 @@ export class DeliveryManInfoComponent implements OnInit {
         }
         else if (response.deliveryMan) {
           this.deliveryMan = response.deliveryMan
-          this.deliveryManCopy = { ...this.deliveryMan }
+          this.deliveryManCopy = structuredClone(this.deliveryMan)
 
           this.deliveryMan.name =
             `${this.deliveryMan.name} ${this.deliveryMan.lastName1} ${this.deliveryMan.lastName2}`

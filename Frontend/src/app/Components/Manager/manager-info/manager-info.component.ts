@@ -46,7 +46,7 @@ export class ManagerInfoComponent implements OnInit {
         }
         else if (response.manager) {
           this.manager = response.manager
-          this.managerCopy = { ...this.manager }
+          this.managerCopy = structuredClone(this.manager)
 
           this.manager.name =
             `${this.manager.name} ${this.manager.lastName1} ${this.manager.lastName2}`

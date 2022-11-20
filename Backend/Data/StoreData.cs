@@ -144,6 +144,7 @@ namespace Backend.Data
           array{phoneNumbers}
         );", connection
       );
+
       try
       {
         connection.Open();
