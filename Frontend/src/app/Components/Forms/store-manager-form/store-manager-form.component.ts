@@ -10,7 +10,7 @@ import { MessageService } from 'src/app/Services/message.service'
   templateUrl: './store-manager-form.component.html',
   styleUrls: ['./store-manager-form.component.scss']
 })
-export class StoreManagerFormComponent implements OnInit {
+export class StoreManagerFormComponent implements OnInit, OnChanges {
   id: FormControl
   username: FormControl
   name: FormControl
@@ -54,17 +54,19 @@ export class StoreManagerFormComponent implements OnInit {
     this.formGroup.addControl('city', this.city)
     this.formGroup.addControl('district', this.district)
     this.formGroup.addControl('phoneNumbers', this.phoneNumbers)
+  }
 
+  ngOnChanges(): void {
     if (this.managerInfo && Object.keys(this.managerInfo).length) {
-      this.formGroup.patchValue(this.managerInfo)
+      const { ...managerInfo } = this.managerInfo
 
       this.phoneNumbers.removeAt(0)
 
-      this.managerInfo.phoneNumbers.forEach(phoneNumber => {
+      managerInfo.phoneNumbers.forEach(phoneNumber => {
         this.phoneNumbers.push(new FormControl(phoneNumber))
       })
 
-      this.formGroup.patchValue(this.managerInfo)
+      this.formGroup.patchValue(managerInfo)
     }
   }
 }

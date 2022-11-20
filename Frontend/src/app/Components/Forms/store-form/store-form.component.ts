@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core'
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { Store } from 'src/app/Interfaces/Store'
@@ -12,7 +12,7 @@ import { StoreTypeService } from 'src/app/Services/store-type.service'
   templateUrl: './store-form.component.html',
   styleUrls: ['./store-form.component.scss']
 })
-export class StoreFormComponent implements OnInit {
+export class StoreFormComponent implements OnInit, OnChanges {
   id: FormControl
   name: FormControl
   email: FormControl
@@ -46,6 +46,7 @@ export class StoreFormComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+
     this.formGroup.addControl('id', this.id)
     this.formGroup.addControl('name', this.name)
     this.formGroup.addControl('email', this.email)
@@ -57,15 +58,19 @@ export class StoreFormComponent implements OnInit {
 
     await this.getStoreTypes()
       .then((storeTypes) => { this.storeTypes = storeTypes })
+  }
 
+  ngOnChanges(): void {
     if (this.storeInfo && Object.keys(this.storeInfo).length) {
+      const { ...storeInfo } = this.storeInfo
+
       this.phoneNumbers.removeAt(0)
 
-      this.storeInfo.phoneNumbers.forEach(phoneNumber => {
+      storeInfo.phoneNumbers.forEach(phoneNumber => {
         this.phoneNumbers.push(new FormControl(phoneNumber))
       })
 
-      this.formGroup.patchValue(this.storeInfo)
+      this.formGroup.patchValue(storeInfo)
     }
   }
 
