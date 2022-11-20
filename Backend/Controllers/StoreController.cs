@@ -96,13 +96,13 @@ namespace Backend.Controllers
     }
 
     [HttpPatch]
-    [Route("update/{id}")]
+    [Route("update/{storeID}")]
     public Object Put([FromBody] StoreInfo storeData, int storeID)
     {
       int managerID = StoreData.Get(storeID).managerID;
 
-      bool storeOK = StoreData.Edit(storeData.store, storeID);
       bool managerOK = ManagerData.Edit(storeData.manager, managerID);
+      bool storeOK = StoreData.Edit(storeData.store, storeID);
       if (storeOK && managerOK)
       {
         return new
