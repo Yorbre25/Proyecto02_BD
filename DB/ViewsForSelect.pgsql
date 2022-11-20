@@ -88,3 +88,21 @@ create or replace view Full_Manager as
       where M.Id = MP.ManagerId
     ) as PhoneNumbers
   from Manager as M;
+
+create or replace view Full_Administrator as
+  select 
+    A.Id,
+    A.Name,
+    A.LastName1,
+    A.LastName2,
+    A.Email,
+    A.Province,
+    A.City,
+    A.District,
+    A.Username,
+    Array(
+      Select AP.PhoneNumber
+      from Administrator_Phones as AP
+      where AP.AdministratorId = A.Id
+    ) as PhoneNumbers
+  from administrator as A;

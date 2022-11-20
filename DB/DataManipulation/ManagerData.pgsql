@@ -1,62 +1,19 @@
-CREATE TYPE Full_Manager as(
-    Id int,
-    Username varchar(15),
-    Name varchar(15),
-    LastName1 varchar(15),
-    LastName2 varchar(15),
-    Email varchar(40),
-    Province char(15),
-    City varchar(15),
-    District varchar(15),
-    PhoneNumbers character varying[]
-);
 
 --- get all managers
 CREATE OR REPLACE FUNCTION Get_All_Managers()
-returns setof Manager
+returns setof Full_Manager
 LANGUAGE sql
 AS $$
-  select 
-    M.Id,
-    M.Username, 
-    M.Name, 
-    M.LastName1,
-    M.LastName2,
-    M.Email, 
-    M.Province, 
-    M.City, 
-    M.District,
-    ARRAY(
-      select MP.Phonenumber
-      from Manager_Phones as MP
-      where M.Id = MP.ManagerId
-    ) as PhoneNumbers
-  from Manager as M;
+  select * from Full_Manager;
 $$;
 
 
 --get manager by id
 create or replace function Get_Manager(in_id int)
-returns setof Manager
+returns setof Full_Manager
 LANGUAGE sql
 AS $$
-  select 
-    M.Id,
-    M.Username, 
-    M.Name, 
-    M.LastName1,
-    M.LastName2,
-    M.Email, 
-    M.Province, 
-    M.City, 
-    M.District, 
-    ARRAY(
-      select MP.Phonenumber
-      from Manager_Phones as MP
-      where M.Id = MP.ManagerId
-    ) as PhoneNumbers
-  from Manager as M
-  where M.Id = in_id;
+  select * from Full_Manager where id = in_id;
 $$;
 
 --Isert Manager
