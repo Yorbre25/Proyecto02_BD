@@ -87,5 +87,32 @@ begin
     call insert_Store_phones(In_Id,In_PhoneNumbers);
 end; $$;
 
+--ADMINISTRATOR PHONES
+---Create Administrator Phones
+create or replace procedure Insert_Administrator_Phones(In_Id int, In_PhoneNumbers varchar(10) array)
+language plpgsql
+as $$
+begin
+    for i in 1..array_length(In_PhoneNumbers, 1) loop
+        INSERT INTO Administrator_Phones(AdministratorId,PhoneNumber) VALUES (In_Id,In_PhoneNumbers[i]);
+    end loop;
+end; $$;
 
+--Delete Administrator phones
+create or replace procedure Delete_Administrator_Phones(In_Id int)
+language plpgsql
+as $$
+begin
+    delete from Administrator_phones
+    where AdministratorId = In_Id;
+end; $$;
+
+--Update Administrator phones
+create or replace procedure Update_Administrator_Phones(In_Id int, In_PhoneNumbers varchar(10) array)
+language plpgsql
+as $$
+begin
+    call delete_Administrator_phones(In_Id);
+    call insert_Administrator_phones(In_Id,In_PhoneNumbers);
+end; $$;
 

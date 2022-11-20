@@ -1,68 +1,17 @@
-CREATE TYPE Full_Order as(
-    Id int,
-    Total decimal(10,2),
-    Province varchar(15),
-    City varchar(15),
-    District varchar(15),
-    ClientName varchar(15),
-    ClientLastName varchar(15),
-    DelManName varchar(15),
-    DelManLastName varchar(15),
-    Products text
-);
 
 
 CREATE OR REPLACE FUNCTION Get_All_Orders()
 returns setof Full_Order
 LANGUAGE sql
 AS $$
-  select 
-    O.Id,
-    O.Total,
-    O.province,
-    O.City,
-    O.district,
-    C.Name as ClientName,
-    C.LastName1 as ClientLastName,
-    D.Name as DelManName,
-    D.lastname1 as DelManLastName,
-    Array(
-      Select P.Name 
-      from Order_Products as OP join Product as P on OP.ProductBarCode = P.BarCode
-      where OP.OrderId = O.Id
-    )
-  from ((((_Order as O join Client as C on O.ClientId = C.id) 
-  join Deliveryman as D on O.DelManId = D.id)
-  join order_products as OP on O.Id = OP.OrderId)
-  join Product as P on OP.ProductBarCode = P.barCode)
-  group by O.id, C.Name, C.LastName1, D.Name, D.lastname1;
+  Select * from Full_Order
 $$;
 
 CREATE OR REPLACE FUNCTION Get_Order(in_id int)
 returns setof Full_Order
 LANGUAGE sql
 AS $$
-  select 
-    O.Id,
-    O.Total,
-    O.province,
-    O.City,
-    O.district,
-    C.Name as ClientName,
-    C.LastName1 as ClientLastName,
-    D.Name as DelManName,
-    D.lastname1 as DelManLastName,
-    Array(
-      Select P.Name 
-      from Order_Products as OP join Product as P on OP.ProductBarCode = P.BarCode
-      where OP.OrderId = O.Id
-    )
-  from ((((_Order as O join Client as C on O.ClientId = C.id) 
-  join Deliveryman as D on O.DelManId = D.id)
-  join order_products as OP on O.Id = OP.OrderId)
-  join Product as P on OP.ProductBarCode = P.barCode)
-  WHERE O.Id = in_id
-  group by O.id, C.Name, C.LastName1, D.Name, D.lastname1;
+  Select * from Full_Order where Id = in_id
 $$;
 
 

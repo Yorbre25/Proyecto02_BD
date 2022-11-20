@@ -13,7 +13,7 @@ CREATE TYPE Full_Manager as(
 
 --- get all managers
 CREATE OR REPLACE FUNCTION Get_All_Managers()
-returns setof Full_Manager
+returns setof Manager
 LANGUAGE sql
 AS $$
   select 
@@ -37,7 +37,7 @@ $$;
 
 --get manager by id
 create or replace function Get_Manager(in_id int)
-returns setof Full_Manager
+returns setof Manager
 LANGUAGE sql
 AS $$
   select 
