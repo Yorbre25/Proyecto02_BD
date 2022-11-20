@@ -28,7 +28,7 @@ export class ManagerInfoComponent implements OnInit {
       { key: "name", replacement: "Nombre completo" },
       { key: "email", replacement: "Correo electrónico" },
       { key: "province", replacement: "Dirección" },
-      { key: "phoneNumbers", replacement: "Teléfonos" },
+      { key: "phoneNumbers", replacement: "Teléfonos" }
     ]
 
     this.manager = {} as Manager

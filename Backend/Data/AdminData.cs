@@ -34,8 +34,8 @@ namespace Backend.Data
             email = dr["Email"].ToString()!,
             province = dr["Province"].ToString()!,
             city = dr["City"].ToString()!,
-            district = dr["District"].ToString()!,
-            // phoneNumbers = (List<String>)dr["PhoneNumbers"] Descomentar cuando el query este listo
+            district = dr["District"].ToString()!
+            // phoneNumbers = (string[])dr["PhoneNumbers"]
           });
         }
 
@@ -78,7 +78,7 @@ namespace Backend.Data
             province = dr["Province"].ToString()!,
             city = dr["City"].ToString()!,
             district = dr["District"].ToString()!,
-            // phoneNumbers = (List<String>)dr["PhoneNumbers"] Descomentar cuando el query este listo
+            phoneNumbers = (string[])dr["PhoneNumbers"]
           };
         }
 
@@ -110,10 +110,11 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{hashedPassword}'
-        );", connection // array{phoneNumbers} -> Para agregar los teléfonos -> También hay que ponerlo en edit
+          '{hashedPassword}',
+          array{phoneNumbers}
+        );", connection
       );
-      // Faltan teléfonooooos
+
       try
       {
         connection.Open();
@@ -130,7 +131,7 @@ namespace Backend.Data
 
     public static bool Edit(Admin admin, int adminID)
     {
-      // string phoneNumbers = AuxFunctions.arrayToString(admin.phoneNumbers);
+      string phoneNumbers = AuxFunctions.arrayToString(admin.phoneNumbers);
       string hashedPassword = getEditPassword(admin, adminID);
 
       var connection = Connection.Get();
@@ -146,8 +147,9 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{hashedPassword}'
-        );", connection // array{phoneNumbers} -> Para agregar los teléfonos
+          '{hashedPassword}',
+          array{phoneNumbers}
+        );", connection
       );
 
       try
@@ -183,6 +185,7 @@ namespace Backend.Data
         return false;
       }
     }
+
     private static string getEditPassword(Admin admin, int adminID)
     {
       string hashedPassword;
