@@ -109,7 +109,7 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{admin.password}'
+          '{BCrypt.Net.BCrypt.HashPassword(admin.password)}'
         );", connection // array{phoneNumbers} -> Para agregar los teléfonos -> También hay que ponerlo en edit
       );
       // Faltan teléfonooooos
@@ -145,10 +145,9 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{admin.password}'
+          '{BCrypt.Net.BCrypt.HashPassword(admin.password)}'
         );", connection
       );
-      // Faltan teléfonooooos
       try
       {
         connection.Open();
