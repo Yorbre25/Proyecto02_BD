@@ -6,7 +6,7 @@ namespace Backend.Data
   {
     //No borren, comentenlo
     private static string databaseURL =
-      "Server=localhost;Port=5432;Database=ubytec; User Id=postgres;Password=2019;";
+      "Server=localhost;Port=5432;Database=UbyTec; User Id=postgres;Password=1234;";
 
     public static NpgsqlConnection Get() // Singleton
     {

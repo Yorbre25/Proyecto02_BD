@@ -1,0 +1,33 @@
+
+###
+GET  https://localhost:7156/admin/get_all
+
+###
+POST https://localhost:7156/admin/add
+content-type: application/json
+
+{
+    "id": 93246,
+    "username": "adminPrueba",
+    "name": "Administrador",
+    "lastName1": "Prueba",
+    "lastName2": "Prueba",
+    "email": "pruebaAdmin@gmail.com",
+    "province": "Almería",
+    "city": "Almería",
+    "district": "Almería",
+    "password": "ABC123"
+}
+
+###
+DELETE https://localhost:7156/admin/delete/93246
+
+###
+POST https://localhost:7156/login
+content-type: application/json
+
+{
+    "username": "adminPrueba",
+    "password": "ABC123",
+    "userType": "administrator"
+}
