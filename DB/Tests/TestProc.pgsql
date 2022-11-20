@@ -42,7 +42,7 @@ call Delete_Product_Category(7);
 select * from Get_All_Stores();
 select * from Get_Store(163235);
 call Insert_Store(5935, 'Prueba', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','cambio']);
-call Update_Store(5935, 11, 'Triunfo', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','Chigugua']);
+call Update_Store(163235, 8645, 'Cambio', 'prueba@gmail.com', 'Cargato', 'Cargato', 'Cargato', 1, 123456, array['48345125','Chigugua']);
 call Delete_Store(5935);
 
 --Procedure STORE_TYPE
@@ -88,3 +88,4 @@ select * from get_Sales_Per_Store();
 
 --Procedure Applicant_Store
 select * from Get_All_Applicant_Stores();
+call approve_application(11);
