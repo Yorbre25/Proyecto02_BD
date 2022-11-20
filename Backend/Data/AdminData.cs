@@ -34,8 +34,8 @@ namespace Backend.Data
             email = dr["Email"].ToString()!,
             province = dr["Province"].ToString()!,
             city = dr["City"].ToString()!,
-            district = dr["District"].ToString()!
-            // phoneNumbers = (string[])dr["PhoneNumbers"]
+            district = dr["District"].ToString()!,
+            phoneNumbers = (string[])dr["PhoneNumbers"]
           });
         }
 
