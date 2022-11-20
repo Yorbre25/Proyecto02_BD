@@ -73,10 +73,11 @@ namespace Backend.Controllers
 
     [HttpPost]
     [Route("add")]
-    public Object Post([FromBody] Store store)
+    public Object Post([FromBody] StoreInfo storeData)
     {
-      bool ok = StoreData.Add(store);
-      if (ok)
+      bool managerOK = ManagerData.Add(storeData.manager);
+      bool storeOK = StoreData.Add(storeData.store);
+      if (storeOK && managerOK)
       {
         return new
         {
@@ -96,10 +97,13 @@ namespace Backend.Controllers
 
     [HttpPatch]
     [Route("update/{id}")]
-    public Object Put([FromBody] Store store, int id)
+    public Object Put([FromBody] StoreInfo storeData, int storeID)
     {
-      bool ok = StoreData.Edit(store, id);
-      if (ok)
+      int managerID = StoreData.Get(storeID).managerID;
+
+      bool storeOK = StoreData.Edit(storeData.store, storeID);
+      bool managerOK = ManagerData.Edit(storeData.manager, managerID);
+      if (storeOK && managerOK)
       {
         return new
         {
@@ -121,8 +125,11 @@ namespace Backend.Controllers
     [Route("delete/{id}")]
     public Object Delete(int id)
     {
-      bool ok = StoreData.Delete(id);
-      if (ok)
+      int managerID = StoreData.Get(id).managerID;
+
+      bool storeOK = StoreData.Delete(id);
+      bool managerOK = ManagerData.Delete(managerID);
+      if (managerOK && storeOK)
       {
         return new
         {

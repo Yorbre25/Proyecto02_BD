@@ -1,1 +1,53 @@
-<p>store-form works!</p>
+<form [formGroup]="this.formGroup">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label" for="idInput">Cédula jurídica:</label>
+      <input class="form-control" id=" idInput" type="number" formControlName="id">
+    </div>
+
+    <div class="col">
+      <label class="form-label" for="nameInput">Nombre:</label>
+      <input class="form-control" id="nameInput" type="text" formControlName="name">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label" for="emailInput">Correo electrónico:</label>
+      <input class="form-control" id="emailInput" type="email" formControlName="email">
+    </div>
+
+    <div class="col">
+      <label class="form-label" for="storeTypeInput">Tipo de comercio:</label>
+      <select class="form-select" id="storeTypeInput" formControlName="storeTypeID">
+        <option *ngFor="let storeType of storeTypes" value="{{storeType.id}}">
+          {{storeType.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class=" row mb-3">
+    <div class="col">
+      <label class="form-label" for="provinceInput">Provincia:</label>
+      <input class="form-control" id=" provinceInput" type="text" formControlName="province">
+    </div>
+
+    <div class="col">
+      <label class="form-label" for="cityInput">Cantón:</label>
+      <input class="form-control" id="cityInput" type="text" formControlName="city">
+    </div>
+
+    <div class="col">
+      <label class="form-label" for="districtInput">Distrito:</label>
+      <input class="form-control" id="districtInput" type="text" formControlName="district">
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <app-multivalued-input [formArray]="phoneNumbers" label="Teléfonos" inputType="number">
+      </app-multivalued-input>
+    </div>
+  </div>
+</form>

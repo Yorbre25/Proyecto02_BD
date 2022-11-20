@@ -12,5 +12,6 @@ namespace Backend.Models
     public string city { get; set; }
     public string district { get; set; }
     public string[] phoneNumbers { get; set; }
+    public string? password { get; set; }
   }
 }

@@ -10,22 +10,17 @@ import { FormsService } from 'src/app/Services/forms.service'
 })
 export class MultivaluedInputComponent implements OnInit {
   @Input() label: string
-  @Input() inputName: string
   @Input() inputType: string
-
-  formArray: FormArray
+  @Input() formArray: FormArray
 
   constructor(protected formsService: FormsService) {
     this.label = ''
-    this.inputName = ''
     this.inputType = 'text'
 
     this.formArray = new FormArray([], [Validators.required]) as any
   }
 
-  ngOnInit(): void {
-    this.formArray = this.formsService.form.controls[this.inputName] as any
-  }
+  ngOnInit(): void { }
 
   addElement = () => { this.formArray.push(new FormControl('')) }
 

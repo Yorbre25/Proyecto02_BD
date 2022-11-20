@@ -1,1 +1,37 @@
-<p>store-info works!</p>
+<div class="container-sm">
+  <app-message [messageInfo]="messageService.messageInfo"></app-message>
+
+  <nav ngbNav #nav="ngbNav" class="bg-light m-0 nav-tabs nav-fill position-sticky top-0">
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Información de comercio</a>
+      <ng-template ngbNavContent>
+        <app-info-card [infoTitles]="storeInfoTitles" [info]="store"></app-info-card>
+      </ng-template>
+    </ng-container>
+
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Información de administrador</a>
+      <ng-template ngbNavContent>
+        <app-info-card [infoTitles]="managerInfoTitles" [info]="manager"></app-info-card>
+      </ng-template>
+    </ng-container>
+  </nav>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <div>
+      <button class="btn btn-outline-secondary" (click)="auxFunctionsService.goBack()">Regresar</button>
+    </div>
+
+    <div class="d-flex gap-2">
+      <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Editar afiliado'"
+        [modalHeader]="'Edición de afiliado'">
+
+        <app-add-store-form [storeDataInfo]="storeDataCopy"></app-add-store-form>
+      </app-modal>
+
+      <button class="btn btn-outline-danger" (click)="deleteStoreData()">Eliminar afiliado</button>
+    </div>
+  </div>
+</div>

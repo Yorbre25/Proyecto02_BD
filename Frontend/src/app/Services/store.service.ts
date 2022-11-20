@@ -40,11 +40,17 @@ export class StoreService {
    * @param store Objeto con la información del afiliados
    * @returns Objeto con respuesta del servidor
   */
-  createStore = (store: any): Observable<ServerResponse> => {
-    store.phoneNumbers
+  createStore = (storeData: any): Observable<ServerResponse> => {
+    storeData.store.phoneNumbers
       .forEach((phoneNumber: number) => phoneNumber.toString())
 
-    return this.httpClient.post<ServerResponse>(`${this.url}/add`, store)
+    storeData.manager.phoneNumbers
+      .forEach((phoneNumber: number) => phoneNumber.toString())
+
+    storeData.store.managerID = storeData.manager.id
+    storeData.store.storeTypeID = Number(storeData.store.storeTypeID)
+
+    return this.httpClient.post<ServerResponse>(`${this.url}/add`, storeData)
   }
 
   /**
@@ -53,11 +59,19 @@ export class StoreService {
    * @param store Objeto con la información del afiliados
    * @returns Objeto con respuesta del servidor
   */
-  updateStore = (storeID: number, store: any): Observable<ServerResponse> => {
-    store.phoneNumbers
+  updateStore = (storeID: number, storeData: any): Observable<ServerResponse> => {
+    storeData.store.phoneNumbers
       .forEach((phoneNumber: number) => phoneNumber.toString())
 
-    return this.httpClient.patch<ServerResponse>(`${this.url}/update/${storeID}`, store)
+    storeData.manager.phoneNumbers
+      .forEach((phoneNumber: number) => phoneNumber.toString())
+
+    storeData.store.managerID = storeData.manager.id
+    storeData.store.storeTypeID = Number(storeData.store.storeTypeID)
+
+    console.log(storeData);
+
+    return this.httpClient.patch<ServerResponse>(`${this.url}/update/${storeID}`, storeData)
   }
 
   /**

@@ -50,5 +50,98 @@ namespace Backend.Data
         throw new Exception("Error al obtener el administrador de comercio");
       }
     }
+
+    public static bool Add(Manager manager)
+    {
+      //Hay que generarle una contraseña aleatoria
+      string phoneNumbers = AuxFunctions.arrayToString(manager.phoneNumbers);
+
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Insert_Manager(
+          {manager.id},
+          '{manager.username}',
+          '{manager.name}',
+          '{manager.lastName1}',
+          '{manager.lastName2}',
+          '{manager.email}',
+          '{manager.province}',
+          '{manager.city}',
+          '{manager.district}',
+          '{manager.password}',
+          array{phoneNumbers}
+        );", connection
+      );
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
+
+    public static bool Edit(Manager manager, int managerID)
+    {
+      /* Hay que verificar que manager.oldPassword coincida
+      con la password guardada en la base */
+      string phoneNumbers = AuxFunctions.arrayToString(manager.phoneNumbers);
+
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Update_Manager(
+          {managerID},
+          {manager.id},
+          '{manager.username}',
+          '{manager.name}',
+          '{manager.lastName1}',
+          '{manager.lastName2}',
+          '{manager.email}',
+          '{manager.province}',
+          '{manager.city}',
+          '{manager.district}',
+          '{manager.password}',
+          array{phoneNumbers}
+        );", connection
+      );
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
+
+    public static bool Delete(int id)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Delete_Manager({id});", connection);
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
   }
 }
