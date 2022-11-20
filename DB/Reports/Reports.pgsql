@@ -35,4 +35,3 @@ AS $$
   select *
   from sales_per_store;
 $$;
-

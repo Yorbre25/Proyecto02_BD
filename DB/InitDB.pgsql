@@ -14,10 +14,12 @@ DROP TABLE IF EXISTS
 	Store, 
 	Store_Phones,
 	Store_Type, 
+    Applicant_Store,
 	Store_Products, 
 	Manager,
 	Manager_Phones,
-	Administrator
+	Administrator,
+    Administrator_Phones
 CASCADE;
 
 
@@ -125,6 +127,12 @@ create table Store_Products(
     StoreId int not null,
     ProductBarCode int not null,
 	Primary Key(StoreId, ProductBarCode)
+);
+
+create table Applicant_Store(
+    StoreId int not null,
+    Status boolean default false,
+	Primary Key(StoreId)
 );
 
 create table Manager(
@@ -244,6 +252,13 @@ ON UPDATE CASCADE;
 --Foreign Keys Store_Phones
 ALTER TABLE STORE_PHONES
 ADD CONSTRAINT STORE_STORE_PHONES
+FOREIGN KEY (StoreId)
+REFERENCES Store(Id)
+ON UPDATE CASCADE;
+
+--Foreign Keys Applicant_Store
+ALTER TABLE APPLICANT_STORE
+ADD CONSTRAINT APPLICANT_STORE_STORE
 FOREIGN KEY (StoreId)
 REFERENCES Store(Id)
 ON UPDATE CASCADE;
