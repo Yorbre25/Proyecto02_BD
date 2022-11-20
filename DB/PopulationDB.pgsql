@@ -16,6 +16,13 @@ Values
 	(1234568, 'Carlos', 'Salas', 'Fernandez', 'csssfd97@gmail.com', 'Puntarenas', 'Jaco', 'Isla bonita', 'csssfd97', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
 
 
+INSERT INTO Administrator_Phones(
+	AdministratorId,
+	PhoneNumber
+)Values
+	(1234567, '12345678'),
+	(1234568, '87654321');
+
 INSERT INTO Deliveryman(
 	Id,
 	Name,

@@ -1,19 +1,19 @@
-CREATE TYPE Full_Deliveryman as(
-    Id int,
-    Username varchar(15),
-    Name varchar(15),
-    LastName1 varchar(15),
-    LastName2 varchar(15),
-	  Email varchar(40),
-    Province char(15),
-    City varchar(15),
-    District varchar(15),
-    PhoneNumbers character varying[]
-);
+-- CREATE TYPE Full_Deliveryman as(
+--     Id int,
+--     Username varchar(15),
+--     Name varchar(15),
+--     LastName1 varchar(15),
+--     LastName2 varchar(15),
+-- 	  Email varchar(40),
+--     Province char(15),
+--     City varchar(15),
+--     District varchar(15),
+--     PhoneNumbers character varying[]
+-- );
 
 --- get all deliverymen
 CREATE OR REPLACE FUNCTION Get_All_Deliverymen()
-returns setof Full_Deliveryman
+returns setof Deliveryman
 LANGUAGE sql
 AS $$
   select 
@@ -37,7 +37,7 @@ $$;
 
 --get deliveryman by id
 create or replace function Get_Deliveryman(In_Id int)
-returns setof Full_Deliveryman
+returns setof Deliveryman
 LANGUAGE sql
 AS $$
   select

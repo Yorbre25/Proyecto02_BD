@@ -161,6 +161,13 @@ create table Administrator(
 	Primary Key(Id)
 );
 
+create table Administrator_Phones(
+    AdministratorId int not null,
+    PhoneNumber varchar(10) not null,
+    Primary key(AdministratorId, PhoneNumber)
+);
+
+
 -- Foreign Keys Order
 ALTER TABLE _ORDER
 ADD CONSTRAINT ORDER_CLIENTE
@@ -248,3 +255,9 @@ FOREIGN KEY (ManagerId)
 REFERENCES Manager(Id)
 ON UPDATE CASCADE;
 
+--Foreign Keys Administrator_Phones
+ALTER TABLE ADMINISTRATOR_PHONES
+ADD CONSTRAINT ADMINISTRATOR_ADMINISTRATOR_PHONES
+FOREIGN KEY (AdministratorId)
+REFERENCES Administrator(Id)
+ON UPDATE CASCADE;
