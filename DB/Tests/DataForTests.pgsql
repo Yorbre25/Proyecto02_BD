@@ -30,7 +30,8 @@ INSERT INTO Manager(
 	Password)
 Values
 	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
-	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
+	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
+	(98456, 'Julian', 'Carvajal', 'Gutierres', 'juanis@gmail.com', 'Heredia', 'Heredia', 'Heredia', 'julioChan', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
 
 
 INSERT INTO manager_phones(
@@ -52,8 +53,11 @@ INSERT into Store(
 	Storetypeid)
 VALUES
 	(163235, 'McDennys', 'mcdennys@gmail.com', 'Cartago', 'Cartago', 'Las Ruinas', 237654, 2),
-	(9759832, 'La Pichel', 'pichel@gmail.com', 'Guanacaste', 'Guanacatico', 'Guanacastek', 123456, 3);
+	(9759832, 'La Pichel', 'pichel@gmail.com', 'Guanacaste', 'Guanacatico', 'Guanacastek', 123456, 3),
+	(634523, 'Monchis', 'mochis@gmail.com', 'Limon', 'Limon', 'Limon', 98456, 2);
 
+call Approve_Application(163235);
+call Approve_Application(9759832);
 
 INSERT INTO Store_phones(
 	StoreId,

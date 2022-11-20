@@ -85,3 +85,6 @@ call delete_manager_phones(1111);
 -- Procedure Reports
 select * from get_Sales_Per_Client();
 select * from get_Sales_Per_Store();
+
+--Procedure Applicant_Store
+select * from Get_All_Applicant_Stores();

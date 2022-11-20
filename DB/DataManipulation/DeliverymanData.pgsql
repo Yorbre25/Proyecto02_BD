@@ -41,20 +41,20 @@ returns setof Deliveryman
 LANGUAGE sql
 AS $$
   select
-  D.id,
-  D.username,
-  D.name,
-  D.lastName1,
-  D.lastName2,
-  D.email,
-  D.province,
-  D.city,
-  D.district,
-  ARRAY(
-  select DP.Phonenumber
-  from Deliveryman_Phones as DP
-  where D.id = DP.DelManId
-  ) as phoneNumbers
+    D.id,
+    D.username,
+    D.name,
+    D.lastName1,
+    D.lastName2,
+    D.email,
+    D.province,
+    D.city,
+    D.district,
+    ARRAY(
+      select DP.Phonenumber
+      from Deliveryman_Phones as DP
+      where D.id = DP.DelManId
+    ) as phoneNumbers
   from deliveryman as D
   WHERE D.id = In_Id
 $$;

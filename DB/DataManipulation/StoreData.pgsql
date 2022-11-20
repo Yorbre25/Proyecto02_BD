@@ -1,15 +1,15 @@
-CREATE TYPE Full_Store as(
-    Id int,
-    Name varchar(15),
-    Email varchar(40),
-    Province char(15),
-    City varchar(15),
-    District varchar(15),
-    ManagerId int,
-    StoreTypeId int,
-    StoreTypeName varchar(15),
-    PhoneNumbers character varying[]
-);
+-- CREATE TYPE Full_Store as(
+--     Id int,
+--     Name varchar(15),
+--     Email varchar(40),
+--     Province char(15),
+--     City varchar(15),
+--     District varchar(15),
+--     ManagerId int,
+--     StoreTypeId int,
+--     StoreTypeName varchar(15),
+--     PhoneNumbers character varying[]
+-- );
 
 --- get all stores
 CREATE OR REPLACE FUNCTION Get_All_Stores()
@@ -31,9 +31,11 @@ AS $$
       from Store_Phones as SP
       where S.Id = SP.StoreId
     ) as PhoneNumbers
-  from (((Store as S join Store_Type as ST on S.StoreTypeId = ST.Id) 
-  join Store_Phones as SP on S.Id = SP.StoreId)
-  join Manager as M on S.ManagerId = M.Id)
+  from ((((Store as S left join Store_Type as ST on S.StoreTypeId = ST.Id) 
+  left join Store_Phones as SP on S.Id = SP.StoreId)
+  left join Manager as M on S.ManagerId = M.Id)
+  left join Applicant_Store as ApS on S.Id = ApS.StoreId)
+  where ApS.Status = true
   GROUP By S.id, M.Id, ST.Id, ST.Name
 $$;
 
@@ -58,10 +60,11 @@ AS $$
       from Store_Phones as SP
       where S.Id = SP.StoreId
     ) as PhoneNumbers
-  from (((Store as S join Store_Type as ST on S.StoreTypeId = ST.Id) 
-  join Store_Phones as SP on S.Id = SP.StoreId)
-  join Manager as M on S.ManagerId = M.Id)
-  where S.Id = in_id
+  from ((((Store as S left join Store_Type as ST on S.StoreTypeId = ST.Id) 
+  left join Store_Phones as SP on S.Id = SP.StoreId)
+  left join Manager as M on S.ManagerId = M.Id)
+  left join Applicant_Store as ApS on S.Id = ApS.StoreId)
+  where S.Id = in_id and ApS.Status = true
   GROUP By S.id, M.Id, ST.Id, ST.Name
 $$;
 
@@ -145,6 +148,7 @@ as $$
 begin
 
     call delete_Store_phones(In_Id);
+    call delete_applicant_store(In_Id);
     DELETE from Store
     where Id = In_Id;
 
