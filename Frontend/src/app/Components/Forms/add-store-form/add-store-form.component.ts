@@ -4,7 +4,6 @@ import { ServerResponse } from 'src/app/Interfaces/ServerResponses';
 import { Store, StoreData, StoreManager } from 'src/app/Interfaces/Store';
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 import { FormsService } from 'src/app/Services/forms.service';
-import { MessageService } from 'src/app/Services/message.service';
 import { StoreService } from 'src/app/Services/store.service';
 
 @Component({
@@ -22,7 +21,6 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
   @Input() storeDataInfo?: StoreData
 
   constructor(
-    private messageService: MessageService,
     private formsService: FormsService,
     private auxFunctionsService: AuxFunctionsService,
     private storeService: StoreService
@@ -50,7 +48,7 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
       await this.updateStore()
         .then((response: ServerResponse) => {
           if (response.status === 'error') {
-            this.messageService.setMessageInfo(response.message!, 'error')
+            alert(response.message)
           }
           else if (this.storeDataInfo!.store.id !== this.formsService.form.value.store.id) {
             window.location.href =

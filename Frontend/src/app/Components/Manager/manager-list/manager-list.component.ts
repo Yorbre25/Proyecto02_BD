@@ -4,7 +4,6 @@ import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries'
 import { Manager } from 'src/app/Interfaces/Manager'
 
 import { ManagerService } from 'src/app/Services/manager.service'
-import { MessageService } from 'src/app/Services/message.service'
 
 @Component({
   selector: 'app-manager-list',
@@ -16,8 +15,7 @@ export class ManagerListComponent implements OnInit {
   tableData: Manager[]
 
   constructor(
-    private managerService: ManagerService,
-    protected messageService: MessageService
+    private managerService: ManagerService
   ) {
     this.tableColumns = [
       { key: "id", replacement: "Cédula" },
@@ -30,12 +28,10 @@ export class ManagerListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.resetMessageInfo()
-
     this.managerService.getAllManagers()
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.managers) {
           this.tableData = response.managers

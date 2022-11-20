@@ -25,6 +25,20 @@ export class LoginService {
     })
   }
 
+  managerLogin = (loginInfo: LoginInfo): Promise<ServerResponse> => {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<ServerResponse>(`${this.url}/manager`, loginInfo)
+        .subscribe((response) => resolve(response))
+    })
+  }
+
+  clientLogin = (loginInfo: LoginInfo): Promise<ServerResponse> => {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post<ServerResponse>(`${this.url}/client`, loginInfo)
+        .subscribe((response) => resolve(response))
+    })
+  }
+
   logout = () => {
     this.cookieServie.deleteAll('/')
     window.location.href = '/'

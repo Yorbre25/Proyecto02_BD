@@ -12,9 +12,9 @@ INSERT INTO Client(
 	Username, 
 	Password)
 Values
-	(1234567, 'ClientName', 'ClientL1', 'ClientL2', '1990-12-12', 'Cartago', 'Cartago', 'Cartago', '88888888', 'client', 'ABC123'),
-	(303520771, 'Cristian', 'Smith', 'Ulloa', '1980-12-12','Cartago', 'Turrialba', 'La Suiza','77777777', 'crisnorris', 'ABC123'),
-    (63423413, 'Juan', 'Perez', 'Gonzalez', '2000-12-12','San José', 'San José', 'San Pedro','99999999', 'juanPe', 'ABC123');
+	(1234567, 'ClientName', 'ClientL1', 'ClientL2', '1990-12-12', 'Cartago', 'Cartago', 'Cartago', '88888888', 'client', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
+	(303520771, 'Cristian', 'Smith', 'Ulloa', '1980-12-12','Cartago', 'Turrialba', 'La Suiza','77777777', 'crisnorris', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
+    (63423413, 'Juan', 'Perez', 'Gonzalez', '2000-12-12','San José', 'San José', 'San Pedro','99999999', 'juanPe', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
 
 
 INSERT INTO Manager(
@@ -29,8 +29,8 @@ INSERT INTO Manager(
 	Username,
 	Password)
 Values
-	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', 'ABC123'),
-	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', 'ABC123');
+	(237654, 'Adriana', 'Calderon', 'Barboza', 'cuadriante@gmail.com', 'Cartago', 'TresRios','TresRios', 'cuadriante', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
+	(123456, 'Anthony', 'Noc', 'Achoy', 'anto@gmail.com', 'Limon', 'Puerto Viejo', 'Manzanillo', 'chipsAchoy', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
 
 
 INSERT INTO manager_phones(

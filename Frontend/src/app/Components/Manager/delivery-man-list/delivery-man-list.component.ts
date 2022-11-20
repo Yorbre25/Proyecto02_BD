@@ -4,7 +4,6 @@ import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries'
 import { DeliveryMan } from 'src/app/Interfaces/DeliveryMan'
 
 import { DeliveryManService } from 'src/app/Services/delivery-man.service'
-import { MessageService } from 'src/app/Services/message.service'
 
 @Component({
   selector: 'app-delivery-man-list',
@@ -16,8 +15,7 @@ export class DeliveryManListComponent implements OnInit {
   tableData: DeliveryMan[]
 
   constructor(
-    private deliveryManService: DeliveryManService,
-    protected messageService: MessageService
+    private deliveryManService: DeliveryManService
   ) {
     this.tableColumns = [
       { key: "id", replacement: "Cédula" },
@@ -30,12 +28,10 @@ export class DeliveryManListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.resetMessageInfo()
-
     this.deliveryManService.getAllDeliveryMen()
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.deliveryMen) {
           this.tableData = response.deliveryMen

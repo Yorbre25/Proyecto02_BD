@@ -5,7 +5,6 @@ import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 import { StoreType } from 'src/app/Interfaces/StoreType';
 
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
-import { MessageService } from 'src/app/Services/message.service';
 import { StoreTypeService } from 'src/app/Services/store-type.service';
 
 @Component({
@@ -20,8 +19,7 @@ export class StoreTypeInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private storeTypeService: StoreTypeService,
-    protected auxFunctionsService: AuxFunctionsService,
-    protected messageService: MessageService
+    protected auxFunctionsService: AuxFunctionsService
   ) {
     this.storeTypeInfoTitles = [
       { key: "id", replacement: "Identificación" },
@@ -36,7 +34,7 @@ export class StoreTypeInfoComponent implements OnInit {
     this.storeTypeService.getStoreType(id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.storeType) {
           this.storeType = response.storeType
@@ -51,7 +49,7 @@ export class StoreTypeInfoComponent implements OnInit {
     this.storeTypeService.deleteStoreType(this.storeType.id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else {
           window.location.href = '/manager/store_types'

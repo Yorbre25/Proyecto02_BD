@@ -7,7 +7,6 @@ import { ServerResponse } from 'src/app/Interfaces/ServerResponses';
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 import { FormsService } from 'src/app/Services/forms.service';
 import { ManagerService } from 'src/app/Services/manager.service';
-import { MessageService } from 'src/app/Services/message.service';
 
 @Component({
   selector: 'app-add-manager-form',
@@ -29,7 +28,6 @@ export class AddManagerFormComponent implements OnInit {
   passwordConfirm: FormControl
 
   constructor(
-    private messageService: MessageService,
     private auxFunctionsService: AuxFunctionsService,
     private managerService: ManagerService,
     protected formsService: FormsService
@@ -69,10 +67,9 @@ export class AddManagerFormComponent implements OnInit {
     const newManagerInfo = this.formsService.getFormValue()
 
     if (newManagerInfo.password !== newManagerInfo.passwordConfirm) {
-      this.messageService.setMessageInfo('Las contraseñas no coinciden', 'error')
+      alert('Las contraseñas no coinciden')
       return
     } else {
-      this.messageService.resetMessageInfo()
       delete newManagerInfo.passwordConfirm
     }
 

@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser'
 import { HttpClientModule } from '@angular/common/http'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
-import { MessageComponent } from './Components/Generic/message/message.component'
 import { NavbarComponent } from './Components/Generic/navbar/navbar.component'
 import { InfoCardComponent } from './Components/Generic/info-card/info-card.component'
 import { TableComponent } from './Components/Generic/table/table.component'
@@ -43,7 +42,6 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 @NgModule({
   declarations: [
     AppComponent,
-    MessageComponent,
     NavbarComponent,
     TableComponent,
     InfoCardComponent,

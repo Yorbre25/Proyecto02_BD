@@ -8,7 +8,6 @@ import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 
 import { FormsService } from 'src/app/Services/forms.service';
 import { DeliveryManService } from 'src/app/Services/delivery-man.service';
-import { MessageService } from 'src/app/Services/message.service';
 
 @Component({
   selector: 'app-add-delivery-man-form',
@@ -30,7 +29,6 @@ export class AddDeliveryManFormComponent implements OnInit, OnChanges {
   @Input() deliveryManInfo?: DeliveryMan
 
   constructor(
-    private messageService: MessageService,
     private auxFunctionsService: AuxFunctionsService,
     private deliveryManService: DeliveryManService,
     protected formsService: FormsService
@@ -81,7 +79,7 @@ export class AddDeliveryManFormComponent implements OnInit, OnChanges {
       await this.updateDeliveryMan()
         .then((response: ServerResponse) => {
           if (response.status === 'error') {
-            this.messageService.setMessageInfo(response.message!, 'error')
+            alert(response.message)
           }
           else if (this.deliveryManInfo!.id !== this.formsService.form.value.id) {
             window.location.href =

@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
-import { Manager } from 'src/app/Interfaces/Manager';
 import { Store, StoreData, StoreManager } from 'src/app/Interfaces/Store';
 
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
-import { MessageService } from 'src/app/Services/message.service';
 import { StoreService } from 'src/app/Services/store.service';
 
 @Component({
@@ -27,8 +25,7 @@ export class StoreInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private storeDataService: StoreService,
-    protected auxFunctionsService: AuxFunctionsService,
-    protected messageService: MessageService
+    protected auxFunctionsService: AuxFunctionsService
   ) {
     this.storeInfoTitles = [
       { key: 'id', replacement: 'Cédula jurídica' },
@@ -59,7 +56,7 @@ export class StoreInfoComponent implements OnInit {
     this.storeDataService.getStore(id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.storeData) {
           this.storeData = response.storeData
@@ -86,7 +83,7 @@ export class StoreInfoComponent implements OnInit {
     this.storeDataService.deleteStore(this.storeData.store.id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else {
           window.location.href = '/manager/stores'

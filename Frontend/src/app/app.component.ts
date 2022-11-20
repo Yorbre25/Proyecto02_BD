@@ -23,9 +23,12 @@ class AppComponent {
         const urlBase = event.url.split('/')[1]
         const userType = this.cookieService.get('userType')
 
+        console.log(urlBase)
+        console.log(userType)
+
         switch (urlBase) {
           case 'login':
-            if (userType) { window.location.href = `/${userType}` }
+            if (userType !== '') { window.location.href = `/${userType}` }
             break
           case 'logout':
             this.loginService.logout()
