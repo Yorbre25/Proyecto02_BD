@@ -9,9 +9,9 @@ call delete_client(11111);
 --PROCEDURES ADMIN
 SELECT * from Get_All_Administrators();
 Select * from Get_Administrator(547835);
-call Insert_Administrator(547835, 'Prueba', 'Prueba', 'Prueba', 'prueba@gmail.com', 'Prueba', 'Prueba', 'Prueba', 'prueba', 'ABC123');
-call Update_Administrator(547835, 'Triunfo', 'Prueba', 'Prueba', 'prueba@gmail.com', 'Prueba', 'Prueba', 'Prueba', 'prueba', 'ABC123');
-call Delete_Administrator(547835);
+call Insert_Administrator(547835, 'Prueba', 'Prueba', 'Prueba', 'prueba@gmail.com', 'Prueba', 'Prueba', 'Prueba', 'prueba', 'ABC123', array['48345125','75213421']);
+call Update_Administrator(547835, 11111, 'Triunfo', 'Prueba', 'Prueba', 'prueba@gmail.com', 'Prueba', 'Prueba', 'Prueba', 'prueba', 'ABC123', array['48345125','cambio']);
+call Delete_Administrator(11111);
 
 
 --PROCEDURES DELIVERYMAN
