@@ -1,3 +1,4 @@
+--Total sales per Client group by deliverymen and store
 create or replace view Sales_Per_Client AS
     Select C.Name as ClientName, C.LastName1 as ClientLastName, count(O.id) as Cantidad, S.Name as StoreName, D.Name as DeliverymanName, D.LastName1 as DeliverymanLastname, Sum(O.Total) as Total
     From ((((((_Order as O join Client as C on O.ClientId = C.Id)
@@ -8,6 +9,7 @@ create or replace view Sales_Per_Client AS
         join Store as S on SP.StoreId = S.Id)
     group by C.Name, C.LastName1, S.Name, D.Name, D.LastName1; 
 
+-- Return Sales_Per_Client view
 create or replace FUNCTION get_Sales_Per_Client()
 returns setof Sales_Per_Client
 LANGUAGE sql
@@ -16,7 +18,7 @@ AS $$
   from sales_per_client;
 $$;
 
-
+-- Total sales per Store
 create or replace view Sales_Per_Store as
     Select S.Name as StoreName, count(O.id) as Cantidad, Sum(O.Total) as Total
     From (_Order as O join order_products as OP on O.Id = OP.OrderId)
@@ -25,6 +27,7 @@ create or replace view Sales_Per_Store as
     group by S.Name;
 
 
+--Return Sales_Per_Store view
 create or replace FUNCTION get_Sales_Per_Store()
 returns setof Sales_per_store
 LANGUAGE sql

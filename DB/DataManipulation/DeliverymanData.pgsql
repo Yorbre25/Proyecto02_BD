@@ -1,63 +1,22 @@
--- CREATE TYPE Full_Deliveryman as(
---     Id int,
---     Username varchar(15),
---     Name varchar(15),
---     LastName1 varchar(15),
---     LastName2 varchar(15),
--- 	  Email varchar(40),
---     Province char(15),
---     City varchar(15),
---     District varchar(15),
---     PhoneNumbers character varying[]
--- );
+
 
 --- get all deliverymen
 CREATE OR REPLACE FUNCTION Get_All_Deliverymen()
-returns setof Deliveryman
+returns setof Full_Deliveryman
 LANGUAGE sql
 AS $$
-  select 
-    D.id,
-    D.username,
-    D.name,
-    D.lastName1,
-    D.lastName2,
-    D.email,
-    D.province,
-    D.city,
-    D.district,
-	  ARRAY(
-      select DP.Phonenumber
-      from Deliveryman_Phones as DP
-      where D.id = DP.DelManId
-    ) as phoneNumbers
-    from Deliveryman as D;
+  select * from Full_Deliveryman;
 $$;
 
 
 --get deliveryman by id
 create or replace function Get_Deliveryman(In_Id int)
-returns setof Deliveryman
+returns setof Full_Deliveryman
 LANGUAGE sql
 AS $$
-  select
-    D.id,
-    D.username,
-    D.name,
-    D.lastName1,
-    D.lastName2,
-    D.email,
-    D.province,
-    D.city,
-    D.district,
-    ARRAY(
-      select DP.Phonenumber
-      from Deliveryman_Phones as DP
-      where D.id = DP.DelManId
-    ) as phoneNumbers
-  from deliveryman as D
-  WHERE D.id = In_Id
+  select * from Full_Deliveryman where id = In_Id;
 $$;
+
 
 -- Insert deliveyman
 create or replace procedure Insert_Deliveryman(

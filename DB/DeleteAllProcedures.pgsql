@@ -19,10 +19,10 @@ drop procedure if EXISTS Delete_client;
 --Drop Deliveryman
 drop function if exists get_all_deliverymen;
 drop function if exists get_deliveryman;
-drop TYPE if EXISTS Full_Deliveryman;
 drop procedure if exists insert_deliveryman;
 drop procedure if exists update_deliveryman;
 drop procedure if exists delete_deliveryman;
+drop view if EXISTS full_deliveryman;
 
 --Drop Product
 drop function if exists get_all_products;
@@ -31,7 +31,7 @@ drop procedure if exists Insert_Product;
 drop procedure if exists Insert_Product_Photo;
 drop procedure if exists Delete_Product;
 drop procedure if exists Update_Product;
-drop type if EXISTS Full_Product;
+drop view if EXISTS Full_Product;
 
 
 --Drop Product_Category
@@ -44,10 +44,11 @@ drop procedure if exists Delete_Product_Category;
 --Drop Store
 drop function if exists get_all_stores;
 drop function if exists Get_Store;
-drop type if EXISTS Full_Store;
+drop function if exists Get_All_Applicant_Stores;
 drop procedure if exists Insert_Store;
 drop procedure if exists Update_Store;
 drop procedure if exists Delete_Store;
+drop view if EXISTS Full_Store;
 
 --Drop Store_Type
 drop function if exists Get_All_Store_Types;
@@ -59,18 +60,18 @@ drop procedure if exists Delete_Store_Type;
 --Drop Order
 drop function if exists get_all_orders;
 drop function if exists get_order;
-drop type if EXISTS Full_Order;
 drop procedure if exists insert_order;
 drop procedure if exists update_order;
 drop procedure if exists delete_order;
+drop view if EXISTS Full_Order;
 
 --Drop Manager
 drop function if exists get_all_managers;
 drop function if exists get_manager;
-drop type if EXISTS Full_Manager;
 drop procedure if exists insert_manager;
 drop procedure if exists update_manager;
 drop procedure if exists delete_manager;
+drop view if EXISTS Full_Manager;
 
 --drop reports
 drop function if exists get_Sales_Per_Client;
