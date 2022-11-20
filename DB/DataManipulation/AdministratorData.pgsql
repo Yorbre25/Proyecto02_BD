@@ -3,7 +3,7 @@
 
 --- get all administrators
 CREATE OR REPLACE FUNCTION Get_All_Administrators()
-returns setof administrator
+returns setof Full_Administrator
 LANGUAGE sql
 AS $$
   select 
@@ -26,7 +26,7 @@ $$;
 
 --get an administrator by id
 create or replace function Get_Administrator(In_Id int)
-returns setof administrator
+returns setof Full_Administrator
 LANGUAGE sql
 AS $$
   select 

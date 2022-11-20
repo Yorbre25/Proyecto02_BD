@@ -67,8 +67,13 @@ export class EditManagerFormComponent implements OnInit {
 
   ngOnChanges(): void {
     if (this.managerInfo && Object.keys(this.managerInfo).length) {
+      const { ...managerInfo } = this.managerInfo
 
-      const { ...managerInfo } = this.managerInfo as any
+      this.phoneNumbers.removeAt(0)
+
+      managerInfo.phoneNumbers.forEach(phoneNumber => {
+        this.phoneNumbers.push(new FormControl(phoneNumber))
+      })
 
       this.formsService.patchFormValue(managerInfo)
     }
