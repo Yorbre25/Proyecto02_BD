@@ -95,6 +95,7 @@ namespace Backend.Data
 
     public static bool Add(Admin admin)
     {
+      string hashedPassword = BCrypt.Net.BCrypt.HashPassword(admin.password);
       string phoneNumbers = AuxFunctions.arrayToString(admin.phoneNumbers);
 
       var connection = Connection.Get();
@@ -109,7 +110,7 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{BCrypt.Net.BCrypt.HashPassword(admin.password)}'
+          '{hashedPassword}'
         );", connection // array{phoneNumbers} -> Para agregar los teléfonos -> También hay que ponerlo en edit
       );
       // Faltan teléfonooooos

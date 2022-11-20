@@ -17,7 +17,6 @@ import { LoginRouterComponent } from './Components/Generic/login-router/login-ro
 import { LoginComponent } from './Components/Generic/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './Components/Forms/login-form/login-form.component';
-import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
 import { MemberLoginComponent } from './Components/Member/member-login/member-login.component';
 import { MemberMenuComponent } from './Components/Member/member-menu/member-menu.component';
 import { ClientLoginComponent } from './Components/Client/client-login/client-login.component';
@@ -39,6 +38,7 @@ import { StoreInfoComponent } from './Components/Manager/store-info/store-info.c
 import { StoreListComponent } from './Components/Manager/store-list/store-list.component';
 import { StoreFormComponent } from './Components/Forms/store-form/store-form.component';
 import { StoreManagerFormComponent } from './Components/Forms/store-manager-form/store-manager-form.component';
+import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component'
 
 @NgModule({
   declarations: [

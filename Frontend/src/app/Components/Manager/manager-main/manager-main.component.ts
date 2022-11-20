@@ -17,6 +17,7 @@ export class ManagerMainComponent implements OnInit {
       { href: 'delivery_men', name: 'Repartidores' },
       { href: 'store_types', name: 'Tipos de comercio' },
       { href: 'reports', name: 'Reportes' },
+      { href: '/logout', name: 'Cerrar sesión' }
     ]
   }
 

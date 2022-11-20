@@ -60,7 +60,7 @@ begin
         In_City,
         In_District,
         In_Username,
-        crypt(In_Password, gen_salt('bf')));
+        In_Password);
 end; $$;
 
 -- Update an administrator

@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manager-menu.component.scss']
 })
 export class ManagerMenuComponent implements OnInit {
+  adminUsername: string | null
 
-  constructor() { }
+  constructor(
+    private cookieService: CookieService
+  ) {
+    this.adminUsername = ''
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.adminUsername = this.cookieService.get('username')
+  }
 }
