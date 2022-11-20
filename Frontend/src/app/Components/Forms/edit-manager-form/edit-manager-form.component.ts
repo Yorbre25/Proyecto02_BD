@@ -80,11 +80,18 @@ export class EditManagerFormComponent implements OnInit {
 
   onSubmit = async () => {
     const newManagerInfo = this.formsService.getFormValue()
+    const password = newManagerInfo.password
+    const passwordConfirm = newManagerInfo.passwordConfirm
 
-    if (newManagerInfo.password !== newManagerInfo.passwordConfirm) {
+    const emptyPasswords =
+      (password === null || password === '') &&
+      (passwordConfirm === null || passwordConfirm === '')
+
+    if (!emptyPasswords && password !== passwordConfirm) {
       this.messageService.setMessageInfo('Las contraseñas no coinciden', 'error')
       return
-    } else {
+    }
+    else {
       this.messageService.resetMessageInfo()
       delete newManagerInfo.passwordConfirm
     }

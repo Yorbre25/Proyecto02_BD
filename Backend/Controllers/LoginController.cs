@@ -19,10 +19,7 @@ public class LoginController : Controller
 
     if (validPassword)
     {
-      return new
-      {
-        status = "ok",
-      };
+      return new { status = "ok" };
     }
     else
     {
@@ -36,16 +33,50 @@ public class LoginController : Controller
 
   [HttpPost]
   [Route("manager")]
-  public void managerLogin([FromBody] LoginInfo loginInfo)
+  public object managerLogin([FromBody] LoginInfo loginInfo)
   {
+    bool validPassword = PasswordValidator.ValidatePassword(
+      loginInfo.username,
+      loginInfo.password,
+      "manager"
+    );
 
+    if (validPassword)
+    {
+      return new { status = "ok" };
+    }
+    else
+    {
+      return new
+      {
+        status = "error",
+        message = "Correo y/o contraseña incorrectos"
+      };
+    }
   }
 
   [HttpPost]
   [Route("client")]
-  public void clientLogin([FromBody] LoginInfo loginInfo)
+  public object clientLogin([FromBody] LoginInfo loginInfo)
   {
+    bool validPassword = PasswordValidator.ValidatePassword(
+      loginInfo.username,
+      loginInfo.password,
+      "client"
+    );
 
+    if (validPassword)
+    {
+      return new { status = "ok" };
+    }
+    else
+    {
+      return new
+      {
+        status = "error",
+        message = "Correo y/o contraseña incorrectos"
+      };
+    }
   }
 }
 
