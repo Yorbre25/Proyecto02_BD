@@ -1,20 +1,18 @@
-﻿using Backend.Models;
+﻿using Backend.Helpers;
+using Backend.Models;
 using Npgsql;
 using System.Data;
-using Backend.Helpers;
-using System.Net.Sockets;
-using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Data
 {
-    public class DeliveryManData
+    public class OrderData
     {
-        public static List<DeliveryMan> GetAll()
+        public static List<Order> GetAll()
         {
-            List<DeliveryMan> deliveryManList = new List<DeliveryMan>();
+            List<Order> orderList = new List<Order>();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Deliverymen", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Orders", connection);
             cmd.CommandType = CommandType.StoredProcedure;
 
 
@@ -26,39 +24,39 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    deliveryManList.Add(new DeliveryMan()
+                    orderList.Add(new Order()
                     {
                         id = Convert.ToInt32(dr["Id"]),
-                        username = dr["Username"].ToString()!,
-                        name = dr["Name"].ToString()!,
-                        lastName1 = dr["LastName1"].ToString()!,
-                        lastName2 = dr["LastName2"].ToString()!,
-                        email = dr["Email"].ToString()!,
+                        total = Convert.ToInt32(dr["Total"]),
                         province = dr["Province"].ToString()!,
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
-                        phoneNumber = (List<string>)dr["PhoneNumbers"]
+                        clientName = dr["ClientName"].ToString()!,
+                        clientLastName = dr["ClientLastName"].ToString()!,
+                        delManName = dr["DelManName"].ToString()!,
+                        delManLastName = dr["DelManLastName"].ToString()!,
+                        productNames = (List<String>)dr["Productos"]
 
                     });
                 }
 
                 connection.Close();
 
-                return deliveryManList;
+                return orderList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al listar los repartidores");
+                throw new Exception("Error al listar las ordenes");
             }
         }
 
-        public static DeliveryMan Get(int id)
+        public static Order Get(int id)
         {
-            DeliveryMan delman = new DeliveryMan();
+            Order order = new Order();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_Deliveryman", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Order", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("in_id", id);
 
@@ -70,53 +68,46 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    delman = new DeliveryMan()
+                    order = new Order()
                     {
                         id = Convert.ToInt32(dr["Id"]),
-                        username = dr["Username"].ToString()!,
-                        name = dr["Name"].ToString()!,
-                        lastName1 = dr["LastName1"].ToString()!,
-                        lastName2 = dr["LastName2"].ToString()!,
-                        email = dr["Email"].ToString()!,
+                        total = Convert.ToInt32(dr["Total"]),
                         province = dr["Province"].ToString()!,
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
-                        phoneNumber = (List<string>)dr["PhoneNumbers"]
+                        clientName = dr["ClientName"].ToString()!,
+                        clientLastName = dr["ClientLastName"].ToString()!,
+                        delManName = dr["DelManName"].ToString()!,
+                        delManLastName = dr["DelManLastName"].ToString()!,
+                        productNames = (List<String>)dr["Productos"]
                     };
                 }
 
                 connection.Close();
 
-                return delman;
+                return order;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al obtener el repartidor");
+                throw new Exception("Error al obtener la orden");
             }
         }
 
-        public static bool Add(DeliveryMan delman)
+        public static bool Add(Order order)
         {
-
-            string passwordD = EmailSender.GenerateRandomPassword();
-
-            _ = EmailSender.SendEmailAsync(delman.name, delman.username, "Envío de contraseña UbyTEC", "Contraseña: " + passwordD);
-
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Insert_Deliveryman(
-          {delman.id},
-          '{delman.name}',
-          '{delman.lastName1}',
-          '{delman.lastName2}',
-          '{delman.email}',
-          '{delman.province}',
-          '{delman.city}',
-          '{delman.district}',
-          '{delman.username}',
-          '{passwordD}',
-          '{delman.phoneNumber}'
+              $@"CALL Insert_Order(
+          {order.id},
+          '{order.total}',
+          '{order.province}',
+          '{order.city}',
+          '{order.district}',
+          '{order.clientId}',
+          '{order.delManId}',
+          '{order.quantities}',
+          '{order.productBarCodes}'
         );", connection
             );
             try
@@ -133,32 +124,22 @@ namespace Backend.Data
             }
         }
 
-        public static bool Edit(DeliveryMan delman, int id)
+        public static bool Edit(Order order, int id)
         {
-
-            DeliveryMan current = DeliveryManData.Get(id);
-
-            string passUpdate = current.password;
-            if (delman.password != "" && delman.oldPassword == current.password)
-            {
-                passUpdate = delman.password;
-            }
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Update_Deliveryman(
+              $@"CALL Update_Order(
           {id},
-          {delman.id},
-          '{delman.name}',
-          '{delman.lastName1}',
-          '{delman.lastName2}',
-          '{delman.email}',
-          '{delman.province}',
-          '{delman.city}',
-          '{delman.district}',
-          '{delman.username}',
-          '{passUpdate}',
-          '{delman.phoneNumber}'
+          '{order.id}',
+          '{order.total}',
+          '{order.province}',
+          '{order.city}',
+          '{order.district}',
+          '{order.clientId}',
+          '{order.delManId}',
+          '{order.quantities}',
+          '{order.productBarCodes}'
         );", connection
             );
             try
@@ -179,7 +160,7 @@ namespace Backend.Data
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Delete_Deliveryman({id});", connection);
+              $@"CALL Delete_Order({id});", connection);
 
             try
             {
@@ -194,9 +175,6 @@ namespace Backend.Data
                 return false;
             }
         }
-
-        
-
 
     }
 }

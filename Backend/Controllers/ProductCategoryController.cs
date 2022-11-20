@@ -1,12 +1,13 @@
 ﻿using Backend.Data;
 using Backend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("client")]
-    public class ClientController : Controller
+    [Route("productcategory")]
+    public class ProductCategoryController : Controller
     {
         [HttpGet]
         [Route("get_all")]
@@ -14,11 +15,11 @@ namespace Backend.Controllers
         {
             try
             {
-                List<Client> clientes = ClientData.GetAll();
+                List<ProductCategory> productCats = ProductCategoryData.GetAll();
                 return new
                 {
                     status = "ok",
-                    clients = clientes
+                    productCats = productCats
                 };
             }
             catch (System.Exception err)
@@ -37,11 +38,11 @@ namespace Backend.Controllers
         {
             try
             {
-                Client cliente = ClientData.Get(id);
+                ProductCategory productCat = ProductCategoryData.Get(id);
                 return new
                 {
                     status = "ok",
-                    client = cliente
+                    productCat = productCat
                 };
             }
             catch (System.Exception err)
@@ -56,15 +57,15 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
-        public Object Post([FromBody] Client client)
+        public Object Post([FromBody] ProductCategory productCat)
         {
-            bool ok = ClientData.Add(client);
+            bool ok = ProductCategoryData.Add(productCat);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente registrado correctamente"
+                    message = "Categoria de producto registrada correctamente"
                 };
             }
             else
@@ -72,22 +73,22 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo registrar el cliente"
+                    message = "No se pudo registrar la categoria de producto"
                 };
             }
         }
 
         [HttpPatch]
         [Route("update/{id}")]
-        public Object Put([FromBody] Client client, int id)
+        public Object Put([FromBody] ProductCategory productCat, int id)
         {
-            bool ok = ClientData.Edit(client, id);
+            bool ok = ProductCategoryData.Edit(productCat, id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente modificado correctamente"
+                    message = "Categoria de producto modificada correctamente"
                 };
             }
             else
@@ -95,7 +96,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo modificar el cliente"
+                    message = "No se pudo modificar la categoria de producto"
                 };
             }
         }
@@ -104,13 +105,13 @@ namespace Backend.Controllers
         [Route("delete/{id}")]
         public Object Delete(int id)
         {
-            bool ok = ClientData.Delete(id);
+            bool ok = ProductCategoryData.Delete(id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente eliminado correctamente"
+                    message = "Categoria de producto eliminado correctamente"
                 };
             }
             else
@@ -118,7 +119,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo eliminar el cliente"
+                    message = "No se pudo eliminar la categoria de producto"
                 };
             }
         }

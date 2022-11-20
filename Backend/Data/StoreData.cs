@@ -1,22 +1,17 @@
 ﻿using Backend.Models;
 using Npgsql;
 using System.Data;
-using Backend.Helpers;
-using System.Net.Sockets;
-using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Data
 {
-    public class DeliveryManData
+    public class StoreData
     {
-        public static List<DeliveryMan> GetAll()
+        public static List<Store> GetAll()
         {
-            List<DeliveryMan> deliveryManList = new List<DeliveryMan>();
-
+            List<Store> storeList = new List<Store>();
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Deliverymen", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Stores", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-
 
             try
             {
@@ -26,39 +21,39 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    deliveryManList.Add(new DeliveryMan()
+                    storeList.Add(new Store()
                     {
-                        id = Convert.ToInt32(dr["Id"]),
-                        username = dr["Username"].ToString()!,
+                        id = Convert.ToInt32(dr["BarCode"]),
                         name = dr["Name"].ToString()!,
-                        lastName1 = dr["LastName1"].ToString()!,
-                        lastName2 = dr["LastName2"].ToString()!,
-                        email = dr["Email"].ToString()!,
+                        email = dr["CategoryName"].ToString()!,
                         province = dr["Province"].ToString()!,
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
-                        phoneNumber = (List<string>)dr["PhoneNumbers"]
+                        managerName = dr["ManagerName"].ToString()!,
+                        managerLastName1 = dr["ManagerLastName1"].ToString()!,
+                        managerLastName2 = dr["ManagerLastName2"].ToString()!,
+                        phoneNumbers = (List<string>)dr["PhoneNumbers"]
 
                     });
                 }
 
                 connection.Close();
 
-                return deliveryManList;
+                return storeList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al listar los repartidores");
+                throw new Exception("Error al listar las tiendas");
             }
         }
 
-        public static DeliveryMan Get(int id)
+        public static Store Get(int id)
         {
-            DeliveryMan delman = new DeliveryMan();
+            Store store = new Store();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_Deliveryman", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Store", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("in_id", id);
 
@@ -70,53 +65,46 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    delman = new DeliveryMan()
+                    store = new Store()
                     {
-                        id = Convert.ToInt32(dr["Id"]),
-                        username = dr["Username"].ToString()!,
+                        id = Convert.ToInt32(dr["BarCode"]),
                         name = dr["Name"].ToString()!,
-                        lastName1 = dr["LastName1"].ToString()!,
-                        lastName2 = dr["LastName2"].ToString()!,
-                        email = dr["Email"].ToString()!,
+                        email = dr["CategoryName"].ToString()!,
                         province = dr["Province"].ToString()!,
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
-                        phoneNumber = (List<string>)dr["PhoneNumbers"]
+                        managerName = dr["ManagerName"].ToString()!,
+                        managerLastName1 = dr["ManagerLastName1"].ToString()!,
+                        managerLastName2 = dr["ManagerLastName2"].ToString()!,
+                        phoneNumbers = (List<string>)dr["PhoneNumbers"]
                     };
                 }
 
                 connection.Close();
 
-                return delman;
+                return store;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al obtener el repartidor");
+                throw new Exception("Error al obtener la tienda");
             }
         }
 
-        public static bool Add(DeliveryMan delman)
+        public static bool Add(Store store)
         {
-
-            string passwordD = EmailSender.GenerateRandomPassword();
-
-            _ = EmailSender.SendEmailAsync(delman.name, delman.username, "Envío de contraseña UbyTEC", "Contraseña: " + passwordD);
-
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Insert_Deliveryman(
-          {delman.id},
-          '{delman.name}',
-          '{delman.lastName1}',
-          '{delman.lastName2}',
-          '{delman.email}',
-          '{delman.province}',
-          '{delman.city}',
-          '{delman.district}',
-          '{delman.username}',
-          '{passwordD}',
-          '{delman.phoneNumber}'
+              $@"CALL Insert_Store(
+          {store.id},
+          '{store.name}',
+          '{store.email}',
+          '{store.province}',
+          '{store.city}',
+          '{store.district}',
+          '{store.storeId}',
+          '{store.managerId}',
+          '{store.phoneNumbers}'
         );", connection
             );
             try
@@ -133,32 +121,22 @@ namespace Backend.Data
             }
         }
 
-        public static bool Edit(DeliveryMan delman, int id)
+        public static bool Edit(Store store, int id)
         {
-
-            DeliveryMan current = DeliveryManData.Get(id);
-
-            string passUpdate = current.password;
-            if (delman.password != "" && delman.oldPassword == current.password)
-            {
-                passUpdate = delman.password;
-            }
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Update_Deliveryman(
+              $@"CALL Update_Store(
           {id},
-          {delman.id},
-          '{delman.name}',
-          '{delman.lastName1}',
-          '{delman.lastName2}',
-          '{delman.email}',
-          '{delman.province}',
-          '{delman.city}',
-          '{delman.district}',
-          '{delman.username}',
-          '{passUpdate}',
-          '{delman.phoneNumber}'
+          '{store.id}',
+          '{store.name}',
+          '{store.email}',
+          '{store.province}',
+          '{store.city}',
+          '{store.district}',
+          '{store.storeId}',
+          '{store.managerId}',
+          '{store.phoneNumbers}'
         );", connection
             );
             try
@@ -179,7 +157,7 @@ namespace Backend.Data
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Delete_Deliveryman({id});", connection);
+              $@"CALL Delete_Store({id});", connection);
 
             try
             {
@@ -194,9 +172,5 @@ namespace Backend.Data
                 return false;
             }
         }
-
-        
-
-
     }
 }

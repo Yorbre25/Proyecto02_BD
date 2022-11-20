@@ -1,22 +1,18 @@
 ﻿using Backend.Models;
 using Npgsql;
 using System.Data;
-using Backend.Helpers;
-using System.Net.Sockets;
-using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Data
 {
-    public class DeliveryManData
+    public class ManagerData
     {
-        public static List<DeliveryMan> GetAll()
+        public static List<Manager> GetAll()
         {
-            List<DeliveryMan> deliveryManList = new List<DeliveryMan>();
+            List<Manager> managerList = new List<Manager>();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Deliverymen", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Managers", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-
 
             try
             {
@@ -26,7 +22,7 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    deliveryManList.Add(new DeliveryMan()
+                    managerList.Add(new Manager()
                     {
                         id = Convert.ToInt32(dr["Id"]),
                         username = dr["Username"].ToString()!,
@@ -37,28 +33,27 @@ namespace Backend.Data
                         province = dr["Province"].ToString()!,
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
-                        phoneNumber = (List<string>)dr["PhoneNumbers"]
-
+                        phoneNumbers = (List<String>)dr["PhoneNumbers"]
                     });
                 }
 
                 connection.Close();
 
-                return deliveryManList;
+                return managerList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al listar los repartidores");
+                throw new Exception("Error al listar los gerentes");
             }
         }
 
-        public static DeliveryMan Get(int id)
+        public static Manager Get(int id)
         {
-            DeliveryMan delman = new DeliveryMan();
+            Manager manager = new Manager();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_Deliveryman", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Manager", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("in_id", id);
 
@@ -70,7 +65,7 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    delman = new DeliveryMan()
+                    manager = new Manager()
                     {
                         id = Convert.ToInt32(dr["Id"]),
                         username = dr["Username"].ToString()!,
@@ -81,42 +76,37 @@ namespace Backend.Data
                         province = dr["Province"].ToString()!,
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
-                        phoneNumber = (List<string>)dr["PhoneNumbers"]
+                        phoneNumbers = (List<String>)dr["PhoneNumbers"]
                     };
                 }
 
                 connection.Close();
 
-                return delman;
+                return manager;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al obtener el repartidor");
+                throw new Exception("Error al obtener el gerente");
             }
         }
 
-        public static bool Add(DeliveryMan delman)
+        public static bool Add(Manager manager)
         {
-
-            string passwordD = EmailSender.GenerateRandomPassword();
-
-            _ = EmailSender.SendEmailAsync(delman.name, delman.username, "Envío de contraseña UbyTEC", "Contraseña: " + passwordD);
-
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Insert_Deliveryman(
-          {delman.id},
-          '{delman.name}',
-          '{delman.lastName1}',
-          '{delman.lastName2}',
-          '{delman.email}',
-          '{delman.province}',
-          '{delman.city}',
-          '{delman.district}',
-          '{delman.username}',
-          '{passwordD}',
-          '{delman.phoneNumber}'
+              $@"CALL Insert_Manager(
+          {manager.id},
+          '{manager.name}',
+          '{manager.lastName1}',
+          '{manager.lastName2}',
+          '{manager.email}',
+          '{manager.province}',
+          '{manager.city}',
+          '{manager.district}',
+          '{manager.username}',
+          '{manager.phoneNumbers}',
+          '{manager.password}'
         );", connection
             );
             try
@@ -133,32 +123,33 @@ namespace Backend.Data
             }
         }
 
-        public static bool Edit(DeliveryMan delman, int id)
+        public static bool Edit(Manager manager, int id)
         {
 
-            DeliveryMan current = DeliveryManData.Get(id);
+            Manager current = ManagerData.Get(id);
 
             string passUpdate = current.password;
-            if (delman.password != "" && delman.oldPassword == current.password)
+            if (manager.password != "" && manager.oldPassword == current.password)
             {
-                passUpdate = delman.password;
+                passUpdate = manager.password;
             }
+
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Update_Deliveryman(
+              $@"CALL Update_Manager(
           {id},
-          {delman.id},
-          '{delman.name}',
-          '{delman.lastName1}',
-          '{delman.lastName2}',
-          '{delman.email}',
-          '{delman.province}',
-          '{delman.city}',
-          '{delman.district}',
-          '{delman.username}',
-          '{passUpdate}',
-          '{delman.phoneNumber}'
+          '{manager.id}',
+          '{manager.name}',
+          '{manager.lastName1}',
+          '{manager.lastName2}',
+          '{manager.email}',
+          '{manager.province}',
+          '{manager.city}',
+          '{manager.district}',
+          '{manager.username}',
+          '{manager.phoneNumbers}',
+          '{passUpdate}'
         );", connection
             );
             try
@@ -179,7 +170,7 @@ namespace Backend.Data
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Delete_Deliveryman({id});", connection);
+              $@"CALL Delete_Manager({id});", connection);
 
             try
             {
@@ -194,9 +185,5 @@ namespace Backend.Data
                 return false;
             }
         }
-
-        
-
-
     }
 }

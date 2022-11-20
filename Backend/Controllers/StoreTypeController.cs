@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("client")]
-    public class ClientController : Controller
+    [Route("storetype")]
+    public class StoreTypeController : Controller
     {
         [HttpGet]
         [Route("get_all")]
@@ -14,11 +14,11 @@ namespace Backend.Controllers
         {
             try
             {
-                List<Client> clientes = ClientData.GetAll();
+                List<StoreType> storetypes = StoreTypeData.GetAll();
                 return new
                 {
                     status = "ok",
-                    clients = clientes
+                    storetypes = storetypes
                 };
             }
             catch (System.Exception err)
@@ -37,11 +37,11 @@ namespace Backend.Controllers
         {
             try
             {
-                Client cliente = ClientData.Get(id);
+                StoreType storetype = StoreTypeData.Get(id);
                 return new
                 {
                     status = "ok",
-                    client = cliente
+                    storetype = storetype
                 };
             }
             catch (System.Exception err)
@@ -56,15 +56,15 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
-        public Object Post([FromBody] Client client)
+        public Object Post([FromBody] StoreType storetype)
         {
-            bool ok = ClientData.Add(client);
+            bool ok = StoreTypeData.Add(storetype);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente registrado correctamente"
+                    message = "Tipo de tienda registrada correctamente"
                 };
             }
             else
@@ -72,22 +72,22 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo registrar el cliente"
+                    message = "No se pudo registrar el tipo de tienda"
                 };
             }
         }
 
         [HttpPatch]
         [Route("update/{id}")]
-        public Object Put([FromBody] Client client, int id)
+        public Object Put([FromBody] StoreType storetype, int id)
         {
-            bool ok = ClientData.Edit(client, id);
+            bool ok = StoreTypeData.Edit(storetype, id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente modificado correctamente"
+                    message = "Tipo de tienda modificado correctamente"
                 };
             }
             else
@@ -95,7 +95,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo modificar el cliente"
+                    message = "No se pudo modificar el tipo de tienda"
                 };
             }
         }
@@ -104,13 +104,13 @@ namespace Backend.Controllers
         [Route("delete/{id}")]
         public Object Delete(int id)
         {
-            bool ok = ClientData.Delete(id);
+            bool ok = StoreTypeData.Delete(id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente eliminado correctamente"
+                    message = "Tipo de tienda eliminado correctamente"
                 };
             }
             else
@@ -118,7 +118,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo eliminar el cliente"
+                    message = "No se pudo eliminar el tipo de tienda"
                 };
             }
         }

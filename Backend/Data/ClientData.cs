@@ -2,177 +2,207 @@
 using Npgsql;
 
 using Backend.Models;
+using Backend.Helpers;
+using System.Runtime.CompilerServices;
 
 namespace Backend.Data
 {
-  public class ClientData
-  {
-    // public static bool Registrar(Client client)
-    // {
-    //   using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
-    //   {
-    //     SqlCommand cmd = new SqlCommand("client_registrar", oConexion);
-    //     cmd.CommandType = CommandType.StoredProcedure;
-    //     cmd.Parameters.AddWithValue("@Id", client.id);
-    //     cmd.Parameters.AddWithValue("@Name", client.name);
-    //     cmd.Parameters.AddWithValue("@LastName1", client.lastName1);
-    //     cmd.Parameters.AddWithValue("@LastName2", client.lastName1);
-    //     cmd.Parameters.AddWithValue("@Province", client.province);
-    //     cmd.Parameters.AddWithValue("@City", client.city);
-    //     cmd.Parameters.AddWithValue("@District", client.district);
-    //     cmd.Parameters.AddWithValue("@PhoneNumber", client.phoneNumber);
-    //     cmd.Parameters.AddWithValue("@Username", client.userName);
-    //     cmd.Parameters.AddWithValue("@Password", client.password);
-    //     cmd.Parameters.AddWithValue("@Birthdate", client.birthday.Date);
-    //     try
-    //     {
-    //       oConexion.Open();
-    //       cmd.ExecuteNonQuery();
-    //       return true;
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //       return false;
-    //     }
-    //   }
-    // }
-
-    // public static bool Modificar(Client client)
-    // {
-    //   using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
-    //   {
-    //     SqlCommand cmd = new SqlCommand("client_modificar", oConexion);
-    //     cmd.CommandType = CommandType.StoredProcedure;
-    //     cmd.Parameters.AddWithValue("@Id", client.id);
-    //     cmd.Parameters.AddWithValue("@Name", client.name);
-    //     cmd.Parameters.AddWithValue("@LastName1", client.lastName1);
-    //     cmd.Parameters.AddWithValue("@LastName2", client.lastName1);
-    //     cmd.Parameters.AddWithValue("@Province", client.province);
-    //     cmd.Parameters.AddWithValue("@City", client.city);
-    //     cmd.Parameters.AddWithValue("@District", client.district);
-    //     cmd.Parameters.AddWithValue("@PhoneNumber", client.phoneNumber);
-    //     cmd.Parameters.AddWithValue("@Username", client.userName);
-    //     cmd.Parameters.AddWithValue("@Password", client.password);
-    //     cmd.Parameters.AddWithValue("@Birthdate", client.birthday.Date);
-
-    //     try
-    //     {
-    //       oConexion.Open();
-    //       cmd.ExecuteNonQuery();
-    //       return true;
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //       return false;
-    //     }
-    //   }
-    // }
-
-    public static List<ClienteForGet> Listar()
+    public class ClientData
     {
-      List<ClienteForGet> oListaUsuario = new List<ClienteForGet>();
-
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Clients", connection);
-      cmd.CommandType = CommandType.StoredProcedure;
-
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        var dr = cmd.ExecuteReader();
-
-        while (dr.Read())
+        public static List<Client> GetAll()
         {
-          oListaUsuario.Add(new ClienteForGet()
-          {
-            id = Convert.ToInt32(dr["Id"]),
-            name = dr["Name"].ToString(),
-            lastName1 = dr["LastName1"].ToString(),
-            lastName2 = dr["LastName2"].ToString(),
-            province = dr["Province"].ToString(),
-            city = dr["City"].ToString(),
-            district = dr["District"].ToString(),
-            userName = dr["Username"].ToString(),
-            phoneNumber = dr["PhoneNumber"].ToString(),
-            birthdate = Convert.ToDateTime(dr["Birthdate"].ToString())
-          });
+            List<Client> clientList = new List<Client>();
+
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Clients", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    clientList.Add(new Client()
+                    {
+                        id = Convert.ToInt32(dr["Id"]),
+                        username = dr["Username"].ToString()!,
+                        name = dr["Name"].ToString()!,
+                        lastName1 = dr["LastName1"].ToString()!,
+                        lastName2 = dr["LastName2"].ToString()!,
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        phoneNumber = dr["PhoneNumber"].ToString()!,
+                        birthday = Convert.ToDateTime(dr["Birthday"])!
+                    });
+                }
+
+                connection.Close();
+
+                return clientList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new Exception("Error al listar los clientes");
+            }
         }
 
-        connection.Close();
-
-        return oListaUsuario;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        throw new Exception("Error al listar los clientes");
-      }
-    }
-
-    public static ClienteForGet Obtener(int idusuario)
-    {
-      ClienteForGet oUsuario = new ClienteForGet();
-
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand("Get_Client", connection);
-      cmd.CommandType = CommandType.StoredProcedure;
-      // Los parámetros tienen que ir en minuscula -> Ver definición de la función
-      cmd.Parameters.AddWithValue("in_id", idusuario);
-
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        var dr = cmd.ExecuteReader();
-
-        while (dr.Read())
+        public static Client Get(int id)
         {
-          oUsuario = new ClienteForGet()
-          {
-            id = Convert.ToInt32(dr["Id"]),
-            name = dr["Name"].ToString(),
-            lastName1 = dr["LastName1"].ToString(),
-            lastName2 = dr["LastName2"].ToString(),
-            province = dr["Province"].ToString(),
-            city = dr["City"].ToString(),
-            district = dr["District"].ToString(),
-            userName = dr["Username"].ToString(),
-            phoneNumber = dr["PhoneNumber"].ToString(),
-            birthdate = Convert.ToDateTime(dr["Birthdate"].ToString())
-          };
+            Client client = new Client();
+
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Client", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("in_id", id);
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    client = new Client()
+                    {
+                        id = Convert.ToInt32(dr["Id"]),
+                        username = dr["Username"].ToString()!,
+                        name = dr["Name"].ToString()!,
+                        lastName1 = dr["LastName1"].ToString()!,
+                        lastName2 = dr["LastName2"].ToString()!,
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        phoneNumber = dr["PhoneNumber"].ToString()!,
+                        birthday = Convert.ToDateTime(dr["Birthday"])!
+                    };
+                }
+
+                connection.Close();
+
+                return client;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new Exception("Error al obtener el cliente");
+            }
         }
 
-        connection.Close();
+        public static bool Add(Client client)
+        {
+            string passwordC = GenerateRandomPassword();
+            _ = EmailSender.SendEmailAsync(client.name, client.username, "Envío de contraseña UbyTEC", "Contraseña: " + passwordC);
 
-        return oUsuario;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        throw new Exception("Error al obtener el cliente");
-      }
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Insert_Client(
+            {client.id},
+          '{client.name}',
+          '{client.lastName1}',
+          '{client.lastName2}',
+          '{client.province}',
+          '{client.city}',
+          '{client.district}',
+          '{client.phoneNumber}',
+          '{client.username}',
+          '{client.birthday}',
+          '{passwordC}'
+        );", connection
+            );
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public static bool Edit(Client client, int idClient)
+        {
+
+            Client current = ClientData.Get(idClient);
+
+            string passUpdate = current.password;
+            if (client.password != "" && client.oldPassword == current.password)
+            {
+                passUpdate = client.password;
+            }
+
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Update_Client(
+          {idClient},
+          {client.id},
+          '{client.name}',
+          '{client.lastName1}',
+          '{client.lastName2}',
+          '{client.province}',
+          '{client.city}',
+          '{client.district}',
+          '{client.phoneNumber}',
+          '{client.username}',
+          '{client.birthday}',
+          '{passUpdate}'
+        );", connection
+            );
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public static bool Delete(int id)
+        {
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Delete_Client({id});", connection);
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        private static string GenerateRandomPassword()
+        {
+            int passwordLength = 12;
+            string password = "";
+
+            Random random = new Random();
+            for (int i = 0; i < passwordLength; i++)
+            {
+                password += (char)random.Next(35, 126);
+            }
+
+            return password;
+        }
     }
-
-    // public static bool Eliminar(int id)
-    // {
-    //   using (SqlConnection oConexion = new SqlConnection(Conexion.rutaConexion))
-    //   {
-    //     SqlCommand cmd = new SqlCommand("usp_eliminar", oConexion);
-    //     cmd.CommandType = CommandType.StoredProcedure;
-    //     cmd.Parameters.AddWithValue("@idusuario", id);
-
-    //     try
-    //     {
-    //       oConexion.Open();
-    //       cmd.ExecuteNonQuery();
-    //       return true;
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //       return false;
-    //     }
-    //   }
-    // }
-  }
 }
