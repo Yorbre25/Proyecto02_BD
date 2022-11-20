@@ -4,13 +4,13 @@ using System.Data;
 
 namespace Backend.Data
 {
-    public class StoreTypeData
+    public class ProductCategoryData
     {
-        public static List<StoreType> GetAll()
+        public static List<ProductCategory> GetAll()
         {
-            List<StoreType> stypeList = new List<StoreType>();
+            List<ProductCategory> productCatList = new List<ProductCategory>();
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Store_Type", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Product_Categories", connection);
             cmd.CommandType = CommandType.StoredProcedure;
 
             try
@@ -21,7 +21,7 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    stypeList.Add(new StoreType()
+                    productCatList.Add(new ProductCategory()
                     {
                         id = Convert.ToInt32(dr["Id"]),
                         name = dr["Name"].ToString()!
@@ -31,21 +31,21 @@ namespace Backend.Data
 
                 connection.Close();
 
-                return stypeList;
+                return productCatList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al listar los tipos de tienda");
+                throw new Exception("Error al listar las categorias");
             }
         }
 
-        public static StoreType Get(int id)
+        public static ProductCategory Get(int id)
         {
-            StoreType stype = new StoreType();
+            ProductCategory productCat = new ProductCategory();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_Store_Type", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Product_Category", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("in_id", id);
 
@@ -57,7 +57,7 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    stype = new StoreType()
+                    productCat = new ProductCategory()
                     {
                         id = Convert.ToInt32(dr["Id"]),
                         name = dr["Name"].ToString()!
@@ -66,21 +66,21 @@ namespace Backend.Data
 
                 connection.Close();
 
-                return stype;
+                return productCat;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al obtener el tipo de tienda");
+                throw new Exception("Error al obtener la categoria");
             }
         }
 
-        public static bool Add(StoreType stype)
+        public static bool Add(ProductCategory productCat)
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Insert_Store_Type(
-          {stype.name}
+              $@"CALL Insert_Product_Category(
+          {productCat.name}
         );", connection
             );
             try
@@ -97,14 +97,14 @@ namespace Backend.Data
             }
         }
 
-        public static bool Edit(StoreType storetype, int id)
+        public static bool Edit(ProductCategory productCat, int id)
         {
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Update_Store_Type(
+              $@"CALL Update_Product_Category(
           {id},
-          '{storetype.name}'
+          '{productCat.name}'
         );", connection
             );
             try
@@ -125,7 +125,7 @@ namespace Backend.Data
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Delete_Store_Type({id});", connection);
+              $@"CALL Delete_Product_Category({id});", connection);
 
             try
             {

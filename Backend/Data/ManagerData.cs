@@ -1,66 +1,102 @@
-using System.Data;
+﻿using Backend.Models;
 using Npgsql;
-
-using Backend.Helpers;
-using Backend.Models;
+using System.Data;
 
 namespace Backend.Data
 {
-  public class ManagerData
-  {
-    public static Manager Get(int id)
+    public class ManagerData
     {
-      Manager manager = new Manager();
-
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand("Get_Manager", connection);
-      cmd.CommandType = CommandType.StoredProcedure;
-      cmd.Parameters.AddWithValue("in_id", id);
-
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        var dr = cmd.ExecuteReader();
-
-        while (dr.Read())
+        public static List<Manager> GetAll()
         {
-          manager = new Manager()
-          {
-            id = Convert.ToInt32(dr["Id"]),
-            username = dr["Username"].ToString()!,
-            name = dr["Name"].ToString()!,
-            lastName1 = dr["LastName1"].ToString()!,
-            lastName2 = dr["LastName2"].ToString()!,
-            email = dr["Email"].ToString()!,
-            province = dr["Province"].ToString()!,
-            city = dr["City"].ToString()!,
-            district = dr["District"].ToString()!,
-            phoneNumbers = (string[])dr["PhoneNumbers"]
-          };
+            List<Manager> managerList = new List<Manager>();
+
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Managers", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    managerList.Add(new Manager()
+                    {
+                        id = Convert.ToInt32(dr["Id"]),
+                        username = dr["Username"].ToString()!,
+                        name = dr["Name"].ToString()!,
+                        lastName1 = dr["LastName1"].ToString()!,
+                        lastName2 = dr["LastName2"].ToString()!,
+                        email = dr["Email"].ToString()!,
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        phoneNumbers = (List<String>)dr["PhoneNumbers"]
+                    });
+                }
+
+                connection.Close();
+
+                return managerList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new Exception("Error al listar los gerentes");
+            }
         }
 
-        connection.Close();
+        public static Manager Get(int id)
+        {
+            Manager manager = new Manager();
 
-        return manager;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        throw new Exception("Error al obtener el administrador de comercio");
-      }
-    }
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Manager", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("in_id", id);
 
-    public static bool Add(Manager manager)
-    {
-      //Hay que generarle una contraseña aleatoria
-      string phoneNumbers = AuxFunctions.arrayToString(manager.phoneNumbers);
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                var dr = cmd.ExecuteReader();
 
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand(
-        $@"CALL Insert_Manager(
+                while (dr.Read())
+                {
+                    manager = new Manager()
+                    {
+                        id = Convert.ToInt32(dr["Id"]),
+                        username = dr["Username"].ToString()!,
+                        name = dr["Name"].ToString()!,
+                        lastName1 = dr["LastName1"].ToString()!,
+                        lastName2 = dr["LastName2"].ToString()!,
+                        email = dr["Email"].ToString()!,
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        phoneNumbers = (List<String>)dr["PhoneNumbers"]
+                    };
+                }
+
+                connection.Close();
+
+                return manager;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new Exception("Error al obtener el gerente");
+            }
+        }
+
+        public static bool Add(Manager manager)
+        {
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Insert_Manager(
           {manager.id},
-          '{manager.username}',
           '{manager.name}',
           '{manager.lastName1}',
           '{manager.lastName2}',
@@ -68,37 +104,42 @@ namespace Backend.Data
           '{manager.province}',
           '{manager.city}',
           '{manager.district}',
-          '{manager.password}',
-          array{phoneNumbers}
-        );", connection
-      );
-
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        connection.Close();
-        return true;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        return false;
-      }
-    }
-
-    public static bool Edit(Manager manager, int managerID)
-    {
-      /* Hay que verificar que manager.oldPassword coincida
-      con la password guardada en la base */
-      string phoneNumbers = AuxFunctions.arrayToString(manager.phoneNumbers);
-
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand(
-        $@"CALL Update_Manager(
-          {managerID},
-          {manager.id},
           '{manager.username}',
+          '{manager.phoneNumbers}',
+          '{manager.password}'
+        );", connection
+            );
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public static bool Edit(Manager manager, int id)
+        {
+
+            Manager current = ManagerData.Get(id);
+
+            string passUpdate = current.password;
+            if (manager.password != "" && manager.oldPassword == current.password)
+            {
+                passUpdate = manager.password;
+            }
+
+
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Update_Manager(
+          {id},
+          '{manager.id}',
           '{manager.name}',
           '{manager.lastName1}',
           '{manager.lastName2}',
@@ -106,42 +147,43 @@ namespace Backend.Data
           '{manager.province}',
           '{manager.city}',
           '{manager.district}',
-          '{manager.password}',
-          array{phoneNumbers}
+          '{manager.username}',
+          '{manager.phoneNumbers}',
+          '{passUpdate}'
         );", connection
-      );
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        connection.Close();
-        return true;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        return false;
-      }
-    }
+            );
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
 
-    public static bool Delete(int id)
-    {
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand(
-        $@"CALL Delete_Manager({id});", connection);
+        public static bool Delete(int id)
+        {
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Delete_Manager({id});", connection);
 
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        connection.Close();
-        return true;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        return false;
-      }
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
     }
-  }
 }

@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("deliveryman")]
-    public class DeliveryManController : Controller
+    [Route("productcategory")]
+    public class ProductCategoryController : Controller
     {
         [HttpGet]
         [Route("get_all")]
@@ -15,11 +15,11 @@ namespace Backend.Controllers
         {
             try
             {
-                List<DeliveryMan> delmans = DeliveryManData.GetAll();
+                List<ProductCategory> productCats = ProductCategoryData.GetAll();
                 return new
                 {
                     status = "ok",
-                    deliverymen = delmans
+                    productCats = productCats
                 };
             }
             catch (System.Exception err)
@@ -38,11 +38,11 @@ namespace Backend.Controllers
         {
             try
             {
-                DeliveryMan delman = DeliveryManData.Get(id);
+                ProductCategory productCat = ProductCategoryData.Get(id);
                 return new
                 {
                     status = "ok",
-                    deliveryman = delman
+                    productCat = productCat
                 };
             }
             catch (System.Exception err)
@@ -57,15 +57,15 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
-        public Object Post([FromBody] DeliveryMan delman)
+        public Object Post([FromBody] ProductCategory productCat)
         {
-            bool ok = DeliveryManData.Add(delman);
+            bool ok = ProductCategoryData.Add(productCat);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Repartidor registrado correctamente"
+                    message = "Categoria de producto registrada correctamente"
                 };
             }
             else
@@ -73,22 +73,22 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo registrar el repartidor"
+                    message = "No se pudo registrar la categoria de producto"
                 };
             }
         }
 
         [HttpPatch]
         [Route("update/{id}")]
-        public Object Put([FromBody] DeliveryMan delman, int id)
+        public Object Put([FromBody] ProductCategory productCat, int id)
         {
-            bool ok = DeliveryManData.Edit(delman, id);
+            bool ok = ProductCategoryData.Edit(productCat, id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Repartidor modificado correctamente"
+                    message = "Categoria de producto modificada correctamente"
                 };
             }
             else
@@ -96,7 +96,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo modificar el repartidor"
+                    message = "No se pudo modificar la categoria de producto"
                 };
             }
         }
@@ -105,13 +105,13 @@ namespace Backend.Controllers
         [Route("delete/{id}")]
         public Object Delete(int id)
         {
-            bool ok = DeliveryManData.Delete(id);
+            bool ok = ProductCategoryData.Delete(id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Repartidor eliminado correctamente"
+                    message = "Categoria de producto eliminado correctamente"
                 };
             }
             else
@@ -119,7 +119,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo eliminar el repartidor"
+                    message = "No se pudo eliminar la categoria de producto"
                 };
             }
         }

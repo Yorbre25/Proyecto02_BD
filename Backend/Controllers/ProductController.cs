@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("deliveryman")]
-    public class DeliveryManController : Controller
+    [Route("product")]
+    public class ProductController : Controller
     {
         [HttpGet]
         [Route("get_all")]
@@ -15,11 +15,11 @@ namespace Backend.Controllers
         {
             try
             {
-                List<DeliveryMan> delmans = DeliveryManData.GetAll();
+                List<Product> products = ProductData.GetAll();
                 return new
                 {
                     status = "ok",
-                    deliverymen = delmans
+                    products = products
                 };
             }
             catch (System.Exception err)
@@ -38,11 +38,11 @@ namespace Backend.Controllers
         {
             try
             {
-                DeliveryMan delman = DeliveryManData.Get(id);
+                Product product = ProductData.Get(id);
                 return new
                 {
                     status = "ok",
-                    deliveryman = delman
+                    product = product
                 };
             }
             catch (System.Exception err)
@@ -57,15 +57,15 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
-        public Object Post([FromBody] DeliveryMan delman)
+        public Object Post([FromBody] Product product)
         {
-            bool ok = DeliveryManData.Add(delman);
+            bool ok = ProductData.Add(product);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Repartidor registrado correctamente"
+                    message = "Producto registrado correctamente"
                 };
             }
             else
@@ -73,22 +73,22 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo registrar el repartidor"
+                    message = "No se pudo registrar el producto"
                 };
             }
         }
 
         [HttpPatch]
         [Route("update/{id}")]
-        public Object Put([FromBody] DeliveryMan delman, int id)
+        public Object Put([FromBody] Product product, int id)
         {
-            bool ok = DeliveryManData.Edit(delman, id);
+            bool ok = ProductData.Edit(product, id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Repartidor modificado correctamente"
+                    message = "Producto modificado correctamente"
                 };
             }
             else
@@ -96,7 +96,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo modificar el repartidor"
+                    message = "No se pudo modificar el producto"
                 };
             }
         }
@@ -105,13 +105,13 @@ namespace Backend.Controllers
         [Route("delete/{id}")]
         public Object Delete(int id)
         {
-            bool ok = DeliveryManData.Delete(id);
+            bool ok = ProductData.Delete(id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Repartidor eliminado correctamente"
+                    message = "Producto eliminado correctamente"
                 };
             }
             else
@@ -119,7 +119,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo eliminar el repartidor"
+                    message = "No se pudo eliminar el producto"
                 };
             }
         }

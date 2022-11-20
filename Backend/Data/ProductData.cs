@@ -4,13 +4,13 @@ using System.Data;
 
 namespace Backend.Data
 {
-    public class StoreTypeData
+    public class ProductData
     {
-        public static List<StoreType> GetAll()
+        public static List<Product> GetAll()
         {
-            List<StoreType> stypeList = new List<StoreType>();
+            List<Product> productList = new List<Product>();
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Store_Type", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Products", connection);
             cmd.CommandType = CommandType.StoredProcedure;
 
             try
@@ -21,31 +21,33 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    stypeList.Add(new StoreType()
+                    productList.Add(new Product()
                     {
-                        id = Convert.ToInt32(dr["Id"]),
-                        name = dr["Name"].ToString()!
+                        barCode = Convert.ToInt32(dr["BarCode"]),
+                        price = Convert.ToInt32(dr["Price"]),
+                        name = dr["Name"].ToString()!,
+                        categoryName = dr["CategoryName"].ToString()!
 
                     });
                 }
 
                 connection.Close();
 
-                return stypeList;
+                return productList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al listar los tipos de tienda");
+                throw new Exception("Error al listar los productos");
             }
         }
 
-        public static StoreType Get(int id)
+        public static Product Get(int id)
         {
-            StoreType stype = new StoreType();
+            Product product = new Product();
 
             var connection = Connection.Get();
-            NpgsqlCommand cmd = new NpgsqlCommand("Get_Store_Type", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Product", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("in_id", id);
 
@@ -57,30 +59,37 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    stype = new StoreType()
+                    product = new Product()
                     {
-                        id = Convert.ToInt32(dr["Id"]),
-                        name = dr["Name"].ToString()!
+                        barCode = Convert.ToInt32(dr["BarCode"]),
+                        price = Convert.ToInt32(dr["Price"]),
+                        name = dr["Name"].ToString()!,
+                        categoryName = dr["CategoryName"].ToString()!
                     };
                 }
 
                 connection.Close();
 
-                return stype;
+                return product;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new Exception("Error al obtener el tipo de tienda");
+                throw new Exception("Error al obtener el producto");
             }
         }
 
-        public static bool Add(StoreType stype)
+        public static bool Add(Product product)
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Insert_Store_Type(
-          {stype.name}
+              $@"CALL Insert_Product(
+          {product.barCode},
+          '{product.price}',
+          '{product.name}',
+          '{product.categoryId}',
+          '{product.photo}',
+          '{product.storeId}'
         );", connection
             );
             try
@@ -97,14 +106,19 @@ namespace Backend.Data
             }
         }
 
-        public static bool Edit(StoreType storetype, int id)
+        public static bool Edit(Product product, int id)
         {
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Update_Store_Type(
+              $@"CALL Update_Product(
           {id},
-          '{storetype.name}'
+          '{product.barCode}',
+          '{product.price}',
+          '{product.name}',
+          '{product.categoryId}',
+          '{product.photo}',
+          '{product.storeId}'
         );", connection
             );
             try
@@ -125,7 +139,7 @@ namespace Backend.Data
         {
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
-              $@"CALL Delete_Store_Type({id});", connection);
+              $@"CALL Delete_Product({id});", connection);
 
             try
             {

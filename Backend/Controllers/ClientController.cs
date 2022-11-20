@@ -4,125 +4,123 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
-  [ApiController]
-  [Route("client")]
-  public class ClientController : Controller
-  {
-    [HttpGet]
-    [Route("get_all")]
-    public Object Get()
+    [ApiController]
+    [Route("client")]
+    public class ClientController : Controller
     {
-      try
-      {
-        List<ClienteForGet> clientes = ClientData.Listar();
-        return new
+        [HttpGet]
+        [Route("get_all")]
+        public Object Get()
         {
-          status = "ok",
-          clients = clientes
-        };
-      }
-      catch (System.Exception err)
-      {
-        return new
+            try
+            {
+                List<Client> clientes = ClientData.GetAll();
+                return new
+                {
+                    status = "ok",
+                    clients = clientes
+                };
+            }
+            catch (System.Exception err)
+            {
+                return new
+                {
+                    status = "error",
+                    message = err.Message
+                };
+            }
+        }
+
+        [HttpGet]
+        [Route("get/{id}")]
+        public Object Get(int id)
         {
-          status = "error",
-          message = err.Message
-        };
-      }
+            try
+            {
+                Client cliente = ClientData.Get(id);
+                return new
+                {
+                    status = "ok",
+                    client = cliente
+                };
+            }
+            catch (System.Exception err)
+            {
+                return new
+                {
+                    status = "error",
+                    message = err.Message
+                };
+            }
+        }
+
+        [HttpPost]
+        [Route("add")]
+        public Object Post([FromBody] Client client)
+        {
+            bool ok = ClientData.Add(client);
+            if (ok)
+            {
+                return new
+                {
+                    status = "ok",
+                    message = "Cliente registrado correctamente"
+                };
+            }
+            else
+            {
+                return new
+                {
+                    status = "error",
+                    message = "No se pudo registrar el cliente"
+                };
+            }
+        }
+
+        [HttpPatch]
+        [Route("update/{id}")]
+        public Object Put([FromBody] Client client, int id)
+        {
+            bool ok = ClientData.Edit(client, id);
+            if (ok)
+            {
+                return new
+                {
+                    status = "ok",
+                    message = "Cliente modificado correctamente"
+                };
+            }
+            else
+            {
+                return new
+                {
+                    status = "error",
+                    message = "No se pudo modificar el cliente"
+                };
+            }
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public Object Delete(int id)
+        {
+            bool ok = ClientData.Delete(id);
+            if (ok)
+            {
+                return new
+                {
+                    status = "ok",
+                    message = "Cliente eliminado correctamente"
+                };
+            }
+            else
+            {
+                return new
+                {
+                    status = "error",
+                    message = "No se pudo eliminar el cliente"
+                };
+            }
+        }
     }
-
-    [HttpGet]
-    [Route("get/{id}")]
-    public Object Get(int id)
-    {
-      try
-      {
-        ClienteForGet cliente = ClientData.Obtener(id);
-        return new
-        {
-          status = "ok",
-          client = cliente
-        };
-      }
-      catch (System.Exception err)
-      {
-        return new
-        {
-          status = "error",
-          message = err.Message
-        };
-      }
-    }
-
-    //         [HttpPost]
-    //         [Route("add")]
-    //         public Object Post([FromBody] Client cliente)
-    //         {
-    //             bool ok = ClientData.Registrar(cliente);
-    //             if (ok)
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "ok",
-    //                     message = "Cliente registrado correctamente"
-    //                 };
-    //             }
-    //             else
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "error",
-    //                     message = "No se pudo registrar el cliente"
-    //                 };
-    //             }
-    //         }
-
-    //         [HttpPatch]
-    //         [Route("update/{id}")]
-    //         public Object Put([FromBody] Client cliente)
-    //         {
-    //             bool ok = ClientData.Modificar(cliente);
-    //             if (ok)
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "ok",
-    //                     message = "Cliente modificado correctamente"
-    //                 };
-    //             }
-    //             else
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "error",
-    //                     message = "No se pudo modificar el cliente"
-    //                 };
-    //             }
-    //         }
-
-    //         [HttpDelete]
-    //         [Route("delete/{cedula}")]
-    //         public Object Delete(int id)
-    //         {
-    //             bool ok = ClientData.Eliminar(id);
-    //             if (ok)
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "ok",
-    //                     message = "Cliente eliminado correctamente"
-    //                 };
-    //             }
-    //             else
-    //             {
-    //                 return new
-    //                 {
-    //                     status = "error",
-    //                     message = "No se pudo eliminar el cliente"
-    //                 };
-    //             }
-    //         }
-
-    //     }
-  }
 }
