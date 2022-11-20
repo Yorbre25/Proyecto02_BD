@@ -95,6 +95,7 @@ namespace Backend.Data
 
     public static bool Add(Admin admin)
     {
+      string hashedPassword = BCrypt.Net.BCrypt.HashPassword(admin.password);
       string phoneNumbers = AuxFunctions.arrayToString(admin.phoneNumbers);
 
       var connection = Connection.Get();
@@ -109,7 +110,7 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{BCrypt.Net.BCrypt.HashPassword(admin.password)}'
+          '{hashedPassword}'
         );", connection // array{phoneNumbers} -> Para agregar los teléfonos -> También hay que ponerlo en edit
       );
       // Faltan teléfonooooos
@@ -129,8 +130,8 @@ namespace Backend.Data
 
     public static bool Edit(Admin admin, int adminID)
     {
-      /* Hay que verificar que admin.oldPassword coincida
-      con la password guardada en la base */
+      // string phoneNumbers = AuxFunctions.arrayToString(admin.phoneNumbers);
+      string hashedPassword = getEditPassword(admin, adminID);
 
       var connection = Connection.Get();
       NpgsqlCommand cmd = new NpgsqlCommand(
@@ -145,9 +146,10 @@ namespace Backend.Data
           '{admin.city}',
           '{admin.district}',
           '{admin.username}',
-          '{BCrypt.Net.BCrypt.HashPassword(admin.password)}'
-        );", connection
+          '{hashedPassword}'
+        );", connection // array{phoneNumbers} -> Para agregar los teléfonos
       );
+
       try
       {
         connection.Open();
@@ -180,6 +182,32 @@ namespace Backend.Data
         Console.WriteLine(ex.Message);
         return false;
       }
+    }
+    private static string getEditPassword(Admin admin, int adminID)
+    {
+      string hashedPassword;
+
+      Admin oldAdmin = Get(adminID);
+      string oldPassword = PasswordData.getAdminPassword(oldAdmin.username);
+
+      if (admin.password == null)
+      {
+        hashedPassword = oldPassword;
+      }
+      else
+      {
+        bool validPassword = PasswordValidator.ValidatePassword(
+          oldAdmin.username,
+          admin.oldPassword!,
+          "administrator"
+        );
+
+        if (!validPassword) throw new Exception("Contraseña incorrecta");
+
+        hashedPassword = BCrypt.Net.BCrypt.HashPassword(admin.password);
+      }
+
+      return hashedPassword;
     }
   }
 }

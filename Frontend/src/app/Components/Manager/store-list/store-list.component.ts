@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 import { Store } from 'src/app/Interfaces/Store';
 
-import { MessageService } from 'src/app/Services/message.service';
 import { StoreService } from 'src/app/Services/store.service';
 
 @Component({
@@ -16,8 +15,7 @@ export class StoreListComponent implements OnInit {
   tableData: Store[]
 
   constructor(
-    private storeService: StoreService,
-    protected messageService: MessageService
+    private storeService: StoreService
   ) {
     this.tableColumns = [
       { key: "name", replacement: "Nombre del comercio" },
@@ -30,12 +28,10 @@ export class StoreListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.resetMessageInfo()
-
     this.storeService.getAllStoresData()
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.storesData) {
           const stores: Store[] = response.storesData

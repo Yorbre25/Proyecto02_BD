@@ -2,8 +2,6 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core'
 import { FormControl, FormArray, FormGroup, Validators } from '@angular/forms'
 
 import { StoreManager } from 'src/app/Interfaces/Store'
-import { AuxFunctionsService } from 'src/app/Services/aux-functions.service'
-import { MessageService } from 'src/app/Services/message.service'
 
 @Component({
   selector: 'app-store-manager-form',
@@ -25,10 +23,7 @@ export class StoreManagerFormComponent implements OnInit, OnChanges {
   @Input() formGroup: FormGroup
   @Input() managerInfo?: StoreManager
 
-  constructor(
-    private messageService: MessageService,
-    private auxFunctionsService: AuxFunctionsService,
-  ) {
+  constructor() {
     this.formGroup = new FormGroup({})
 
     this.id = new FormControl('', [Validators.required])

@@ -3,16 +3,12 @@ import { Injectable } from '@angular/core'
 import { DateInput, TimeInput } from '../Interfaces/Auxiliaries'
 import { ServerResponse } from '../Interfaces/ServerResponses'
 
-import { MessageService } from './message.service'
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuxFunctionsService {
 
-  constructor(
-    private messageService: MessageService
-  ) { }
+  constructor() { }
 
   /** 
    * Convierte un string a un objeto que contiene día, mes y año 
@@ -78,7 +74,7 @@ export class AuxFunctionsService {
   */
   handleResponse = (response: ServerResponse): any => {
     if (response.status === 'error') {
-      this.messageService.setMessageInfo(response.message!, 'error')
+      alert(response.message)
     }
     else {
       window.location.reload();

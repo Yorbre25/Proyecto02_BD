@@ -6,7 +6,6 @@ import { StoreType } from 'src/app/Interfaces/StoreType';
 
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 import { FormsService } from 'src/app/Services/forms.service';
-import { MessageService } from 'src/app/Services/message.service';
 import { StoreTypeService } from 'src/app/Services/store-type.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class AddStoreTypeFormComponent implements OnInit {
   @Input() storeTypeInfo?: StoreType
 
   constructor(
-    private messageService: MessageService,
     private auxFunctionsService: AuxFunctionsService,
     private storeTypeService: StoreTypeService,
     protected formsService: FormsService
@@ -45,7 +43,7 @@ export class AddStoreTypeFormComponent implements OnInit {
       await this.updateStoreType()
         .then((response: ServerResponse) => {
           if (response.status === 'error') {
-            this.messageService.setMessageInfo(response.message!, 'error')
+            alert(response.message)
           }
           else if (this.storeTypeInfo!.id !== this.formsService.form.value.id) {
             window.location.href =

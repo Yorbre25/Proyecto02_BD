@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { FormsService } from 'src/app/Services/forms.service';
-import { MessageService } from 'src/app/Services/message.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,8 +15,7 @@ export class LoginFormComponent implements OnInit {
   @Input() onSubmit: () => void
 
   constructor(
-    protected formsService: FormsService,
-    protected messageService: MessageService
+    protected formsService: FormsService
   ) {
     this.username = new FormControl('', [Validators.required])
     this.password = new FormControl('', [Validators.required])
@@ -27,7 +25,6 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formsService.resetForm()
-    this.messageService.resetMessageInfo()
 
     this.formsService.form.addControl('username', this.username)
     this.formsService.form.addControl('password', this.password)

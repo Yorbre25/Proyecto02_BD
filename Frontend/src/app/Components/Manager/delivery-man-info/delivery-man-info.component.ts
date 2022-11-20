@@ -6,7 +6,6 @@ import { DeliveryMan } from 'src/app/Interfaces/DeliveryMan'
 
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service'
 import { DeliveryManService } from 'src/app/Services/delivery-man.service'
-import { MessageService } from 'src/app/Services/message.service'
 
 @Component({
   selector: 'app-delivery-man-info',
@@ -21,8 +20,7 @@ export class DeliveryManInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private deliveryManService: DeliveryManService,
-    protected auxFunctionsService: AuxFunctionsService,
-    protected messageService: MessageService
+    protected auxFunctionsService: AuxFunctionsService
   ) {
     this.deliveryManInfoTitles = [
       { key: "id", replacement: "Cédula" },
@@ -42,7 +40,7 @@ export class DeliveryManInfoComponent implements OnInit {
     this.deliveryManService.getDeliveryMan(id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.deliveryMan) {
           this.deliveryMan = response.deliveryMan
@@ -64,7 +62,7 @@ export class DeliveryManInfoComponent implements OnInit {
     this.deliveryManService.deleteDeliveryMan(this.deliveryMan.id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else {
           window.location.href = '/manager/delivery_men'

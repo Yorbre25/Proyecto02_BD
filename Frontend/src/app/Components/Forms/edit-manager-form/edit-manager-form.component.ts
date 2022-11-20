@@ -4,10 +4,8 @@ import { FormControl, FormArray, Validators } from '@angular/forms';
 import { Manager } from 'src/app/Interfaces/Manager';
 import { ServerResponse } from 'src/app/Interfaces/ServerResponses';
 
-import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 import { FormsService } from 'src/app/Services/forms.service';
 import { ManagerService } from 'src/app/Services/manager.service';
-import { MessageService } from 'src/app/Services/message.service';
 
 @Component({
   selector: 'app-edit-manager-form',
@@ -32,8 +30,6 @@ export class EditManagerFormComponent implements OnInit {
   @Input() managerInfo?: Manager
 
   constructor(
-    private auxFunctionsService: AuxFunctionsService,
-    private messageService: MessageService,
     private managerService: ManagerService,
     protected formsService: FormsService
   ) {
@@ -80,19 +76,25 @@ export class EditManagerFormComponent implements OnInit {
 
   onSubmit = async () => {
     const newManagerInfo = this.formsService.getFormValue()
+    const password = newManagerInfo.password
+    const passwordConfirm = newManagerInfo.passwordConfirm
 
-    if (newManagerInfo.password !== newManagerInfo.passwordConfirm) {
-      this.messageService.setMessageInfo('Las contraseñas no coinciden', 'error')
+    const emptyPasswords =
+      (password === null || password === '') &&
+      (passwordConfirm === null || passwordConfirm === '')
+
+    if (!emptyPasswords && password !== passwordConfirm) {
+      alert('Las contraseñas no coinciden')
       return
-    } else {
-      this.messageService.resetMessageInfo()
+    }
+    else {
       delete newManagerInfo.passwordConfirm
     }
 
     await this.updateManager(newManagerInfo)
       .then((response) => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else {
           if (newManagerInfo.id !== this.managerInfo?.id) {

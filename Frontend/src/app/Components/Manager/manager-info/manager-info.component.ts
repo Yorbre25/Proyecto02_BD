@@ -6,7 +6,6 @@ import { Manager } from 'src/app/Interfaces/Manager'
 
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service'
 import { ManagerService } from 'src/app/Services/manager.service'
-import { MessageService } from 'src/app/Services/message.service'
 
 @Component({
   selector: 'app-manager-info',
@@ -21,8 +20,7 @@ export class ManagerInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private managerService: ManagerService,
-    protected auxFunctionsService: AuxFunctionsService,
-    protected messageService: MessageService
+    protected auxFunctionsService: AuxFunctionsService
   ) {
     this.managerInfoTitles = [
       { key: "id", replacement: "Cédula" },
@@ -42,7 +40,7 @@ export class ManagerInfoComponent implements OnInit {
     this.managerService.getManager(id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else if (response.manager) {
           this.manager = response.manager
@@ -64,7 +62,7 @@ export class ManagerInfoComponent implements OnInit {
     this.managerService.deleteManager(this.manager.id)
       .subscribe(response => {
         if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
+          alert(response.message)
         }
         else {
           window.location.href = '/manager/employees'

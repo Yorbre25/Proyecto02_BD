@@ -3,7 +3,6 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms'
 
 import { Store } from 'src/app/Interfaces/Store'
 import { StoreType } from 'src/app/Interfaces/StoreType'
-import { MessageService } from 'src/app/Services/message.service'
 
 import { StoreTypeService } from 'src/app/Services/store-type.service'
 
@@ -28,7 +27,6 @@ export class StoreFormComponent implements OnInit, OnChanges {
   @Input() storeInfo?: Store
 
   constructor(
-    private messageService: MessageService,
     private storeTypeService: StoreTypeService
   ) {
     this.formGroup = new FormGroup({})
@@ -79,7 +77,7 @@ export class StoreFormComponent implements OnInit, OnChanges {
       this.storeTypeService.getAllStoreTypes()
         .subscribe(response => {
           if (response.status == "error") {
-            this.messageService.setMessageInfo(response.message!, "error")
+            alert(response.message)
           }
           else if (response.storeTypes) {
             resolve(response.storeTypes)
