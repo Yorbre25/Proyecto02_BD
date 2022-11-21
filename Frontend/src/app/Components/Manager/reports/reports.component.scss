@@ -1,0 +1,46 @@
+#salesPerClient,
+#salesPerStore {
+  padding: 1.5rem 4rem;
+  display: none;
+}
+
+h1,
+h2,
+p,
+span {
+  color: black;
+}
+
+h1 {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 10px !important;
+}
+
+h2 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 40px !important;
+}
+
+img {
+  margin-left: 25px;
+  width: 40%;
+}
+
+p {
+  font-size: 20px;
+}
+
+span {
+  font-weight: bold;
+}
+
+table {
+  font-size: 15px;
+  background-color: white;
+}
+
+.footer {
+  font-size: 10px;
+}
