@@ -39,7 +39,8 @@ import { StoreFormComponent } from './Components/Forms/store-form/store-form.com
 import { StoreManagerFormComponent } from './Components/Forms/store-manager-form/store-manager-form.component';
 import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
-import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component'
+import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
+import { ReportsComponent } from './Components/Manager/reports/reports.component'
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ApplicantListComponent } from './Components/Manager/applicant-list/appl
     StoreFormComponent,
     StoreManagerFormComponent,
     MemberListComponent,
-    ApplicantListComponent
+    ApplicantListComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

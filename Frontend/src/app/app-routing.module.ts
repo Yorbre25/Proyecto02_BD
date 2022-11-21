@@ -19,6 +19,7 @@ import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/sto
 import { StoreListComponent } from './Components/Manager/store-list/store-list.component'
 import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component'
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component'
+import { ReportsComponent } from './Components/Manager/reports/reports.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -47,6 +48,7 @@ const routes: Routes = [
       { path: 'stores/:id', component: StoreInfoComponent },
       { path: 'store_types', component: StoreTypeListComponent },
       { path: 'store_types/:id', component: StoreTypeInfoComponent },
+      { path: 'reports', component: ReportsComponent }
     ]
   },
   {

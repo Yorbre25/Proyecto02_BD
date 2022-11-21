@@ -1,17 +1,16 @@
 --Total sales per Client group by deliverymen and store
 create or replace view Sales_Per_Client AS
-    Select C.Id as ClientId, C.Name as ClientName, C.LastName1 as ClientLastName, count(O.id) as Cantidad, S.Name as StoreName, S.id as StoreId, D.Id as DeliveryId, D.Name as DeliverymanName, D.LastName1 as DeliverymanLastname, Sum(O.Total) as Total
+    Select C.Id as ClientId, C.Name as ClientName, C.LastName1 as ClientLastName1, C.LastName2 as ClientLastName2, count(O.id) as Cantidad, S.Name as StoreName, D.Name as DeliverymanName, D.LastName1 as DeliverymanLastName1, D.LastName2 as DeliverymanLastName2, Sum(O.Total) as Total
     From ((((((_Order as O join Client as C on O.ClientId = C.Id)
         join deliveryman as D on O.DelManId = D.Id)
         join Order_Products as OP on O.Id = OP.OrderId)
         join Product as P on OP.ProductBarCode = P.BarCode)
         join Store_Products as SP on SP.ProductBarCode = P.BarCode)
         join Store as S on SP.StoreId = S.Id)
-    group by C.id, S.id, D.id, C.Name, C.LastName1, S.Name, D.Name, D.LastName1; 
-
+    group by C.id, C.Name, C.LastName1, C.LastName2, S.Name, D.Name, D.LastName1, D.LastName2;
 
 -- Return Sales_Per_Client view
-create or replace FUNCTION get_Sales_Per_Client()
+create or replace FUNCTION Get_Sales_Per_Client()
 returns setof Sales_Per_Client
 LANGUAGE sql
 AS $$
@@ -37,4 +36,3 @@ AS $$
   select *
   from sales_per_store;
 $$;
-

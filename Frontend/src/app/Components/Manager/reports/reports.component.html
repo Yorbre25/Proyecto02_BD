@@ -1,0 +1,76 @@
+<div class="flex-row-center gap-5">
+  <button (click)="downloadSalesPerClientReport()" class="btn btn-lg btn-outline-primary">
+    <i class="bi bi-people-fill"></i> Ventas por cliente
+  </button>
+
+  <button (click)="downloadSalesPerStoreReport()" class="btn btn-lg btn-outline-primary">
+    <i class="bi bi-shop"></i> Ventas por afiliado
+  </button>
+</div>
+
+<div id="salesPerClient">
+  <div class="flex-column-center">
+    <img src="/assets/logo.png" alt="">
+  </div>
+  <h1>UbyTEC</h1>
+  <h2>Reporte de ventas por cliente</h2>
+
+  <div *ngFor="let clientSale of groupedSalesPerClient" class="mb-5">
+    <p>
+      <span>Cliente:</span>
+      {{clientSale[0].clientName}} {{clientSale[0].clientLastName1}} {{clientSale[0].clientLastName2}}
+    </p>
+
+    <table class="table">
+      <thead>
+        <th class="text-center" scope="col">Tienda</th>
+        <th class="text-center" scope="col">Compras</th>
+        <th class="text-center" scope="col">Repartidor</th>
+        <th class="text-center" scope="col">Monto Total</th>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let col of clientSale">
+          <td class="text-center">{{col.storeName}}</td>
+          <td class="text-center">{{col.totalPurchases}}</td>
+          <td class="text-center">{{col.delManName}} {{col.delManLastName1}} {{col.delManLastName2}}</td>
+          <td class="text-center">{{col.totalPrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer d-flex flex-column align-items-end">
+    <div>Generado el {{date.getDate()}}/{{date.getMonth()+1}}/{{date.getFullYear()}}</div>
+    <div>Generado por: <span>{{cookieService.get('username')}}</span></div>
+  </div>
+</div>
+
+<div id="salesPerStore">
+  <div class="flex-column-center">
+    <img src="/assets/logo.png" alt="">
+  </div>
+  <h1>UbyTEC</h1>
+  <h2>Reporte de ventas por tienda</h2>
+
+  <table class="table">
+    <thead>
+      <th class="text-center" scope="col">Tienda</th>
+      <th class="text-center" scope="col">Compras</th>
+      <th class="text-center" scope="col">Monto Total</th>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let col of salesPerStore">
+        <td class="text-center">{{col.storeName}}</td>
+        <td class="text-center">{{col.totalSales}}</td>
+        <td class="text-center">{{col.totalPrice}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer d-flex flex-column align-items-end">
+    <div>Generado el {{date.getDate()}}/{{date.getMonth()+1}}/{{date.getFullYear()}}</div>
+    <div>Generado por: <span>{{cookieService.get('username')}}</span></div>
+  </div>
+</div>
