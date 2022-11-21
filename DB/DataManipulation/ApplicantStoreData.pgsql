@@ -13,10 +13,23 @@ as $$
 begin
     Update applicant_store
     set
-        Status = true
+        Status = true,
+        observation = 'Aprobado'
     where
         StoreId = In_StoreId;
 
+end; $$;
+
+create or replace procedure Reject_Application(In_StoreId int, In_Observation text)
+language plpgsql
+as $$
+begin
+    Update applicant_store
+    set
+        Status = false,
+        Observation = In_Observation
+    where
+        StoreId = In_StoreId;
 end; $$;
 
 -- Delete store application

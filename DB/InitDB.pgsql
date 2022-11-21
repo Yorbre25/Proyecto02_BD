@@ -132,6 +132,7 @@ create table Store_Products(
 create table Applicant_Store(
     StoreId int not null,
     Status boolean default false,
+    Observation text default 'En espera de aprobación',
 	Primary Key(StoreId)
 );
 
