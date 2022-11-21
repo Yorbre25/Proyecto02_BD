@@ -72,12 +72,15 @@ export class AuxFunctionsService {
   * Vuelve a cargar la página en caso contrario
   * @param response Respuesta del backend
   */
-  handleResponse = (response: ServerResponse): any => {
+  handleResponse = (
+    response: ServerResponse,
+    callback = () => window.location.reload()
+  ): any => {
     if (response.status === 'error') {
       alert(response.message)
     }
     else {
-      window.location.reload();
+      callback()
     }
   }
 

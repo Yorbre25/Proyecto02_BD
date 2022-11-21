@@ -37,7 +37,9 @@ import { StoreInfoComponent } from './Components/Manager/store-info/store-info.c
 import { StoreListComponent } from './Components/Manager/store-list/store-list.component';
 import { StoreFormComponent } from './Components/Forms/store-form/store-form.component';
 import { StoreManagerFormComponent } from './Components/Forms/store-manager-form/store-manager-form.component';
-import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component'
+import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
+import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
+import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component'
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
     StoreInfoComponent,
     StoreListComponent,
     StoreFormComponent,
-    StoreManagerFormComponent
+    StoreManagerFormComponent,
+    MemberListComponent,
+    ApplicantListComponent
   ],
   imports: [
     BrowserModule,

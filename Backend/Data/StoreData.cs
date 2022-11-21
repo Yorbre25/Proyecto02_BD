@@ -178,5 +178,87 @@ namespace Backend.Data
         return false;
       }
     }
+
+    public static List<Store> GetApplicants()
+    {
+      List<Store> storeList = new List<Store>();
+
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Applicant_Stores", connection);
+      cmd.CommandType = CommandType.StoredProcedure;
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        var dr = cmd.ExecuteReader();
+
+        while (dr.Read())
+        {
+          storeList.Add(new Store()
+          {
+            id = Convert.ToInt32(dr["Id"]),
+            name = dr["Name"].ToString()!,
+            email = dr["Email"].ToString()!,
+            province = dr["Province"].ToString()!,
+            city = dr["City"].ToString()!,
+            district = dr["District"].ToString()!,
+            managerID = Convert.ToInt32(dr["ManagerId"]),
+            storeTypeID = Convert.ToInt32(dr["StoreTypeId"]),
+            storeTypeName = dr["StoreTypeName"].ToString()!,
+            phoneNumbers = (string[])dr["PhoneNumbers"]
+          });
+        }
+
+        connection.Close();
+
+        return storeList;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        throw new Exception("Error al listar los afiliados");
+      }
+    }
+
+    public static bool ApproveApplicant(int applicantID)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Approve_Application({applicantID});", connection);
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
+
+    public static bool RejectApplicant(int applicantID, string observation)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Reject_Application({applicantID}, '{observation}');", connection);
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
   }
 }

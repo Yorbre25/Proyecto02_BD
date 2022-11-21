@@ -69,8 +69,6 @@ export class StoreService {
     storeData.store.managerID = storeData.manager.id
     storeData.store.storeTypeID = Number(storeData.store.storeTypeID)
 
-    console.log(storeData);
-
     return this.httpClient.patch<ServerResponse>(`${this.url}/update/${storeID}`, storeData)
   }
 
@@ -81,4 +79,16 @@ export class StoreService {
   */
   deleteStore = (id: number): Observable<ServerResponse> =>
     this.httpClient.delete<ServerResponse>(`${this.url}/delete/${id}`)
+
+  /**
+    * Solicita al servidor que devuelva todas las solicitudes de afiliación
+  */
+  getAllApplicants = (): Observable<StoresDataResponse> =>
+    this.httpClient.get<StoresDataResponse>(`${this.url}/get_applicants`)
+
+  approveApplicant = (id: number): Observable<ServerResponse> =>
+    this.httpClient.post<ServerResponse>(`${this.url}/approve_applicant/${id}`, {})
+
+  rejectApplicant = (id: number, observation: string): Observable<ServerResponse> =>
+    this.httpClient.post<ServerResponse>(`${this.url}/reject_applicant/${id}`, { observation: observation })
 } 

@@ -1,0 +1,32 @@
+<div class="mt-4">
+  <ng-template #content let-modal>
+    <div class="modal-body pt-0">
+      <p class="fs-3 my-3 text-center">
+        ¿Aceptar la solicitud de afiliación de <span class="fw-bold">{{selectedApplicantName}}</span>?
+      </p>
+
+      <form [formGroup]="formsService.form">
+        <div class="form-floating mb-3">
+          <textarea type="text" class="form-control h-100" id="observationInput" placeholder="Motivo"
+            formControlName="observation">
+          </textarea>
+          <label for="observationInput">Motivo</label>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" (click)="approveApplicant()">
+        Aceptar
+      </button>
+
+      <button type="button" class="btn btn-outline-danger" (click)="rejectApplicant()">
+        Rechazar
+      </button>
+    </div>
+  </ng-template>
+
+  <div class="overflow-scroll" style="height: 60vh;">
+    <app-table [tableColumns]="tableColumns" [tableData]="tableData" [onClick]="onRowClicked" rowIDKey="id"></app-table>
+  </div>
+</div>
