@@ -1,0 +1,19 @@
+<div class="container-md">
+  <nav [destroyOnHide]="false" ngbNav #nav="ngbNav" class="nav-tabs nav-fill">
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Lista de afiliados</a>
+      <ng-template ngbNavContent>
+        <app-store-list></app-store-list>
+      </ng-template>
+    </ng-container>
+
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Solicitudes de afiliación</a>
+      <ng-template ngbNavContent>
+        <app-applicant-list></app-applicant-list>
+      </ng-template>
+    </ng-container>
+  </nav>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

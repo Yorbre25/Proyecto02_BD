@@ -7,16 +7,14 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap'
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-  closeResult = ''
   @Input() options: NgbModalOptions
-  @Input() showModalButtonText: string
+  @Input() showModalButtonText?: string
   @Input() modalHeader: string
   @Input() footerButtonText?: string
   @Input() footerButtonCallback: () => void
 
   constructor(private modalService: NgbModal) {
     this.options = {}
-    this.showModalButtonText = ''
     this.modalHeader = ''
     this.footerButtonCallback = () => this.close()
   }

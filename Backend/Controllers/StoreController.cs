@@ -10,7 +10,7 @@ namespace Backend.Controllers
   {
     [HttpGet]
     [Route("get_all")]
-    public Object Get()
+    public object Get()
     {
       try
       {
@@ -44,7 +44,7 @@ namespace Backend.Controllers
 
     [HttpGet]
     [Route("get/{id}")]
-    public Object Get(int id)
+    public object Get(int id)
     {
       try
       {
@@ -73,7 +73,7 @@ namespace Backend.Controllers
 
     [HttpPost]
     [Route("add")]
-    public Object Post([FromBody] StoreInfo storeData)
+    public object Post([FromBody] StoreInfo storeData)
     {
       bool managerOK = ManagerData.Add(storeData.manager);
       bool storeOK = StoreData.Add(storeData.store);
@@ -97,7 +97,7 @@ namespace Backend.Controllers
 
     [HttpPatch]
     [Route("update/{storeID}")]
-    public Object Put([FromBody] StoreInfo storeData, int storeID)
+    public object Put([FromBody] StoreInfo storeData, int storeID)
     {
       int managerID = StoreData.Get(storeID).managerID;
 
@@ -123,7 +123,7 @@ namespace Backend.Controllers
 
     [HttpDelete]
     [Route("delete/{id}")]
-    public Object Delete(int id)
+    public object Delete(int id)
     {
       int managerID = StoreData.Get(id).managerID;
 
@@ -143,6 +143,40 @@ namespace Backend.Controllers
         {
           status = "error",
           message = "No se pudo eliminar el afiliado"
+        };
+      }
+    }
+
+    [HttpGet]
+    [Route("get_applicants")]
+    public object GetApplicants()
+    {
+      try
+      {
+        List<Store> stores = StoreData.GetApplicants();
+
+        List<object> storesData = new List<object>();
+        foreach (Store storeData in stores)
+        {
+          storesData.Add(new
+          {
+            store = storeData,
+            manager = ManagerData.Get(storeData.managerID)
+          });
+        }
+
+        return new
+        {
+          status = "ok",
+          storesData = storesData
+        };
+      }
+      catch (System.Exception err)
+      {
+        return new
+        {
+          status = "error",
+          message = err.Message
         };
       }
     }
