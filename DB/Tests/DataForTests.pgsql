@@ -116,13 +116,14 @@ insert into _Order(
 	city,
 	district,
 	ClientId,
-	DelManId)
+	DelManId,
+	Status)
 VALUES
-	('3500', 'Cartago', 'Cartago', 'Cartago', 1234567, 756345),
-	('1200', 'Cartago', 'Cartago', 'Cartago', 303520771, 756345),
-	('2500', 'Cartago', 'Cartago', 'Cartago', 303520771, 2763495),
-	('3155', 'San José', 'San José', 'San José', 303520771, 756345),
-	('2100', 'Limon', 'Limon', 'Limon', 1234567, 2763495);
+	('3500', 'Cartago', 'Cartago', 'Cartago', 1234567, 756345, 'Entregado'),
+	('1200', 'Cartago', 'Cartago', 'Cartago', 303520771, 756345, 'Entregado'),
+	('2500', 'Cartago', 'Cartago', 'Cartago', 303520771, 2763495, 'Entregado'),
+	('3155', 'San José', 'San José', 'San José', 303520771, 756345, 'Entregado'),
+	('2100', 'Limon', 'Limon', 'Limon', 1234567, 2763495, 'Entregado');
 
 
 Insert into Order_Products( -- Pasa algo raro aquí

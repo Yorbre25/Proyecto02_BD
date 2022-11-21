@@ -47,7 +47,8 @@ create table _Order
     City varchar(15),
     District varchar(15),
     ClientId int not null,
-    DelManId int not null,
+    DelManId int,
+    Status varchar(10) DEFAULT 'En proceso',
     PRIMARY KEY(Id)
 );
 
@@ -62,6 +63,7 @@ create table Deliveryman
     Province char(15),
     City varchar(15),
     District varchar(15),
+    Available boolean default true,
     Password text not null,
     PRIMARY KEY(Id)
 );
