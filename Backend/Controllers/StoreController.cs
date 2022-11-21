@@ -180,5 +180,56 @@ namespace Backend.Controllers
         };
       }
     }
+
+    [HttpPost]
+    [Route("approve_applicant/{applicantID}")]
+    public object Post(int applicantID)
+    {
+      bool ok = StoreData.ApproveApplicant(applicantID);
+      if (ok)
+      {
+        return new
+        {
+          status = "ok",
+          message = "Afiliado aprobado correctamente"
+        };
+      }
+      else
+      {
+        return new
+        {
+          status = "error",
+          message = "No se pudo aprobar el afiliado"
+        };
+      }
+    }
+
+    [HttpPost]
+    [Route("reject_applicant/{applicantID}")]
+    public object Post([FromBody] ObservationWrapper observation, int applicantID)
+    {
+      bool ok = StoreData.RejectApplicant(applicantID, observation.observation);
+      if (ok)
+      {
+        return new
+        {
+          status = "ok",
+          message = "Afiliado rechazado correctamente"
+        };
+      }
+      else
+      {
+        return new
+        {
+          status = "error",
+          message = "No se pudo rechazar el afiliado"
+        };
+      }
+    }
   }
+}
+
+public struct ObservationWrapper
+{
+  public string observation { get; set; }
 }

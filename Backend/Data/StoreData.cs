@@ -221,5 +221,44 @@ namespace Backend.Data
       }
     }
 
+    public static bool ApproveApplicant(int applicantID)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Approve_Application({applicantID});", connection);
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
+
+    public static bool RejectApplicant(int applicantID, string observation)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL Reject_Application({applicantID}, '{observation}');", connection);
+
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
   }
 }

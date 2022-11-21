@@ -73,14 +73,22 @@ export class ApplicantListComponent implements OnInit {
       })
   }
 
-  acceptApplicant = () => {
-    this.formsService.printFormValue()
-    console.log('acceptApplicant');
+  approveApplicant = () => {
+    this.storeService.approveApplicant(this.selectedApplicantID)
+      .subscribe((response) => {
+        if (response.status === 'error') { alert(response.message) }
+        else { window.location.reload() }
+      })
   }
 
   rejectApplicant = () => {
-    this.formsService.printFormValue()
-    console.log('rejectApplicant');
+    const observation = this.formsService.form.value.observation
+
+    this.storeService.rejectApplicant(this.selectedApplicantID, observation)
+      .subscribe((response) => {
+        if (response.status === 'error') { alert(response.message) }
+        else { window.location.reload() }
+      })
   }
 
   onRowClicked = (applicantID: number) => {

@@ -15,6 +15,7 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
   store: FormGroup
   manager: FormGroup
 
+  form: FormGroup
   storeInfo?: Store
   managerInfo?: StoreManager
 
@@ -25,15 +26,14 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
     private auxFunctionsService: AuxFunctionsService,
     private storeService: StoreService
   ) {
+    this.form = new FormGroup({})
     this.store = new FormGroup({})
     this.manager = new FormGroup({})
   }
 
   ngOnInit(): void {
-    this.formsService.resetForm()
-
-    this.formsService.form.addControl('store', this.store)
-    this.formsService.form.addControl('manager', this.manager)
+    this.form.addControl('store', this.store)
+    this.form.addControl('manager', this.manager)
   }
 
   ngOnChanges(): void {
@@ -44,32 +44,27 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit = async () => {
+    console.log(this.form.value);
+
     if (this.storeDataInfo && Object.keys(this.storeDataInfo).length) {
       await this.updateStore()
         .then((response: ServerResponse) => {
-          if (response.status === 'error') {
-            alert(response.message)
-          }
-          else if (this.storeDataInfo!.store.id !== this.formsService.form.value.store.id) {
-            window.location.href =
-              `/manager/stores/${this.formsService.form.value.store.id}`
-          }
-          else {
-            window.location.reload()
-          }
+          if (response.status === 'error') { alert(response.message) }
+          else { window.location.href = '/manager/stores' }
         })
     }
     else {
       await this.createStore()
         .then((response) => {
-          this.auxFunctionsService.handleResponse(response)
+          this.auxFunctionsService.handleResponse(
+            response, () => window.location.href = '/manager/stores')
         })
     }
   }
 
   createStore = (): Promise<ServerResponse> => {
     return new Promise((resolve, reject) => {
-      const newStoreInfo = this.formsService.getFormValue()
+      const newStoreInfo = this.form.value
 
       this.storeService.createStore(newStoreInfo)
         .subscribe((response: ServerResponse) => resolve(response))
@@ -78,7 +73,7 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
 
   updateStore = (): Promise<ServerResponse> => {
     return new Promise((resolve, reject) => {
-      const newStoreInfo = this.formsService.getFormValue()
+      const newStoreInfo = this.form.value
 
       this.storeService.updateStore(this.storeDataInfo!.store.id, newStoreInfo)
         .subscribe((response: ServerResponse) => resolve(response))

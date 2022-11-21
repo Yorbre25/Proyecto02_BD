@@ -85,4 +85,10 @@ export class StoreService {
   */
   getAllApplicants = (): Observable<StoresDataResponse> =>
     this.httpClient.get<StoresDataResponse>(`${this.url}/get_applicants`)
+
+  approveApplicant = (id: number): Observable<ServerResponse> =>
+    this.httpClient.post<ServerResponse>(`${this.url}/approve_applicant/${id}`, {})
+
+  rejectApplicant = (id: number, observation: string): Observable<ServerResponse> =>
+    this.httpClient.post<ServerResponse>(`${this.url}/reject_applicant/${id}`, { observation: observation })
 } 

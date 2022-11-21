@@ -42,19 +42,23 @@ Values
 	(123456, '77777777');
 
 
-INSERT into Store(
-	Id,
-	Name,
-	Email,
-	Province,
-	City,
-	District,
-	ManagerId,
-	Storetypeid)
-VALUES
-	(163235, 'McDennys', 'mcdennys@gmail.com', 'Cartago', 'Cartago', 'Las Ruinas', 237654, 2),
-	(9759832, 'La Pichel', 'pichel@gmail.com', 'Guanacaste', 'Guanacatico', 'Guanacastek', 123456, 3),
-	(634523, 'Monchis', 'mochis@gmail.com', 'Limon', 'Limon', 'Limon', 98456, 2);
+-- INSERT into Store(
+-- 	Id,
+-- 	Name,
+-- 	Email,
+-- 	Province,
+-- 	City,
+-- 	District,
+-- 	ManagerId,
+-- 	Storetypeid)
+-- VALUES
+-- 	(163235, 'McDennys', 'mcdennys@gmail.com', 'Cartago', 'Cartago', 'Las Ruinas', 237654, 2),
+-- 	(9759832, 'La Pichel', 'pichel@gmail.com', 'Guanacaste', 'Guanacatico', 'Guanacastek', 123456, 3),
+-- 	(634523, 'Monchis', 'mochis@gmail.com', 'Limon', 'Limon', 'Limon', 98456, 2);
+
+call Insert_Store(163235, 'McDennys', 'mcdennys@gmail.com', 'Cartago', 'Cartago', 'Las Ruinas', 2, 237654, array['48345125','54244234']);
+call Insert_Store(9759832, 'La Pichel', 'pichel@gmail.com', 'Guanacaste', 'Guanacatico', 'Guanacastek', 3, 123456, array['48345125','54244234']);
+call Insert_Store(634523, 'Monchis', 'mochis@gmail.com', 'Limon', 'Limon', 'Limon', 2, 98456, array['48345125','54244234']);
 
 call Approve_Application(163235);
 call Approve_Application(9759832);
