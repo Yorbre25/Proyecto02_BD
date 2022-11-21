@@ -34,7 +34,8 @@ AS $$
 BEGIN
     Update applicant_store
     set
-        Status = false
+        Status = false,
+        observation = 'En espera de aprobación'
     where StoreId = New.Id;
     return new;
 END; $$;

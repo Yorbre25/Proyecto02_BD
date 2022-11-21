@@ -60,6 +60,7 @@ create or replace view Full_Store AS
         ST.Id as StoreTypeId,
         ST.Name as StoreTypeName,
         ApS.Status as ApplicationStatus,
+        ApS.Observation,
         ARRAY(
             select SP.Phonenumber
             from Store_Phones as SP
@@ -69,7 +70,7 @@ create or replace view Full_Store AS
     left join Store_Phones as SP on S.Id = SP.StoreId)
     left join Manager as M on S.ManagerId = M.Id)
     left join Applicant_Store as ApS on S.Id = ApS.StoreId)
-    GROUP By S.id, M.Id, ST.Id, ST.Name, ApS.Status;
+    GROUP By S.id, M.Id, ST.Id, ST.Name, ApS.Status, ApS.Observation;
 
 create or replace view Full_Manager as
   Select 

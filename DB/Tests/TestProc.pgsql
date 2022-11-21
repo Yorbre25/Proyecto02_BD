@@ -88,4 +88,5 @@ select * from get_Sales_Per_Store();
 
 --Procedure Applicant_Store
 select * from Get_All_Applicant_Stores();
-call approve_application(11);
+call approve_application(5935);
+call reject_application(5935, 'No cumple con los requisitos');
