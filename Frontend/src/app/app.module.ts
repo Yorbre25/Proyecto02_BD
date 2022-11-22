@@ -37,6 +37,8 @@ import { MemberProductManagementComponent } from './Components/Member/member-pro
 import { MemberProductComponent } from './Components/Member/member-product/member-product.component';
 import { AddProductFormComponent } from './Components/Forms/add-product-form/add-product-form.component';
 import { EditProductFormComponent } from './Components/Forms/edit-product-form/edit-product-form.component';
+import { AddMemberFormComponent } from './Components/Forms/add-member-form/add-member-form.component';
+import { EditMemberFormComponent } from './Components/Forms/edit-member-form/edit-member-form.component';
 
 
 @NgModule({
@@ -73,6 +75,8 @@ import { EditProductFormComponent } from './Components/Forms/edit-product-form/e
     MemberProductComponent,
     AddProductFormComponent,
     EditProductFormComponent,
+    AddMemberFormComponent,
+    EditMemberFormComponent
   ],
   imports: [
     BrowserModule,

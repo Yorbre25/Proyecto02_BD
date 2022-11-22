@@ -19,8 +19,10 @@
 
     <div class=" row mb-3">
         <div class="col">
-            <label class="form-label" for="priceInput">Image Upload:</label>
-            <input class="form-control" id="priceInput" type="file" formControlName="photoId">
+            <label class="form-label" for="priceInput">Imagen de Producto:</label>
+            <input class="form-control" id="priceInput" type="file" accept=".png,.jpg, .jpge/*"
+            formControlName="photo" (change)="handleUpload($event)">
+            <img [src]="photoPath" *ngIf="photoPath" class="imgPlaceholder" >
         </div>
     </div>
 
