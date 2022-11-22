@@ -29,7 +29,11 @@ import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add
 import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component';
 import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
 import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
-import { MemberMainComponent } from './Components/Member/member-main/member-main.component'
+import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
+import { MemberAdministrationComponent } from './Components/Member/member-administration/member-administration.component';
+import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
+import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
+import { MemberProductComponent } from './Components/Member/member-product/member-product.component'
 
 
 @NgModule({
@@ -58,7 +62,11 @@ import { MemberMainComponent } from './Components/Member/member-main/member-main
     DeliveryManInfoComponent,
     MemberMenuComponent,
     MemberMainComponent,
-    MemberLoginComponent
+    MemberLoginComponent,
+    MemberAdministrationComponent,
+    MemberOrdersComponent,
+    MemberProductManagementComponent,
+    MemberProductComponent
   ],
   imports: [
     BrowserModule,
