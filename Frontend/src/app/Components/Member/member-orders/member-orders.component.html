@@ -1,1 +1,15 @@
-<p>member-orders works!</p>
+<div class="container-md">
+    <h3 class="text-center mb-3">Ordenes</h3>
+    <h4 class="text-center mb-3">Listo para Entrega</h4>
+    <div class="overflow-scroll" style="height: 60vh;">
+        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+    </div>
+    <h4 class="text-center mb-3">En camino</h4>
+    <div class="overflow-scroll" style="height: 60vh;">
+        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+    </div>
+    <h4 class="text-center mb-3">Entregado</h4>
+    <div class="overflow-scroll" style="height: 60vh;">
+        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+    </div>
+</div>
