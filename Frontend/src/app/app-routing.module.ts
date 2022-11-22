@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginRouterComponent } from './Components/Generic/login-router/login-router.component';
 import { LoginComponent } from './Components/Generic/login/login.component';
 import { ClientLoginComponent } from './Components/Client/client-login/client-login.component';
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
+import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
 import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
 import { MemberLoginComponent } from './Components/Member/member-login/member-login.component';
 import { MemberMenuComponent } from './Components/Member/member-menu/member-menu.component';
@@ -32,6 +34,7 @@ const routes: Routes = [
   },
   { path: 'manager/menu', component: ManagerMenuComponent },
   { path: 'member/menu', component: MemberMenuComponent },
+  { path: 'client/menu', component: ClientMenuComponent },
   {
     path: 'manager',
     component: ManagerMainComponent,
@@ -51,6 +54,14 @@ const routes: Routes = [
       { path: 'administration', component: MemberAdministrationComponent },
       { path: 'orders', component: MemberOrdersComponent },
       { path: 'product_management', component: MemberProductManagementComponent },
+    ]
+  },
+  {
+    path: 'client',
+    component: MemberMainComponent,
+    children: [
+      { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
+      { path: 'business/:id', component: ClientBusinessComponent },
     ]
   }
 ]

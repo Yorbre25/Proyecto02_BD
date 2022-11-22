@@ -10,7 +10,7 @@ export class ClientMainComponent implements OnInit {
 
   constructor() {
     this.navbarLinks = [
-      { href: 'administration', name: 'Administración' },
+      { href: 'restaurants', name: 'Restaurantes' },
       { href: 'product_management', name: 'Mis Pedidos' },
       { href: 'cart', name: 'Mi carrito' },
     ]
