@@ -74,7 +74,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = err.Message
+                    message = "No se pudo finalizar la orden"
                 };
             }
         }

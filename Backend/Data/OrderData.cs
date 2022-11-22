@@ -36,7 +36,7 @@ namespace Backend.Data
                         clientLastName = dr["ClientLastName"].ToString()!,
                         delManName = dr["DelManName"].ToString()!,
                         delManLastName = dr["DelManLastName"].ToString()!,
-                        productNames = (List<String>)dr["Productos"]
+                        productName = (List<String>)dr["Productos"]
 
                     });
                 }
@@ -80,7 +80,7 @@ namespace Backend.Data
                         clientLastName = dr["ClientLastName"].ToString()!,
                         delManName = dr["DelManName"].ToString()!,
                         delManLastName = dr["DelManLastName"].ToString()!,
-                        productNames = (List<String>)dr["Productos"]
+                        productName = (List<String>)dr["Productos"]
                     };
                 }
 
@@ -97,8 +97,8 @@ namespace Backend.Data
 
         public static bool Add(Order order)
         {
-            string barCodes = AuxFunctions.arrayToString(order.productBarCode);
-            string quantities = AuxFunctions.arrayToString(order.quantity);
+            string barCodes = AuxFunctions.arrayToString(order.productBarCode.ConvertAll<string>(x => x.ToString()).ToArray());
+            string quantities = AuxFunctions.arrayToString(order.quantity.ConvertAll<string>(x => x.ToString()).ToArray());
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
               $@"CALL Insert_Order(
@@ -127,8 +127,8 @@ namespace Backend.Data
 
         public static bool Edit(Order order, int id)
         {
-            string barCodes = AuxFunctions.arrayToString(order.productBarCode);
-            string quantities = AuxFunctions.arrayToString(order.quantity);
+            string barCodes = AuxFunctions.arrayToString(order.productBarCode.ConvertAll<string>(x => x.ToString()).ToArray());
+            string quantities = AuxFunctions.arrayToString(order.quantity.ConvertAll<string>(x => x.ToString()).ToArray());
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
