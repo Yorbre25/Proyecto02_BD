@@ -55,6 +55,30 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("setdelivered/{id}")]
+        public Object Delivered(int id)
+        {
+            bool ok = OrderData.SetDelivered(id);
+            if (ok)
+            {
+                
+                return new
+                {
+                    status = "ok",
+                    message = "Orden entregada"
+                };
+            }
+            else
+            {
+                return new
+                {
+                    status = "error",
+                    message = err.Message
+                };
+            }
+        }
+
         [HttpPost]
         [Route("add")]
         public Object Post([FromBody] Order order)

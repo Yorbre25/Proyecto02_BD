@@ -106,7 +106,6 @@ namespace Backend.Data
           '{order.city}',
           '{order.district}',
           '{order.clientId}',
-          '{order.delManId}',
           '{barCodes}',
           '{quantities}'
 
@@ -140,7 +139,6 @@ namespace Backend.Data
           '{order.city}',
           '{order.district}',
           '{order.clientId}',
-          '{order.delManId}',
           '{barCodes}',
           '{quantities}'
         );", connection
@@ -164,6 +162,26 @@ namespace Backend.Data
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
               $@"CALL Delete_Order({id});", connection);
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public static bool SetDelivered(int id)
+        {
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand(
+              $@"CALL Order_Delivered({id});", connection);
 
             try
             {
