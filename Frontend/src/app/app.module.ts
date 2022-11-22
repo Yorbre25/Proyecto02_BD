@@ -56,7 +56,8 @@ import { StoreManagerFormComponent } from './Components/Forms/store-manager-form
 import { ManagerLoginComponent } from './Components/Manager/manager-login/manager-login.component';
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
 import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
-import { ReportsComponent } from './Components/Manager/reports/reports.component'
+import { ReportsComponent } from './Components/Manager/reports/reports.component';
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component'
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { ReportsComponent } from './Components/Manager/reports/reports.component
     StoreManagerFormComponent,
     MemberListComponent,
     ApplicantListComponent,
-    ReportsComponent
+    ReportsComponent,
+    ClientMenuComponent
   ],
   imports: [
     BrowserModule,

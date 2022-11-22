@@ -27,6 +27,7 @@ import { StoreListComponent } from './Components/Manager/store-list/store-list.c
 import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component'
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component'
 import { ReportsComponent } from './Components/Manager/reports/reports.component'
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -75,6 +76,13 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
       { path: 'business/:id', component: ClientBusinessComponent },
+    ]
+  },
+  {
+    path: 'client',
+    component: ManagerMainComponent,
+    children: [
+      { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
     ]
   }
 ]
