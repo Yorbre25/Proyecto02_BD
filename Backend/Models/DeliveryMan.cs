@@ -12,6 +12,8 @@
     public string district { get; set; }
     public string email { get; set; }
     public string[] phoneNumbers { get; set; }
+
+    public string? oldPassword { get; set; }
     public string? password { get; set; }
   }
 }

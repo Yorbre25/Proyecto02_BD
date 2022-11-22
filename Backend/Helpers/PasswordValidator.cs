@@ -4,34 +4,38 @@ namespace Backend.Models;
 public class PasswordValidator
 {
 
-  // Checks if the password is correct
-  public static bool ValidatePassword(string username, string passwordInput, string userType)
-  {
-    try
+    // Checks if the password is correct
+    public static bool ValidatePassword(string username, string passwordInput, string userType)
     {
-      string hashedPassword = "";
-      if (userType == "administrator")
-      {
-        hashedPassword = PasswordData.getAdminPassword(username);
-      }
-      else if (userType == "manager")
-      {
-        hashedPassword = PasswordData.getManagerPassword(username);
-      }
-      else if (userType == "client")
-      {
-        hashedPassword = PasswordData.getClientPassword(username);
-      }
-      else
-      {
-        return false;
-      }
+        try
+        {
+            string hashedPassword = "";
+            if (userType == "administrator")
+            {
+                hashedPassword = PasswordData.getAdminPassword(username);
+            }
+            else if (userType == "manager")
+            {
+                hashedPassword = PasswordData.getManagerPassword(username);
+            }
+            else if (userType == "client")
+            {
+                hashedPassword = PasswordData.getClientPassword(username);
+            }
+            else if (userType == "deliveryman")
+            {
+                hashedPassword = PasswordData.getDelManPassword(username);
+            }
+            else
+            {
+                return false;
+            }
 
-      return BCrypt.Net.BCrypt.Verify(passwordInput, hashedPassword);
+            return BCrypt.Net.BCrypt.Verify(passwordInput, hashedPassword);
+        }
+        catch (System.Exception)
+        {
+            return false;
+        }
     }
-    catch (System.Exception)
-    {
-      return false;
-    }
-  }
 }

@@ -1,12 +1,13 @@
 ﻿using Backend.Data;
 using Backend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("client")]
-    public class ClientController : Controller
+    [Route("product")]
+    public class ProductController : Controller
     {
         [HttpGet]
         [Route("get_all")]
@@ -14,11 +15,11 @@ namespace Backend.Controllers
         {
             try
             {
-                List<Client> clientes = ClientData.GetAll();
+                List<Product> products = ProductData.GetAll();
                 return new
                 {
                     status = "ok",
-                    clients = clientes
+                    products = products
                 };
             }
             catch (System.Exception err)
@@ -37,11 +38,11 @@ namespace Backend.Controllers
         {
             try
             {
-                Client cliente = ClientData.Get(id);
+                Product product = ProductData.Get(id);
                 return new
                 {
                     status = "ok",
-                    client = cliente
+                    product = product
                 };
             }
             catch (System.Exception err)
@@ -56,15 +57,15 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
-        public Object Post([FromBody] Client client)
+        public Object Post([FromBody] Product product)
         {
-            bool ok = ClientData.Add(client);
+            bool ok = ProductData.Add(product);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente registrado correctamente"
+                    message = "Producto registrado correctamente"
                 };
             }
             else
@@ -72,22 +73,22 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo registrar el cliente"
+                    message = "No se pudo registrar el producto"
                 };
             }
         }
 
         [HttpPatch]
         [Route("update/{id}")]
-        public Object Put([FromBody] Client client, int id)
+        public Object Put([FromBody] Product product, int id)
         {
-            bool ok = ClientData.Edit(client, id);
+            bool ok = ProductData.Edit(product, id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente modificado correctamente"
+                    message = "Producto modificado correctamente"
                 };
             }
             else
@@ -95,7 +96,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo modificar el cliente"
+                    message = "No se pudo modificar el producto"
                 };
             }
         }
@@ -104,13 +105,13 @@ namespace Backend.Controllers
         [Route("delete/{id}")]
         public Object Delete(int id)
         {
-            bool ok = ClientData.Delete(id);
+            bool ok = ProductData.Delete(id);
             if (ok)
             {
                 return new
                 {
                     status = "ok",
-                    message = "Cliente eliminado correctamente"
+                    message = "Producto eliminado correctamente"
                 };
             }
             else
@@ -118,7 +119,7 @@ namespace Backend.Controllers
                 return new
                 {
                     status = "error",
-                    message = "No se pudo eliminar el cliente"
+                    message = "No se pudo eliminar el producto"
                 };
             }
         }
