@@ -29,7 +29,6 @@ import { ReportsComponent } from './Components/Manager/reports/reports.component
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'logout', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginRouterComponent,
@@ -75,13 +74,6 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
       { path: 'business/:id', component: ClientBusinessComponent },
-    ]
-  },
-  {
-    path: 'client',
-    component: ManagerMainComponent,
-    children: [
-      { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
     ]
   }
 ]

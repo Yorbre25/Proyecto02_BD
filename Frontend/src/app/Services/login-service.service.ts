@@ -1,11 +1,12 @@
-import { CookieService } from 'ngx-cookie-service';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import Cookies from 'js-cookie'
 
-import { apiURL } from '../app.component';
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
 
-import { LoginInfo } from '../Interfaces/Auxiliaries';
-import { ServerResponse } from '../Interfaces/ServerResponses';
+import { apiURL } from '../app.component'
+
+import { LoginInfo } from '../Interfaces/Auxiliaries'
+import { ServerResponse } from '../Interfaces/ServerResponses'
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,7 @@ export class LoginService {
   url: string = `${apiURL}/login`
 
   constructor(
-    private httpClient: HttpClient,
-    private cookieServie: CookieService
+    private httpClient: HttpClient
   ) { }
 
   adminLogin = (loginInfo: LoginInfo): Promise<ServerResponse> => {
@@ -40,7 +40,9 @@ export class LoginService {
   }
 
   logout = () => {
-    this.cookieServie.delete('username', '*', 'localhost', false, 'Lax')
-    this.cookieServie.delete('userType', '*', 'localhost', false, 'Lax')
+    Cookies.remove('username')
+    Cookies.remove('userType')
+
+    window.location.href = '/'
   }
 }
