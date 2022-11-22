@@ -8,6 +8,7 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 import { MemberLoginComponent } from './Components/Member/member-login/member-login.component';
 import { MemberMenuComponent } from './Components/Member/member-menu/member-menu.component';
 import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
+import { MemberAdministrationComponent } from './Components/Member/member-administration/member-administration.component';
 import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
 import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
@@ -47,7 +48,7 @@ const routes: Routes = [
     component: MemberMainComponent,
     children: [
       { path: '', redirectTo: '/member/menu', pathMatch: 'full' },
-      { path: 'administration', component: MemberOrdersComponent },
+      { path: 'administration', component: MemberAdministrationComponent },
       { path: 'orders', component: MemberOrdersComponent },
       { path: 'product_management', component: MemberProductManagementComponent },
     ]
