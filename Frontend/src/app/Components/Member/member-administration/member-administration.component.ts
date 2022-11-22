@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries'
 import { Manager } from 'src/app/Interfaces/Manager'
 
-import { ManagerService } from 'src/app/Services/manager.service'
-import { MessageService } from 'src/app/Services/message.service'
+//import { ManagerService } from 'src/app/Services/manager.service'
 
 @Component({
   selector: 'app-member-administration',
@@ -16,8 +15,7 @@ export class MemberAdministrationComponent implements OnInit {
   tableData: Manager[]
 
   constructor(
-    private managerService: ManagerService,
-    protected messageService: MessageService
+   // private managerService: ManagerService,
   ) { 
     this.tableColumns = [
       { key: "id", replacement: "Cédula" },
@@ -30,22 +28,20 @@ export class MemberAdministrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.resetMessageInfo()
 
-    this.managerService.getAllManagers()
-      .subscribe(response => {
-        if (response.status === 'error') {
-          this.messageService.setMessageInfo(response.message!, 'error')
-        }
-        else if (response.managers) {
-          this.tableData = response.managers
-          this.tableData.forEach((manager) => {
-            manager.name = `${manager.name} ${manager.lastName1} ${manager.lastName2}`
-          })
-        }
-        else {
-          console.log(response)
-        }
-      })
+   // this.managerService.getAllManagers()
+    //  .subscribe(response => {
+     //   if (response.status === 'error') {
+      //  }
+      //  else if (response.managers) {
+      //    this.tableData = response.managers
+      //    this.tableData.forEach((manager) => {
+       //     manager.name = `${manager.name} ${manager.lastName1} ${manager.lastName2}`
+       //   })
+       // }
+      //  else {
+      //    console.log(response)
+      //  }
+     // })
   }
 }

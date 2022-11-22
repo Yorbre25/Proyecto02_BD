@@ -71,7 +71,6 @@ import { ReportsComponent } from './Components/Manager/reports/reports.component
     LoginRouterComponent,
     LoginComponent,
     ManagerLoginComponent,
-    MemberLoginComponent,
     ClientLoginComponent,
     LoginFormComponent,
     ManagerMainComponent,

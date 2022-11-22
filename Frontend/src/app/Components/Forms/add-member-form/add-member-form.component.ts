@@ -7,7 +7,6 @@ import { ServerResponse } from 'src/app/Interfaces/ServerResponses';
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 import { FormsService } from 'src/app/Services/forms.service';
 import { ManagerService } from 'src/app/Services/manager.service'; // cambiar esto
-import { MessageService } from 'src/app/Services/message.service'; // cambiar esto
 
 @Component({
   selector: 'app-add-member-form',
@@ -29,7 +28,6 @@ export class AddMemberFormComponent implements OnInit {
   passwordConfirm: FormControl
 
   constructor(
-    private messageService: MessageService,
     private auxFunctionsService: AuxFunctionsService,
     private managerService: ManagerService,
     protected formsService: FormsService
@@ -69,10 +67,9 @@ export class AddMemberFormComponent implements OnInit {
     const newManagerInfo = this.formsService.getFormValue()
 
     if (newManagerInfo.password !== newManagerInfo.passwordConfirm) {
-      this.messageService.setMessageInfo('Las contraseñas no coinciden', 'error')
       return
     } else {
-      this.messageService.resetMessageInfo()
+
       delete newManagerInfo.passwordConfirm
     }
 
