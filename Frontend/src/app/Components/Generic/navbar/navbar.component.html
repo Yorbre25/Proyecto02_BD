@@ -4,6 +4,9 @@
             [routerLink]="link.href">
             {{link.name}}
         </a>
+        <a (click)="loginService.logout()" class="text-center flex-grow-1 nav-link m-0 py-3">
+            Cerrar sesión
+        </a>
     </div>
 </nav>
 

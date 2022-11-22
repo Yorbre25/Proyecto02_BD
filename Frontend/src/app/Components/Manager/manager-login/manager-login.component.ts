@@ -1,4 +1,5 @@
-import { CookieService } from 'ngx-cookie-service'
+import Cookies from 'js-cookie'
+
 import { Component, OnInit } from '@angular/core'
 
 import { LoginInfo } from 'src/app/Interfaces/Auxiliaries'
@@ -14,7 +15,6 @@ import { FormsService } from 'src/app/Services/forms.service'
 export class ManagerLoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
-    private cookieService: CookieService,
     private formsService: FormsService
   ) { }
 
@@ -28,8 +28,8 @@ export class ManagerLoginComponent implements OnInit {
           alert(response.message)
         }
         else {
-          this.cookieService.set('username', loginInfo.username)
-          this.cookieService.set('userType', 'manager')
+          Cookies.set('username', loginInfo.username)
+          Cookies.set('userType', 'manager')
 
           window.location.href = '/manager'
         }

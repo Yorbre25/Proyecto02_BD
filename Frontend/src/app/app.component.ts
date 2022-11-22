@@ -1,9 +1,7 @@
-import { CookieService } from 'ngx-cookie-service'
+import Cookies from 'js-cookie'
 
 import { Component } from '@angular/core'
 import { NavigationStart, Router } from '@angular/router'
-
-import { LoginService } from './Services/login-service.service'
 
 @Component({
   selector: 'app-root',
@@ -15,26 +13,24 @@ class AppComponent {
 
   constructor(
     private router: Router,
-    private cookieService: CookieService,
-    private loginService: LoginService
   ) {
     this.router.events.subscribe((event: any): void => {
-      if (event instanceof NavigationStart) {
-        const urlBase = event.url.split('/')[1]
-        const userType = this.cookieService.get('userType')
+      window.addEventListener('DOMContentLoaded', (): void => {
+        if (event instanceof NavigationStart) {
+          const urlBase = event.url.split('/')[1]
+          const userType = Cookies.get('userType')
 
-        switch (urlBase) {
-          case 'login':
-            if (userType.length > 0) { window.location.href = `/${userType}` }
-            break
-          case 'logout':
-            this.loginService.logout()
-            break
-          default:
-            // window.location.href = `/login`
-            break
+          console.log(urlBase, userType);
+
+
+          if ((urlBase === 'login' || urlBase.length === 0) && userType) {
+            this.router.navigate([`/${userType}`])
+          }
+          else if (urlBase !== 'login' && !userType) {
+            this.router.navigate(['/login'])
+          }
         }
-      }
+      })
     })
   }
 }

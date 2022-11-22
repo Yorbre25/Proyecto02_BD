@@ -1,10 +1,11 @@
-import { CookieService } from 'ngx-cookie-service'
-import { Component, OnInit } from '@angular/core';
+import Cookies from 'js-cookie'
 
-import { LoginService } from 'src/app/Services/login-service.service';
-import { FormsService } from 'src/app/Services/forms.service';
+import { Component, OnInit } from '@angular/core'
 
-import { LoginInfo } from 'src/app/Interfaces/Auxiliaries';
+import { LoginService } from 'src/app/Services/login-service.service'
+import { FormsService } from 'src/app/Services/forms.service'
+
+import { LoginInfo } from 'src/app/Interfaces/Auxiliaries'
 
 @Component({
   selector: 'app-member-login',
@@ -15,12 +16,10 @@ export class MemberLoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private cookieService: CookieService,
     private formsService: FormsService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onSubmit = () => {
     const loginInfo: LoginInfo = this.formsService.getFormValue()
@@ -30,8 +29,8 @@ export class MemberLoginComponent implements OnInit {
           alert(response.message)
         }
         else {
-          this.cookieService.set('username', loginInfo.username)
-          this.cookieService.set('userType', 'member')
+          Cookies.set('username', loginInfo.username)
+          Cookies.set('userType', 'member')
 
           window.location.href = '/member'
         }

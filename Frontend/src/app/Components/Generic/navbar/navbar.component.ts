@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 
 import { NavbarLink } from 'src/app/Interfaces/Auxiliaries'
+import { LoginService } from 'src/app/Services/login-service.service'
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,9 @@ import { NavbarLink } from 'src/app/Interfaces/Auxiliaries'
 export class NavbarComponent implements OnInit {
   @Input() links: NavbarLink[]
 
-  constructor() {
+  constructor(
+    protected loginService: LoginService
+  ) {
     this.links = []
   }
 
