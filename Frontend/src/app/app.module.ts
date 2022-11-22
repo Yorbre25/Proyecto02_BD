@@ -27,6 +27,7 @@ import { ManagerListComponent } from './Components/Manager/manager-list/manager-
 import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
 import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add-manager-form.component';
 import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component';
+import { ViewOrderFormComponent } from './Components/Forms/view-order-form/view-order-form.component';
 import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
 import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
 import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
@@ -34,9 +35,8 @@ import { MemberAdministrationComponent } from './Components/Member/member-admini
 import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
 import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
 import { MemberProductComponent } from './Components/Member/member-product/member-product.component';
-import { MemberOrderComponent } from './Components/Member/member-order/member-order.component';
-import { OrderFormComponent } from './Components/Forms/order-form/order-form.component';
-import { ProductFormComponent } from './Components/Forms/product-form/product-form.component'
+import { AddProductFormComponent } from './Components/Forms/add-product-form/add-product-form.component';
+import { EditProductFormComponent } from './Components/Forms/edit-product-form/edit-product-form.component';
 
 
 @NgModule({
@@ -61,6 +61,7 @@ import { ProductFormComponent } from './Components/Forms/product-form/product-fo
     ManagerInfoComponent,
     AddManagerFormComponent,
     EditManagerFormComponent,
+    ViewOrderFormComponent,
     DeliveryManListComponent,
     DeliveryManInfoComponent,
     MemberMenuComponent,
@@ -70,9 +71,8 @@ import { ProductFormComponent } from './Components/Forms/product-form/product-fo
     MemberOrdersComponent,
     MemberProductManagementComponent,
     MemberProductComponent,
-    MemberOrderComponent,
-    OrderFormComponent,
-    ProductFormComponent
+    AddProductFormComponent,
+    EditProductFormComponent,
   ],
   imports: [
     BrowserModule,
