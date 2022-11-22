@@ -125,7 +125,7 @@ namespace Backend.Data
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
                         phoneNumber = dr["PhoneNumber"].ToString()!,
-                        birthday = Convert.ToDateTime(dr["Birthday"])!
+                        birthday = Convert.ToDateTime(dr["BirthDate"])!
                     });
                 }
 
@@ -168,7 +168,7 @@ namespace Backend.Data
                         city = dr["City"].ToString()!,
                         district = dr["District"].ToString()!,
                         phoneNumber = dr["PhoneNumber"].ToString()!,
-                        birthday = Convert.ToDateTime(dr["Birthday"])!
+                        birthday = Convert.ToDateTime(dr["BirthDate"])!
                     };
                 }
 
