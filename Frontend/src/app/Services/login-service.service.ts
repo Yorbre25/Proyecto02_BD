@@ -40,7 +40,7 @@ export class LoginService {
   }
 
   logout = () => {
-    this.cookieServie.deleteAll('/')
-    window.location.href = '/'
+    this.cookieServie.delete('username', '*', 'localhost', false, 'Lax')
+    this.cookieServie.delete('userType', '*', 'localhost', false, 'Lax')
   }
 }

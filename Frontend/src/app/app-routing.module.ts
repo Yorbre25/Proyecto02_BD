@@ -23,14 +23,13 @@ import { ClientBusinessComponent } from './Components/Client/client-business/cli
 
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component'
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component'
-import { StoreListComponent } from './Components/Manager/store-list/store-list.component'
 import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component'
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component'
 import { ReportsComponent } from './Components/Manager/reports/reports.component'
-import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'logout', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginRouterComponent,

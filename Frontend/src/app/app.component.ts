@@ -23,17 +23,28 @@ class AppComponent {
         const urlBase = event.url.split('/')[1]
         const userType = this.cookieService.get('userType')
 
-        switch (urlBase) {
-          case 'login':
-            if (userType.length > 0) { window.location.href = `/${userType}` }
-            break
-          case 'logout':
-            this.loginService.logout()
-            break
-          default:
-            // window.location.href = `/login`
-            break
+        console.log(userType);
+        console.log(urlBase);
+
+        if (urlBase === 'logout') {
+          this.loginService.logout()
         }
+        else if ((urlBase === 'login' || urlBase.length === 0) && userType.length > 0) {
+          this.router.navigate([`/${userType}`])
+        }
+        else if (urlBase !== 'login' && userType.length === 0) {
+          this.router.navigate(['/login'])
+        }
+
+        // switch (urlBase) {
+        //   case 'logout':
+        //     this.loginService.logout()
+        //     break
+        //   default:
+        //     if (userType.length > 0) { window.location.href = `/${userType}` }
+        //     else if (urlBase !== 'login') { window.location.href = '/login' }
+        //     break
+        // }
       }
     })
   }

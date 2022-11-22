@@ -19,8 +19,7 @@ export class MemberLoginComponent implements OnInit {
     private formsService: FormsService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onSubmit = () => {
     const loginInfo: LoginInfo = this.formsService.getFormValue()
