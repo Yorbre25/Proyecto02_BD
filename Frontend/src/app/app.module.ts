@@ -38,6 +38,13 @@ import { AddProductFormComponent } from './Components/Forms/add-product-form/add
 import { EditProductFormComponent } from './Components/Forms/edit-product-form/edit-product-form.component';
 import { AddMemberFormComponent } from './Components/Forms/add-member-form/add-member-form.component';
 import { EditMemberFormComponent } from './Components/Forms/edit-member-form/edit-member-form.component';
+import { ClientMainComponent } from './Components/Client/client-main/client-main.component';
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
+import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
+import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
+import { EditCartFormComponent } from './Components/Forms/edit-cart-form/edit-cart-form.component';
+import { ViewOrderClientFormComponent } from './Components/Forms/view-order-client-form/view-order-client-form.component';
+import { AddFeedbackFormComponent } from './Components/Forms/add-feedback-form/add-feedback-form.component';
 
 
 @NgModule({
@@ -74,7 +81,14 @@ import { EditMemberFormComponent } from './Components/Forms/edit-member-form/edi
     AddProductFormComponent,
     EditProductFormComponent,
     AddMemberFormComponent,
-    EditMemberFormComponent
+    EditMemberFormComponent,
+    ClientMainComponent,
+    ClientMenuComponent,
+    ClientBusinessComponent,
+    ClientCartComponent,
+    EditCartFormComponent,
+    ViewOrderClientFormComponent,
+    AddFeedbackFormComponent
   ],
   imports: [
     BrowserModule,
