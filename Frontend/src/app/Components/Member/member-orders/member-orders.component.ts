@@ -17,6 +17,7 @@ export class MemberOrdersComponent implements OnInit {
       { key: "id", replacement: "Código de Orden" },
       { key: "total", replacement: "Total" },
       { key: "shippingAddress", replacement: "Dirección de Envío" },
+      { key: "delivMan", replacement: "Repartidor" },
     ]
     this.tableData = []
   }

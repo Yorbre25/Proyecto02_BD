@@ -33,7 +33,10 @@ import { MemberMainComponent } from './Components/Member/member-main/member-main
 import { MemberAdministrationComponent } from './Components/Member/member-administration/member-administration.component';
 import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
 import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
-import { MemberProductComponent } from './Components/Member/member-product/member-product.component'
+import { MemberProductComponent } from './Components/Member/member-product/member-product.component';
+import { MemberOrderComponent } from './Components/Member/member-order/member-order.component';
+import { OrderFormComponent } from './Components/Forms/order-form/order-form.component';
+import { ProductFormComponent } from './Components/Forms/product-form/product-form.component'
 
 
 @NgModule({
@@ -66,7 +69,10 @@ import { MemberProductComponent } from './Components/Member/member-product/membe
     MemberAdministrationComponent,
     MemberOrdersComponent,
     MemberProductManagementComponent,
-    MemberProductComponent
+    MemberProductComponent,
+    MemberOrderComponent,
+    OrderFormComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,

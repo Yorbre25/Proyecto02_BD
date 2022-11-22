@@ -6,5 +6,6 @@ interface Order {
     delManId: string
     quantity: number[]
     productBarCode: number[]
+    delivMan: string
 }
 export { Order }
