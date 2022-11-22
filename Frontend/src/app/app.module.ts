@@ -34,7 +34,6 @@ import { MemberMainComponent } from './Components/Member/member-main/member-main
 import { MemberAdministrationComponent } from './Components/Member/member-administration/member-administration.component';
 import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
 import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
-import { MemberProductComponent } from './Components/Member/member-product/member-product.component';
 import { AddProductFormComponent } from './Components/Forms/add-product-form/add-product-form.component';
 import { EditProductFormComponent } from './Components/Forms/edit-product-form/edit-product-form.component';
 import { AddMemberFormComponent } from './Components/Forms/add-member-form/add-member-form.component';
@@ -72,7 +71,6 @@ import { EditMemberFormComponent } from './Components/Forms/edit-member-form/edi
     MemberAdministrationComponent,
     MemberOrdersComponent,
     MemberProductManagementComponent,
-    MemberProductComponent,
     AddProductFormComponent,
     EditProductFormComponent,
     AddMemberFormComponent,

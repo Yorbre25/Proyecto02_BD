@@ -10,7 +10,6 @@ import { MemberMenuComponent } from './Components/Member/member-menu/member-menu
 import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
 import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
 import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
-import { MemberProductComponent } from './Components/Member/member-product/member-product.component';
 import { ManagerMainComponent } from './Components/Manager/manager-main/manager-main.component';
 import { ManagerMenuComponent } from './Components/Manager/manager-menu/manager-menu.component';
 import { ManagerListComponent } from './Components/Manager/manager-list/manager-list.component';
@@ -48,9 +47,9 @@ const routes: Routes = [
     component: MemberMainComponent,
     children: [
       { path: '', redirectTo: '/member/menu', pathMatch: 'full' },
+      { path: 'administration', component: MemberOrdersComponent },
       { path: 'orders', component: MemberOrdersComponent },
       { path: 'product_management', component: MemberProductManagementComponent },
-      { path: 'product/:barCode', component: MemberProductComponent }
     ]
   }
 ]
