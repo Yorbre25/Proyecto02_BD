@@ -25,9 +25,25 @@ import { ManagerListComponent } from './Components/Manager/manager-list/manager-
 import { ManagerInfoComponent } from './Components/Manager/manager-info/manager-info.component';
 import { AddManagerFormComponent } from './Components/Forms/add-manager-form/add-manager-form.component';
 import { EditManagerFormComponent } from './Components/Forms/edit-manager-form/edit-manager-form.component';
+import { ViewOrderFormComponent } from './Components/Forms/view-order-form/view-order-form.component';
 import { DeliveryManListComponent } from './Components/Manager/delivery-man-list/delivery-man-list.component';
 import { DeliveryManInfoComponent } from './Components/Manager/delivery-man-info/delivery-man-info.component'
 import { MemberMainComponent } from './Components/Member/member-main/member-main.component';
+import { MemberAdministrationComponent } from './Components/Member/member-administration/member-administration.component';
+import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
+import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
+import { AddProductFormComponent } from './Components/Forms/add-product-form/add-product-form.component';
+import { EditProductFormComponent } from './Components/Forms/edit-product-form/edit-product-form.component';
+import { AddMemberFormComponent } from './Components/Forms/add-member-form/add-member-form.component';
+import { EditMemberFormComponent } from './Components/Forms/edit-member-form/edit-member-form.component';
+import { ClientMainComponent } from './Components/Client/client-main/client-main.component';
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
+import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
+import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
+import { EditCartFormComponent } from './Components/Forms/edit-cart-form/edit-cart-form.component';
+import { ViewOrderClientFormComponent } from './Components/Forms/view-order-client-form/view-order-client-form.component';
+import { AddFeedbackFormComponent } from './Components/Forms/add-feedback-form/add-feedback-form.component';
+
 import { AddDeliveryManFormComponent } from './Components/Forms/add-delivery-man-form/add-delivery-man-form.component';
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component';
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component';
@@ -41,6 +57,7 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
 import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
 import { ReportsComponent } from './Components/Manager/reports/reports.component'
+
 
 @NgModule({
   declarations: [
@@ -63,11 +80,26 @@ import { ReportsComponent } from './Components/Manager/reports/reports.component
     ManagerInfoComponent,
     AddManagerFormComponent,
     EditManagerFormComponent,
+    ViewOrderFormComponent,
     DeliveryManListComponent,
     DeliveryManInfoComponent,
     MemberMenuComponent,
     MemberMainComponent,
     MemberLoginComponent,
+    MemberAdministrationComponent,
+    MemberOrdersComponent,
+    MemberProductManagementComponent,
+    AddProductFormComponent,
+    EditProductFormComponent,
+    AddMemberFormComponent,
+    EditMemberFormComponent,
+    ClientMainComponent,
+    ClientMenuComponent,
+    ClientBusinessComponent,
+    ClientCartComponent,
+    EditCartFormComponent,
+    ViewOrderClientFormComponent,
+    AddFeedbackFormComponent,
     AddDeliveryManFormComponent,
     StoreTypeListComponent,
     StoreTypeInfoComponent,

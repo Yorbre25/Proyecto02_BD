@@ -11,12 +11,9 @@ export class MemberMainComponent implements OnInit {
 
   constructor() {
     this.navbarLinks = [
-      { href: 'employees', name: 'Empleados' },
-      { href: 'members', name: 'Afiliados' },
-      { href: 'clients', name: 'Clientes' },
-      { href: 'delivery', name: 'Repartidores' },
-      { href: 'stores', name: 'Comercios' },
-      { href: 'reports', name: 'Reportes' },
+      { href: 'administration', name: 'Administración' },
+      { href: 'product_management', name: 'Productos' },
+      { href: 'orders', name: 'Pedidos' },
     ]
   }
 
