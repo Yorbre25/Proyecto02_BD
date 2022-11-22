@@ -45,7 +45,7 @@ namespace Backend.Data
 
         public static bool Edit(Client client, int idClient)
         {
-            string hashedPassword = getEditPassword(client, id);
+            string hashedPassword = getEditPassword(client, idClient);
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
@@ -98,9 +98,9 @@ namespace Backend.Data
             }
         }
 
-        public static List<ClienteForGet> GetAll()
+        public static List<Client> GetAll()
         {
-            List<ClienteForGet> oListaUsuario = new List<ClienteForGet>();
+            List<Client> clientList = new List<Client>();
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand("Get_All_Clients", connection);
@@ -114,24 +114,24 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    oListaUsuario.Add(new ClienteForGet()
+                    clientList.Add(new Client()
                     {
                         id = Convert.ToInt32(dr["Id"]),
-                        name = dr["Name"].ToString(),
-                        lastName1 = dr["LastName1"].ToString(),
-                        lastName2 = dr["LastName2"].ToString(),
-                        province = dr["Province"].ToString(),
-                        city = dr["City"].ToString(),
-                        district = dr["District"].ToString(),
-                        userName = dr["Username"].ToString(),
-                        phoneNumber = dr["PhoneNumber"].ToString(),
-                        birthdate = Convert.ToDateTime(dr["Birthdate"].ToString())
+                        username = dr["Username"].ToString()!,
+                        name = dr["Name"].ToString()!,
+                        lastName1 = dr["LastName1"].ToString()!,
+                        lastName2 = dr["LastName2"].ToString()!,
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        phoneNumber = dr["PhoneNumber"].ToString()!,
+                        birthday = Convert.ToDateTime(dr["Birthday"])!
                     });
                 }
 
                 connection.Close();
 
-                return oListaUsuario;
+                return clientList;
             }
             catch (Exception ex)
             {
@@ -140,15 +140,14 @@ namespace Backend.Data
             }
         }
 
-        public static ClienteForGet Get(int idusuario)
+        public static Client Get(int id)
         {
-            ClienteForGet oUsuario = new ClienteForGet();
+            Client client = new Client();
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand("Get_Client", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-            // Los parámetros tienen que ir en minuscula -> Ver definición de la función
-            cmd.Parameters.AddWithValue("in_id", idusuario);
+            cmd.Parameters.AddWithValue("in_id", id);
 
             try
             {
@@ -158,24 +157,24 @@ namespace Backend.Data
 
                 while (dr.Read())
                 {
-                    oUsuario = new ClienteForGet()
+                    client = new Client()
                     {
                         id = Convert.ToInt32(dr["Id"]),
-                        name = dr["Name"].ToString(),
-                        lastName1 = dr["LastName1"].ToString(),
-                        lastName2 = dr["LastName2"].ToString(),
-                        province = dr["Province"].ToString(),
-                        city = dr["City"].ToString(),
-                        district = dr["District"].ToString(),
-                        userName = dr["Username"].ToString(),
-                        phoneNumber = dr["PhoneNumber"].ToString(),
-                        birthdate = Convert.ToDateTime(dr["Birthdate"].ToString())
+                        username = dr["Username"].ToString()!,
+                        name = dr["Name"].ToString()!,
+                        lastName1 = dr["LastName1"].ToString()!,
+                        lastName2 = dr["LastName2"].ToString()!,
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        phoneNumber = dr["PhoneNumber"].ToString()!,
+                        birthday = Convert.ToDateTime(dr["Birthday"])!
                     };
                 }
 
                 connection.Close();
 
-                return oUsuario;
+                return client;
             }
             catch (Exception ex)
             {
@@ -188,7 +187,7 @@ namespace Backend.Data
         {
             string hashedPassword;
 
-            Admin oldCli = Get(id);
+            Client oldCli = Get(id);
             string oldPassword = PasswordData.getClientPassword(oldCli.username);
 
             if (client.password == null)

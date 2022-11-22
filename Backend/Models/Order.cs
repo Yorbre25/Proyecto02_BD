@@ -15,6 +15,6 @@
         public string? delManLastName { get; set; }
         public List<int>? quantity { get; set; }
         public List<int>? productBarCode { get; set; }
-        public List<int>? productName { get; set; }
+        public List<string>? productName { get; set; }
     }
 }

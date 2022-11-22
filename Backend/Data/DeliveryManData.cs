@@ -96,7 +96,7 @@ namespace Backend.Data
         public static bool Add(DeliveryMan deliveryMan)
         {
             string passwordD = EmailSender.GenerateRandomPassword();
-            _ = EmailSender.SendEmailAsync(client.name, client.username, "Envío de contraseña UbyTEC", "Contraseña: " + passwordD);
+            _ = EmailSender.SendEmailAsync(deliveryMan.name, deliveryMan.username, "Envío de contraseña UbyTEC", "Contraseña: " + passwordD);
             string phoneNumbers = AuxFunctions.arrayToString(deliveryMan.phoneNumbers);
 
             var connection = Connection.Get();
@@ -189,7 +189,7 @@ namespace Backend.Data
         {
             string hashedPassword;
 
-            Admin oldDelman = Get(id);
+            DeliveryMan oldDelman = Get(id);
             string oldPassword = PasswordData.getClientPassword(oldDelman.username);
 
             if (delman.password == null)
@@ -206,7 +206,7 @@ namespace Backend.Data
 
                 if (!validPassword) throw new Exception("Contraseña incorrecta");
 
-                hashedPassword = BCrypt.Net.BCrypt.HashPassword(client.password);
+                hashedPassword = BCrypt.Net.BCrypt.HashPassword(delman.password);
             }
 
             return hashedPassword;
