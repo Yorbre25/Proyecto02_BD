@@ -36,7 +36,8 @@ INSERT INTO Deliveryman(
 	Password)
 Values
 	(756345, 'Ricardo', 'Gatgens', 'Rodriguez', 'gatgens48@gmail.com', 'Alajuela', 'SanRamón', 'Yonoseque Norte', 'pelos', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
-	(2763495, 'Rahel', 'Avila', 'Agilar', 'rahelavi@gmail.com', 'Guanacaste', 'Nicoya', 'Santa Rosa', 'rahelia', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
+	(2763495, 'Rahel', 'Avila', 'Agilar', 'rahelavi@gmail.com', 'Guanacaste', 'Nicoya', 'Santa Rosa', 'rahelia', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e'),
+	(9012351, 'Alejandro', 'Delgado', 'Sojo', 'ale@gmail.com', 'Limón', 'Limón', 'Limón', 'ale14', '$2a$11$.PuMgCpPE0FdXQNAd6m.tOlkVMCd9gTrs0CKLTXVVeHg1iYW9409e');
 
 
 INSERT INTO Deliveryman_Phones(

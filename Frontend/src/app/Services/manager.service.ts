@@ -10,8 +10,6 @@ import {
   ServerResponse,
 } from '../Interfaces/ServerResponses'
 
-import { AuxFunctionsService } from './aux-functions.service'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +17,7 @@ export class ManagerService {
   url: string = `${apiURL}/admin`
 
   constructor(
-    private httpClient: HttpClient,
-    private auxFunctionsService: AuxFunctionsService
+    private httpClient: HttpClient
   ) { }
 
   /**
