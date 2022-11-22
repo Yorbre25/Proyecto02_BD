@@ -6,84 +6,111 @@ namespace Backend.Data;
 public class PasswordData
 {
 
-  public static string getAdminPassword(string username)
-  {
-    var connection = Connection.Get();
-    NpgsqlCommand command = new NpgsqlCommand("get_admin_password", connection);
-    command.CommandType = CommandType.StoredProcedure;
-    command.Parameters.AddWithValue("in_username", username);
-
-    string password = "";
-    try
+    public static string getAdminPassword(string username)
     {
-      connection.Open();
-      command.ExecuteNonQuery();
-      var dr = command.ExecuteReader();
+        var connection = Connection.Get();
+        NpgsqlCommand command = new NpgsqlCommand("get_admin_password", connection);
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("in_username", username);
 
-      while (dr.Read()) { password = dr.GetString(0)!; }
+        string password = "";
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+            var dr = command.ExecuteReader();
 
-      connection.Close();
+            while (dr.Read()) { password = dr.GetString(0)!; }
 
-      return password;
+            connection.Close();
+
+            return password;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("Error al obtener la contraseña del administrador");
+        }
     }
-    catch (Exception ex)
+
+    public static string getManagerPassword(string username)
     {
-      Console.WriteLine(ex.Message);
-      throw new Exception("Error al obtener la contraseña del administrador");
+        var connection = Connection.Get();
+        NpgsqlCommand command = new NpgsqlCommand("Get_Manager_Password", connection);
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("in_username", username);
+
+        string password = "";
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+            var dr = command.ExecuteReader();
+
+            while (dr.Read()) { password = dr.GetString(0)!; }
+
+            connection.Close();
+
+            return password;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("Error al obtener la contraseña del administrador de comercio");
+        }
     }
-  }
 
-  public static string getManagerPassword(string username)
-  {
-    var connection = Connection.Get();
-    NpgsqlCommand command = new NpgsqlCommand("Get_Manager_Password", connection);
-    command.CommandType = CommandType.StoredProcedure;
-    command.Parameters.AddWithValue("in_username", username);
-
-    string password = "";
-    try
+    public static string getClientPassword(string username)
     {
-      connection.Open();
-      command.ExecuteNonQuery();
-      var dr = command.ExecuteReader();
+        var connection = Connection.Get();
+        NpgsqlCommand command = new NpgsqlCommand("Get_Client_Password", connection);
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("in_username", username);
 
-      while (dr.Read()) { password = dr.GetString(0)!; }
+        string password = "";
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+            var dr = command.ExecuteReader();
 
-      connection.Close();
+            while (dr.Read()) { password = dr.GetString(0)!; }
 
-      return password;
+            connection.Close();
+
+            return password;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("Error al obtener la contraseña del cliente");
+        }
     }
-    catch (Exception ex)
+
+    public static string getDelManPassword(string username)
     {
-      Console.WriteLine(ex.Message);
-      throw new Exception("Error al obtener la contraseña del administrador de comercio");
+        var connection = Connection.Get();
+        NpgsqlCommand command = new NpgsqlCommand("Get_Deliveryman_Password", connection);
+        command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("in_username", username);
+
+        string password = "";
+        try
+        {
+            connection.Open();
+            command.ExecuteNonQuery();
+            var dr = command.ExecuteReader();
+
+            while (dr.Read()) { password = dr.GetString(0)!; }
+
+            connection.Close();
+
+            return password;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("Error al obtener la contraseña del repartidor");
+        }
     }
-  }
-
-  public static string getClientPassword(string username)
-  {
-    var connection = Connection.Get();
-    NpgsqlCommand command = new NpgsqlCommand("Get_Client_Password", connection);
-    command.CommandType = CommandType.StoredProcedure;
-    command.Parameters.AddWithValue("in_username", username);
-
-    string password = "";
-    try
-    {
-      connection.Open();
-      command.ExecuteNonQuery();
-      var dr = command.ExecuteReader();
-
-      while (dr.Read()) { password = dr.GetString(0)!; }
-
-      connection.Close();
-
-      return password;
-    }
-    catch (Exception ex)
-    {
-      Console.WriteLine(ex.Message);
-      throw new Exception("Error al obtener la contraseña del cliente");
-    }
-  }
 }
