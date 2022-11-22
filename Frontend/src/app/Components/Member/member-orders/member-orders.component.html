@@ -1,0 +1,23 @@
+<div class="container-md">
+    <h3 class="text-center mb-3">Pedidos</h3>
+
+
+    <div class="d-flex justify-content-end mb-3">
+        <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'i'"
+            [modalHeader]="'Detalle de Pedido'">
+            <app-view-order-form></app-view-order-form>
+        </app-modal>
+    </div>
+    <h4 class="text-center mb-3">Listo para Entrega</h4>
+    <div class="overflow-scroll" style="height: 60vh;">
+        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+    </div>
+    <h4 class="text-center mb-3">En camino</h4>
+    <div class="overflow-scroll" style="height: 60vh;">
+        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+    </div>
+    <h4 class="text-center mb-3">Entregado</h4>
+    <div class="overflow-scroll" style="height: 60vh;">
+        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+    </div>
+</div>

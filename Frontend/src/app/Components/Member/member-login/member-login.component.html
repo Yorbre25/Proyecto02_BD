@@ -4,7 +4,12 @@
         <img  src="assets/logo.png" alt="Logo-UbyTEC" width="300">
         <h1 class="fs-5 text-center m-0">Afiliado</h1>
       </div>
-  
       <app-login-form [onSubmit]="onSubmit"></app-login-form>
     </div>
+    <div class="d-flex justify-content-end mb-3">
+      <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Afiliarse'" 
+      [modalHeader]="'Solicitud de Afiliación'">
+          <app-add-member-form></app-add-member-form>
+      </app-modal>
+  </div>
   </div>
