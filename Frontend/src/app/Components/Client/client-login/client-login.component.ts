@@ -1,7 +1,9 @@
+import { CookieService } from 'ngx-cookie-service'
 import { Component, OnInit } from '@angular/core';
 
 import { LoginService } from 'src/app/Services/login-service.service';
 import { FormsService } from 'src/app/Services/forms.service';
+import { LoginInfo } from 'src/app/Interfaces/Auxiliaries';
 
 @Component({
   selector: 'app-client-login',
@@ -11,6 +13,7 @@ import { FormsService } from 'src/app/Services/forms.service';
 export class ClientLoginComponent implements OnInit {
 
   constructor(
+    private cookieService: CookieService,
     private loginService: LoginService,
     protected formsService: FormsService
   ) { }
@@ -19,8 +22,19 @@ export class ClientLoginComponent implements OnInit {
   }
 
   onSubmit = () => {
-    this.formsService.printFormValue()
-    window.location.href = '/client'
+    const loginInfo: LoginInfo = this.formsService.getFormValue()
+    this.loginService.clientLogin(loginInfo)
+      .then((response) => {
+        if (response.status === 'error') {
+          alert(response.message)
+        }
+        else {
+          this.cookieService.set('username', loginInfo.username)
+          this.cookieService.set('userType', 'client')
+
+          window.location.href = '/client'
+        }
+      })
   }
 
 }
