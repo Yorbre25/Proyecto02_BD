@@ -20,9 +20,6 @@ class AppComponent {
           const urlBase = event.url.split('/')[1]
           const userType = Cookies.get('userType')
 
-          console.log(urlBase, userType);
-
-
           if ((urlBase === 'login' || urlBase.length === 0) && userType) {
             this.router.navigate([`/${userType}`])
           }

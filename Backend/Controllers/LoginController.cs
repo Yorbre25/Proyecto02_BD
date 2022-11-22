@@ -35,11 +35,24 @@ public class LoginController : Controller
   [Route("manager")]
   public object managerLogin([FromBody] LoginInfo loginInfo)
   {
-    bool validPassword = PasswordValidator.ValidatePassword(
-      loginInfo.username,
-      loginInfo.password,
-      "manager"
-    );
+    bool validPassword = false;
+
+    try
+    {
+      validPassword = PasswordValidator.ValidatePassword(
+        loginInfo.username,
+        loginInfo.password,
+        "manager"
+      );
+    }
+    catch (Exception ex)
+    {
+      return new
+      {
+        status = "error",
+        message = ex.Message
+      };
+    }
 
     if (validPassword)
     {

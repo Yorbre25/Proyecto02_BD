@@ -32,25 +32,34 @@ public class PasswordData
     }
   }
 
-  public static string getManagerPassword(string username)
+  public static ManagerPasswordInfo getManagerPassword(string username)
   {
     var connection = Connection.Get();
     NpgsqlCommand command = new NpgsqlCommand("Get_Manager_Password", connection);
     command.CommandType = CommandType.StoredProcedure;
     command.Parameters.AddWithValue("in_username", username);
 
-    string password = "";
+    ManagerPasswordInfo passwordInfo = new ManagerPasswordInfo();
+
     try
     {
       connection.Open();
       command.ExecuteNonQuery();
       var dr = command.ExecuteReader();
 
-      while (dr.Read()) { password = dr.GetString(0)!; }
+      while (dr.Read())
+      {
+        passwordInfo = new ManagerPasswordInfo()
+        {
+          password = dr["password"].ToString()!,
+          status = Convert.ToBoolean(dr["status"]),
+          observation = dr["observation"].ToString()!
+        };
+      }
 
       connection.Close();
 
-      return password;
+      return passwordInfo;
     }
     catch (Exception ex)
     {
@@ -112,4 +121,11 @@ public class PasswordData
       throw new Exception("Error al obtener la contraseña del repartidor");
     }
   }
+}
+
+public struct ManagerPasswordInfo
+{
+  public string password;
+  public bool status;
+  public string observation;
 }
