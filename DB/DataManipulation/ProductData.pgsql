@@ -5,6 +5,24 @@
 --     CategoryName varchar(15)
 -- );
 
+--- get all products using store id
+CREATE OR REPLACE FUNCTION Get_All_Products_By_Store(in_storeID int)
+returns setof Full_Product
+LANGUAGE sql
+AS $$
+  Select 
+    P.BarCode,
+    P.Name,
+    P.Price,
+    PC.Name as Category
+    from Product as P
+    join Product_Category as PC on P.CategoryId = PC.Id
+    join Store_Products as SP on P.barcode = SP.productBarCode
+    join Store as S on S.id = SP.storeID
+  where 
+    S.id = in_storeID;
+$$;
+
 --- get all products
 CREATE OR REPLACE FUNCTION Get_All_Products()
 returns setof Full_Product

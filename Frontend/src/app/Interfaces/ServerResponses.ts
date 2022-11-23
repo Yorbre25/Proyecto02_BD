@@ -3,6 +3,7 @@ import { DeliveryMan } from "./DeliveryMan"
 import { StoreType } from "./StoreType"
 import { StoreData } from "./Store"
 import { SalePerClient, SalePerStore } from "./Reports"
+import { Product } from "./Product"
 
 interface ServerResponse {
     status: 'ok' | 'error'
@@ -41,6 +42,14 @@ interface StoreDataResponse extends ServerResponse {
     storeData: StoreData
 }
 
+interface ProductsResponse extends ServerResponse {
+    products: Product[]
+}
+
+interface ProductResponse extends ServerResponse {
+    product: Product
+}
+
 interface SalePerClientResponse extends ServerResponse {
     report: SalePerClient[]
 }
@@ -59,6 +68,8 @@ export {
     StoreTypeResponse,
     StoresDataResponse,
     StoreDataResponse,
+    ProductsResponse,
+    ProductResponse,
     SalePerClientResponse,
     SalePerStoreResponse
 }

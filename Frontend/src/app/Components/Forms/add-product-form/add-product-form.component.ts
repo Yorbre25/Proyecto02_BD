@@ -18,20 +18,20 @@ export class AddProductFormComponent implements OnInit {
   storeId: FormControl
   photoPath: FormControl
 
-    handleUpload(event: any) {
-        if (event.target.files && event.target.files[0]) {
-            var reader = new FileReader();
-            reader.onload = (event: any) => {
-                this.photoPath = event.target.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
+  handleUpload(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.photoPath = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
     }
+  }
 
   constructor(
     private auxFunctionsService: AuxFunctionsService,
     protected formsService: FormsService
-  ) { 
+  ) {
     this.barCode = new FormControl('', [Validators.required])
     this.price = new FormControl('', [Validators.required])
     this.name = new FormControl('', [Validators.required])
@@ -39,11 +39,12 @@ export class AddProductFormComponent implements OnInit {
     this.photo = new FormControl('', [Validators.required])
     this.storeId = new FormControl('', [Validators.required])
     this.photoPath = new FormControl('', [Validators.required])
-    
+
   }
 
   ngOnInit(): void {
     this.formsService.resetForm()
+
     this.formsService.form.addControl('barCode', this.barCode)
     this.formsService.form.addControl('price', this.price)
     this.formsService.form.addControl('name', this.name)
