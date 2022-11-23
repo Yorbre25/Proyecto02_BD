@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
-import { Order } from 'src/app/Interfaces/Order'
-//import {ProductService} from 'src/app/Services/product.service'
+import {Order} from 'src/app/Interfaces/Order'
+import {OrderService} from 'src/app/Services/order.service'
 
 @Component({
   selector: 'app-client-recents',
@@ -12,39 +12,38 @@ export class ClientRecentsComponent implements OnInit {
   tableColumns: KeyReplacement<Order>[]
   tableData: Order[]
 
-  constructor() {
+  constructor(private orderService: OrderService) { 
     this.tableColumns = [
       { key: "id", replacement: "Código de Orden" },
       { key: "total", replacement: "Total" },
-      // { key: "shippingAddress", replacement: "Dirección de Envío" }, Cambio de interfaz
-      // { key: "delivMan", replacement: "Repartidor" },
+      
     ]
     this.tableData = []
   }
-
+  
   ngOnInit(): void {
-    // this.storeService.getAllStoresData()
-    //   .subscribe(response => {
-    //     if (response.status === 'error') {
-    //       alert(response.message)
-    //     }
-    //     else if (response.storesData) {
-    //       const stores: Store[] = response.storesData
-    //         .map((storeData) => {
-    //           let store: any = storeData.store
-    //           const manager = storeData.manager
+    this.orderService.getAllOrdersData()
+      .subscribe(response => {
+        if (response.status === 'error') {
+          alert(response.message)
+        }
+        else if (response.ordersData) {
+          const orders: Order[] = response.ordersData
+            .map((orderData) => {
+              let order: any = orderData.order
+              const client = orderData.client
 
-    //           store.managerID = `
-    //             ${manager.name} ${manager.lastName1} ${manager.lastName2}`
-    //           return store
-    //         })
+              order.clientID = `
+                ${client.id}`
+              return order
+            })
 
-    //       this.tableData = stores
-    //     }
-    //     else {
-    //       console.log(response)
-    //     }
-    //   })
+          this.tableData = orders
+        }
+        else {
+          console.log(response)
+        }
+      })
   }
 
 }
