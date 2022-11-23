@@ -23,19 +23,16 @@ export class ClientRecentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let idCli = Number(Cookies.get('idClient'))
 
-    this.orderService.getAllOrdersCli()
+    let idCli = Cookies.get('idCli');
+    this.orderService.getAllOrdersCli(Cookies.get('idClient'))
       .subscribe(response => {
         if (response.status === 'error') {
           alert(response.message)
         }
         else if (response.orders) {
-          console.log(response.orders)
 
           this.tableData = response.orders
-            .filter(order => order.clientId === idCli)
-          console.log(this.tableData);
         }
         else {
           console.log(response)
