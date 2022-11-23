@@ -48,6 +48,6 @@ export class FeedbackService {
    * @param id ID de la reseña
    * @returns Objeto con respuesta del servidor
   */
-  deleteManager = (id: number): Observable<ServerResponse> =>
+  deleteFeedback = (id: number): Observable<ServerResponse> =>
     this.httpClient.delete<ServerResponse>(`${this.url}/delete/${id}`)
 } 

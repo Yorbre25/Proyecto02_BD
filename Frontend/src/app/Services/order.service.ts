@@ -23,11 +23,12 @@ export class OrderService {
   getAllOrders = (): Observable<OrdersResponse> =>
     this.httpClient.get<OrdersResponse>(`${this.url}/get_all`)
 
-
-
-  getAllOrdersCli = (id: any): Observable<OrdersResponse> =>
-    this.httpClient.get<OrdersResponse>(`${this.url}/get_all/${id}`)
+  getAllOrdersCli = (): Observable<OrdersResponse> =>
+    this.httpClient.get<OrdersResponse>(`${this.url}/get_all_cli`)
 
   setDeliveryMan = (order: Order): Observable<ServerResponse> =>
     this.httpClient.post<ServerResponse>(`${this.url}/set_deliveryman`, order)
+
+  addOrder = (order:Order): Observable<ServerResponse> =>
+    this.httpClient.post<ServerResponse>(`${this.url}/add`, order)
 }
