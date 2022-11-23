@@ -23,23 +23,23 @@ namespace Backend.Data
                 cmd.ExecuteNonQuery();
                 var dr = cmd.ExecuteReader();
 
-        while (dr.Read())
-        {
-          orderList.Add(new Order()
-          {
-            id = Convert.ToInt32(dr["id"]),
-            total = Convert.ToInt32(dr["Total"]),
-            province = dr["Province"].ToString()!,
-            city = dr["City"].ToString()!,
-            district = dr["District"].ToString()!,
-            clientName = dr["ClientName"].ToString()!,
-            clientLastName = dr["ClientLastName"].ToString()!,
-            delManName = dr["DelManName"].ToString()!,
-            delManLastName = dr["DelManLastName"].ToString()!,
-            storeId = Convert.ToInt32(dr["StoreId"]),
-            productName = (string[])dr["Products"]
-          });
-        }
+                while (dr.Read())
+                {
+                    orderList.Add(new Order()
+                    {
+                        id = Convert.ToInt32(dr["id"]),
+                        total = Convert.ToInt32(dr["Total"]),
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        clientName = dr["ClientName"].ToString()!,
+                        clientLastName = dr["ClientLastName"].ToString()!,
+                        delManName = dr["DelManName"].ToString()!,
+                        delManLastName = dr["DelManLastName"].ToString()!,
+                        storeId = Convert.ToInt32(dr["StoreId"]),
+                        productName = (string[])dr["Products"]
+                    });
+                }
 
                 connection.Close();
 
@@ -52,53 +52,54 @@ namespace Backend.Data
             }
         }
 
-    public static List<Order> GetAllCli(int idCli)
-    {
-      List<Order> orderList = new List<Order>();
-
-      var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand("Get_Order_Cli", connection);
-      cmd.CommandType = CommandType.StoredProcedure;
-      cmd.Parameters.AddWithValue("in_idCli", idCli);
-
-      try
-      {
-        connection.Open();
-        cmd.ExecuteNonQuery();
-        var dr = cmd.ExecuteReader();
-
-        while (dr.Read())
+        public static List<Order> GetAllCli(int idCli)
         {
-          orderList.Add(new Order()
-          {
-            id = Convert.ToInt32(dr["id"]),
-            total = Convert.ToInt32(dr["Total"]),
-            province = dr["Province"].ToString()!,
-            city = dr["City"].ToString()!,
-            district = dr["District"].ToString()!,
-            clientName = dr["ClientName"].ToString()!,
-            clientLastName = dr["ClientLastName"].ToString()!,
-            delManName = dr["DelManName"].ToString()!,
-            delManLastName = dr["DelManLastName"].ToString()!,
-            productName = (string[])dr["Products"]
+            List<Order> orderList = new List<Order>();
 
-          });
+            var connection = Connection.Get();
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Order_Cli", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("in_idCli", idCli);
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    orderList.Add(new Order()
+                    {
+                        id = Convert.ToInt32(dr["id"]),
+                        total = Convert.ToInt32(dr["Total"]),
+                        province = dr["Province"].ToString()!,
+                        city = dr["City"].ToString()!,
+                        district = dr["District"].ToString()!,
+                        clientName = dr["ClientName"].ToString()!,
+                        clientLastName = dr["ClientLastName"].ToString()!,
+                        delManName = dr["DelManName"].ToString()!,
+                        delManLastName = dr["DelManLastName"].ToString()!,
+                        storeId = Convert.ToInt32(dr["StoreId"]),
+                        productName = (string[])dr["Products"]
+
+                    });
+                }
+
+                connection.Close();
+
+                return orderList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new Exception("Error al listar las ordenes");
+            }
         }
 
-        connection.Close();
-
-        return orderList;
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.Message);
-        throw new Exception("Error al listar las ordenes");
-      }
-    }
-
-    public static Order Get(int id)
-    {
-      Order order = new Order();
+        public static Order Get(int id)
+        {
+            Order order = new Order();
 
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand("Get_Order", connection);
