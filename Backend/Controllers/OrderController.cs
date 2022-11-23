@@ -11,6 +11,10 @@ namespace Backend.Controllers
     {
         [HttpGet]
         [Route("get_all")]
+        /**
+         * Proporciona por medio del API la lista de ordenes
+         * 
+         */
         public Object Get()
         {
             try
@@ -34,6 +38,10 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("get/{id}")]
+        /**
+         * Proporciona por medio del API la orden relacionada al id
+         * 
+         */
         public Object Get(int id)
         {
             try
@@ -57,6 +65,11 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("setdelivered/{id}")]
+        /**
+         * 
+         * Hace que una orden esté terminada
+         * 
+         */
         public Object Delivered(int id)
         {
             bool ok = OrderData.SetDelivered(id);
@@ -81,6 +94,10 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
+        /**
+         * Agrega por medio del API una orden a la base
+         * Recibe un objeto order por medio del un JSON
+         */
         public Object Post([FromBody] Order order)
         {
             bool ok = OrderData.Add(order);
@@ -104,6 +121,10 @@ namespace Backend.Controllers
 
         [HttpPatch]
         [Route("update/{id}")]
+        /**
+         * Actualiza por medio del API una orden a la base
+         * Recibe un objeto order por medio del un JSON
+         */
         public Object Put([FromBody] Order order, int id)
         {
             bool ok = OrderData.Edit(order, id);
@@ -127,6 +148,9 @@ namespace Backend.Controllers
 
         [HttpDelete]
         [Route("delete/{id}")]
+        /**
+         * Elimina la orden que tenga el id dado
+         */
         public Object Delete(int id)
         {
             bool ok = OrderData.Delete(id);

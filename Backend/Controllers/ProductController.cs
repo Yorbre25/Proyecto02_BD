@@ -11,6 +11,10 @@ namespace Backend.Controllers
     {
         [HttpGet]
         [Route("get_all")]
+        /**
+         * Proporciona por medio del API la lista de productos
+         * 
+         */
         public Object Get()
         {
             try
@@ -34,6 +38,10 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("get/{id}")]
+        /**
+         * Proporciona por medio del API el producto relacionado al id
+         * 
+         */
         public Object Get(int id)
         {
             try
@@ -57,6 +65,10 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
+        /**
+         * Agrega por medio del API un producto a la base
+         * Recibe un objeto product por medio del un JSON
+         */
         public Object Post([FromBody] Product product)
         {
             bool ok = ProductData.Add(product);
@@ -80,6 +92,10 @@ namespace Backend.Controllers
 
         [HttpPatch]
         [Route("update/{id}")]
+        /**
+         * Actualiza por medio del API un producto a la base
+         * Recibe un objeto product por medio del un JSON
+         */
         public Object Put([FromBody] Product product, int id)
         {
             bool ok = ProductData.Edit(product, id);
@@ -103,6 +119,9 @@ namespace Backend.Controllers
 
         [HttpDelete]
         [Route("delete/{id}")]
+        /**
+         * Elimina un producto que tenga el id dado
+         */
         public Object Delete(int id)
         {
             bool ok = ProductData.Delete(id);
