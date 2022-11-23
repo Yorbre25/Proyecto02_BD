@@ -57,6 +57,7 @@ interface FeedbackResponse extends ServerResponse {
 interface FeedbacksResponse extends ServerResponse {
     reviews: Feedback[]
 }
+
 export {
 
     ServerResponse,
