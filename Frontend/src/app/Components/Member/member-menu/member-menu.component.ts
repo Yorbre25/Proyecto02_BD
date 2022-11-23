@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +15,7 @@ export class MemberMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.managerUsername = Cookies.get('username')!
+   // this.managerUsername = Cookies.get('username')!
   }
 
 }

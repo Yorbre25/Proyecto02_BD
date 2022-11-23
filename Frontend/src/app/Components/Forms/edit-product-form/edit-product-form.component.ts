@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie'
+//import Cookies from 'js-cookie'
 
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
@@ -92,7 +92,7 @@ export class EditProductFormComponent implements OnInit, OnChanges {
 
   onSubmit = async () => {
     const newProductInfo = this.formsService.getFormValue()
-    newProductInfo.storeId = Cookies.get('storeID')
+    //newProductInfo.storeId = Cookies.get('storeID')
 
     await this.updateProduct(newProductInfo)
       .then((response) => {

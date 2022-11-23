@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie'
+//import Cookies from 'js-cookie'
 
 import { Component, OnInit } from '@angular/core'
 
@@ -29,9 +29,9 @@ export class MemberLoginComponent implements OnInit {
           alert(response.message)
         }
         else {
-          Cookies.set('storeID', response.storeID)
-          Cookies.set('username', loginInfo.username)
-          Cookies.set('userType', 'member')
+        //  Cookies.set('storeID', response.storeID)
+        //  Cookies.set('username', loginInfo.username)
+       //   Cookies.set('userType', 'member')
 
           window.location.href = '/member'
         }

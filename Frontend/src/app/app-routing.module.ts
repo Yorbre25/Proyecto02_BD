@@ -24,6 +24,7 @@ import { ClientBusinessComponent } from './Components/Client/client-business/cli
 import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
 import { ClientOrderComponent } from './Components/Client/client-order/client-order.component';
 import { ClientRecentsComponent } from './Components/Client/client-recents/client-recents.component';
+import { ClientSTOREComponent } from './Components/Client/client-store/client-store.component';
 
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component'
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component'
@@ -79,7 +80,8 @@ const routes: Routes = [
     component: ClientMainComponent,
     children: [
       { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
-      { path: 'business', component: ClientBusinessComponent },
+      { path: 'stores', component: ClientBusinessComponent },
+      { path: 'stores/:id', component: ClientSTOREComponent },
       { path: 'cart', component: ClientCartComponent },
       { path: 'recent', component: ClientRecentsComponent },
       { path: 'order', component: ClientOrderComponent },

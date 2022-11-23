@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 import { Product } from 'src/app/Interfaces/Product'
@@ -26,19 +26,19 @@ export class MemberProductManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storeID = Number(Cookies.get('storeID'))
-    this.productService.getAllStoreProducts(storeID)
-      .subscribe(response => {
-        if (response.status === 'error') {
-          alert(response.message)
-        }
-        else if (response.products) {
-          this.tableData = response.products
-        }
-        else {
-          console.log(response)
-        }
-      })
+   // const storeID = Number(Cookies.get('storeID'))
+  //  this.productService.getAllStoreProducts(storeID)
+   //   .subscribe(response => {
+  //      if (response.status === 'error') {
+  //        alert(response.message)
+  //      }
+  //      else if (response.products) {
+  //        this.tableData = response.products
+   //     }
+   //     else {
+  //        console.log(response)
+  //      }
+  //    })
   }
 }
 
