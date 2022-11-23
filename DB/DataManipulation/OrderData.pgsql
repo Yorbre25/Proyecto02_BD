@@ -28,6 +28,7 @@ create or replace procedure Insert_order(
     In_City varchar(15),
     In_District varchar(15),
     In_ClientId int,
+    In_StoreId int,
     In_Products int Array,
     In_numProducts int Array
 )
@@ -40,17 +41,21 @@ begin
     Province,
     City,
     District,
-    ClientId
+    ClientId,
+    StoreId,
+    Status
   )VALUES(
     In_Province,
     In_City,
     In_District,
-    In_ClientId
+    In_ClientId,
+    In_StoreId,
+    'Preparando'
   ) RETURNING ID Into id_var;
 
   call insert_order_products(id_var, In_Products, In_numProducts);
   call set_order_total(id_var);
-  call set_deliveryman(id_var, In_Province, In_City, In_District);
+  -- call set_deliveryman(id_var, In_Province, In_City, In_District);
 end; $$;
 
 

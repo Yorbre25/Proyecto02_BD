@@ -1,4 +1,4 @@
-//import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
@@ -40,8 +40,9 @@ export class LoginService {
   }
 
   logout = () => {
-   // Cookies.remove('username')
-   // Cookies.remove('userType')
+    Cookies.remove('username')
+    Cookies.remove('userType')
+    Cookies.remove('storeID')
 
     window.location.href = '/'
   }

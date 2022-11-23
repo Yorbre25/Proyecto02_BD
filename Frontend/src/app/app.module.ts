@@ -60,7 +60,8 @@ import { EditStoreManagerFormComponent } from './Components/Forms/edit-store-man
 import { MemberProductInfoComponent } from './Components/Member/member-product-info/member-product-info.component'
 
 import { ClientOrderComponent } from './Components/Client/client-order/client-order.component'
-import { ClientRecentsComponent } from './Components/Client/client-recents/client-recents.component'
+import { ClientRecentsComponent } from './Components/Client/client-recents/client-recents.component';
+import { ClientSTOREComponent } from './Components/Client/client-store/client-store.component'
 
 @NgModule({
   declarations: [
@@ -118,7 +119,8 @@ import { ClientRecentsComponent } from './Components/Client/client-recents/clien
     MemberProductInfoComponent,
     ClientOrderComponent,
     ClientRecentsComponent,
-    EditStoreManagerFormComponent
+    EditStoreManagerFormComponent,
+    ClientSTOREComponent
   ],
   imports: [
     BrowserModule,

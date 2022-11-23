@@ -1,26 +1,20 @@
-<div class="flex-column-center my-5" >
+<div class="flex-column-center my-2" >
     <div class="flex-start">
         <img src="assets/logo.png" alt="Logo-UbyTEC" width="150" >
         <h1 class="fs-6 text-center m-1">Cliente</h1>
-    </div>
-    <div class="text-center m-0">
-        Bienvenido, <span class=" fw-bold d-inline"> {{'--> nombre cliente <--'}} </span>
+        <a class="btn btn-lg btn-primary py-3 w-100" href="client/cart">Mi Carrito</a>
     </div>
 </div>
 
-<div class="flex-column-center w-100 px-5">
-    <nav class="d-flex flex-column gap-5 align-items-center justify-content-center w-75 h-100">
-        <div class="row gap-5 w-100">  
-            <div class="col p-0">
-                <a class="btn btn-lg btn-primary py-3 w-100" href="client/restaurants">Restaurantes</a>
-            </div>
-            <div class="col p-0">
-                <a class="btn btn-lg btn-primary py-3 w-100" href="client/cart">Mi Carrito</a>
-            </div>
-            <div class="col p-0">
-                <a class="btn btn-lg btn-primary py-3 w-100" href="client/recent">Pedidos recientes</a>
-            </div>
-        </div>
-    </nav>
-</div>
 
+
+<div class="row gap-5 w-100">
+            
+    <div class="col p-0">
+        <app-client-business></app-client-business>
+    </div>
+    <div class="col p-0">
+        <app-client-recents></app-client-recents>
+    </div>
+
+</div>

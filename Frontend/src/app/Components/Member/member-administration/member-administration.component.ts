@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries'
 import { StoreManager } from 'src/app/Interfaces/Store'
@@ -34,25 +34,25 @@ export class MemberAdministrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = Number(Cookies.get('storeID'))
-    this.storeService.getStore(id)
-      .subscribe((response: any) => {
-        if (response.status === 'error') {
-          alert(response.message)
-        }
-        else if (response.storeData.manager) {
-          this.manager = response.storeData.manager
-          this.managerCopy = structuredClone(this.manager)
+   // const id = Number(Cookies.get('storeID'))
+   // this.storeService.getStore(id)
+    //  .subscribe((response: any) => {
+    //    if (response.status === 'error') {
+    //      alert(response.message)
+    //    }
+    //    else if (response.storeData.manager) {
+    //      this.manager = response.storeData.manager
+    //     this.managerCopy = structuredClone(this.manager)
+//
+   //       this.manager.name =
+   //         `${this.manager.name} ${this.manager.lastName1} ${this.manager.lastName2}`
 
-          this.manager.name =
-            `${this.manager.name} ${this.manager.lastName1} ${this.manager.lastName2}`
-
-          this.manager.province =
-            `${this.manager.province}, ${this.manager.city}, ${this.manager.district}`
-        }
-        else {
-          console.log(response)
-        }
-      })
+    //      this.manager.province =
+     //       `${this.manager.province}, ${this.manager.city}, ${this.manager.district}`
+     //   }
+    //    else {
+     //     console.log(response)
+    //    }
+   //   })
   }
 }

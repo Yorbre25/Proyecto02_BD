@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
-import Cookies from 'js-cookie'
+//import Cookies from 'js-cookie'
 import { Product } from 'src/app/Interfaces/Product'
 
 import { ProductCategory } from 'src/app/Interfaces/ProductCategory'
@@ -82,7 +82,7 @@ export class AddProductFormComponent implements OnInit {
 
   onSubmit = async () => {
     const newProductInfo = this.formsService.getFormValue()
-    newProductInfo.storeId = Cookies.get('storeID')
+    //newProductInfo.storeId = Cookies.get('storeID')
 
     await this.createProduct(newProductInfo)
       .then((response) => { this.auxFunctionsService.handleResponse(response) })
