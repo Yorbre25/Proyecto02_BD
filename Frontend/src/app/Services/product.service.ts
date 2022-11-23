@@ -5,67 +5,72 @@ import { Observable } from 'rxjs'
 import { apiURL } from '../app.component'
 
 import {
-  ManagersResponse,
-  ManagerResponse,
+  ProductsResponse,
+  ProductResponse,
   ServerResponse,
 } from '../Interfaces/ServerResponses'
-
-import { AuxFunctionsService } from './aux-functions.service'
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManagerService {
-  url: string = `${apiURL}/admin`
+export class ProductService {
+  url: string = `${apiURL}/product`
 
   constructor(
     private httpClient: HttpClient,
-    private auxFunctionsService: AuxFunctionsService
   ) { }
 
   /**
-   * Solicita al servidor que devuelva todos los empleados
+   * Solicita al servidor que devuelva todos los productos
   */
-  getAllManagers = (): Observable<ManagersResponse> =>
-    this.httpClient.get<ManagersResponse>(`${this.url}/get_all`)
+  getAllProducts = (): Observable<ProductsResponse> =>
+    this.httpClient.get<ProductsResponse>(`${this.url}/get_all`)
 
   /**
-   * Solicita al servidor que devuelva la información de un empleado
-   * @param managerID ID del empleado
+    * Solicita al servidor que devuelva todos los productos de una tienda
   */
-  getManager = (id: number): Observable<ManagerResponse> =>
-    this.httpClient.get<ManagerResponse>(`${this.url}/get/${id}`)
+  getAllStoreProducts = (storeID: number): Observable<ProductsResponse> =>
+    this.httpClient.get<ProductsResponse>(`${this.url}/get_all_by_store/${storeID}`)
 
   /**
-   * Solicita al servidor que cree un nuevo empleado
-   * @param manager Objeto con la información del empleado
+   * Solicita al servidor que devuelva la información de un producto
+   * @param productID ID del producto
+  */
+  getProduct = (id: number): Observable<ProductResponse> =>
+    this.httpClient.get<ProductResponse>(`${this.url}/get/${id}`)
+
+  /**
+   * Solicita al servidor que cree un nuevo producto
+   * @param product Objeto con la información del producto
    * @returns Objeto con respuesta del servidor
   */
-  createManager = (manager: any): Observable<ServerResponse> => {
-    manager.phoneNumbers
-      .forEach((phoneNumber: number) => phoneNumber.toString())
+  createProduct = (product: any): Observable<ServerResponse> => {
+    product.barCode = Number(product.barCode)
+    product.price = Number(product.price)
+    product.categoryId = Number(product.categoryId)
+    product.storeId = Number(product.storeId)
 
-    return this.httpClient.post<ServerResponse>(`${this.url}/add`, manager)
+    console.log(product)
+
+
+    return this.httpClient.post<ServerResponse>(`${this.url}/add`, product)
   }
 
   /**
-   * Solicita al servidor que actualice la información de un empleado
-   * @param managerID ID del empleado
-   * @param manager Objeto con la información del empleado
+   * Solicita al servidor que actualice la información de un producto
+   * @param productID ID del producto
+   * @param product Objeto con la información del producto
    * @returns Objeto con respuesta del servidor
   */
-  updateManager = (managerID: number, manager: any): Observable<ServerResponse> => {
-    manager.phoneNumbers
-      .forEach((phoneNumber: number) => phoneNumber.toString())
-
-    return this.httpClient.patch<ServerResponse>(`${this.url}/update/${managerID}`, manager)
+  updateProduct = (productID: number, product: any): Observable<ServerResponse> => {
+    return this.httpClient.patch<ServerResponse>(`${this.url}/update/${productID}`, product)
   }
 
   /**
-   * Solicita al servidor que elimine un empleado
-   * @param id ID del empleado
+   * Solicita al servidor que elimine un producto
+   * @param id ID del producto
    * @returns Objeto con respuesta del servidor
   */
-  deleteManager = (id: number): Observable<ServerResponse> =>
+  deleteProduct = (id: number): Observable<ServerResponse> =>
     this.httpClient.delete<ServerResponse>(`${this.url}/delete/${id}`)
 } 

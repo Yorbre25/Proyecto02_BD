@@ -22,7 +22,6 @@ export class AddStoreFormComponent implements OnInit, OnChanges {
   @Input() storeDataInfo?: StoreData
 
   constructor(
-    private formsService: FormsService,
     private auxFunctionsService: AuxFunctionsService,
     private storeService: StoreService
   ) {

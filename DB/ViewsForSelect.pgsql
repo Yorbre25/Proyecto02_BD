@@ -40,13 +40,18 @@ create or replace view Full_Deliveryman AS
         from Deliveryman as D;
 
 create or replace view Full_Product AS
-    Select 
-        P.BarCode,
-        P.Name,
-        P.Price,
-        PC.Name as Category
-        from Product as P 
-        join Product_Category as PC on P.CategoryId = PC.Id;
+  Select 
+    P.BarCode,
+    P.Price,
+    P.Name,
+    PC.Id as CategoryID,
+    PC.Name as CategoryName,
+    PP.Photo as Photo
+    from Product as P
+    join Product_Category as PC on P.CategoryId = PC.Id
+    join Product_Photos as PP on P.BarCode = PP.ProductBarCode
+    join Store_Products as SP on P.barcode = SP.productBarCode
+	  join Store as S on S.id = SP.storeID
 
 create or replace view Full_Store AS
     Select   

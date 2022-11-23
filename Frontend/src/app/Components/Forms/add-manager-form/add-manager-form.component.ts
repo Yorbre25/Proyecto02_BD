@@ -80,7 +80,6 @@ export class AddManagerFormComponent implements OnInit {
   }
 
   createManager = (newManagerInfo: Manager): Promise<ServerResponse> => {
-
     return new Promise((resolve, reject) => {
       this.managerService.createManager(newManagerInfo)
         .subscribe((response: ServerResponse) => resolve(response))
