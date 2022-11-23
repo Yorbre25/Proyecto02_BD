@@ -55,10 +55,10 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
 import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
 import { ReportsComponent } from './Components/Manager/reports/reports.component';
-import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component'
-import { EditStoreManagerFormComponent } from './Components/Forms/edit-store-manager-form/edit-store-manager-form.component'
-
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
 import { ClientOrderComponent } from './Components/Client/client-order/client-order.component'
+import { ClientRecentsComponent } from './Components/Client/client-recents/client-recents.component'
+import { EditStoreManagerFormComponent } from './Components/Forms/edit-store-manager-form/edit-store-manager-form.component'
 
 
 @NgModule({
@@ -113,8 +113,9 @@ import { ClientOrderComponent } from './Components/Client/client-order/client-or
     ApplicantListComponent,
     ReportsComponent,
     ClientMenuComponent,
-    EditStoreManagerFormComponent,
-    ClientOrderComponent
+    ClientOrderComponent,
+    ClientRecentsComponent,
+    EditStoreManagerFormComponent
   ],
   imports: [
     BrowserModule,
