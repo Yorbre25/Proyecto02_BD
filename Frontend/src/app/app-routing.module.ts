@@ -30,6 +30,7 @@ import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/sto
 import { StoreInfoComponent } from './Components/Manager/store-info/store-info.component'
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component'
 import { ReportsComponent } from './Components/Manager/reports/reports.component'
+import { MemberProductInfoComponent } from './Components/Member/member-product-info/member-product-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -70,6 +71,7 @@ const routes: Routes = [
       { path: 'administration', component: MemberAdministrationComponent },
       { path: 'orders', component: MemberOrdersComponent },
       { path: 'product_management', component: MemberProductManagementComponent },
+      { path: 'product_management/:id', component: MemberProductInfoComponent },
     ]
   },
   {

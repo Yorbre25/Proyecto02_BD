@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
   [ApiController]
-  [Route("productcategory")]
+  [Route("product_category")]
   public class ProductCategoryController : Controller
   {
     [HttpGet]

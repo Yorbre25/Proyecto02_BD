@@ -13,6 +13,10 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("get_all/{id}")]
+        /**
+        * Proporciona por medio del API la lista de reseñas segun el id de un cliente
+        * 
+        */
         public Object GetAll(int id)
         {
             try
@@ -32,8 +36,13 @@ namespace Backend.Controllers
                 };
             }
         }
+
         [HttpGet]
         [Route("get/{id}")]
+        /**
+         * Proporciona por medio del API una reseña con el id de la orden dado
+         * 
+         */
         public Object Get(int id)
         {
             try
@@ -56,6 +65,10 @@ namespace Backend.Controllers
         }
         [HttpPost]
         [Route("add")]
+        /**
+         * Agrega por medio del API una reseña a la base
+         * Recibe un objeto feedback por medio del un JSON
+         */
         public Object Add([FromBody] Feedback feedback)
         {
             if (feedback == null)
@@ -74,7 +87,9 @@ namespace Backend.Controllers
 
         [HttpDelete]
         [Route("delete/{id}")]
-
+        /**
+         * Elimina la reseña que tenga el id dado
+         */
         public Object Delete(int id)
         {
             db.DeleteFeedback(id);
