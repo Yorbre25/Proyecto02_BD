@@ -48,6 +48,7 @@ create table _Order
     District varchar(15),
     ClientId int not null,
     DelManId int,
+    StoreId int,
     Status varchar(10) DEFAULT 'En proceso',
     PRIMARY KEY(Id)
 );
@@ -190,6 +191,12 @@ ALTER TABLE _ORDER
 ADD CONSTRAINT ORDER_DELIVERYMAN
 FOREIGN KEY (DelManId)
 REFERENCES Deliveryman(Id)
+ON UPDATE CASCADE;
+
+ALTER TABLE _ORDER
+ADD CONSTRAINT ORDER_STORE
+FOREIGN KEY (StoreId)
+REFERENCES Store(Id)
 ON UPDATE CASCADE;
 
 -- Foreign Keys Deliveryman_Phones

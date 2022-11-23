@@ -8,10 +8,10 @@ AS $$
 $$;
 
 create or replace function Get_Client_Password(In_Username text)
-returns text
+returns client_login
 LANGUAGE sql
 AS $$
-  select C.Password
+  select C.Password, C.Id
   from client as C
   where C.Username = In_Username;
 $$;

@@ -188,7 +188,7 @@ namespace Backend.Data
             string hashedPassword;
 
             Client oldCli = Get(id);
-            string oldPassword = PasswordData.getClientPassword(oldCli.username);
+            string oldPassword = PasswordData.getClientPassword(oldCli.username)[0];
 
             if (client.password == null)
             {

@@ -7,6 +7,7 @@ import { SalePerClient, SalePerStore } from "./Reports"
 import { Feedback } from "./Feedback"
 import { Product } from "./Product"
 import { ProductCategory } from "./ProductCategory"
+import { Order } from "./Order"
 
 interface ServerResponse {
     status: 'ok' | 'error'
@@ -85,6 +86,20 @@ interface ProductCategoryResponse extends ServerResponse {
     productCaty: ProductCategory
 }
 
+interface LoginClientResponse extends ServerResponse {
+    status:'ok'|'error'
+    id?:number
+    message?: string
+}
+
+interface OrdersResponse extends ServerResponse {
+    orders: Order[]
+}
+
+interface OrderResponse extends ServerResponse {
+    order: Order
+}
+
 export {
 
     ServerResponse,
@@ -105,6 +120,8 @@ export {
     SalePerClientResponse,
     SalePerStoreResponse,
     FeedbackResponse,
-    FeedbacksResponse
-
+    FeedbacksResponse,
+    LoginClientResponse,
+    OrdersResponse,
+    OrderResponse
 }

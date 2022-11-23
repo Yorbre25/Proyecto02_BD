@@ -8,16 +8,16 @@
             <app-view-order-form></app-view-order-form>
         </app-modal>
     </div>
-    <h4 class="text-center mb-3">Listo para Entrega</h4>
+    <h4 class="text-center mb-3">Preparando</h4>
     <div class="overflow-scroll" style="height: 60vh;">
-        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+        <app-table [tableColumns]="tableColumns" [tableData]="preparingTableData" rowIDKey="id"></app-table>
     </div>
     <h4 class="text-center mb-3">En camino</h4>
     <div class="overflow-scroll" style="height: 60vh;">
-        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+        <app-table [tableColumns]="tableColumns" [tableData]="onTheWayTableData" rowIDKey="id"></app-table>
     </div>
     <h4 class="text-center mb-3">Entregado</h4>
     <div class="overflow-scroll" style="height: 60vh;">
-        <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="id"></app-table>
+        <app-table [tableColumns]="tableColumns" [tableData]="deliveredTableData" rowIDKey="id"></app-table>
     </div>
 </div>

@@ -190,7 +190,7 @@ namespace Backend.Data
             string hashedPassword;
 
             DeliveryMan oldDelman = Get(id);
-            string oldPassword = PasswordData.getClientPassword(oldDelman.username);
+            string oldPassword = PasswordData.getClientPassword(oldDelman.username)[0];
 
             if (delman.password == null)
             {
