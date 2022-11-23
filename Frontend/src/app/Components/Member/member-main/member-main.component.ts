@@ -14,6 +14,7 @@ export class MemberMainComponent implements OnInit {
       { href: 'administration', name: 'Administración' },
       { href: 'product_management', name: 'Productos' },
       { href: 'orders', name: 'Pedidos' },
+      { href: 'orders', name: 'Pedidos' },
     ]
   }
 

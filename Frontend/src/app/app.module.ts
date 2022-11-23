@@ -57,7 +57,8 @@ import { MemberListComponent } from './Components/Manager/member-list/member-lis
 import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
 import { ReportsComponent } from './Components/Manager/reports/reports.component';
 import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
-import { ClientOrderComponent } from './Components/Client/client-order/client-order.component'
+import { ClientOrderComponent } from './Components/Client/client-order/client-order.component';
+import { ClientRecentsComponent } from './Components/Client/client-recents/client-recents.component'
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { ClientOrderComponent } from './Components/Client/client-order/client-or
     ApplicantListComponent,
     ReportsComponent,
     ClientMenuComponent,
-    ClientOrderComponent
+    ClientOrderComponent,
+    ClientRecentsComponent
   ],
   imports: [
     BrowserModule,

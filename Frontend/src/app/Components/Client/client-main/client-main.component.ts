@@ -11,7 +11,7 @@ export class ClientMainComponent implements OnInit {
   constructor() {
     this.navbarLinks = [
       { href: 'restaurants', name: 'Restaurantes' },
-      { href: 'product_management', name: 'Mis Pedidos' },
+      { href: 'recent', name: 'Mis Pedidos' },
       { href: 'cart', name: 'Mi carrito' },
     ]
   }
