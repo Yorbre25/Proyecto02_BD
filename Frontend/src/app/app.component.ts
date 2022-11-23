@@ -35,7 +35,8 @@ class AppComponent {
   }
 }
 
-const apiURL = 'https://apiubytec.azurewebsites.net/' //'https://localhost:7156'
+// const apiURL = 'https://apiubytec.azurewebsites.net/'
+const apiURL = 'https://localhost:7156'
 
 export default AppComponent
 export { AppComponent, apiURL }
