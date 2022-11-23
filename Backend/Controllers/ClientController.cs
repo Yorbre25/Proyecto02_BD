@@ -10,6 +10,10 @@ namespace Backend.Controllers
     {
         [HttpGet]
         [Route("get_all")]
+        /**
+         * Proporciona por medio del API la lista de clientes
+         * 
+         */
         public Object Get()
         {
             try
@@ -33,6 +37,10 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("get/{id}")]
+        /**
+         * Proporciona por medio del API el cliente con el id dado
+         * 
+         */
         public Object Get(int id)
         {
             try
@@ -56,6 +64,10 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("add")]
+        /**
+         * Agrega por medio del API un cliente a la base
+         * Recibe un objeto client por medio del un JSON
+         */
         public Object Post([FromBody] Client client)
         {
             bool ok = ClientData.Add(client);
@@ -79,6 +91,10 @@ namespace Backend.Controllers
 
         [HttpPatch]
         [Route("update/{id}")]
+        /**
+         * Actualiza por medio del API un cliente a la base
+         * Recibe un objeto client por medio del un JSON
+         */
         public Object Put([FromBody] Client client, int id)
         {
             bool ok = ClientData.Edit(client, id);
@@ -102,6 +118,9 @@ namespace Backend.Controllers
 
         [HttpDelete]
         [Route("delete/{id}")]
+        /**
+         * Elimina el cliente que tenga el id dado
+         */
         public Object Delete(int id)
         {
             bool ok = ClientData.Delete(id);

@@ -19,9 +19,10 @@ namespace Backend.Data
             await Collection.DeleteOneAsync(filter);
         }
 
-        public async Task<List<Feedback>> GetAllFeedbacks()
+        public async Task<List<Feedback>> GetAllFeedbacks(int id)
         {
-            return await Collection.FindAsync(new BsonDocument()).Result.ToListAsync();
+            var filter = Builders<Feedback>.Filter.Eq(s => s.idClient, id);
+            return await Collection.FindAsync(new BsonDocument { { "idClient", id } }).Result.ToListAsync();
         }
 
         public async Task<Feedback> GetFeedback(int id)

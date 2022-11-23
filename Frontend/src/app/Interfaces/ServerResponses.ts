@@ -3,6 +3,7 @@ import { DeliveryMan } from "./DeliveryMan"
 import { StoreType } from "./StoreType"
 import { StoreData } from "./Store"
 import { SalePerClient, SalePerStore } from "./Reports"
+import { Feedback } from "./Feedback"
 import { Product } from "./Product"
 import { ProductCategory } from "./ProductCategory"
 
@@ -59,6 +60,14 @@ interface SalePerStoreResponse extends ServerResponse {
     report: SalePerStore[]
 }
 
+interface FeedbackResponse extends ServerResponse {
+    review: Feedback
+}
+
+interface FeedbacksResponse extends ServerResponse {
+    reviews: Feedback[]
+}
+
 interface ProductCategoriesResponse extends ServerResponse {
     productCats: ProductCategory[]
 }
@@ -68,6 +77,7 @@ interface ProductCategoryResponse extends ServerResponse {
 }
 
 export {
+
     ServerResponse,
     ManagersResponse,
     ManagerResponse,
@@ -82,5 +92,7 @@ export {
     ProductCategoriesResponse,
     ProductCategoryResponse,
     SalePerClientResponse,
-    SalePerStoreResponse
+    SalePerStoreResponse,
+    FeedbackResponse,
+    FeedbacksResponse
 }
