@@ -55,8 +55,9 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
 import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
 import { ReportsComponent } from './Components/Manager/reports/reports.component';
-import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component'
-import { EditStoreManagerFormComponent } from './Components/Forms/edit-store-manager-form/edit-store-manager-form.component'
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
+import { EditStoreManagerFormComponent } from './Components/Forms/edit-store-manager-form/edit-store-manager-form.component';
+import { MemberProductInfoComponent } from './Components/Member/member-product-info/member-product-info.component'
 
 import { ClientOrderComponent } from './Components/Client/client-order/client-order.component'
 
@@ -114,6 +115,7 @@ import { ClientOrderComponent } from './Components/Client/client-order/client-or
     ReportsComponent,
     ClientMenuComponent,
     EditStoreManagerFormComponent,
+    MemberProductInfoComponent
     ClientOrderComponent
   ],
   imports: [

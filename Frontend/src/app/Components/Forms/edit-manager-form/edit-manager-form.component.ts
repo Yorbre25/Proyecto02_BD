@@ -101,13 +101,11 @@ export class EditManagerFormComponent implements OnInit {
         if (response.status === 'error') {
           alert(response.message)
         }
+        else if (newManagerInfo.id !== this.managerInfo?.id) {
+          window.location.href = `/manager/employees/${newManagerInfo.id}`
+        }
         else {
-          if (newManagerInfo.id !== this.managerInfo?.id) {
-            window.location.href = `/manager/employees/${newManagerInfo.id}`
-          }
-          else {
-            window.location.reload();
-          }
+          window.location.reload();
         }
       })
   }
