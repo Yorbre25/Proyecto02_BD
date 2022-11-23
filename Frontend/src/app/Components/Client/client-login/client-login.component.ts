@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core'
 import { LoginService } from 'src/app/Services/login-service.service'
 import { FormsService } from 'src/app/Services/forms.service'
 import { LoginInfo } from 'src/app/Interfaces/Auxiliaries'
+import { CookieService } from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-client-login',
@@ -31,6 +32,7 @@ export class ClientLoginComponent implements OnInit {
         else {
           Cookies.set('username', loginInfo.username)
           Cookies.set('userType', 'manager')
+          Cookies.set('idClient', response.id)
 
           window.location.href = '/client'
         }

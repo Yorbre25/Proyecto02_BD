@@ -7,7 +7,7 @@
     public string province { get; set; }
     public string city { get; set; }
     public string district { get; set; }
-    public int clientId { get; set; }
+    public int? clientId { get; set; }
     public int delManId { get; set; }
     public int storeId { get; set; }
     public string? status { get; set; }

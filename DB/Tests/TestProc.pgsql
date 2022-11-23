@@ -56,7 +56,7 @@ call Delete_Store_Type(5);
 
 select * from Get_All_Orders();
 select * from Get_Order(1);
-call insert_order('Limón', 'Limón', 'Limón', 1234567, array[123], array[2]);
+call insert_order('Limón', 'Limón', 'Limón', 1234567, 634523 array[123], array[2]);
 call update_order(7, 60, 'Triunfo', 'Limón', 'Limón', 1234567, 2763495, array[222], array[5]);
 call order_delivered(6);
 call delete_Order(6);

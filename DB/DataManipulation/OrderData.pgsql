@@ -15,11 +15,11 @@ AS $$
 $$;
 
 
-CREATE OR REPLACE FUNCTION Get_Order_Cli(in_idCli int)
-returns setof Full_Order
+CREATE OR REPLACE FUNCTION Get_Order_Cli()
+returns setof Full_Order_Cli
 LANGUAGE sql
 AS $$
-  Select * from Full_Order_Cli where ClientId = in_idCli
+  Select * from Full_Order_Cli
 $$;
 
 -- Insert order
@@ -82,7 +82,10 @@ begin
     SELECT D.id into VarDelManId FROM Deliveryman as D order by random() LIMIT 1;
   END IF;
   
-  Update _order set delmanid = VarDelManId where Id = OrderId;
+  Update _order set 
+    delmanid = VarDelManId,
+    status = 'En camino'
+  where Id = OrderId;
   Update deliveryman set available = false where Id = VarDelManId;
 end; $$;
 

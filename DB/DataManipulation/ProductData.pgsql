@@ -34,7 +34,6 @@ AS $$
   select * from Full_Product
 $$;
 
-
 --get product by barCode
 create or replace function Get_Product(in_barCode int)
 returns setof Full_Product

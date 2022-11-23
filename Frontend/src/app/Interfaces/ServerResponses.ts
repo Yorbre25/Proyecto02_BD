@@ -88,7 +88,7 @@ interface ProductCategoryResponse extends ServerResponse {
 
 interface LoginClientResponse extends ServerResponse {
     status:'ok'|'error'
-    id?:number
+    id?:any
     message?: string
 }
 

@@ -120,9 +120,9 @@ insert into _Order(
 	StoreId,
 	Status)
 VALUES
-	('3500', 'Cartago', 'Cartago', 'Cartago', 1234567, 756345, 163235,'Entregado'),
+	('3500', 'Cartago', 'Cartago', 'Cartago', 1234567, 756345, 163235,'En camino'),
 	('1200', 'Cartago', 'Cartago', 'Cartago', 303520771, 756345, 9759832, 'Entregado'),
-	('2500', 'Cartago', 'Cartago', 'Cartago', 303520771, 2763495, 163235,'Entregado'),
+	('2500', 'Cartago', 'Cartago', 'Cartago', 303520771, 2763495, 163235,'Preparando'),
 	('3155', 'San José', 'San José', 'San José', 303520771, 756345, 9759832, 'Entregado'),
 	('2100', 'Limon', 'Limon', 'Limon', 1234567, 2763495, 634523,'Entregado');
 

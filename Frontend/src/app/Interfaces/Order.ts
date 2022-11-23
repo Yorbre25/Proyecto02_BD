@@ -1,11 +1,19 @@
-interface Order { 
-    id: number 
+interface Order {
+    id: number
     total: number
-    shippingAddress: string[]
-    clientId: string
-    delManId: string
+    province: string
+    city: string
+    district: string
+    clientId: number
+    delManId: number
+    storeId: number
+    status: string
+    clientName: string
+    delManName: string
+    clientLastName: string
+    delManLastName: string
     quantity: number[]
     productBarCode: number[]
-    delivMan: string
+    productName: string[]
 }
 export { Order }
