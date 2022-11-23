@@ -109,8 +109,9 @@ create or replace view Full_Administrator as
   from administrator as A;
 
 create or replace view manager_login as
-  select 
+  select
+    s.id as id,
     m.Password as password,
     aps.status as status,
     aps.observation as observation
-  from manager as m, store as s, applicant_store as aps
+  from manager as m, store as s, applicant_store as aps;

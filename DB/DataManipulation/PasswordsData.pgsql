@@ -22,6 +22,7 @@ returns setof manager_login
 LANGUAGE sql
 AS $$
   select 
+    s.id as id,
     m.Password as password,
     aps.status as status,
     aps.observation as observation

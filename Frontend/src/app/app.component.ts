@@ -26,6 +26,9 @@ class AppComponent {
           else if (urlBase !== 'login' && !userType) {
             this.router.navigate(['/login'])
           }
+          else if (urlBase !== userType) {
+            this.router.navigate([`/${userType}`])
+          }
         }
       })
     })

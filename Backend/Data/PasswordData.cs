@@ -51,6 +51,7 @@ public class PasswordData
       {
         passwordInfo = new ManagerPasswordInfo()
         {
+          id = Convert.ToInt32(dr["id"]),
           password = dr["password"].ToString()!,
           status = Convert.ToBoolean(dr["status"]),
           observation = dr["observation"].ToString()!
@@ -125,7 +126,9 @@ public class PasswordData
 
 public struct ManagerPasswordInfo
 {
+  public int id;
   public string password;
   public bool status;
   public string observation;
+  public bool? validPassword;
 }

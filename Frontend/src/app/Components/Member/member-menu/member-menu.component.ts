@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./member-menu.component.scss']
 })
 export class MemberMenuComponent implements OnInit {
+  managerUsername: string | null
 
-  constructor() { }
+  constructor() {
+    this.managerUsername = ''
+  }
 
   ngOnInit(): void {
+    this.managerUsername = Cookies.get('username')!
   }
 
 }

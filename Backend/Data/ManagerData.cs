@@ -47,7 +47,7 @@ namespace Backend.Data
       catch (Exception ex)
       {
         Console.WriteLine(ex.Message);
-        throw new Exception("Error al obtener el administrador de comercio");
+        throw new Exception("Error al obtener el manageristrador de comercio");
       }
     }
 
@@ -90,8 +90,7 @@ namespace Backend.Data
 
     public static bool Edit(Manager manager, int managerID)
     {
-      /* Hay que verificar que manager.oldPassword coincida
-      con la password guardada en la base */
+      string hashedPassword = getEditPassword(manager, managerID);
       string phoneNumbers = AuxFunctions.arrayToString(manager.phoneNumbers);
 
       var connection = Connection.Get();
@@ -107,7 +106,7 @@ namespace Backend.Data
           '{manager.province}',
           '{manager.city}',
           '{manager.district}',
-          '{manager.password}',
+          '{hashedPassword}',
           array{phoneNumbers}
         );", connection
       );
@@ -143,6 +142,31 @@ namespace Backend.Data
         Console.WriteLine(ex.Message);
         return false;
       }
+    }
+
+    private static string getEditPassword(Manager manager, int managerID)
+    {
+      string hashedPassword;
+
+      Manager oldManager = Get(managerID);
+      string oldPassword = PasswordData.getManagerPassword(oldManager.username).password;
+
+      if (manager.password == null)
+      {
+        hashedPassword = oldPassword;
+      }
+      else
+      {
+        bool validPassword = PasswordValidator
+          .ValidateManagerPassword(oldManager.username, manager.oldPassword!)
+          .validPassword!.Value;
+
+        if (!validPassword) throw new Exception("Contraseña incorrecta");
+
+        hashedPassword = BCrypt.Net.BCrypt.HashPassword(manager.password);
+      }
+
+      return hashedPassword;
     }
   }
 }

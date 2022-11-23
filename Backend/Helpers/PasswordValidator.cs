@@ -13,19 +13,6 @@ public class PasswordValidator
     {
       hashedPassword = PasswordData.getAdminPassword(username);
     }
-    else if (userType == "manager")
-    {
-      ManagerPasswordInfo managerPasswordInfo = PasswordData.getManagerPassword(username);
-
-      if (managerPasswordInfo.status == false)
-      {
-        throw new Exception($@"Inicio de sesión no habilitado{'\n'}Motivo: {managerPasswordInfo.observation}");
-      }
-      else
-      {
-        return BCrypt.Net.BCrypt.Verify(passwordInput, managerPasswordInfo.password);
-      }
-    }
     else if (userType == "client")
     {
       hashedPassword = PasswordData.getClientPassword(username);
@@ -40,5 +27,21 @@ public class PasswordValidator
     }
 
     return BCrypt.Net.BCrypt.Verify(passwordInput, hashedPassword);
+  }
+
+  public static ManagerPasswordInfo ValidateManagerPassword(string username, string passwordInput)
+  {
+    ManagerPasswordInfo managerPasswordInfo = PasswordData.getManagerPassword(username);
+    bool validPassword = BCrypt.Net.BCrypt.Verify(passwordInput, managerPasswordInfo.password);
+
+    if (validPassword && !managerPasswordInfo.status)
+    {
+      throw new Exception($@"Inicio de sesión no habilitado{'\n'}Motivo: {managerPasswordInfo.observation}");
+    }
+    else
+    {
+      managerPasswordInfo.validPassword = validPassword;
+      return managerPasswordInfo;
+    }
   }
 }
