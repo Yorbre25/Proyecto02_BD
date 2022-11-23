@@ -54,14 +54,15 @@ namespace Backend.Data
       }
     }
 
-    public static List<Order> GetAllCli(int idCli)
+    public static List<Order> GetAllCli()
     {
       List<Order> orderList = new List<Order>();
 
       var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand($@"CALL Get_Order_Cli({idCli})", connection);
+            NpgsqlCommand cmd = new NpgsqlCommand("Get_Order_Cli", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-      try
+            try
       {
         connection.Open();
         cmd.ExecuteNonQuery();
