@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http'
 import { apiURL } from '../app.component'
 
 import { LoginInfo } from '../Interfaces/Auxiliaries'
-import { ServerResponse } from '../Interfaces/ServerResponses'
+import { LoginClientResponse, ServerResponse } from '../Interfaces/ServerResponses'
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class LoginService {
     })
   }
 
-  clientLogin = (loginInfo: LoginInfo): Promise<ServerResponse> => {
+  clientLogin = (loginInfo: LoginInfo): Promise<LoginClientResponse> => {
     return new Promise((resolve, reject) => {
       this.httpClient.post<ServerResponse>(`${this.url}/client`, loginInfo)
         .subscribe((response) => resolve(response))

@@ -76,6 +76,13 @@ interface ProductCategoryResponse extends ServerResponse {
     productCaty: ProductCategory
 }
 
+interface LoginClientResponse extends ServerResponse {
+    status:'ok'|'error'
+    id?:number
+    message?: string
+
+}
+
 export {
 
     ServerResponse,
@@ -94,5 +101,6 @@ export {
     SalePerClientResponse,
     SalePerStoreResponse,
     FeedbackResponse,
-    FeedbacksResponse
+    FeedbacksResponse,
+    LoginClientResponse
 }

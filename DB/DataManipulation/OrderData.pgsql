@@ -15,6 +15,13 @@ AS $$
 $$;
 
 
+CREATE OR REPLACE FUNCTION Get_Order_Cli(in_idCli int)
+returns setof Full_Order
+LANGUAGE sql
+AS $$
+  Select * from Full_Order where ClientId = in_idCli
+$$;
+
 -- Insert order
 create or replace procedure Insert_order( 
     In_Province varchar(15),

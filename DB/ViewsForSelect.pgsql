@@ -51,7 +51,7 @@ create or replace view Full_Product AS
     join Product_Category as PC on P.CategoryId = PC.Id
     join Product_Photos as PP on P.BarCode = PP.ProductBarCode
     join Store_Products as SP on P.barcode = SP.productBarCode
-	  join Store as S on S.id = SP.storeID
+	  join Store as S on S.id = SP.storeID;
 
 create or replace view Full_Store AS
     Select   
@@ -120,3 +120,10 @@ create or replace view manager_login as
     aps.status as status,
     aps.observation as observation
   from manager as m, store as s, applicant_store as aps;
+
+
+create or replace view client_login as
+  select 
+    c.Password,
+    c.Id
+  from client as c;

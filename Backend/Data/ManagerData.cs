@@ -53,7 +53,7 @@ namespace Backend.Data
 
     public static bool Add(Manager manager)
     {
-      //Hay que generarle una contraseña aleatoria
+
       manager.password = BCrypt.Net.BCrypt.HashPassword("ABC123");
       string phoneNumbers = AuxFunctions.arrayToString(manager.phoneNumbers);
 
