@@ -1,4 +1,5 @@
 import { Manager } from "./Manager"
+import { Client } from "./Client"
 import { DeliveryMan } from "./DeliveryMan"
 import { StoreType } from "./StoreType"
 import { StoreData } from "./Store"
@@ -19,6 +20,14 @@ interface ManagersResponse extends ServerResponse {
 
 interface ManagerResponse extends ServerResponse {
     manager?: Manager
+}
+
+interface ClientsResponse extends ServerResponse {
+    clients?: Client[]
+}
+
+interface ClientResponse extends ServerResponse {
+    client?: Client
 }
 
 interface DeliveryMenResponse extends ServerResponse {
@@ -96,6 +105,8 @@ export {
     ServerResponse,
     ManagersResponse,
     ManagerResponse,
+    ClientsResponse,
+    ClientResponse,
     DeliveryMenResponse,
     DeliveryManResponse,
     StoreTypesResponse,
