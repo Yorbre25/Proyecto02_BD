@@ -23,6 +23,7 @@ import { ClientMenuComponent } from './Components/Client/client-menu/client-menu
 import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
 import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
 import { ClientOrderComponent } from './Components/Client/client-order/client-order.component';
+import { ClientRecentsComponent } from './Components/Client/client-recents/client-recents.component';
 
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component'
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component'
@@ -80,7 +81,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
       { path: 'business', component: ClientBusinessComponent },
       { path: 'cart', component: ClientCartComponent },
-      { path: 'recent', component: ClientCartComponent },
+      { path: 'recent', component: ClientRecentsComponent },
       { path: 'order', component: ClientOrderComponent },
     ]
   }
