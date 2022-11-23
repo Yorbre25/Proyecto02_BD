@@ -77,6 +77,7 @@ namespace Backend.Data
             province = dr["Province"].ToString()!,
             city = dr["City"].ToString()!,
             district = dr["District"].ToString()!,
+            clientId = Convert.ToInt32(dr["ClientId"]),
             clientName = dr["ClientName"].ToString()!,
             clientLastName = dr["ClientLastName"].ToString()!,
             delManName = dr["DelManName"].ToString()!,

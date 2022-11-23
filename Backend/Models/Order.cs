@@ -11,6 +11,7 @@
     public int delManId { get; set; }
     public int storeId { get; set; }
     public string? status { get; set; }
+    public int? clientID { get; set; }
     public string? clientName { get; set; }
     public string? delManName { get; set; }
     public string? clientLastName { get; set; }
