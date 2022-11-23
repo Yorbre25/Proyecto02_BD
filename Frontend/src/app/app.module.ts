@@ -35,7 +35,6 @@ import { MemberProductManagementComponent } from './Components/Member/member-pro
 import { AddProductFormComponent } from './Components/Forms/add-product-form/add-product-form.component';
 import { EditProductFormComponent } from './Components/Forms/edit-product-form/edit-product-form.component';
 import { AddMemberFormComponent } from './Components/Forms/add-member-form/add-member-form.component';
-import { EditMemberFormComponent } from './Components/Forms/edit-member-form/edit-member-form.component';
 import { ClientMainComponent } from './Components/Client/client-main/client-main.component';
 import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
 import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
@@ -56,7 +55,8 @@ import { ManagerLoginComponent } from './Components/Manager/manager-login/manage
 import { MemberListComponent } from './Components/Manager/member-list/member-list.component';
 import { ApplicantListComponent } from './Components/Manager/applicant-list/applicant-list.component';
 import { ReportsComponent } from './Components/Manager/reports/reports.component';
-import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component'
+import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
+import { EditStoreManagerFormComponent } from './Components/Forms/edit-store-manager-form/edit-store-manager-form.component'
 
 
 @NgModule({
@@ -91,7 +91,6 @@ import { ClientMenuComponent } from './Components/Client/client-menu/client-menu
     AddProductFormComponent,
     EditProductFormComponent,
     AddMemberFormComponent,
-    EditMemberFormComponent,
     ClientMainComponent,
     ClientMenuComponent,
     ClientBusinessComponent,
@@ -111,7 +110,8 @@ import { ClientMenuComponent } from './Components/Client/client-menu/client-menu
     MemberListComponent,
     ApplicantListComponent,
     ReportsComponent,
-    ClientMenuComponent
+    ClientMenuComponent,
+    EditStoreManagerFormComponent
   ],
   imports: [
     BrowserModule,

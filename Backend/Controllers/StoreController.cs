@@ -147,6 +147,40 @@ namespace Backend.Controllers
       }
     }
 
+    [HttpPatch]
+    [Route("edit_manager/{managerID}")]
+    public object Put([FromBody] Manager manager, int managerID)
+    {
+      bool managerOK = false;
+
+      try { managerOK = ManagerData.Edit(manager, managerID); }
+      catch (Exception ex)
+      {
+        return new
+        {
+          status = "error",
+          message = ex.Message
+        };
+      }
+
+      if (managerOK)
+      {
+        return new
+        {
+          status = "ok",
+          message = "Administrador de comercio modificado correctamente"
+        };
+      }
+      else
+      {
+        return new
+        {
+          status = "error",
+          message = "No se pudo modificar el administrador de comercio"
+        };
+      }
+    }
+
     [HttpGet]
     [Route("get_applicants")]
     public object GetApplicants()

@@ -11,6 +11,7 @@ import {
 } from '../Interfaces/ServerResponses'
 
 import { AuxFunctionsService } from './aux-functions.service'
+import { StoreManager } from '../Interfaces/Store'
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,12 @@ export class StoreService {
   */
   deleteStore = (id: number): Observable<ServerResponse> =>
     this.httpClient.delete<ServerResponse>(`${this.url}/delete/${id}`)
+
+  editStoreManager = (id: number, manager: any): Observable<ServerResponse> => {
+    manager.phoneNumbers.forEach((phoneNumber: number) => phoneNumber.toString())
+
+    return this.httpClient.patch<ServerResponse>(`${this.url}/edit_manager/${id}`, manager)
+  }
 
   /**
     * Solicita al servidor que devuelva todas las solicitudes de afiliación

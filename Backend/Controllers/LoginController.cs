@@ -1,3 +1,4 @@
+using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,8 @@ public class LoginController : Controller
   [Route("admin")]
   public object adminLogin([FromBody] LoginInfo loginInfo)
   {
-    bool validPassword = PasswordValidator.ValidatePassword(
-      loginInfo.username,
-      loginInfo.password,
-      "administrator"
-    );
+    bool validPassword = PasswordValidator
+      .ValidatePassword(loginInfo.username, loginInfo.password, "administrator");
 
     if (validPassword)
     {
@@ -35,15 +33,29 @@ public class LoginController : Controller
   [Route("manager")]
   public object managerLogin([FromBody] LoginInfo loginInfo)
   {
-    bool validPassword = PasswordValidator.ValidatePassword(
-      loginInfo.username,
-      loginInfo.password,
-      "manager"
-    );
+    ManagerPasswordInfo managerPasswordInfo;
 
-    if (validPassword)
+    try
     {
-      return new { status = "ok" };
+      managerPasswordInfo = PasswordValidator
+        .ValidateManagerPassword(loginInfo.username, loginInfo.password);
+    }
+    catch (Exception ex)
+    {
+      return new
+      {
+        status = "error",
+        message = ex.Message
+      };
+    }
+
+    if (managerPasswordInfo.validPassword!.Value)
+    {
+      return new
+      {
+        status = "ok",
+        storeID = managerPasswordInfo.id
+      };
     }
     else
     {
@@ -59,11 +71,8 @@ public class LoginController : Controller
   [Route("client")]
   public object clientLogin([FromBody] LoginInfo loginInfo)
   {
-    bool validPassword = PasswordValidator.ValidatePassword(
-      loginInfo.username,
-      loginInfo.password,
-      "client"
-    );
+    bool validPassword = PasswordValidator
+      .ValidatePassword(loginInfo.username, loginInfo.password, "client");
 
     if (validPassword)
     {
