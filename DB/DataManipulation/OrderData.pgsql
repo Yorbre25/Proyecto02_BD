@@ -15,11 +15,11 @@ AS $$
 $$;
 
 
-CREATE OR REPLACE FUNCTION Get_Order_Cli(in_idCli int)
+CREATE OR REPLACE FUNCTION Get_Order_Cli()
 returns setof Full_Order_Cli
 LANGUAGE sql
 AS $$
-  Select * from Full_Order_Cli where ClientId = in_idCli
+  Select * from Full_Order_Cli
 $$;
 
 -- Insert order

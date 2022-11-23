@@ -37,16 +37,16 @@ namespace Backend.Controllers
     }
 
     [HttpGet]
-    [Route("get_all/{idCli}")]
+    [Route("get_all_cli")]
     /**
      * Proporciona por medio del API la lista de ordenes relacionadas a un cliente
      * 
      */
-    public Object Get_cli(int idCli)
+    public Object Get_cli()
     {
       try
       {
-        List<Order> orders = OrderData.GetAllCli(idCli);
+        List<Order> orders = OrderData.GetAllCli();
         return new
         {
           status = "ok",
