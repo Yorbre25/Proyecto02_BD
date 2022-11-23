@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Cookies from 'js-cookie';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
-import {Order} from 'src/app/Interfaces/Order'
-import {OrderService} from 'src/app/Services/order.service'
+import { Order } from 'src/app/Interfaces/Order'
+import { OrderService } from 'src/app/Services/order.service'
 
 @Component({
   selector: 'app-client-recents',
@@ -13,15 +13,15 @@ export class ClientRecentsComponent implements OnInit {
   tableColumns: KeyReplacement<Order>[]
   tableData: Order[]
 
-  constructor(private orderService: OrderService) { 
+  constructor(private orderService: OrderService) {
     this.tableColumns = [
       { key: "id", replacement: "Código de Orden" },
       { key: "total", replacement: "Total" },
-      
+
     ]
     this.tableData = []
   }
-  
+
   ngOnInit(): void {
 
     let idCli = Cookies.get('idCli');

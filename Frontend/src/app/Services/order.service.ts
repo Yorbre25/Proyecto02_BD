@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 
 import { apiURL } from '../app.component'
-import { OrdersResponse } from '../Interfaces/ServerResponses';
+import { Order } from '../Interfaces/Order';
+import { OrdersResponse, ServerResponse } from '../Interfaces/ServerResponses';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +27,7 @@ export class OrderService {
 
   getAllOrdersCli = (id: any): Observable<OrdersResponse> =>
     this.httpClient.get<OrdersResponse>(`${this.url}/get_all/${id}`)
+
+  setDeliveryMan = (order: Order): Observable<ServerResponse> =>
+    this.httpClient.post<ServerResponse>(`${this.url}/set_deliveryman`, order)
 }
