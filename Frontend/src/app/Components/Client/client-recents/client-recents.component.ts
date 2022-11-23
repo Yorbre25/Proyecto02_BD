@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
-import {Order} from 'src/app/Interfaces/Order'
-import {OrderService} from 'src/app/Services/order.service'
+import { Order } from 'src/app/Interfaces/Order'
+import { OrderService } from 'src/app/Services/order.service'
 
 @Component({
   selector: 'app-client-recents',
@@ -12,38 +12,38 @@ export class ClientRecentsComponent implements OnInit {
   tableColumns: KeyReplacement<Order>[]
   tableData: Order[]
 
-  constructor(private orderService: OrderService) { 
+  constructor(private orderService: OrderService) {
     this.tableColumns = [
       { key: "id", replacement: "Código de Orden" },
       { key: "total", replacement: "Total" },
-      
+
     ]
     this.tableData = []
   }
-  
+
   ngOnInit(): void {
-    this.orderService.getAllOrdersData()
-      .subscribe(response => {
-        if (response.status === 'error') {
-          alert(response.message)
-        }
-        else if (response.ordersData) {
-          const orders: Order[] = response.ordersData
-            .map((orderData) => {
-              let order: any = orderData.order
-              const client = orderData.client
+    // this.orderService.getAllOrdersData()
+    //   .subscribe(response => {
+    //     if (response.status === 'error') {
+    //       alert(response.message)
+    //     }
+    //     else if (response.ordersData) {
+    //       const orders: Order[] = response.ordersData
+    //         .map((orderData) => {
+    //           let order: any = orderData.order
+    //           const client = orderData.client
 
-              order.clientID = `
-                ${client.id}`
-              return order
-            })
+    //           order.clientID = `
+    //             ${client.id}`
+    //           return order
+    //         })
 
-          this.tableData = orders
-        }
-        else {
-          console.log(response)
-        }
-      })
+    //       this.tableData = orders
+    //     }
+    //     else {
+    //       console.log(response)
+    //     }
+    //   })
   }
 
 }
