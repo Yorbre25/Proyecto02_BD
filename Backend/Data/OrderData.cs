@@ -59,9 +59,7 @@ namespace Backend.Data
       List<Order> orderList = new List<Order>();
 
       var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand("Get_Order_Cli", connection);
-      cmd.CommandType = CommandType.StoredProcedure;
-      cmd.Parameters.AddWithValue("in_idCli", idCli);
+      NpgsqlCommand cmd = new NpgsqlCommand($@"CALL Get_Order_Cli({idCli})", connection);
 
       try
       {

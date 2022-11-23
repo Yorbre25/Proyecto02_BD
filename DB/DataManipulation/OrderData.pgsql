@@ -16,7 +16,7 @@ $$;
 
 
 CREATE OR REPLACE FUNCTION Get_Order_Cli(in_idCli int)
-returns setof Full_Order
+returns setof Full_Order_Cli
 LANGUAGE sql
 AS $$
   Select * from Full_Order_Cli where ClientId = in_idCli

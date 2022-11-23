@@ -32,7 +32,7 @@ export class ClientLoginComponent implements OnInit {
         else {
           Cookies.set('username', loginInfo.username)
           Cookies.set('userType', 'manager')
-          Cookies.set('idClient', response.id?.toString())
+          Cookies.set('idClient', response.id)
 
           window.location.href = '/client'
         }

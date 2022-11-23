@@ -31,7 +31,7 @@ public class PasswordValidator
 
     public static int getClientID(string username)
     {
-        return Convert.ToInt32(PasswordData.getAdminPassword(username)[1]);
+        return Convert.ToInt32(PasswordData.getClientPassword(username)[1]);
     }
 
     public static ManagerPasswordInfo ValidateManagerPassword(string username, string passwordInput)

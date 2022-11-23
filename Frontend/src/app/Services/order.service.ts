@@ -24,6 +24,6 @@ export class OrderService {
 
 
 
-  getAllOrdersCli = (id: number): Observable<OrdersResponse> =>
+  getAllOrdersCli = (id: any): Observable<OrdersResponse> =>
     this.httpClient.get<OrdersResponse>(`${this.url}/get_all/${id}`)
 }

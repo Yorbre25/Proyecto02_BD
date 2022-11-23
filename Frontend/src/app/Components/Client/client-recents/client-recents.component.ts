@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Cookies from 'js-cookie';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 import {Order} from 'src/app/Interfaces/Order'
 import {OrderService} from 'src/app/Services/order.service'
@@ -22,23 +23,16 @@ export class ClientRecentsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.orderService.getAllOrdersData()
+
+    let idCli = Cookies.get('idCli');
+    this.orderService.getAllOrdersCli(Cookies.get('idClient'))
       .subscribe(response => {
         if (response.status === 'error') {
           alert(response.message)
         }
-        else if (response.ordersData) {
-          const orders: Order[] = response.ordersData
-            .map((orderData) => {
-              let order: any = orderData.order
-              const client = orderData.client
+        else if (response.orders) {
 
-              order.clientID = `
-                ${client.id}`
-              return order
-            })
-
-          this.tableData = orders
+          this.tableData = response.orders
         }
         else {
           console.log(response)
