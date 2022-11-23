@@ -64,7 +64,6 @@ import { ClientRecentsComponent } from './Components/Client/client-recents/clien
 import { ClientSTOREComponent } from './Components/Client/client-store/client-store.component';
 import { AddClientFormComponent } from './Components/Forms/add-client-form/add-client-form.component';
 import { EditClientFormComponent } from './Components/Forms/edit-client-form/edit-client-form.component';
-import { CartElementComponent } from './Components/Generic/cart-element/cart-element.component'
 
 @NgModule({
   declarations: [
@@ -126,7 +125,6 @@ import { CartElementComponent } from './Components/Generic/cart-element/cart-ele
     ClientSTOREComponent,
     AddClientFormComponent,
     EditClientFormComponent,
-    CartElementComponent
   ],
   imports: [
     BrowserModule,
