@@ -82,7 +82,10 @@ begin
     SELECT D.id into VarDelManId FROM Deliveryman as D order by random() LIMIT 1;
   END IF;
   
-  Update _order set delmanid = VarDelManId where Id = OrderId;
+  Update _order set 
+    delmanid = VarDelManId,
+    status = 'En camino'
+  where Id = OrderId;
   Update deliveryman set available = false where Id = VarDelManId;
 end; $$;
 

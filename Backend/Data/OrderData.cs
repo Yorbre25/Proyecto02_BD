@@ -23,33 +23,25 @@ namespace Backend.Data
                 cmd.ExecuteNonQuery();
                 var dr = cmd.ExecuteReader();
 
-                while (dr.Read())
-                {
-                    orderList.Add(new Order()
-                    {
-                        id = Convert.ToInt32(dr["id"]),
-                        total = Convert.ToInt32(dr["Total"]),
-                        province = dr["Province"].ToString()!,
-                        city = dr["City"].ToString()!,
-                        district = dr["District"].ToString()!,
-                        clientName = dr["ClientName"].ToString()!,
-                        clientLastName = dr["ClientLastName"].ToString()!,
-                        delManName = dr["DelManName"].ToString()!,
-                        delManLastName = dr["DelManLastName"].ToString()!,
-                        storeId = Convert.ToInt32(dr["StoreId"]),
-                        productName = (string[])dr["Products"]
-                    });
-                }
+        while (dr.Read())
+        {
+          orderList.Add(new Order()
+          {
+            id = Convert.ToInt32(dr["id"]),
+            total = Convert.ToInt32(dr["Total"]),
+            province = dr["Province"].ToString()!,
+            city = dr["City"].ToString()!,
+            district = dr["District"].ToString()!,
+            clientName = dr["ClientName"].ToString()!,
+            clientLastName = dr["ClientLastName"].ToString()!,
+            delManName = dr["DelManName"].ToString()!,
+            delManLastName = dr["DelManLastName"].ToString()!,
+            storeId = Convert.ToInt32(dr["StoreId"]),
+            status = dr["Status"].ToString()!,
+            productName = (string[])dr["Products"],
+            quantity = ((int[])dr["Quantity"]).ToList()
 
-                connection.Close();
-
-                return orderList;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw new Exception("Error al listar las ordenes");
-            }
+          });
         }
 
         public static List<Order> GetAllCli(int idCli)

@@ -15,7 +15,12 @@ create or replace view Full_Order AS
             Select P.Name 
             from Order_Products as OP join Product as P on OP.ProductBarCode = P.BarCode
             where OP.OrderId = O.Id
-            ) as Products
+            ) as Products,
+        Array(
+            Select OP.Quantity 
+            from Order_Products as OP join Product as P on OP.ProductBarCode = P.BarCode
+            where OP.OrderId = O.Id
+            ) as Quantity
     from ((((_Order as O join Client as C on O.ClientId = C.id) 
     join Deliveryman as D on O.DelManId = D.id)
     join order_products as OP on O.Id = OP.OrderId)
