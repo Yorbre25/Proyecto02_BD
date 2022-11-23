@@ -1,11 +1,12 @@
 import Cookies from 'js-cookie';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 import { Order } from 'src/app/Interfaces/Order'
 import { OrderService } from 'src/app/Services/order.service';
+import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { OrderService } from 'src/app/Services/order.service';
   styleUrls: ['./member-orders.component.scss']
 })
 export class MemberOrdersComponent implements OnInit {
+  @ViewChild('content') modalContent?: any
+
   preparingTableColumns: KeyReplacement<Order>[]
   otherTableColumns: KeyReplacement<Order>[]
 
@@ -26,6 +29,7 @@ export class MemberOrdersComponent implements OnInit {
   selectedOrder: Order
 
   constructor(
+    private auxFunctionsService: AuxFunctionsService,
     private modalService: NgbModal,
     private orderService: OrderService
   ) {
@@ -73,8 +77,6 @@ export class MemberOrdersComponent implements OnInit {
           this.preparingTableData = storeOrders.filter(order => order.status === 'Preparando')
           this.onTheWayTableData = storeOrders.filter(order => order.status === 'En camino')
           this.deliveredTableData = storeOrders.filter(order => order.status === 'Entregado')
-
-          console.log(this.storeOrders);
         }
         else {
           console.log(response)
@@ -84,9 +86,16 @@ export class MemberOrdersComponent implements OnInit {
 
   onOrderClicked = (orderID: number) => {
     this.selectedOrder = this.storeOrders.find(order => order.id === orderID)!
-    // openModal(modalContent)
+    this.openModal(this.modalContent)
   }
 
+  assignDeliveryMan = () => {
+    this.orderService.setDeliveryMan(this.selectedOrder)
+      .subscribe(response => {
+        if (response.status === 'error') { alert(response.message) }
+        else { this.auxFunctionsService.handleResponse(response) }
+      })
+  }
 
   openModal = (content: any) => {
     this.modalService.open(content, { size: 'lg', scrollable: true })

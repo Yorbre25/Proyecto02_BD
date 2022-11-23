@@ -18,7 +18,6 @@ export class ViewOrderFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.orderInfo)
   }
 
 }

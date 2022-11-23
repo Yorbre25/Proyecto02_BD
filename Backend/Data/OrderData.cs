@@ -84,7 +84,6 @@ namespace Backend.Data
             delManLastName = dr["DelManLastName"].ToString()!,
             storeId = Convert.ToInt32(dr["StoreId"]),
             productName = (string[])dr["Products"]
-
           });
         }
 
@@ -245,5 +244,29 @@ namespace Backend.Data
       }
     }
 
+    public static bool SetDeliveryman(Order order)
+    {
+      var connection = Connection.Get();
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"CALL set_deliveryman(
+						{order.id},
+						'{order.province}',
+						'{order.city}',
+						'{order.district}'
+        );", connection
+      );
+      try
+      {
+        connection.Open();
+        cmd.ExecuteNonQuery();
+        connection.Close();
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+        return false;
+      }
+    }
   }
 }

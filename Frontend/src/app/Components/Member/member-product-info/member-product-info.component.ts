@@ -44,9 +44,6 @@ export class MemberProductInfoComponent implements OnInit {
         else if (response.product) {
           this.product = response.product
           this.productCopy = structuredClone(this.product)
-
-          console.log(this.productCopy);
-
         }
         else {
           console.log(response)
