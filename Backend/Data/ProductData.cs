@@ -26,7 +26,7 @@ namespace Backend.Data
             barCode = Convert.ToInt32(dr["BarCode"]),
             price = Convert.ToInt32(dr["Price"]),
             name = dr["Name"].ToString()!,
-            categoryName = dr["Category"].ToString()!
+            categoryName = dr["CategoryName"].ToString()!
           });
         }
 
@@ -60,7 +60,7 @@ namespace Backend.Data
             barCode = Convert.ToInt32(dr["BarCode"]),
             price = Convert.ToInt32(dr["Price"]),
             name = dr["Name"].ToString()!,
-            categoryName = dr["Category"].ToString()!
+            categoryName = dr["CategoryName"].ToString()!
 
           });
         }
@@ -81,10 +81,8 @@ namespace Backend.Data
       Product product = new Product();
 
       var connection = Connection.Get();
-      NpgsqlCommand cmd = new NpgsqlCommand("Get_Product", connection);
-      cmd.CommandType = CommandType.StoredProcedure;
-      cmd.Parameters.AddWithValue("in_id", id);
-
+      NpgsqlCommand cmd = new NpgsqlCommand(
+        $@"select * from Get_Product({id});", connection);
       try
       {
         connection.Open();
@@ -98,7 +96,9 @@ namespace Backend.Data
             barCode = Convert.ToInt32(dr["BarCode"]),
             price = Convert.ToInt32(dr["Price"]),
             name = dr["Name"].ToString()!,
-            categoryName = dr["Category"].ToString()!
+            categoryId = Convert.ToInt32(dr["CategoryID"]),
+            categoryName = dr["CategoryName"].ToString()!,
+            photo = dr["Photo"].ToString()!
           };
         }
 
@@ -153,7 +153,8 @@ namespace Backend.Data
           '{product.price}',
           '{product.name}',
           '{product.categoryId}',
-          '{product.storeId}'
+          '{product.storeId}',
+					'{product.photo}'
         );", connection
       );
       try

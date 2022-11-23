@@ -12,13 +12,16 @@ LANGUAGE sql
 AS $$
   Select 
     P.BarCode,
-    P.Name,
     P.Price,
-    PC.Name as Category
+    P.Name,
+    PC.Id as CategoryID,
+    PC.Name as CategoryName,
+    PP.Photo as Photo
     from Product as P
     join Product_Category as PC on P.CategoryId = PC.Id
+    join Product_Photos as PP on P.BarCode = PP.ProductBarCode
     join Store_Products as SP on P.barcode = SP.productBarCode
-    join Store as S on S.id = SP.storeID
+	  join Store as S on S.id = SP.storeID
   where 
     S.id = in_storeID;
 $$;
@@ -37,7 +40,20 @@ create or replace function Get_Product(in_barCode int)
 returns setof Full_Product
 LANGUAGE sql
 AS $$
-select * from Full_Product where BarCode = in_barCode
+  Select 
+    P.BarCode,
+    P.Price,
+    P.Name,
+    PC.Id as CategoryID,
+    PC.Name as CategoryName,
+    PP.Photo as Photo
+    from Product as P
+    join Product_Category as PC on P.CategoryId = PC.Id
+    join Product_Photos as PP on P.BarCode = PP.ProductBarCode
+    join Store_Products as SP on P.barcode = SP.productBarCode
+	  join Store as S on S.id = SP.storeID
+  where 
+    P.BarCode = in_barCode;
 $$;
 
 -- Insert new product
@@ -92,26 +108,44 @@ end; $$;
 
 -- Update product
 create or replace procedure Update_Product(
+  In_Old_BarCode int,
   In_BarCode int,
   In_Price decimal(10,2),
 	In_Name varchar(15),
   In_CategoryId int,
-  In_Store int
+  In_Store int,
+  In_Photo_Path varchar(50)
 )
 language plpgsql
 as $$
 begin
 
   UPDATE Product set
+      BarCode = In_BarCode,
       Price = In_Price,
       Name = In_Name,
       CategoryId = In_CategoryId
-  WHERE barcode = In_BarCode;
+  WHERE barcode = In_Old_BarCode;
   
   update store_products set
     StoreId = In_Store
   where ProductBarCode = In_BarCode;
 
+  call Update_Product_Photo(In_BarCode, In_Photo_Path);
+end; $$;
+
+-- update product photo
+create or replace procedure Update_Product_Photo(
+  In_ProductBarCode int,
+  In_photo varchar(50)
+)
+language plpgsql
+as $$
+begin
+  UPDATE product_photos SET
+    ProductBarCode = In_ProductBarCode,
+    Photo = In_photo
+  WHERE ProductBarCode = In_ProductBarCode;
 end; $$;
 
 -- Delete product

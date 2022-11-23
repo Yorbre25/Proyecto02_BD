@@ -36,7 +36,7 @@ export class AddProductFormComponent implements OnInit {
       }
       reader.readAsDataURL(event.target.files[0])
 
-      const filename = `${Math.random().toString(36).slice(2, 7)}.jpg`
+      const filename = `${Math.random().toString(36).slice(2, 7)}`
       const blob = new Blob([event.target.files[0]])
       const a = document.createElement('a')
       a.style.display = 'none'
@@ -46,7 +46,7 @@ export class AddProductFormComponent implements OnInit {
       a.click()
       document.body.removeChild(a)
 
-      this.photo.setValue(`/assets/${filename}`)
+      this.photo.setValue(`/assets/product/${filename}`)
     }
   }
 

@@ -1,6 +1,11 @@
 <form [formGroup]="formsService.form" (ngSubmit)="onSubmit()">
 	<div class="row mb-3">
 		<div class="col">
+			<label class="form-label" for="barCodeInput">Código de barras:</label>
+			<input class="form-control" id="barCodeInput" type="number" formControlName="barCode">
+		</div>
+
+		<div class="col">
 			<label class="form-label" for="nameInput">Nombre:</label>
 			<input class="form-control" id="nameInput" type="text" formControlName="name">
 		</div>
