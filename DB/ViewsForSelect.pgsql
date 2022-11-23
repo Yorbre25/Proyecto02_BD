@@ -5,11 +5,12 @@ create or replace view Full_Order AS
         O.Province,
         O.City,
         O.District,
+        O.StoreId,
+        O.Status,
         C.Name as ClientName,
         C.LastName1 as ClientLastName,
         D.Name as DelmanName,
         D.LastName1 as DelmanLastName,
-        S.id as StoreId,
         Array(
             Select P.Name 
             from Order_Products as OP join Product as P on OP.ProductBarCode = P.BarCode
@@ -19,8 +20,7 @@ create or replace view Full_Order AS
     join Deliveryman as D on O.DelManId = D.id)
     join order_products as OP on O.Id = OP.OrderId)
     join Product as P on OP.ProductBarCode = P.barCode)
-    join Store as S on O.StoreId = S.id
-    group by O.id, S.id, C.Name, C.LastName1, D.Name, D.lastname1;
+    group by O.id, C.Name, C.LastName1, D.Name, D.lastname1;
 
 create or replace view Full_Order_Cli AS
     Select 
