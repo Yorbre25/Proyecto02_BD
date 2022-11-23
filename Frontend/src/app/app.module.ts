@@ -115,7 +115,7 @@ import { ClientOrderComponent } from './Components/Client/client-order/client-or
     ReportsComponent,
     ClientMenuComponent,
     EditStoreManagerFormComponent,
-    MemberProductInfoComponent
+    MemberProductInfoComponent,
     ClientOrderComponent
   ],
   imports: [
