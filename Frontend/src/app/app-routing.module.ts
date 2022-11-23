@@ -18,8 +18,11 @@ import { MemberAdministrationComponent } from './Components/Member/member-admini
 import { MemberProductManagementComponent } from './Components/Member/member-product-management/member-product-management.component';
 import { MemberOrdersComponent } from './Components/Member/member-orders/member-orders.component';
 
+import { ClientMainComponent } from './Components/Client/client-main/client-main.component';
 import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
 import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
+import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
+import { ClientOrderComponent } from './Components/Client/client-order/client-order.component';
 
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component'
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component'
@@ -70,10 +73,13 @@ const routes: Routes = [
   },
   {
     path: 'client',
-    component: MemberMainComponent,
+    component: ClientMainComponent,
     children: [
       { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
-      { path: 'business/:id', component: ClientBusinessComponent },
+      { path: 'business', component: ClientBusinessComponent },
+      { path: 'cart', component: ClientCartComponent },
+      { path: 'recent', component: ClientCartComponent },
+      { path: 'order', component: ClientOrderComponent },
     ]
   }
 ]

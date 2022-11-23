@@ -10,15 +10,20 @@
 
 <div class="flex-column-center w-100 px-5">
     <nav class="d-flex flex-column gap-5 align-items-center justify-content-center w-75 h-100">
-        <div class="row gap-5 w-100">
+        <div class="row gap-5 w-100">  
             <div class="col p-0">
-                <div class="d-flex justify-content-end mb-3">
-                    <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Ver mi pedido'" 
-                    [modalHeader]="'Mi pedido'">
-                        <app-view-order-client-form></app-view-order-client-form>
-                    </app-modal>
-                </div>
+                <a class="btn btn-lg btn-primary py-3 w-100" href="client/restaurants">Restaurantes</a>
+            </div>
+            <div class="col p-0">
+                <a class="btn btn-lg btn-primary py-3 w-100" href="client/cart">Mi Carrito</a>
+            </div>
+            <div class="col p-0">
+                <a class="btn btn-lg btn-primary py-3 w-100" href="client/order">Mi pedido</a> // esto no existe
+            </div>
+            <div class="col p-0">
+                <a class="btn btn-lg btn-primary py-3 w-100" href="client/recent">Pedidos recientes</a>
             </div>
         </div>
     </nav>
 </div>
+

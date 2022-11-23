@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-manager-menu',
@@ -14,6 +14,6 @@ export class ManagerMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adminUsername = Cookies.get('username')!
+    //this.adminUsername = Cookies.get('username')!
   }
 }
