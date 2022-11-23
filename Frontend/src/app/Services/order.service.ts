@@ -21,4 +21,9 @@ export class OrderService {
 */
   getAllOrders = (): Observable<OrdersResponse> =>
     this.httpClient.get<OrdersResponse>(`${this.url}/get_all`)
+
+
+
+  getAllOrdersCli = (id: number): Observable<OrdersResponse> =>
+    this.httpClient.get<OrdersResponse>(`${this.url}/get_all/${id}`)
 }

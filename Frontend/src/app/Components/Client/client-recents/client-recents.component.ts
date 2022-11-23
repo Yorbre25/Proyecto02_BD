@@ -21,8 +21,30 @@ export class ClientRecentsComponent implements OnInit {
     ]
     this.tableData = []
   }
-
+  
   ngOnInit(): void {
+    this.storeService.getAllStoresData()
+      .subscribe(response => {
+        if (response.status === 'error') {
+          alert(response.message)
+        }
+        else if (response.storesData) {
+          const stores: Store[] = response.storesData
+            .map((storeData) => {
+              let store: any = storeData.store
+              const manager = storeData.manager
+
+              store.managerID = `
+                ${manager.name} ${manager.lastName1} ${manager.lastName2}`
+              return store
+            })
+
+          this.tableData = stores
+        }
+        else {
+          console.log(response)
+        }
+      })
   }
 
 }
