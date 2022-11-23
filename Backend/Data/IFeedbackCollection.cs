@@ -10,7 +10,7 @@ namespace Backend.Data
 
         Task<Feedback> GetFeedback(int id);
 
-        Task<List<Feedback>> GetAllFeedbacks();
+        Task<List<Feedback>> GetAllFeedbacks(int id);
 
     }
 }

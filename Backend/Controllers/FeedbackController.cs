@@ -12,15 +12,15 @@ namespace Backend.Controllers
         private IFeedbackCollection db = new FeedbackCollection();
 
         [HttpGet]
-        [Route("get_all")]
-        public Object GetAll()
+        [Route("get_all/{id}")]
+        public Object GetAll(int id)
         {
             try
             {
                 return new
                 {
                     status = "ok",
-                    reviews = db.GetAllFeedbacks().Result
+                    reviews = db.GetAllFeedbacks(id).Result
             };
             }
             catch (System.Exception err)

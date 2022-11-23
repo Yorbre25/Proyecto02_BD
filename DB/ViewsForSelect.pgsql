@@ -107,3 +107,11 @@ create or replace view Full_Administrator as
       where AP.AdministratorId = A.Id
     ) as PhoneNumbers
   from administrator as A;
+
+create or replace view manager_login as
+  select
+    s.id as id,
+    m.Password as password,
+    aps.status as status,
+    aps.observation as observation
+  from manager as m, store as s, applicant_store as aps;

@@ -11,6 +11,8 @@ namespace Backend.Models
         [BsonElement("idOrder")]
         public int idOrder { get; set; }
 
+        [BsonElement("idClient")]
+        public int idClient { get; set; }
 
         [BsonElement("storeReview")]
         public string storeReview { get; set; }

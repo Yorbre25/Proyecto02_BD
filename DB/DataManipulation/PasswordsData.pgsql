@@ -18,11 +18,17 @@ $$;
 
 
 create or replace function Get_Manager_Password(In_Username text)
-returns text
+returns setof manager_login
 LANGUAGE sql
 AS $$
-  select m.Password
-  from manager as m
-  where m.Username = In_Username;
+  select 
+    s.id as id,
+    m.Password as password,
+    aps.status as status,
+    aps.observation as observation
+  from manager as m, store as s, applicant_store as aps
+  where 
+  	m.Username = In_Username and
+    s.managerid = m.id and
+    s.id = aps.storeid;
 $$;
-

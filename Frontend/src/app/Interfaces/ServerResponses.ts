@@ -3,6 +3,7 @@ import { DeliveryMan } from "./DeliveryMan"
 import { StoreType } from "./StoreType"
 import { StoreData } from "./Store"
 import { SalePerClient, SalePerStore } from "./Reports"
+import { Feedback } from "./Feedback"
 
 interface ServerResponse {
     status: 'ok' | 'error'
@@ -49,7 +50,16 @@ interface SalePerStoreResponse extends ServerResponse {
     report: SalePerStore[]
 }
 
+interface FeedbackResponse extends ServerResponse {
+    review: Feedback
+}
+
+interface FeedbacksResponse extends ServerResponse {
+    reviews: Feedback[]
+}
+
 export {
+
     ServerResponse,
     ManagersResponse,
     ManagerResponse,
@@ -60,5 +70,7 @@ export {
     StoresDataResponse,
     StoreDataResponse,
     SalePerClientResponse,
-    SalePerStoreResponse
+    SalePerStoreResponse,
+    FeedbackResponse,
+    FeedbacksResponse
 }
