@@ -4,6 +4,7 @@ import { StoreType } from "./StoreType"
 import { StoreData } from "./Store"
 import { SalePerClient, SalePerStore } from "./Reports"
 import { Product } from "./Product"
+import { ProductCategory } from "./ProductCategory"
 
 interface ServerResponse {
     status: 'ok' | 'error'
@@ -58,6 +59,14 @@ interface SalePerStoreResponse extends ServerResponse {
     report: SalePerStore[]
 }
 
+interface ProductCategoriesResponse extends ServerResponse {
+    productCats: ProductCategory[]
+}
+
+interface ProductCategoryResponse extends ServerResponse {
+    productCaty: ProductCategory
+}
+
 export {
     ServerResponse,
     ManagersResponse,
@@ -70,6 +79,8 @@ export {
     StoreDataResponse,
     ProductsResponse,
     ProductResponse,
+    ProductCategoriesResponse,
+    ProductCategoryResponse,
     SalePerClientResponse,
     SalePerStoreResponse
 }

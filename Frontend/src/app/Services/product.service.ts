@@ -10,8 +10,6 @@ import {
   ServerResponse,
 } from '../Interfaces/ServerResponses'
 
-import { AuxFunctionsService } from './aux-functions.service'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -47,6 +45,14 @@ export class ProductService {
    * @returns Objeto con respuesta del servidor
   */
   createProduct = (product: any): Observable<ServerResponse> => {
+    product.barCode = Number(product.barCode)
+    product.price = Number(product.price)
+    product.categoryId = Number(product.categoryId)
+    product.storeId = Number(product.storeId)
+
+    console.log(product)
+
+
     return this.httpClient.post<ServerResponse>(`${this.url}/add`, product)
   }
 

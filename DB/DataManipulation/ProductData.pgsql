@@ -46,7 +46,8 @@ create or replace procedure Insert_Product(
   In_Price decimal(10,2),
 	In_Name varchar(15),
   In_CategoryId int,
-  In_Store int
+  In_Store int,
+  In_Photo_Path varchar(50)
 )
 language plpgsql
 as $$
@@ -65,6 +66,8 @@ begin
   );
   Insert into store_products(StoreId,ProductBarCode)
   Values(In_Store,In_BarCode);
+
+  call Insert_Product_Photo(In_BarCode, In_Photo_Path);
 COMMIT;
 end; $$;
 

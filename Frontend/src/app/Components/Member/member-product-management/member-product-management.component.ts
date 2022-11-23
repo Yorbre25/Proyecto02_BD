@@ -40,7 +40,6 @@ export class MemberProductManagementComponent implements OnInit {
         }
       })
   }
-
 }
 
 

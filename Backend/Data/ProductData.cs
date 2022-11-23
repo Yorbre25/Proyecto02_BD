@@ -123,7 +123,8 @@ namespace Backend.Data
           '{product.price}',
           '{product.name}',
           '{product.categoryId}',
-          '{product.storeId}'
+          '{product.storeId}',
+					'{product.photo}'
         );", connection
       );
 
