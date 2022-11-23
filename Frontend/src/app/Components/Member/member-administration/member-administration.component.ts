@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import Cookies from 'js-cookie';
 
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries'
-import { Manager } from 'src/app/Interfaces/Manager'
-
-//import { ManagerService } from 'src/app/Services/manager.service'
+import { StoreManager } from 'src/app/Interfaces/Store'
+import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
+import { StoreService } from 'src/app/Services/store.service';
 
 @Component({
   selector: 'app-member-administration',
@@ -11,37 +12,47 @@ import { Manager } from 'src/app/Interfaces/Manager'
   styleUrls: ['./member-administration.component.scss']
 })
 export class MemberAdministrationComponent implements OnInit {
-  tableColumns: KeyReplacement<Manager>[]
-  tableData: Manager[]
+  managerInfoTitles: KeyReplacement<StoreManager>[]
+  manager: StoreManager
+  managerCopy: StoreManager
 
   constructor(
-   // private managerService: ManagerService,
-  ) { 
-    this.tableColumns = [
+    private storeService: StoreService,
+    protected auxFunctionsService: AuxFunctionsService
+  ) {
+    this.managerInfoTitles = [
       { key: "id", replacement: "Cédula" },
       { key: "username", replacement: "Nombre de usuario" },
       { key: "name", replacement: "Nombre completo" },
       { key: "email", replacement: "Correo electrónico" },
+      { key: "province", replacement: "Dirección" },
+      { key: "phoneNumbers", replacement: "Teléfonos" }
     ]
 
-    this.tableData = []
+    this.manager = {} as StoreManager
+    this.managerCopy = {} as StoreManager
   }
 
   ngOnInit(): void {
+    const id = Number(Cookies.get('storeID'))
+    this.storeService.getStore(id)
+      .subscribe((response: any) => {
+        if (response.status === 'error') {
+          alert(response.message)
+        }
+        else if (response.storeData.manager) {
+          this.manager = response.storeData.manager
+          this.managerCopy = structuredClone(this.manager)
 
-   // this.managerService.getAllManagers()
-    //  .subscribe(response => {
-     //   if (response.status === 'error') {
-      //  }
-      //  else if (response.managers) {
-      //    this.tableData = response.managers
-      //    this.tableData.forEach((manager) => {
-       //     manager.name = `${manager.name} ${manager.lastName1} ${manager.lastName2}`
-       //   })
-       // }
-      //  else {
-      //    console.log(response)
-      //  }
-     // })
+          this.manager.name =
+            `${this.manager.name} ${this.manager.lastName1} ${this.manager.lastName2}`
+
+          this.manager.province =
+            `${this.manager.province}, ${this.manager.city}, ${this.manager.district}`
+        }
+        else {
+          console.log(response)
+        }
+      })
   }
 }

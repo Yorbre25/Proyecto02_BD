@@ -24,11 +24,12 @@ export class MemberLoginComponent implements OnInit {
   onSubmit = () => {
     const loginInfo: LoginInfo = this.formsService.getFormValue()
     this.loginService.managerLogin(loginInfo)
-      .then((response) => {
+      .then((response: any) => {
         if (response.status === 'error') {
           alert(response.message)
         }
         else {
+          Cookies.set('storeID', response.storeID)
           Cookies.set('username', loginInfo.username)
           Cookies.set('userType', 'member')
 
