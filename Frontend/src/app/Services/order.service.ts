@@ -29,8 +29,24 @@ export class OrderService {
   setDeliveryMan = (order: Order): Observable<ServerResponse> =>
     this.httpClient.post<ServerResponse>(`${this.url}/set_deliveryman`, order)
 
+  updateOrder = (orderID: number, order: any): Observable<ServerResponse> => {
+    order.quantity
+      .forEach((quantity: number) => quantity.toString())
+
+    order.productBarCode
+      .forEach((productBarCode: number) => productBarCode.toString())
+
+    order.productName
+      .forEach((productName: string) => productName.toString())
+
+    return this.httpClient.patch<ServerResponse>(`${this.url}/update/${orderID}`, order)
+  }
+
+
   addOrder = (order:Order): Observable<ServerResponse> =>
     this.httpClient.post<ServerResponse>(`${this.url}/add`, order)
   
   
 }
+
+
