@@ -29,13 +29,13 @@ export class AddClientFormComponent implements OnInit {
   passwordConfirm: FormControl
   oldPassword: FormControl
 
-  
+
   constructor(
     private auxFunctionsService: AuxFunctionsService,
-   // private clientService: ClientService,
-    private formsService: FormsService
+    // private clientService: ClientService,
+    protected formsService: FormsService
 
-  ) { 
+  ) {
     this.id = new FormControl('', [Validators.required])
     this.username = new FormControl('', [Validators.required])
     this.name = new FormControl('', [Validators.required])
@@ -50,7 +50,7 @@ export class AddClientFormComponent implements OnInit {
     this.birthDay = new FormControl('', [Validators.required])
     this.passwordConfirm = new FormControl('', [Validators.required])
     this.oldPassword = new FormControl('', [Validators.required])
-  
+
   }
 
   ngOnInit(): void {
@@ -69,7 +69,7 @@ export class AddClientFormComponent implements OnInit {
     this.formsService.form.addControl('password', this.password)
     this.formsService.form.addControl('passwordConfirm', this.passwordConfirm)
     this.formsService.form.addControl('oldPassword', this.oldPassword)
- 
+
   }
 
   onSubmit = async () => {
@@ -90,8 +90,8 @@ export class AddClientFormComponent implements OnInit {
 
   createClient = (newClientInfo: Client): Promise<ServerResponse> => {
     return new Promise((resolve, reject) => {
-      this.clientService.createClient(newClientInfo)
-        .subscribe((response: ServerResponse) => resolve(response))
+      // this.clientService.createClient(newClientInfo)
+      //   .subscribe((response: ServerResponse) => resolve(response))
     })
   }
 }
