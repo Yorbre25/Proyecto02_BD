@@ -6,7 +6,7 @@ import { ServerResponse } from 'src/app/Interfaces/ServerResponses';
 
 import { AuxFunctionsService } from 'src/app/Services/aux-functions.service';
 import { FormsService } from 'src/app/Services/forms.service';
-//import { ClientService } from 'src/app/Services/client.service';
+import { ClientService } from 'src/app/Services/client.service';
 
 @Component({
   selector: 'app-add-client-form',
@@ -32,7 +32,7 @@ export class AddClientFormComponent implements OnInit {
   
   constructor(
     private auxFunctionsService: AuxFunctionsService,
-   // private clientService: ClientService,
+    private clientService: ClientService,
     private formsService: FormsService
 
   ) { 
