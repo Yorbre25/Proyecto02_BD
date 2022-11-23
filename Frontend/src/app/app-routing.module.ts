@@ -22,6 +22,7 @@ import { ClientMainComponent } from './Components/Client/client-main/client-main
 import { ClientMenuComponent } from './Components/Client/client-menu/client-menu.component';
 import { ClientBusinessComponent } from './Components/Client/client-business/client-business.component';
 import { ClientCartComponent } from './Components/Client/client-cart/client-cart.component';
+import { ClientOrderComponent } from './Components/Client/client-order/client-order.component';
 
 import { StoreTypeListComponent } from './Components/Manager/store-type-list/store-type-list.component'
 import { StoreTypeInfoComponent } from './Components/Manager/store-type-info/store-type-info.component'
@@ -78,7 +79,7 @@ const routes: Routes = [
       { path: 'business', component: ClientBusinessComponent },
       { path: 'cart', component: ClientCartComponent },
       { path: 'recent', component: ClientCartComponent },
-      { path: 'order', component: ClientCartComponent },
+      { path: 'order', component: ClientOrderComponent },
     ]
   }
 ]
