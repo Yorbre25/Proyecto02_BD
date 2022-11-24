@@ -22,6 +22,7 @@ export class ClientSTOREComponent implements OnInit {
   tableColumns: KeyReplacement<Product>[]
   tableData: Product[]
   storeName: string | undefined
+  cartProductIds: string[]
   s = Number(Cookies.get('storeID'))
   constructor(
     private productService: ProductService, 
@@ -35,6 +36,7 @@ export class ClientSTOREComponent implements OnInit {
       { key: "categoryName", replacement: "Categoría" },
     ]
     this.tableData = []
+    this.cartProductIds = []
     
 }
 ngOnInit(): void {
@@ -65,6 +67,22 @@ ngOnInit(): void {
         }
       })
   }
+
+
+  addToCart = (productID: any) => {
+
+    this.cartProductIds.push(productID)
+
+    let cpi =
+    {
+      'productIDs': this.cartProductIds
+    }
+
+    Cookies.set('cartProductIds', JSON.stringify(cpi))
+    //window.location.href = 'client/stores/${storeID}'
+    
+  }
+
 
 }
 

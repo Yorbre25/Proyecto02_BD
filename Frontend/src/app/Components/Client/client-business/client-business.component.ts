@@ -1,3 +1,4 @@
+import { NONE_TYPE } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import Cookies from 'js-cookie';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
@@ -45,6 +46,7 @@ ngOnInit(): void {
 }
 
 onStoreClicked = (storeID: any) => {
+  let s:any = []
   Cookies.set('storeId', storeID)
   window.location.href = 'client/stores/${storeID}'
   
