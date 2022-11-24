@@ -1,6 +1,7 @@
 <div class="card mb-4 px-4">
     <div class="card-header py-3">
         <h5 class="mb-0">Carrito</h5>
+        <p class="text-muted mb-0"> Comercio <span class="fw-bold text-body">{{storeName}}</span> </p>
     </div>
     <div class="row mb-3">
         <div *ngFor="let product of productIDsInCart; let i = index" class="d-flex justify-content-between">
@@ -11,14 +12,18 @@
             <div class="col">
                 <label class="form-label" for="quantityInput">Precio:</label>
                 <h5 class="form-label" for="productNameInput">{{productPriceInCart[i]}}</h5>
-                
+
             </div>
             <div class="col">
                 <label class="form-label" for="quantityInput">Cantidad:</label>
-                <input class="form-control" id="quantityInput" type="number" placeholder={{productQuantityInCart[i]}} formControlName="quantity">
+                <input class="form-control" id="quantityInput" type="number" placeholder={{productQuantityInCart[i]}}
+                    formControlName="quantity">
             </div>
         </div>
-        
+        <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Realizar pedido'">
+            <app-view-order-client-form></app-view-order-client-form>
+        </app-modal>
+
     </div>
 
 

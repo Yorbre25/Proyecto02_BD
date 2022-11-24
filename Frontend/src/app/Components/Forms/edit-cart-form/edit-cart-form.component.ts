@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Cookies from 'js-cookie';
+import { Store } from 'src/app/Interfaces/Store'
+import { StoreService } from 'src/app/Services/store.service';
+import { ServerResponse } from 'src/app/Interfaces/ServerResponses'
 
 import { ProductService } from 'src/app/Services/product.service';
 @Component({
@@ -12,12 +15,16 @@ export class EditCartFormComponent implements OnInit {
   productIDsInCart: string[] = []
   productNameInCart: string[] = []
   productPriceInCart: string[] = []
+  storeName: string
 
   @Input() productsInCart?: string[]
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private storeService: StoreService
   ) {
+    this.storeName = 'nan'
+
     this.productsInCart = JSON.parse(String(Cookies.get('cartProductIds'))).productIDs
 
     console.log(this.productsInCart)
@@ -40,6 +47,20 @@ export class EditCartFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.storeService.getStore(Number(Cookies.get('storeId')))
+      .subscribe(response => {
+        if (response.status === 'error') {
+          alert(response.message)
+        }
+        else if (response.storeData) {
+          this.storeName = response.storeData.store.name
+        }
+        else {
+          console.log(response)
+        }
+      })
+
     for (var productID of this.productIDsInCart!) {
       this.productService.getProduct(Number(productID))
         .subscribe(response => {
