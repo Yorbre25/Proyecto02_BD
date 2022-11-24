@@ -23,12 +23,28 @@ export class OrderService {
   getAllOrders = (): Observable<OrdersResponse> =>
     this.httpClient.get<OrdersResponse>(`${this.url}/get_all`)
 
+      /**
+ * Solicita al servidor que devuelva todas las ordenes de un cliente
+*/
   getAllOrdersCli = (): Observable<OrdersResponse> =>
     this.httpClient.get<OrdersResponse>(`${this.url}/get_all_cli`)
+
+    
+      /**
+   * Solicita al servidor que actualice la información de repartidor de orden
+   * @param order orden
+  */
 
   setDeliveryMan = (order: Order): Observable<ServerResponse> =>
     this.httpClient.post<ServerResponse>(`${this.url}/set_deliveryman`, order)
 
+
+      /**
+   * Solicita al servidor que actualice la información de un orden
+   * @param managerID ID del orden
+   * @param manager Objeto con la información del orden
+   * @returns Objeto con respuesta del servidor
+  */
   updateOrder = (orderID: number, order: any): Observable<ServerResponse> => {
     order.quantity
       .forEach((quantity: number) => quantity.toString())
@@ -42,10 +58,17 @@ export class OrderService {
     return this.httpClient.patch<ServerResponse>(`${this.url}/update/${orderID}`, order)
   }
 
-
+  /**
+   * Solicita al servidor que cree un nuevo orden
+   * @param manager Objeto con la información del orden
+   * @returns Objeto con respuesta del servidor
+  */
   addOrder = (order:any): Observable<ServerResponse> =>
     this.httpClient.post<ServerResponse>(`${this.url}/add`, order)
 
+    /**
+   *Actualiza la orden cuando ha sido recibida por el usuario
+  */
   setDelivered = (orderID:number):  Observable<ServerResponse> =>
     this.httpClient.get<ServerResponse>(`${this.url}/setdelivered/${orderID}`)
 }

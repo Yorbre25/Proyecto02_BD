@@ -21,21 +21,21 @@ export class ManagerService {
   ) { }
 
   /**
-   * Solicita al servidor que devuelva todos los empleados
+   * Solicita al servidor que devuelva todos los afiliados
   */
   getAllManagers = (): Observable<ManagersResponse> =>
     this.httpClient.get<ManagersResponse>(`${this.url}/get_all`)
 
   /**
-   * Solicita al servidor que devuelva la información de un empleado
-   * @param managerID ID del empleado
+   * Solicita al servidor que devuelva la información de un afiliado
+   * @param managerID ID del afiliado
   */
   getManager = (id: number): Observable<ManagerResponse> =>
     this.httpClient.get<ManagerResponse>(`${this.url}/get/${id}`)
 
   /**
-   * Solicita al servidor que cree un nuevo empleado
-   * @param manager Objeto con la información del empleado
+   * Solicita al servidor que cree un nuevo afiliado
+   * @param manager Objeto con la información del afiliado
    * @returns Objeto con respuesta del servidor
   */
   createManager = (manager: any): Observable<ServerResponse> => {
@@ -46,9 +46,9 @@ export class ManagerService {
   }
 
   /**
-   * Solicita al servidor que actualice la información de un empleado
-   * @param managerID ID del empleado
-   * @param manager Objeto con la información del empleado
+   * Solicita al servidor que actualice la información de un afiliado
+   * @param managerID ID del afiliado
+   * @param manager Objeto con la información del afiliado
    * @returns Objeto con respuesta del servidor
   */
   updateManager = (managerID: number, manager: any): Observable<ServerResponse> => {
@@ -59,8 +59,8 @@ export class ManagerService {
   }
 
   /**
-   * Solicita al servidor que elimine un empleado
-   * @param id ID del empleado
+   * Solicita al servidor que elimine un afiliado
+   * @param id ID del afiliado
    * @returns Objeto con respuesta del servidor
   */
   deleteManager = (id: number): Observable<ServerResponse> =>

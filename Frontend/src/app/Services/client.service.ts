@@ -21,21 +21,21 @@ export class ClientService {
   ) { }
 
   /**
-   * Solicita al servidor que devuelva todos los empleados
+   * Solicita al servidor que devuelva todos los clientes
   */
   getAllClients = (): Observable<ClientsResponse> =>
     this.httpClient.get<ClientsResponse>(`${this.url}/get_all`)
 
   /**
-   * Solicita al servidor que devuelva la información de un empleado
-   * @param clientID ID del empleado
+   * Solicita al servidor que devuelva la información de un cliente
+   * @param clientID ID del cliente
   */
   getClient = (id: number): Observable<ClientResponse> =>
     this.httpClient.get<ClientResponse>(`${this.url}/get/${id}`)
 
   /**
-   * Solicita al servidor que cree un nuevo empleado
-   * @param client Objeto con la información del empleado
+   * Solicita al servidor que cree un nuevo cliente
+   * @param client Objeto con la información del cliente
    * @returns Objeto con respuesta del servidor
   */
   createClient = (client: any): Observable<ServerResponse> => {
@@ -43,9 +43,9 @@ export class ClientService {
   }
 
   /**
-   * Solicita al servidor que actualice la información de un empleado
-   * @param clientID ID del empleado
-   * @param client Objeto con la información del empleado
+   * Solicita al servidor que actualice la información de un cliente
+   * @param clientID ID del cliente
+   * @param client Objeto con la información del cliente
    * @returns Objeto con respuesta del servidor
   */
   updateClient = (clientID: number, client: any): Observable<ServerResponse> => {
@@ -53,8 +53,8 @@ export class ClientService {
   }
 
   /**
-   * Solicita al servidor que elimine un empleado
-   * @param id ID del empleado
+   * Solicita al servidor que elimine un cliente
+   * @param id ID del cliente
    * @returns Objeto con respuesta del servidor
   */
   deleteClient = (id: number): Observable<ServerResponse> =>
