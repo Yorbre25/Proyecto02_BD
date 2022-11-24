@@ -21,7 +21,7 @@ export class AddDeliveryManFormComponent implements OnInit, OnChanges {
   lastName1: FormControl
   lastName2: FormControl
   email: FormControl
-  province: FormControl
+  province: FormControl                           
   city: FormControl
   district: FormControl
   phoneNumbers: FormArray
@@ -116,3 +116,5 @@ export class AddDeliveryManFormComponent implements OnInit, OnChanges {
     })
   }
 }
+
+
