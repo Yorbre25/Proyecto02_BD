@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-//import Cookies from 'js-cookie';
-
+import Cookies from 'js-cookie';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
-import { Product } from 'src/app/Interfaces/Product'
-
+import { Store } from 'src/app/Interfaces/Store'
 import { StoreService } from 'src/app/Services/store.service';
 
 @Component({
@@ -12,29 +10,37 @@ import { StoreService } from 'src/app/Services/store.service';
   styleUrls: ['./client-business.component.scss']
 })
 export class ClientBusinessComponent implements OnInit {
-  tableColumns: KeyReplacement<Product>[]
-  tableData: Product[]
-  constructor(private storeServide: StoreService) {
+
+  tableColumns: KeyReplacement<Store>[]
+  tableData: Store[]
+  constructor(private storeService: StoreService) {
     this.tableColumns = [
       { key: "name", replacement: "Nombre del Restaurante" },
     ]
     this.tableData = []
-   }
+}
+ngOnInit(): void {
+  this.storeService.getAllStoresData()
+    .subscribe(response => {
+      if (response.status === 'error') {
+        alert(response.message)
+      }
+      else if (response.storesData) {
+        const stores: Store[] = response.storesData
+          .map((storeData) => {
+            let store: any = storeData.store
+            const manager = storeData.manager
 
-  ngOnInit(): void {
-    //const storeID = Number(Cookies.get('storeID'))
-    //this.storeService.getAllStoreProducts(storeID)
-    //  .subscribe(response => {
-      //  if (response.status === 'error') {
-      //    alert(response.message)
-      //  }
-    //    else if (response.products) {
-    //      this.tableData = response.products
-    //    }
-    //    else {
-   //       console.log(response)
-  //      }
-  //    })
-  }
+            store.managerID = `
+              ${manager.name} ${manager.lastName1} ${manager.lastName2}`
+            return store
+          })
 
+        this.tableData = stores
+      }
+      else {
+        console.log(response)
+      }
+    })
+}
 }

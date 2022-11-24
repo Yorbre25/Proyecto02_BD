@@ -7,4 +7,9 @@
   
       <app-login-form [onSubmit]="onSubmit"></app-login-form>
     </div>
+    <div class="flex-fill mb-2">
+      <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Crear usuario'"
+        [modalHeader]="'Crear usuario'">
+        <app-add-store-form></app-add-store-form>
+      </app-modal>
   </div>

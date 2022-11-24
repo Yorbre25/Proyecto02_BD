@@ -2,7 +2,9 @@
     <div class="container py-1">
         <div class="row d-flex justify-content-center my-4">
             <div class="col-md-8">
-                <app-edit-cart-form></app-edit-cart-form>
+                <div class="container-md">
+                    <app-client-view-order-form [orderInfo]="currentOrder"></app-client-view-order-form>
+                </div>
             </div>
 
 

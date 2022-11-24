@@ -30,9 +30,9 @@ export class ClientLoginComponent implements OnInit {
           alert(response.message)
         }
         else {
-          Cookies.set('username', loginInfo.username)
-          Cookies.set('userType', 'manager')
-          Cookies.set('idClient', response.id)
+         Cookies.set('username', loginInfo.username)
+       Cookies.set('userType', 'manager')
+        Cookies.set('idClient', response.id)
 
           window.location.href = '/client'
         }

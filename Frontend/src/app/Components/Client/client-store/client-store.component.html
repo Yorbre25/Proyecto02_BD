@@ -1,7 +1,9 @@
 <section class="h-50 gradient-custom">
 
     <div class="container py-1">
-        <h3 class="mb-0">Mcdonal</h3>
+        <h3 class="mb-0"><span class="fw-bold text-body">
+            {{storeName}}
+        </span></h3>
         <div class="row d-flex justify-content-center my-4">
             
             <div class="col-md-8">
@@ -10,44 +12,9 @@
                         <h5 class="mb-0">Menu</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="mb-4">Combos</h5>
-                        <!-- Single item -->
-                        <div class="row">
-                            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                                <!-- Image -->
-                                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                                    <img src="https://github.com/Yorbre25/Proyecto02_BD/blob/f688b04d3b8cfceabda898f17100e7c0ed3391c3/Frontend/src/assets/mcnuggets.jpg"
-                                        class="w-100" alt="mcnuget" />
-                                    <a href="#!">
-                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                                    </a>
-                                </div>
-                                <!-- Image -->
-                            </div>
-            
-                            <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                                <!-- Data -->
-                                <p><strong>McNuggets (10 unidades)</strong></p>
-                
-                                <!-- Data -->
-                            </div>
-            
-                            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-
-                                <div class="d-flex mb-4" style="max-width: 300px">
-            
-                                    <button class="btn btn-primary px-3 ms-2">
-                                        Agregar al carrito
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <p class="text-start text-md-center">
-                                    <strong>$17.99</strong>
-                                </p>
-                                <!-- Price -->
-                            </div>
-                        </div>
-                        <!-- Single item -->
+                        <div class="overflow-scroll" style="height: 60vh;">
+                            <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="barCode"></app-table>
+                        </div>  
                     </div>
             
                 </div>
