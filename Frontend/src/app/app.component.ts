@@ -26,7 +26,7 @@ class AppComponent {
           if ((urlBase === 'login' || urlBase.length === 0) && userType) {
             this.router.navigate([`/${userType}`])
           }
-          else if (urlBase !== 'login' && !userType) {
+          else if (urlBase !== 'login' && urlBase !== 'client' && !userType) {
             this.router.navigate(['/login'])
           }
         }
@@ -35,8 +35,8 @@ class AppComponent {
   }
 }
 
-//const apiURL = 'https://apiubytec.azurewebsites.net'
-const apiURL = 'https://localhost:7156'
+const apiURL = 'https://apiubytec.azurewebsites.net'
+// const apiURL = 'https://localhost:7156'
 
 export default AppComponent
 export { AppComponent, apiURL }

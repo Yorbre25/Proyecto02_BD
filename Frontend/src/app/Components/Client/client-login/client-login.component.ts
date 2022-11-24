@@ -24,19 +24,20 @@ export class ClientLoginComponent implements OnInit {
 
   onSubmit = () => {
     const loginInfo: LoginInfo = this.formsService.getFormValue()
-    this.loginService.clientLogin(loginInfo)
-      .then((response) => {
-        if (response.status === 'error') {
-          alert(response.message)
-        }
-        else {
-         Cookies.set('username', loginInfo.username)
-       Cookies.set('userType', 'manager')
-        Cookies.set('idClient', response.id)
+    console.log(loginInfo);
 
-          window.location.href = '/client'
-        }
-      })
+    // this.loginService.clientLogin(loginInfo)
+    //   .then((response) => {
+    //     if (response.status === 'error') {
+    //       alert(response.message)
+    //     }
+    //     else {
+    //       Cookies.set('username', loginInfo.username)
+    //       Cookies.set('userType', 'manager')
+    //       Cookies.set('idClient', response.id)
+    //     }
+    //   })
+    window.location.href = '/client'
   }
 
 }

@@ -25,7 +25,7 @@ export class ClientSTOREComponent implements OnInit {
   cartProductIds: string[]
   s = Number(Cookies.get('storeID'))
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
     private storeService: StoreService,
     private orderService: OrderService) {
     this.storeName = 'nan'
@@ -37,10 +37,10 @@ export class ClientSTOREComponent implements OnInit {
     ]
     this.tableData = []
     this.cartProductIds = []
-    
-}
-ngOnInit(): void {
-  const storeID = Number(Cookies.get('storeId'))
+
+  }
+  ngOnInit(): void {
+    const storeID = Number(Cookies.get('storeId'))
     this.productService.getAllStoreProducts(storeID)
       .subscribe(response => {
         if (response.status === 'error') {
@@ -54,7 +54,7 @@ ngOnInit(): void {
         }
       })
 
-      this.storeService.getStore(Number(Cookies.get('storeId')))
+    this.storeService.getStore(Number(Cookies.get('storeId')))
       .subscribe(response => {
         if (response.status === 'error') {
           alert(response.message)
@@ -80,7 +80,6 @@ ngOnInit(): void {
 
     Cookies.set('cartProductIds', JSON.stringify(cpi))
     //window.location.href = 'client/stores/${storeID}'
-    
   }
 
 
