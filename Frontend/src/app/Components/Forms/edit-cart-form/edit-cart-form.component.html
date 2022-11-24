@@ -3,14 +3,19 @@
         <h5 class="mb-0">Carrito</h5>
     </div>
     <div class="row mb-3">
-        <div *ngFor="let product of productNamesInCart; let i = index" class="d-flex justify-content-between">
+        <div *ngFor="let product of productIDsInCart; let i = index" class="d-flex justify-content-between">
             <div class="col">
                 <label class="form-label" for="productNameInput">Producto: </label>
-                <h4 class="form-label" for="productNameInput">{{product}}</h4>
+                <h4 class="form-label" for="productNameInput">{{productNameInCart[i]}}</h4>
+            </div>
+            <div class="col">
+                <label class="form-label" for="quantityInput">Precio:</label>
+                <h5 class="form-label" for="productNameInput">{{productPriceInCart[i]}}</h5>
+                
             </div>
             <div class="col">
                 <label class="form-label" for="quantityInput">Cantidad:</label>
-                <input class="form-control" id="quantityInput" type="text" placeholder={{productQuantityInCart[i]}} formControlName="quantity">
+                <input class="form-control" id="quantityInput" type="number" placeholder={{productQuantityInCart[i]}} formControlName="quantity">
             </div>
         </div>
         
