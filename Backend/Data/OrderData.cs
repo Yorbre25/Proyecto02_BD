@@ -143,18 +143,21 @@ namespace Backend.Data
 
     public static bool Add(Order order)
     {
-      string barCodes = AuxFunctions.arrayToString(order.productBarCode.ConvertAll<string>(x => x.ToString()).ToArray());
-      string quantities = AuxFunctions.arrayToString(order.quantity.ConvertAll<string>(x => x.ToString()).ToArray());
+      
+      string barCodes = AuxFunctions.arrayToStringInt(order.productBarCode.ConvertAll<string>(x => x.ToString()).ToArray());
+      string quantities = AuxFunctions.arrayToStringInt(order.quantity.ConvertAll<string>(x => x.ToString()).ToArray());
+            Console.WriteLine(barCodes);
+            Console.WriteLine(quantities);
       var connection = Connection.Get();
       NpgsqlCommand cmd = new NpgsqlCommand(
         $@"CALL Insert_Order(
-          {order.province},
+          '{order.province}',
           '{order.city}',
           '{order.district}',
           '{order.clientId}',
-					'{order.storeId}',
-          '{barCodes}',
-          '{quantities}'
+		  '{order.storeId}',
+          Array{barCodes},
+          Array{quantities}
 
         );", connection
       );

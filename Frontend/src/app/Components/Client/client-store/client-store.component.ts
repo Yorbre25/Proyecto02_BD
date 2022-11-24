@@ -4,10 +4,14 @@ import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 
 import { Store } from 'src/app/Interfaces/Store'
 import { StoreService } from 'src/app/Services/store.service';
+import { ServerResponse } from 'src/app/Interfaces/ServerResponses'
+
+import { Order } from 'src/app/Interfaces/Order'
+import { OrderService } from 'src/app/Services/order.service';
 
 import { Product } from 'src/app/Interfaces/Product'
 import { ProductService } from 'src/app/Services/product.service';
-import { NONE_TYPE } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-client-store',
@@ -18,19 +22,25 @@ export class ClientSTOREComponent implements OnInit {
   tableColumns: KeyReplacement<Product>[]
   tableData: Product[]
   storeName: string | undefined
-  constructor(private productService: ProductService, private storeService: StoreService) {
+  cartProductIds: string[]
+  s = Number(Cookies.get('storeID'))
+  constructor(
+    private productService: ProductService, 
+    private storeService: StoreService,
+    private orderService: OrderService) {
     this.storeName = 'nan'
     this.tableColumns = [
-
+      { key: "barCode", replacement: "ID" },
       { key: "price", replacement: "Precio" },
       { key: "name", replacement: "Nombre" },
-      { key: "categoryName", replacement: "Categoría" },
+      { key: "categoryName", replacement: "CategorÃ­a" },
     ]
     this.tableData = []
+    this.cartProductIds = []
     
 }
 ngOnInit(): void {
-  const storeID = Number(Cookies.get('storeID'))
+  const storeID = Number(Cookies.get('storeId'))
     this.productService.getAllStoreProducts(storeID)
       .subscribe(response => {
         if (response.status === 'error') {
@@ -44,7 +54,7 @@ ngOnInit(): void {
         }
       })
 
-      this.storeService.getStore(Number(Cookies.get('storeID')))
+      this.storeService.getStore(Number(Cookies.get('storeId')))
       .subscribe(response => {
         if (response.status === 'error') {
           alert(response.message)
@@ -57,5 +67,21 @@ ngOnInit(): void {
         }
       })
   }
+
+
+  addToCart = (productID: any) => {
+
+    this.cartProductIds.push(productID)
+
+    let cpi =
+    {
+      'productIDs': this.cartProductIds
+    }
+
+    Cookies.set('cartProductIds', JSON.stringify(cpi))
+    //window.location.href = 'client/stores/${storeID}'
+    
+  }
+
 
 }

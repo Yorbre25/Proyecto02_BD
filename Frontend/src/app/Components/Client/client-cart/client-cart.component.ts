@@ -14,7 +14,7 @@ import { OrderService } from 'src/app/Services/order.service';
 export class ClientCartComponent implements OnInit {
   tableColumns: KeyReplacement<Order>[]
   tableData: Order[]
-  currentOrder: Order
+  productsInCart: string[] = []
 
 
 
@@ -25,33 +25,12 @@ export class ClientCartComponent implements OnInit {
 
     ]
     this.tableData = []
-
-    this.currentOrder = {} as Order
   }
 
+
   ngOnInit(): void {
-    let idCli = Number(Cookies.get('idClient'))
-
-    this.orderService.getAllOrdersCli()
-      .subscribe(response => {
-        if (response.status === 'error') {
-          alert(response.message)
-        }
-        else if (response.orders) {
-          console.log(response.orders)
-
-          
-          this.tableData = response.orders
-            .filter(order => order.clientId === idCli)
-          console.log(this.tableData);
-
-          this.currentOrder = response.orders.find(order => order.status === 'EnProceso')!
-        }
-        else {
-          console.log(response)
-        }
-      })
-
+    this.productsInCart = JSON.parse(String(Cookies.get('cartProductIds'))).productIDs 
+    console.log(this.productsInCart)
   }
 
 }

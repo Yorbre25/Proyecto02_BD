@@ -1,15 +1,17 @@
-<div class="form-outline form-white mb-4">
-    <h4>Califique su Pedido</h4>
-    <label class="form-label" for="typeName">Servicio del Repartidor</label>
-    <input type="text" id="typeName" class="form-control form-control-lg" size="17" 
-    placeholder="El repartidor fue..." />    
-</div>
-<div class="form-outline form-white mb-4">
-    <label class="form-label" for="typeText">Servicio del Comercio</label>
-    <input type="text" id="typeText" class="form-control form-control-lg" size="17"
-        placeholder="El comercio fue..." minlength="19" maxlength="19" />
-</div>
-<div class="col p-0">
-    <a class="btn btn-lg btn-primary py-3 w-100" href="client/menu">Calificar</a>
-</div>
-
+<form [formGroup]="this.formsService.form" (ngSubmit)="onSubmit()">
+    <div class="form-outline form-white mb-4">
+        <h4>Califique su Pedido</h4>
+        <label class="form-label" for="reviewDelman">Servicio del Repartidor</label>
+        <input type="text" id="reviewDelman" class="form-control form-control-lg" size="17"
+            formControlName="reviewDelman" placeholder="El repartidor fue..." />
+    </div>
+    <div class="form-outline form-white mb-4">
+        <label class="form-label" for="reviewStore">Servicio del Comercio</label>
+        <input type="text" id="reviewStore" class="form-control form-control-lg" size="17" formControlName="reviewStore"
+            placeholder="El comercio fue..." minlength="19" maxlength="19" />
+    </div>
+    <div class="d-flex justify-content-end">
+        <a (click)="onSubmit()" class="btn btn-lg btn-primary py-3 w-100" href="client/menu">Calificar
+        </a>
+    </div>
+</form>

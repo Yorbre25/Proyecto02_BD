@@ -16,7 +16,7 @@ namespace Backend.Data
             var connection = Connection.Get();
             NpgsqlCommand cmd = new NpgsqlCommand(
               $@"CALL Insert_Client(
-            {client.id},
+            '{client.id}',
           '{client.name}',
           '{client.lastName1}',
           '{client.lastName2}',

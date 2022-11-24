@@ -1,143 +1,128 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormArray, Validators } from '@angular/forms';
+import Cookies from 'js-cookie';
+import { Store } from 'src/app/Interfaces/Store'
+import { StoreService } from 'src/app/Services/store.service';
+import { ServerResponse } from 'src/app/Interfaces/ServerResponses'
 
-import { Order } from 'src/app/Interfaces/Order'
-import { ServerResponse } from 'src/app/Interfaces/ServerResponses';
-
+import { ProductService } from 'src/app/Services/product.service';
+import { FormArray, FormControl, Validators } from '@angular/forms';
 import { FormsService } from 'src/app/Services/forms.service';
-import { OrderService } from 'src/app/Services/order.service'
-
-
-
 @Component({
   selector: 'app-edit-cart-form',
   templateUrl: './edit-cart-form.component.html',
   styleUrls: ['./edit-cart-form.component.scss']
 })
 export class EditCartFormComponent implements OnInit {
-  id: FormControl
-  total: FormControl
-  province: FormControl
-  city: FormControl
-  district: FormControl
-  clientId: FormControl
-  delManId: FormControl
-  storeId: FormControl
-  status: FormControl
-  clientName: FormControl
-  delManName: FormControl
-  clientLastName: FormControl
-  delManLastName: FormControl
-  quantity: FormArray
-  productBarCode: FormArray
-  productName: FormArray
+  productQuantityInCart: number[] = []
+  productIDsInCart: string[] = []
+  productNameInCart: string[] = []
+  productPriceInCart: string[] = []
+  storeName: string
+  quantities: FormArray
 
-  @Input() orderInfo?: Order
+  @Input() productsInCart?: string[]
 
   constructor(
-    private orderService: OrderService,
+    private productService: ProductService,
+    private storeService: StoreService,
     protected formsService: FormsService
-  ) { 
-    this.id = new FormControl('', [Validators.required])
-    this.total = new FormControl('', [Validators.required])
-    this.province = new FormControl('', [Validators.required])
-    this.city = new FormControl('', [Validators.required])
-    this.district = new FormControl('', [Validators.required])
-    this.clientId = new FormControl('', [Validators.required])
-    this.delManId = new FormControl('', [Validators.required])
-    this.storeId = new FormControl('', [Validators.required])
-    this.status = new FormControl('', [Validators.required])
-    this.clientName = new FormControl('', [Validators.required])
-    this.delManName = new FormControl('', [Validators.required])
-    this.clientLastName = new FormControl('', [Validators.required])
-    this.delManLastName = new FormControl('', [Validators.required])
-    this.quantity = new FormArray([new FormControl('')], [Validators.required])
-    this.productBarCode = new FormArray([new FormControl('')], [Validators.required])
-    this.productName = new FormArray([new FormControl('')], [Validators.required])
+  ) {
+    this.storeName = 'nan'
+    this.quantities = new FormArray([new FormControl('')], [Validators.required])
+    this.productsInCart = JSON.parse(String(Cookies.get('cartProductIds'))).productIDs
+
+    console.log(this.productsInCart)
+
+    for (var productID of this.productsInCart!) {
+      if (this.productIDsInCart.indexOf(productID) == -1) {
+        this.productIDsInCart.push(productID!)
+        this.productQuantityInCart.push(1)
+      } else {
+        let i = this.productIDsInCart.indexOf(productID)
+        this.productQuantityInCart[i] = this.productQuantityInCart[i] + 1
+      }
+
+
+    }
+
+    console.log(this.productIDsInCart)
+    console.log(this.productQuantityInCart)
+
   }
 
   ngOnInit(): void {
-    this.formsService.form.addControl('id', this.id)
-    this.formsService.form.addControl('total', this.total)
-    this.formsService.form.addControl('province', this.province)
-    this.formsService.form.addControl('city', this.city)
-    this.formsService.form.addControl('district', this.district)
-    this.formsService.form.addControl('clientId', this.clientId)
-    this.formsService.form.addControl('delManId', this.delManId)
-    this.formsService.form.addControl('storeId', this.storeId)
-    this.formsService.form.addControl('clientName', this.clientName)
-    this.formsService.form.addControl('delManName', this.delManName)
-    this.formsService.form.addControl('clientLastName', this.clientLastName)
-    this.formsService.form.addControl('delManLastName', this.delManLastName)
-    this.formsService.form.addControl('quantity', this.quantity)
-    this.formsService.form.addControl('productBarCode', this.productBarCode)
-    this.formsService.form.addControl('productName', this.productName)
-  }
+    this.formsService.resetForm()
 
-  ngOnChanges(): void {
-    if (this.orderInfo && Object.keys(this.orderInfo).length) {
-      const { ...orderInfo } = this.orderInfo
+    this.formsService.form.addControl('quantities', this.quantities)
 
-      this.quantity.removeAt(0)
-
-      orderInfo.quantity.forEach(quantity => {
-        this.quantity.push(new FormControl(quantity))
+    this.storeService.getStore(Number(Cookies.get('storeId')))
+      .subscribe(response => {
+        if (response.status === 'error') {
+          alert(response.message)
+        }
+        else if (response.storeData) {
+          this.storeName = response.storeData.store.name
+        }
+        else {
+          console.log(response)
+        }
       })
 
-      this.productBarCode.removeAt(0)
+    for (var productID of this.productIDsInCart!) {
+      this.productService.getProduct(Number(productID))
+        .subscribe(response => {
+          if (response.status === 'error') {
+            alert(response.message)
+          }
+          else if (response.product) {
+            console.log(response.product)
+            this.productNameInCart.push(response.product.name)
+            this.productPriceInCart.push(response.product.price)
 
-      orderInfo.productBarCode.forEach(productBarCode => {
-        this.productBarCode.push(new FormControl(productBarCode))
-      })
 
-      this.productName.removeAt(0)
+          }
+          else {
+            console.log(response)
+          }
 
-      orderInfo.productName.forEach(productName => {
-        this.productName.push(new FormControl(productName))
-      })
-
-      this.formsService.patchFormValue(orderInfo)
+        })
     }
   }
 
   onSubmit = async () => {
-    const newOrderInfo = this.formsService.getFormValue()
-    const password = newOrderInfo.password
-    const passwordConfirm = newOrderInfo.passwordConfirm
-
-    const emptyPasswords =
-      (password === null || password === '') &&
-      (passwordConfirm === null || passwordConfirm === '')
-
-    if (!emptyPasswords && password !== passwordConfirm) {
-      alert('Las contraseñas no coinciden')
-      return
-    }
-    else {
-      delete newOrderInfo.passwordConfirm
+    const infoQuant = this.formsService.getFormValue()
+    console.log(this.productQuantityInCart)
+    let cpc =
+    {
+      'productQuants': this.productQuantityInCart
     }
 
-    await this.updateOrder(newOrderInfo)
-      .then((response) => {
-        if (response.status === 'error') {
-          alert(response.message)
-        }
-        else if (newOrderInfo.id !== this.orderInfo?.id) {
-          window.location.href = `/order/employees/${newOrderInfo.id}`
-        }
-        else {
-          window.location.reload();
-        }
-      })
-  }
+    
+    let cpi =
+    {
+      'productIDs': this.productIDsInCart
+    }
 
-  updateOrder = (newOrderInfo: Order): Promise<ServerResponse> => {
-    return new Promise((resolve, reject) => {
-      if (this.orderInfo && Object.keys(this.orderInfo).length) {
-        this.orderService.updateOrder(this.orderInfo.id, newOrderInfo)
-          .subscribe((response: ServerResponse) => resolve(response))
-      }
-    })
-  }
+    Cookies.set('cartProductQuants', JSON.stringify(cpc))
+    Cookies.set('cartProductIds', JSON.stringify(cpi))
+    
+    let total:number =0
+    let service:number =0
+    let subtotal:number =0
+    for (let i in this.productsInCart!) {
+      subtotal = subtotal + Number(this.productIDsInCart[i])*Number(this.productQuantityInCart[i])
+      
+    }
 
+    total = subtotal + 0.1*subtotal
+    service = 0.1*subtotal
+    console.log(subtotal)
+    console.log(total)
+    console.log(service)
+
+    Cookies.set('subtotal', subtotal.toString())
+    Cookies.set('total', total.toString())
+    Cookies.set('service', service.toString())
+
+  }
 }

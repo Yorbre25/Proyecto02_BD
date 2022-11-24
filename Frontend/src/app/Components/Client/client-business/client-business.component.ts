@@ -1,3 +1,4 @@
+import { NONE_TYPE } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import Cookies from 'js-cookie';
 import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
@@ -15,6 +16,7 @@ export class ClientBusinessComponent implements OnInit {
   tableData: Store[]
   constructor(private storeService: StoreService) {
     this.tableColumns = [
+      { key: "id", replacement: "ID" },
       { key: "name", replacement: "Nombre del Restaurante" },
     ]
     this.tableData = []
@@ -29,10 +31,9 @@ ngOnInit(): void {
         const stores: Store[] = response.storesData
           .map((storeData) => {
             let store: any = storeData.store
-            const manager = storeData.manager
+    
+            
 
-            store.managerID = `
-              ${manager.name} ${manager.lastName1} ${manager.lastName2}`
             return store
           })
 
@@ -43,4 +44,12 @@ ngOnInit(): void {
       }
     })
 }
+
+onStoreClicked = (storeID: any) => {
+  let s:any = []
+  Cookies.set('storeId', storeID)
+  window.location.href = 'client/stores/${storeID}'
+  
+}
+
 }
