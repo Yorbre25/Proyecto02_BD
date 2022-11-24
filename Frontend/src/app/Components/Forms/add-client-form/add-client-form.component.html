@@ -23,13 +23,8 @@
       </div>
   
       <div class="col">
-        <label class="form-label" for="usernameInput">Nombre de usuario:</label>
+        <label class="form-label" for="usernameInput">Correo electrónico:</label>
         <input class="form-control" id="usernameInput" type="text" formControlName="username">
-      </div>
-  
-      <div class="col">
-        <label class="form-label" for="emailInput">Correo electrónico:</label>
-        <input class="form-control" id="emailInput" type="email" formControlName="email">
       </div>
     </div>
   
@@ -53,35 +48,18 @@
     <div class="row mb-3">
       <div class="col">
         <label class="form-label" for="phoneNumberInput">Número de Telefono:</label>
-        <input class="form-control" id=" phoneNumberInput" type="text" formControlName="phoneNumber">
+        <input class="form-control" id=" phoneNumberInput" type="number" formControlName="phoneNumber">
      </div>
     </div>
 
     <div class="row mb-3">
         <div class="col">
           <label class="form-label" for="phoneNumberInput">Cumpleaños:</label>
-          <input class="form-control" id=" phoneNumberInput" type="text" formControlName="birthDay">
+          <input class="form-control" id=" phoneNumberInput" type="date" formControlName="birthDay">
        </div>
       </div>
   
-    <div class="row mb-3">
-      <div class="col">
-        <label class="form-label" for="oldPasswordInput">Contraseña anterior:</label>
-        <input class="form-control" id=" oldPasswordInput" type="password" formControlName="oldPassword">
-      </div>
-  
-      <div class="col">
-        <label class="form-label" for="passwordInput">Nueva contraseña:</label>
-        <input class="form-control" id=" passwordInput" type="password" formControlName="password">
-      </div>
-  
-      <div class="col">
-        <label class="form-label" for="passwordConfirmInput">Confirme la nueva contraseña:</label>
-        <input class="form-control" id="passwordConfirmInput" type="password" formControlName="passwordConfirm">
-      </div>
-    </div>
-  
     <div class="d-flex justify-content-end">
-      <input type="submit" class="btn btn-success btn-lg" value="Editar">
+      <input type="submit" class="btn btn-success btn-lg" value="Crear Usuario">
     </div>
   </form>

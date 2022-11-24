@@ -19,20 +19,17 @@ export class AddClientFormComponent implements OnInit {
   name: FormControl
   lastName1: FormControl
   lastName2: FormControl
-  email: FormControl
   province: FormControl
   city: FormControl
   district: FormControl
   phoneNumber: FormControl
   birthDay: FormControl
-  password: FormControl
-  passwordConfirm: FormControl
-  oldPassword: FormControl
+
 
 
   constructor(
     private auxFunctionsService: AuxFunctionsService,
-     private clientService: ClientService,
+    private clientService: ClientService,
     protected formsService: FormsService
 
   ) {
@@ -41,15 +38,12 @@ export class AddClientFormComponent implements OnInit {
     this.name = new FormControl('', [Validators.required])
     this.lastName1 = new FormControl('', [Validators.required])
     this.lastName2 = new FormControl('', [Validators.required])
-    this.email = new FormControl('', [Validators.required])
     this.province = new FormControl('', [Validators.required])
     this.city = new FormControl('', [Validators.required])
     this.district = new FormControl('', [Validators.required])
     this.phoneNumber = new FormControl('', [Validators.required])
-    this.password = new FormControl('', [Validators.required])
     this.birthDay = new FormControl('', [Validators.required])
-    this.passwordConfirm = new FormControl('', [Validators.required])
-    this.oldPassword = new FormControl('', [Validators.required])
+
 
   }
 
@@ -60,16 +54,11 @@ export class AddClientFormComponent implements OnInit {
     this.formsService.form.addControl('name', this.name)
     this.formsService.form.addControl('lastName1', this.lastName1)
     this.formsService.form.addControl('lastName2', this.lastName2)
-    this.formsService.form.addControl('email', this.email)
     this.formsService.form.addControl('province', this.province)
     this.formsService.form.addControl('city', this.city)
     this.formsService.form.addControl('district', this.district)
     this.formsService.form.addControl('phoneNumber', this.phoneNumber)
     this.formsService.form.addControl('birthDay', this.birthDay)
-    this.formsService.form.addControl('password', this.password)
-    this.formsService.form.addControl('passwordConfirm', this.passwordConfirm)
-    this.formsService.form.addControl('oldPassword', this.oldPassword)
-
   }
 
   onSubmit = async () => {
@@ -90,8 +79,8 @@ export class AddClientFormComponent implements OnInit {
 
   createClient = (newClientInfo: Client): Promise<ServerResponse> => {
     return new Promise((resolve, reject) => {
-      // this.clientService.createClient(newClientInfo)
-      //   .subscribe((response: ServerResponse) => resolve(response))
+      this.clientService.createClient(newClientInfo)
+        .subscribe((response: ServerResponse) => resolve(response))
     })
   }
 }
