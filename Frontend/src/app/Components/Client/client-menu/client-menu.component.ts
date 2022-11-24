@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-client-menu',

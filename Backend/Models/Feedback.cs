@@ -12,7 +12,7 @@ namespace Backend.Models
         public int idOrder { get; set; }
 
         [BsonElement("idClient")]
-        public int idClient { get; set; }
+        public int idClient  { get; set; }
 
         [BsonElement("storeReview")]
         public string storeReview { get; set; }

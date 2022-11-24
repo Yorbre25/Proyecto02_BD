@@ -5,6 +5,8 @@ import { StoreService } from 'src/app/Services/store.service';
 import { ServerResponse } from 'src/app/Interfaces/ServerResponses'
 
 import { ProductService } from 'src/app/Services/product.service';
+import { FormArray, FormControl, Validators } from '@angular/forms';
+import { FormsService } from 'src/app/Services/forms.service';
 @Component({
   selector: 'app-edit-cart-form',
   templateUrl: './edit-cart-form.component.html',
@@ -16,15 +18,17 @@ export class EditCartFormComponent implements OnInit {
   productNameInCart: string[] = []
   productPriceInCart: string[] = []
   storeName: string
+  quantities: FormArray
 
   @Input() productsInCart?: string[]
 
   constructor(
     private productService: ProductService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    protected formsService: FormsService
   ) {
     this.storeName = 'nan'
-
+    this.quantities = new FormArray([new FormControl('')], [Validators.required])
     this.productsInCart = JSON.parse(String(Cookies.get('cartProductIds'))).productIDs
 
     console.log(this.productsInCart)
@@ -47,6 +51,9 @@ export class EditCartFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formsService.resetForm()
+
+    this.formsService.form.addControl('quantities', this.quantities)
 
     this.storeService.getStore(Number(Cookies.get('storeId')))
       .subscribe(response => {
@@ -72,6 +79,7 @@ export class EditCartFormComponent implements OnInit {
             this.productNameInCart.push(response.product.name)
             this.productPriceInCart.push(response.product.price)
 
+
           }
           else {
             console.log(response)
@@ -79,7 +87,42 @@ export class EditCartFormComponent implements OnInit {
 
         })
     }
+  }
 
+  onSubmit = async () => {
+    const infoQuant = this.formsService.getFormValue()
+    console.log(this.productQuantityInCart)
+    let cpc =
+    {
+      'productQuants': this.productQuantityInCart
+    }
+
+    
+    let cpi =
+    {
+      'productIDs': this.productIDsInCart
+    }
+
+    Cookies.set('cartProductQuants', JSON.stringify(cpc))
+    Cookies.set('cartProductIds', JSON.stringify(cpi))
+    
+    let total:number =0
+    let service:number =0
+    let subtotal:number =0
+    for (let i in this.productsInCart!) {
+      subtotal = subtotal + Number(this.productIDsInCart[i])*Number(this.productQuantityInCart[i])
+      
+    }
+
+    total = subtotal + 0.1*subtotal
+    service = 0.1*subtotal
+    console.log(subtotal)
+    console.log(total)
+    console.log(service)
+
+    Cookies.set('subtotal', subtotal.toString())
+    Cookies.set('total', total.toString())
+    Cookies.set('service', service.toString())
 
   }
 }

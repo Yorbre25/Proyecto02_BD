@@ -43,7 +43,7 @@ export class OrderService {
   }
 
 
-  addOrder = (order:Order): Observable<ServerResponse> =>
+  addOrder = (order:any): Observable<ServerResponse> =>
     this.httpClient.post<ServerResponse>(`${this.url}/add`, order)
 
   setDelivered = (orderID:number):  Observable<ServerResponse> =>

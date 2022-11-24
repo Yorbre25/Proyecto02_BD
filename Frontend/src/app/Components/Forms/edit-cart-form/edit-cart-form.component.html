@@ -1,3 +1,4 @@
+<form [formGroup]="this.formsService.form" (ngSubmit)="onSubmit()">
 <div class="card mb-4 px-4">
     <div class="card-header py-3">
         <h5 class="mb-0">Carrito</h5>
@@ -10,18 +11,21 @@
                 <h4 class="form-label" for="productNameInput">{{productNameInCart[i]}}</h4>
             </div>
             <div class="col">
-                <label class="form-label" for="quantityInput">Precio:</label>
-                <h5 class="form-label" for="productNameInput">{{productPriceInCart[i]}}</h5>
+                <label class="form-label" for="priceInput">Precio:</label>
+                <h5 class="form-label" for="priceInput">{{productPriceInCart[i]}}</h5>
 
             </div>
             <div class="col">
-                <label class="form-label" for="quantityInput">Cantidad:</label>
-                <input class="form-control" id="quantityInput" type="number" placeholder={{productQuantityInCart[i]}}
-                    formControlName="quantity">
+                <label class="form-label" for="quantities">Cantidad:</label>
+                <input class="form-control" id="quantities" type="number" placeholder={{productQuantityInCart[i]}} formControlName="quantities">
             </div>
         </div>
+        <div class="d-flex justify-content-end">
+            <input type="submit" class="btn btn-success btn-lg" value="Confirmar cambios">
+        </div>
         <app-modal [options]="{size:'lg', scrollable:true}" [showModalButtonText]="'Realizar pedido'">
-            <app-view-order-client-form></app-view-order-client-form>
+
+            <app-view-order-client-form ></app-view-order-client-form>
         </app-modal>
 
     </div>
@@ -29,3 +33,4 @@
 
 
 </div>
+</form>

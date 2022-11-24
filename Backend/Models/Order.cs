@@ -2,14 +2,14 @@
 {
   public class Order
   {
-    public int id { get; set; }
+    public int? id { get; set; }
     public int? total { get; set; }
-    public string province { get; set; }
-    public string city { get; set; }
-    public string district { get; set; }
+    public string? province { get; set; }
+    public string? city { get; set; }
+    public string? district { get; set; }
     public int? clientId { get; set; }
-    public int delManId { get; set; }
-    public int storeId { get; set; }
+    public int? delManId { get; set; }
+    public int? storeId { get; set; }
     public string? status { get; set; }
     public string? clientName { get; set; }
     public string? delManName { get; set; }
