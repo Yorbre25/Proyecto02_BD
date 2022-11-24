@@ -33,7 +33,7 @@ export class ClientSTOREComponent implements OnInit {
       { key: "barCode", replacement: "ID" },
       { key: "price", replacement: "Precio" },
       { key: "name", replacement: "Nombre" },
-      { key: "categoryName", replacement: "Categoría" },
+      { key: "categoryName", replacement: "CategorÃ­a" },
     ]
     this.tableData = []
     this.cartProductIds = []
@@ -85,4 +85,3 @@ ngOnInit(): void {
 
 
 }
-
