@@ -14,7 +14,6 @@ import { OrderService } from 'src/app/Services/order.service';
 export class ClientCartComponent implements OnInit {
   tableColumns: KeyReplacement<Order>[]
   tableData: Order[]
-  currentOrder: Order
   productsInCart: string[] = []
 
 
@@ -26,8 +25,6 @@ export class ClientCartComponent implements OnInit {
 
     ]
     this.tableData = []
-
-    this.currentOrder = {} as Order
   }
 
 
