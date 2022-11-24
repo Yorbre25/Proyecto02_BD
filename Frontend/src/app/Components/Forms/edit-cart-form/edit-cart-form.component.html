@@ -1,66 +1,21 @@
-<div class="card mb-1">
+<div class="card mb-4 px-4">
     <div class="card-header py-3">
-        <h5 class="mb-0">Carrito de compra</h5>
+        <h5 class="mb-0">Carrito</h5>
     </div>
-    <div class="card-body">
-        <!-- Single item -->
-        <div class="row">
-            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                <!-- Image -->
-                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                    <img src="https://github.com/Yorbre25/Proyecto02_BD/blob/f688b04d3b8cfceabda898f17100e7c0ed3391c3/Frontend/src/assets/mcnuggets.jpg"
-                        class="w-100" alt="mcnuget" />
-                    <a href="#!">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                    </a>
-                </div>
-                <!-- Image -->
+    <div class="row mb-3">
+        <div *ngFor="let product of productNamesInCart; let i = index" class="d-flex justify-content-between">
+            <div class="col">
+                <label class="form-label" for="productNameInput">Producto: </label>
+                <h4 class="form-label" for="productNameInput">{{product}}</h4>
             </div>
-
-            <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                <!-- Data -->
-                <div *ngFor="let product of orderInfo!.productName; let i = index" class="d-flex justify-content-between">
-                    <p class="small mb-0">{{product}}</p>
-                    <p class="small mb-0">{{orderInfo!.quantity[i]}}</p>
-                    
-                </div>
-                <button type="button" class="btnTrash btn-primary me-1 mb-2" data-mdb-toggle="tooltip"
-                    title="Remove item">
-                    Eliminar
-                    <i class="fas fa-trash"></i>
-                </button>
-                <!-- Data -->
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <!-- Quantity -->
-                <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btnLess btn-primary px-3 me-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        -
-                        <i class="fas fa-minus"></i>
-                    </button>
-
-                    <div class="form-outline">
-                        <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                    </div>
-
-                    <button class="btnMore btn-primary px-3 ms-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        +
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-                <!-- Quantity -->
-
-                <!-- Price -->
-                <p class="text-start text-md-center">
-                    <!-- <p class="small mb-0">$1</p> El api no manda los precios individuales-->
-                </p>
-                <!-- Price -->
+            <div class="col">
+                <label class="form-label" for="quantityInput">Cantidad:</label>
+                <input class="form-control" id="quantityInput" type="text" placeholder={{productQuantityInCart[i]}} formControlName="quantity">
             </div>
         </div>
-        <!-- Single item -->
+        
     </div>
+
+
 
 </div>
