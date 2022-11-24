@@ -82,7 +82,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/client/menu', pathMatch: 'full' },
       { path: 'stores', component: ClientBusinessComponent },
       { path: 'stores/:id', component: ClientSTOREComponent },
-      { path: 'cart', component: ClientCartComponent },
+      { path: 'stores/:id/cart', component: ClientCartComponent },
       { path: 'recent', component: ClientRecentsComponent },
       { path: 'order', component: ClientOrderComponent },
     ]

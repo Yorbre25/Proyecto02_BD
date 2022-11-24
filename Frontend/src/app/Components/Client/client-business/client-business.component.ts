@@ -43,4 +43,9 @@ ngOnInit(): void {
       }
     })
 }
+
+onStoreClicked = (storeID: number) => {
+  window.location.href = 'client/stores/${id}'
+}
+
 }

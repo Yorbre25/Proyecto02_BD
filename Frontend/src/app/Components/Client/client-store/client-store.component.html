@@ -4,19 +4,20 @@
         <h3 class="mb-0"><span class="fw-bold text-body">
             {{storeName}}
         </span></h3>
-        <div class="row d-flex justify-content-center my-4">
-            
-            <div class="col-md-8">
+        <div class="row d-flex justify-content-center my-6">
+            <div class="col-md-12">
                 <div class="card mb-1">
                     <div class="card-header py-3">
                         <h5 class="mb-0">Menu</h5>
+                        <p class="mb-0">Haga clic en item para agregar al carrito</p>
                     </div>
                     <div class="card-body">
                         <div class="overflow-scroll" style="height: 60vh;">
-                            <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="barCode"></app-table>
+                            <app-table [tableColumns]="tableColumns" [tableData]="tableData" rowIDKey="barCode" 
+                            ></app-table>
                         </div>  
                     </div>
-            
+                    <a class="btn btn-lg btn-primary py-3 w-100" href="client/stores/{{s}}/cart">Mi Carrito</a>
                 </div>
             
             </div>

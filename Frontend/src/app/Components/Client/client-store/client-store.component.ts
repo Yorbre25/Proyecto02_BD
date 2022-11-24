@@ -4,10 +4,14 @@ import { KeyReplacement } from 'src/app/Interfaces/Auxiliaries';
 
 import { Store } from 'src/app/Interfaces/Store'
 import { StoreService } from 'src/app/Services/store.service';
+import { ServerResponse } from 'src/app/Interfaces/ServerResponses'
+
+import { Order } from 'src/app/Interfaces/Order'
+import { OrderService } from 'src/app/Services/order.service';
 
 import { Product } from 'src/app/Interfaces/Product'
 import { ProductService } from 'src/app/Services/product.service';
-import { NONE_TYPE } from '@angular/compiler';
+
 
 @Component({
   selector: 'app-client-store',
@@ -18,7 +22,11 @@ export class ClientSTOREComponent implements OnInit {
   tableColumns: KeyReplacement<Product>[]
   tableData: Product[]
   storeName: string | undefined
-  constructor(private productService: ProductService, private storeService: StoreService) {
+  s = Number(Cookies.get('storeID'))
+  constructor(
+    private productService: ProductService, 
+    private storeService: StoreService,
+    private orderService: OrderService) {
     this.storeName = 'nan'
     this.tableColumns = [
 
@@ -59,3 +67,4 @@ ngOnInit(): void {
   }
 
 }
+
