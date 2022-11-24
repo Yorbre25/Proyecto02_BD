@@ -29,7 +29,7 @@ export class ClientSTOREComponent implements OnInit {
     private orderService: OrderService) {
     this.storeName = 'nan'
     this.tableColumns = [
-
+      { key: "barCode", replacement: "ID" },
       { key: "price", replacement: "Precio" },
       { key: "name", replacement: "Nombre" },
       { key: "categoryName", replacement: "Categoría" },

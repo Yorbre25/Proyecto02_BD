@@ -46,7 +46,7 @@ ngOnInit(): void {
 
 onStoreClicked = (storeID: any) => {
   Cookies.set('storeId', storeID)
-  window.location.href = 'client/stores/${storeId}'
+  window.location.href = 'client/stores/${storeID}'
   
 }
 
