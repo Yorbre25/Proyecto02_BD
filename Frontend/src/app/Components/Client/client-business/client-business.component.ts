@@ -15,6 +15,7 @@ export class ClientBusinessComponent implements OnInit {
   tableData: Store[]
   constructor(private storeService: StoreService) {
     this.tableColumns = [
+      { key: "id", replacement: "ID" },
       { key: "name", replacement: "Nombre del Restaurante" },
     ]
     this.tableData = []
@@ -29,10 +30,9 @@ ngOnInit(): void {
         const stores: Store[] = response.storesData
           .map((storeData) => {
             let store: any = storeData.store
-            const manager = storeData.manager
+    
+            
 
-            store.managerID = `
-              ${manager.name} ${manager.lastName1} ${manager.lastName2}`
             return store
           })
 
@@ -44,8 +44,10 @@ ngOnInit(): void {
     })
 }
 
-onStoreClicked = (storeID: number) => {
-  window.location.href = 'client/stores/${id}'
+onStoreClicked = (storeID: any) => {
+  Cookies.set('storeId', storeID)
+  window.location.href = 'client/stores/${storeId}'
+  
 }
 
 }

@@ -38,7 +38,7 @@ export class ClientSTOREComponent implements OnInit {
     
 }
 ngOnInit(): void {
-  const storeID = Number(Cookies.get('storeID'))
+  const storeID = Number(Cookies.get('storeId'))
     this.productService.getAllStoreProducts(storeID)
       .subscribe(response => {
         if (response.status === 'error') {
@@ -52,7 +52,7 @@ ngOnInit(): void {
         }
       })
 
-      this.storeService.getStore(Number(Cookies.get('storeID')))
+      this.storeService.getStore(Number(Cookies.get('storeId')))
       .subscribe(response => {
         if (response.status === 'error') {
           alert(response.message)
